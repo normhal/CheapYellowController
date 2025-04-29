@@ -1,0 +1,47 @@
+ID,LongName,Address
+0,Rio Grande RS3 5200,52
+1,New York Central H16-44 7003,70
+2,Erie Lake SD45 EMD 3619,61
+3,New Haven 44ton 18,18
+4,Cleaner 44ton NH 126,126
+5,Seaboard S2 30,30
+6,Great Northern S2 1,1
+7,Pennsylvania NW2 5918,59
+8,Great Northern NW2GN 154,54
+9,Great Northern Vo1000 5333,53
+10,Canadian National GMD-1A 1610,16
+11,Norfolk Southern Gevo 3631,63
+12,Sante Fe Cleaner 14,14
+13,New York Central NW2 8769,87
+14,BCOL Dash8-40 4615,46
+15,Montana Rail Link F45 EMD 391,91
+16,Lehigh Valley U23 B 503,50
+17,Clarendon & Pittsford GP9 TT 752,75
+18,Boston & Maine 44T 11,11
+19,Reading Bee Line SD45 6,6
+20,Canadian National SD40 Mid 6256,56
+21,Reading Green GP35 3640,36
+22,BNSF Dash 8 40B 8601,86
+23,CSX GP38-2 EMD 2643,43
+24,Union Pacific SD45 2848,48
+25,Rio Grande 44 Ton 39,39
+26,Wisconson & Southern SD40 4006,40
+27,CR&I Yellow MP15 123,12
+28,Union Pacific SD40-2 Snoot 3367,67
+29,Burlington Northern GP7 Grn 1528,28
+30,70 Ton 4,4
+31,Maine Central RS11 Yellow 802,80
+32,Yard S4 62,62
+33,Burlington Northern SW1 81,81
+34,Burlington Northern E7A,99
+35,CSX AC6000CW, 653
+36,Florida Eastcoast F3A,504
+37,NJ Transit GP40,4302
+38,Santa Fe SW-12,2280
+39,Great Northern SW-12,25
+40,Burlington Northern SD40-2,6784
+41,Western Pacific U28B,754
+42,CSX SW-12,1125
+43,Santa Fe FP45,92
+44,Canadian National GP9,4108
+45,Burlington Northern GP9,245
