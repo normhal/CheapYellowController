@@ -1,0 +1,3 @@
+ID, Acc1,State1, Acc2,State2, Acc3,State3, Acc4,State4, Acc5,State5, Acc6,State6
+0,1,Thrown,2,Thrown,3,Thrown,4,Closed,5,Thrown,6,Closed
+1,1,Closed,2,Closed,3,Closed,4,Thrown,5,Closed,6,Thrown
