@@ -44,7 +44,7 @@ list I've largely adhered to:
 For close to 12 months, progress has been slow, but steady. Here is an image of the First Page of the Controller available for download now. All the following images are taken from the EEZ Studio project for the 4.3in 272x480 resolution display. Other models all have the same basic design with only a slight variance of the images sizes and fonts used.
 
 
-![Image Description](assets.Menu.png)
+![Image Description](assets/Menu.png)
 
 
 As you can see, the Accessories and Routes have been greyed out for later. 
@@ -191,7 +191,7 @@ Exit the IDE and then reload it without opening the Serial Monitor, and the Uplo
 # Your First Use
 
 
-![Image Description](assets.Menu.png)
+![Image Description](assets/Menu.png)
 
 If all has completed successfully, you should be presented with the Menu Page as shown above, and you should be able to
 browse around. Here are some specific Tips for each of the Pages...
@@ -206,7 +206,7 @@ You have 4 "Throttles" accessible to you - A, B, C and D. The throttle you selec
 all loco activities until you select another. When you make your selection, that throttle ID is indicated in the Throttle 
 Page heading.
 
-![Image Description](assets.Throttle.png)
+![Image Description](assets/Throttle.png)
 
 #  Notes on Throttle Buttons
 
@@ -252,14 +252,14 @@ Similarly, with the "Edit" button pressed, the touched loco entry will be passed
 To add a new Loco, either edit an existing Loco, or scroll to an empty slot, press the "Edit" button, and then touch the empty slot.
 
 
-![Image Description](assets.Roster.png)
+![Image Description](assets/Roster.png)
 
 
 # Edit Loco Page
 
 See comments in the Throttle section above:-). The image below shows the sample Loco being edited, with the "Horn" function having been touched. Touching an occupied function slot "moves" its contents to the three editing fields above the function matrix, which allows for assigning the function number, textual heading, and momentary option. When complete, touching any one of the function slots will transfer the contents of the 3 editing fields to the touched function slot. This provides a very quick and easy way to re-arrange function button layout as preferred.
 
-![Image Description](assets.EditLoco.png)
+![Image Description](assets/EditLoco.png)
 
 # Program Page
 
@@ -269,7 +269,7 @@ This image is fairly self-explanatory. It shows the "Program Track" as having be
 
 # WiFi Page
 
-![Image Description](assets.Wifi.png)
+![Image Description](assets/Wifi.png)
 
 
 Nothing too complicated here. The "Scan" button presents a page where all local WiFi networks can be displayed and the desired SSID selected. 
@@ -277,20 +277,20 @@ Nothing too complicated here. The "Scan" button presents a page where all local 
 # Scan Page
 
 
-![Image Description](assets.Scan.png)
+![Image Description](assets/Scan.png)
 
 
 # Credits Page
 
 This project would not have been possible with out the teamwork and associated comraderie we've all enjoyed! My appreciation cannot be overstated. Just as significant are the developers and support folk at EEZ Studio! My inexperience and often naive questions no doubt tested their patience:-(
 
-![Image Description](assets.Credits.png)
+![Image Description](assets/Credits.png)
 
 # Info Page
 
 A short history and "spec list" of Version numbers and Libraries used.
 
-![Image Description](assets.Info.png)
+![Image Description](assets/Info.png)
 
 # Disclamer
 
