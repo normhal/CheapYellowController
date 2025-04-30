@@ -44,7 +44,7 @@ list I've largely adhered to:
 For close to 12 months, progress has been slow, but steady. Here is an image of the First Page of the Controller available for download now. All the following images are taken from the EEZ Studio project for the 4.3in 272x480 resolution display. Other models all have the same basic design with only a slight variance of the images sizes and fonts used.
 
 
-![Screenshot 2025-04-08 183421](https://github.com/user-attachments/assets/edae6fd0-c93b-4c36-b403-10d7d6ab81bc)
+![Menu](https://github.com/user-attachments/assets/e508a254-d75c-44f1-97ea-7071dd14a5be)
 
 
 As you can see, the Accessories and Routes have been greyed out for later. 
@@ -191,7 +191,7 @@ Exit the IDE and then reload it without opening the Serial Monitor, and the Uplo
 # Your First Use
 
 
-![Menu](https://github.com/user-attachments/assets/0d4248d2-8d3d-4138-b730-2f6eab438640)
+![Menu](https://github.com/user-attachments/assets/2785cda2-e59e-46ea-a84c-64a3bae2baab)
 
 
 If all has completed successfully, you should be presented with the Menu Page as shown above, and you should be able to
@@ -207,7 +207,7 @@ You have 4 "Throttles" accessible to you - A, B, C and D. The throttle you selec
 all loco activities until you select another. When you make your selection, that throttle ID is indicated in the Throttle 
 Page heading.
 
-![Throttle](https://github.com/user-attachments/assets/9c2ed2a8-b7d8-4129-a894-e2b25bda2d3f)
+![Throttle](https://github.com/user-attachments/assets/866c0d30-dc81-4b65-be26-19f675142292)
 
 #  Notes on Throttle Buttons
 
@@ -253,7 +253,7 @@ Similarly, with the "Edit" button pressed, the touched loco entry will be passed
 To add a new Loco, either edit an existing Loco, or scroll to an empty slot, press the "Edit" button, and then touch the empty slot.
 
 
-![Roster](https://github.com/user-attachments/assets/905c45a9-d327-49f4-87f9-879bdeab2f64)
+![Roster](https://github.com/user-attachments/assets/4b5b71c6-e31a-4e7d-85ec-81a93fb7ae9e)
 
 
 # Edit Loco Page
@@ -264,25 +264,28 @@ See comments in the Throttle section above:-). The image below shows the sample 
 
 # Program Page
 
-![Program](https://github.com/user-attachments/assets/3d98144f-5166-4ec2-a286-2327de36d58a)
+![Program](https://github.com/user-attachments/assets/47ec37fa-e0a7-4f6a-80ca-2ad6b5874d2a)
 
 This image is fairly self-explanatory. It shows the "Program Track" as having been selected, and the "Min" button pressed as a shortcut to filling the CV Number field getting completed. Pressing the "Read" button will cause DCC-EX to read CV 2 from the Loco on the Program Track. Note that if no CV number is provided, the "Read" button will automatically insert "CV 1" to be read, and instruct DCC-EX to read the Loco's address. Informative messages are provided to assist with use.
 
 # WiFi Page
 
-![Wifi](https://github.com/user-attachments/assets/0963a257-859a-4674-bc91-a3df91c4e7d0)
+![Wifi](https://github.com/user-attachments/assets/c0adcdc0-b945-4d74-898c-53ce93cad86d)
+
 
 Nothing too complicated here. The "Scan" button presents a page where all local WiFi networks can be displayed and the desired SSID selected. 
 
 # Scan Page
 
-![Scan](https://github.com/user-attachments/assets/50f3ba18-d059-4e4f-b967-8d6354195d2b)
+
+![Scan](https://github.com/user-attachments/assets/a8d354fa-39dc-434d-9a41-4453c6947ad5)
+
 
 # Credits Page
 
 This project would not have been possible with out the teamwork and associated comraderie we've all enjoyed! My appreciation cannot be overstated. Just as significant are the developers and support folk at EEZ Studio! My inexperience and often naive questions no doubt tested their patience:-(
 
-![Credits](https://github.com/user-attachments/assets/e1dcc07a-75cc-4f90-b325-3523211a2b36)
+![Credits](https://github.com/user-attachments/assets/a7e938c4-bb9f-4d68-8a3d-a4b7470e2f0c)
 
 # Info Page
 
