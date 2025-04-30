@@ -79,11 +79,15 @@ DCCEXProtocol and Ex-Rail.
 
 # Getting Started - What You'll Need
 
-Before we get started, it'll be of some interest that compiling, building and getting to the point of actually using the Controller can take only quite a few steps and a fair bit of time. I have found simply compiling the sketch on a Windows system can take anywhere around 20 minutes! This can be pretty frustrating when a simple setting in the "tools" section was omitted or forgotten. For this reason, I have switched to developing and compiling on an uBuntu Linux system - compile times around 2 minutes, and only a few seconds for repeat compiles.
+Before we get started, it'll be of some interest that compiling, building and getting to the point of actually using the Controller can take quite a few steps and a fair bit of time. I have found simply compiling the sketch on a Windows system can take anywhere up to 20 minutes! This can be pretty frustrating when a simple setting in the "tools" section was omitted or forgotten. For this reason, I have switched to developing and compiling on an uBuntu Linux system - compile times around 2 minutes, and only a few seconds for repeat compiles.
 
-To help get around this problem, as a development team we have started using a batch file with pre-compiled binaries to load both the sketch and LittleFS files. The complete process takes a matter of seconds and your display is ready for use. If you'd like to try this method, open the "Flashing" folder in this repository, where you will find a collection of batch files - one for each supported display variant.
+To help get around this problem, as a development team we have started using a batch file system with pre-compiled binaries to load both the sketch and LittleFS files. The complete process takes a matter of seconds and your display is ready for use. If you'd like to try this method, open the "Flashing" folder in the "Main" branch of this repository, where you will find a collection of batch files - one for each supported display variant.
 
-Note that 2 executable files are required - esptool.exe and mklittlefs.exe. You can find both of these executables on your system (if you program ESP32 products:-)) but for your convenience I have stored both in the "Flashing" folder. I'm not sure of the restictions regarding distributing these executables - I don't have specific permission, so download on your own cogniscence:-)
+Note that 2 executable files are required - esptool.exe and mklittlefs.exe. You can find both of these executables on your system (if you program ESP32 products:-)) but for your convenience I have stored both in the "Flashing" folder. I'm not sure of the restictions regarding distributing these executables so have not included them in the batch file folders. You will need to locate and place them in the folder which contains the Batch file before running it.
+
+After successfully running the batch files, the Controller should be ready for use and your own customization - no mess, no fuss:-)
+
+The nexts few points apply for those who wish to "roll-their own" or simply experiment. All source files for both the Arduino sketch and any of the supported Display boards can be found in the "Master" branch. In addition to these, you'll need:-
 
 1. A Display with integrated ESP32
     - This is a design preference, and not a restriction - I'd like to see a Rasberry Pi Pico W based configuration
@@ -103,23 +107,24 @@ Note that 2 executable files are required - esptool.exe and mklittlefs.exe. You 
     - CSV_Parser latest Version
     - TAMC_GT911 for the capacitive displays
     - Resistive displays need the included xpt2046 Library
-      A more generic version is under review
+      A more generic version of the Library is under review
     - Arduino_GFX_Library Latest Version
   
-3. What's in this repository:-)
+3. What's in the Master Branch of this repository:
 
-   This project is made up from two "major" development processes - the Arduino IDE and EEZ Studio.
-   -    EEZ Studio has four different projects - one for each supported display resolution.
+   This project is made up from two "major" development projects - the Arduino IDE and EEZ Studio.
+   -    EEZ Studio has five different projects - one for each supported display resolution. 
    -    The Arduino IDE (2.x or 1.8.19) has only one Sketch, which integrates with the desired EEZ Studio project and display model of choice to produce the resultant sketch.
    -    To make this slightly easier for you to build the correct version for your display, I have included pre-configured combinations for your convenience. In summary:
          - The CYC folder is "unconfigured" and there is no guarantee which was the last configuration built from it. If you choose to "roll-your-own", you'll need to also load EEZ Studio so as to output the correct source files for your display resolution.
          - CYC-2432-CYD is a folder ready to be compiled for the ubiquitous CYD display - 240x320 resolution and Resistive Touch
          - CYC-2432-THMI is specific to the LilyGo T-HMI (beautiful IPS) variant
          - CYC-3248 can be configured for 320x480 resolution Resistive, Capacitive or a specific JC3248W535C Capacitive model
+         - CYC-4827 can also be configured for 272 x480 resolution Resistive or Capacitive Touch displays
          - CYC-8048 supports 3 480x800 units - all Capacitive at this stage, but 4.3 and 5.0in Sunton TFTs work.
     
-    As at 19 April, the two "Most Complete" folders are CYC_4827-41925 and CYC_8048-41925 - the 4.3in2 72x480  Resistive display, and the 480x800 4.3in Capacitive model. All will be updated in due course.
-
+    As at 30 April, 2025, the "Flashing" folder in the "Main" branch contains the full list of currently supported and tested display modules.
+   
 # Setting up Arduino IDE
 
 Both 2.3.6 and 1.8.19 have been used successfully. Be warned that the compilation time
@@ -166,7 +171,7 @@ to facilitate the loading of data files. The procedures for Versions 1.8.19 are 
 
 # For Arduino IDE 1.8.19
 
-Instructions to follow...
+Follow the instructions here: https://github.com/earlephilhower/arduino-esp8266littlefs-plugin
 
 # For Arduino IDE 2.x.x
 
@@ -285,9 +290,6 @@ A short history and "spec list" of Version numbers and Libraries used.
 
 ![Info](https://github.com/user-attachments/assets/43179ede-0043-40b7-a927-4fb926066b8c)
 
+# Disclamer
 
-
-
-
-
-
+Whilst everything in this repository has been tried and tested, it must be said that you download and use at your own risk:-(. Take note that two processor types are used in individual modules - ESP32 and ESP32-S3. The ESP32s are found in the ESP32-2438S0xx and ESP32-3248S0xx variants and ESP32-S3s in all others. Be sure to flash with the correct Batch File! 
