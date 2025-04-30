@@ -18,7 +18,7 @@ a likely candidate.
 The project was born. Here is a picture of the first "Proof of Concept", designed with EEZ Studio. The "Stop"
 and "Power" images came directly from my arsenal of images created for the Nextions.
 
-![upload_2024-8-10_19-41-35](https://github.com/user-attachments/assets/6808b675-7c2f-435b-bb28-f926adcac184)
+![Image Description](assets/POCImage.png)
 
 # Design Objective
 
