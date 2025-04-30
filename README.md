@@ -263,7 +263,7 @@ See comments in the Throttle section above:-). The image below shows the sample 
 
 # Program Page
 
-![Image Description](assets.Program.png)
+![Image Description](assets/Program.png)
 
 This image is fairly self-explanatory. It shows the "Program Track" as having been selected, and the "Min" button pressed as a shortcut to filling the CV Number field getting completed. Pressing the "Read" button will cause DCC-EX to read CV 2 from the Loco on the Program Track. Note that if no CV number is provided, the "Read" button will automatically insert "CV 1" to be read, and instruct DCC-EX to read the Loco's address. Informative messages are provided to assist with use.
 
