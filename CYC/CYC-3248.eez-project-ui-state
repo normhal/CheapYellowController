@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-3248.eez-project]:/userPages/9",
+    "selectedUserPageObject": "[CYC-3248.eez-project]:/userPages/3",
     "selectedBitmapObject": "[CYC-3248.eez-project]:/bitmaps/1",
     "subnavigationSelectedItems": {}
   },
@@ -186,27 +186,28 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 65,
+              "weight": 58.130699088145896,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
                   "id": "#6723a9af-d361-498e-99d0-398633f958ea",
-                  "name": "Info",
+                  "name": "EditLoco",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-3248.eez-project]:/userPages/9",
+                    "objectPath": "[CYC-3248.eez-project]:/userPages/3",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
               "id": "#a7133a96-96b9-4ea0-9437-4e7649563ece",
-              "weight": 20,
+              "weight": 26.869300911854104,
               "children": [
                 {
                   "type": "tabset",
@@ -221,8 +222,7 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -1779,13 +1779,17 @@
       }
     },
     "[CYC-3248.eez-project]:/userPages/0[flow-state]": {
-      "selection": {},
+      "selection": {
+        "0": {
+          "4": {}
+        }
+      },
       "transform": {
         "translate": {
-          "x": -160,
-          "y": -240
+          "x": -323.34891774891776,
+          "y": -263.6948051948051
         },
-        "scale": 1
+        "scale": 1.25
       },
       "timeline": {
         "isEditorActive": false,
@@ -1795,13 +1799,15 @@
       }
     },
     "[CYC-3248.eez-project]:/userPages/8[flow-state]": {
-      "selection": {},
+      "selection": {
+        "0": {}
+      },
       "transform": {
         "translate": {
           "x": -160,
           "y": -240
         },
-        "scale": 1
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1813,17 +1819,17 @@
     "[CYC-3248.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "5": {
+          "3": {
             "$selected": true
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -160,
-          "y": -240
+          "x": -48.25,
+          "y": -221.0625
         },
-        "scale": 1
+        "scale": 1.25
       },
       "timeline": {
         "isEditorActive": false,
@@ -1833,13 +1839,15 @@
       }
     },
     "[CYC-3248.eez-project]:/userPages/6[flow-state]": {
-      "selection": {},
+      "selection": {
+        "0": {}
+      },
       "transform": {
         "translate": {
           "x": -160,
           "y": -240
         },
-        "scale": 1
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1849,13 +1857,15 @@
       }
     },
     "[CYC-3248.eez-project]:/userPages/5[flow-state]": {
-      "selection": {},
+      "selection": {
+        "0": {}
+      },
       "transform": {
         "translate": {
           "x": -160,
-          "y": -240
+          "y": 0
         },
-        "scale": 1
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1867,9 +1877,7 @@
     "[CYC-3248.eez-project]:/userPages/7[flow-state]": {
       "selection": {
         "0": {
-          "2": {
-            "$selected": true
-          }
+          "1": {}
         }
       },
       "transform": {
@@ -1877,7 +1885,7 @@
           "x": -160,
           "y": -240
         },
-        "scale": 1
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1943,6 +1951,89 @@
         "secondToPx": 200,
         "scrollLeft": 0
       }
+    },
+    "[CYC-3248.eez-project]:/userPages/3[flow-state]": {
+      "selection": {
+        "0": {
+          "4": {},
+          "7": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -160,
+          "y": -240
+        },
+        "scale": 1.25
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-3248.eez-project]:/userPages/1[flow-state]": {
+      "selection": {
+        "0": {
+          "5": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -160,
+          "y": -240
+        },
+        "scale": 1.25
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-3248.eez-project]:/userPages/2[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -160,
+          "y": -240
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-3248.eez-project]:/userPages/4[flow-state]": {
+      "selection": {
+        "0": {
+          "15": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -160,
+          "y": -240
+        },
+        "scale": 1.25
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
     }
   },
   "activeOutputSection": 0,
@@ -1960,12 +2051,11 @@
   "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
-    "BORDER",
-    "BACKGROUND",
-    "TEXT"
+    "SHADOW",
+    "BORDER"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 1,
+  "flowZoom": 1.25,
   "implementationLanguage": "C"
 }

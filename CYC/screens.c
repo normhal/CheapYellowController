@@ -666,8 +666,6 @@ void create_screen_main() {
             lv_obj_set_size(obj, 27, 18);
         }
     }
-    
-    tick_screen_main();
 }
 
 void tick_screen_main() {
@@ -968,7 +966,7 @@ void create_screen_throttle() {
             lv_obj_set_size(obj, 14, 125);
             lv_slider_set_range(obj, 0, 126);
             lv_obj_add_event_cb(obj, action_throttle_button, LV_EVENT_RELEASED, (void *)3);
-            lv_obj_set_scroll_dir(obj, LV_DIR_NONE);
+            lv_obj_set_scroll_snap_x(obj, LV_DIR_NONE);
             lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_KNOB | LV_STATE_DEFAULT);
             lv_obj_set_style_transform_width(obj, 5, LV_PART_KNOB | LV_STATE_DEFAULT);
             lv_obj_set_style_transform_height(obj, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
@@ -1238,8 +1236,6 @@ void create_screen_throttle() {
             lv_obj_set_style_align(obj, LV_ALIGN_DEFAULT, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
-    
-    tick_screen_throttle();
 }
 
 void tick_screen_throttle() {
@@ -1449,8 +1445,6 @@ void create_screen_roster() {
             }
         }
     }
-    
-    tick_screen_roster();
 }
 
 void tick_screen_roster() {
@@ -1694,7 +1688,7 @@ void create_screen_edit_loco() {
                     objects.ta_address = obj;
                     lv_obj_set_pos(obj, 130, -3);
                     lv_obj_set_size(obj, 50, 22);
-                    lv_textarea_set_max_length(obj, 128);
+                    lv_textarea_set_max_length(obj, 4);
                     lv_textarea_set_one_line(obj, true);
                     lv_textarea_set_password_mode(obj, false);
                     lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1735,7 +1729,7 @@ void create_screen_edit_loco() {
             objects.ta_fnum = obj;
             lv_obj_set_pos(obj, 5, 108);
             lv_obj_set_size(obj, 28, 28);
-            lv_textarea_set_max_length(obj, 2);
+            lv_textarea_set_max_length(obj, 3);
             lv_textarea_set_one_line(obj, true);
             lv_textarea_set_password_mode(obj, false);
             lv_obj_set_style_border_color(obj, lv_color_hex(0xff000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -2409,8 +2403,6 @@ void create_screen_edit_loco() {
             lv_obj_set_style_align(obj, LV_ALIGN_DEFAULT, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
-    
-    tick_screen_edit_loco();
 }
 
 void tick_screen_edit_loco() {
@@ -2860,8 +2852,6 @@ void create_screen_program() {
             lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
-    
-    tick_screen_program();
 }
 
 void tick_screen_program() {
@@ -3301,8 +3291,6 @@ void create_screen_wi_fi() {
     }
     lv_keyboard_set_textarea(objects.kb_alpha, objects.ta_password);
     lv_keyboard_set_textarea(objects.kb_numeric, objects.ta_port);
-    
-    tick_screen_wi_fi();
 }
 
 void tick_screen_wi_fi() {
@@ -3478,8 +3466,6 @@ void create_screen_scan() {
             lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_AUTO, LV_PART_MAIN | LV_STATE_PRESSED);
         }
     }
-    
-    tick_screen_scan();
 }
 
 void tick_screen_scan() {
@@ -3720,8 +3706,6 @@ void create_screen_config() {
             lv_obj_set_style_align(obj, LV_ALIGN_DEFAULT, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
-    
-    tick_screen_config();
 }
 
 void tick_screen_config() {
@@ -3891,8 +3875,6 @@ void create_screen_credits() {
             lv_obj_set_style_text_font(obj, &lv_font_montserrat_10, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
-    
-    tick_screen_credits();
 }
 
 void tick_screen_credits() {
@@ -4042,34 +4024,11 @@ void create_screen_info() {
             lv_obj_set_style_text_line_space(obj, -1, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
-    
-    tick_screen_info();
 }
 
 void tick_screen_info() {
 }
 
-
-
-typedef void (*tick_screen_func_t)();
-tick_screen_func_t tick_screen_funcs[] = {
-    tick_screen_main,
-    tick_screen_throttle,
-    tick_screen_roster,
-    tick_screen_edit_loco,
-    tick_screen_program,
-    tick_screen_wi_fi,
-    tick_screen_scan,
-    tick_screen_config,
-    tick_screen_credits,
-    tick_screen_info,
-};
-void tick_screen(int screen_index) {
-    tick_screen_funcs[screen_index]();
-}
-void tick_screen_by_id(enum ScreensEnum screenId) {
-    tick_screen_funcs[screenId - 1]();
-}
 
 void create_screens() {
     lv_disp_t *dispp = lv_disp_get_default();
@@ -4086,4 +4045,23 @@ void create_screens() {
     create_screen_config();
     create_screen_credits();
     create_screen_info();
+}
+
+typedef void (*tick_screen_func_t)();
+
+tick_screen_func_t tick_screen_funcs[] = {
+    tick_screen_main,
+    tick_screen_throttle,
+    tick_screen_roster,
+    tick_screen_edit_loco,
+    tick_screen_program,
+    tick_screen_wi_fi,
+    tick_screen_scan,
+    tick_screen_config,
+    tick_screen_credits,
+    tick_screen_info,
+};
+
+void tick_screen(int screen_index) {
+    tick_screen_funcs[screen_index]();
 }

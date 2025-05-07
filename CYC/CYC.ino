@@ -132,7 +132,7 @@ void my_disp_flush( lv_disp_drv_t* disp_drv, const lv_area_t* area, lv_color_t* 
     #if ( LV_COLOR_16_SWAP != 0 ) 
       gfx->draw16bitBeRGBBitmap( area->x1, area->y1, ( uint16_t* )&color_p->full, w, h );
     #else
-      gfx->draw16bitRGBBitmap( area->x1, area->y1, ( uint16_t* )&color_p->full, w, h );
+       gfx->draw16bitRGBBitmap( area->x1, area->y1, ( uint16_t* )&color_p->full, w, h );
     #endif
 //  #endif
   lv_disp_flush_ready( disp_drv );
@@ -231,6 +231,7 @@ void setup()
     lv_obj_set_parent(objects.btn_power, lv_layer_top());
     lv_obj_set_parent(objects.btn_home, lv_layer_top());
     lv_obj_set_parent(objects.img_wifi, lv_layer_top());
+    lv_obj_set_parent(objects.h_line, lv_layer_top());
 
     lv_textarea_add_text(objects.ta_password, netwks[0].password.c_str());
     lv_textarea_add_text(objects.ta_ip_address, netwks[0].ipAddress.c_str());

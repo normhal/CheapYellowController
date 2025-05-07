@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-8048.eez-project]:/userPages/9",
+    "selectedUserPageObject": "[CYC-8048.eez-project]:/userPages/3",
     "selectedBitmapObject": "[CYC-8048.eez-project]:/bitmaps/2",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -24,7 +24,6 @@
           },
           {
             "type": "border",
-            "selected": 2,
             "size": 240,
             "location": "right",
             "children": [
@@ -210,15 +209,16 @@
                 {
                   "type": "tab",
                   "id": "#2c2fc19d-c36d-451c-b7fe-407c37eef5a2",
-                  "name": "Info",
+                  "name": "EditLoco",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-8048.eez-project]:/userPages/9",
+                    "objectPath": "[CYC-8048.eez-project]:/userPages/3",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
@@ -238,8 +238,7 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -1315,7 +1314,7 @@
     "[CYC-8048.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "4": {
+          "3": {
             "$selected": true
           }
         }
@@ -1323,9 +1322,9 @@
       "transform": {
         "translate": {
           "x": -240,
-          "y": -400
+          "y": -280
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1359,11 +1358,9 @@
     "[CYC-8048.eez-project]:/userPages/5[flow-state]": {
       "selection": {
         "0": {
-          "4": {
-            "$selected": true
-          },
-          "10": {},
-          "17": {}
+          "3": {},
+          "9": {},
+          "16": {}
         }
       },
       "transform": {
@@ -1371,7 +1368,7 @@
           "x": -240,
           "y": -640
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1389,7 +1386,7 @@
           "x": -240,
           "y": -520
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1401,10 +1398,8 @@
     "[CYC-8048.eez-project]:/userPages/7[flow-state]": {
       "selection": {
         "0": {
-          "3": {
-            "$selected": true
-          },
-          "9": {}
+          "2": {},
+          "8": {}
         }
       },
       "transform": {
@@ -1412,7 +1407,7 @@
           "x": -240,
           "y": -280
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1424,9 +1419,7 @@
     "[CYC-8048.eez-project]:/userPages/8[flow-state]": {
       "selection": {
         "0": {
-          "4": {
-            "$selected": true
-          }
+          "3": {}
         }
       },
       "transform": {
@@ -1434,7 +1427,7 @@
           "x": -240,
           "y": -400
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1455,10 +1448,10 @@
       },
       "transform": {
         "translate": {
-          "x": -422,
-          "y": -525
+          "x": -343.34374999999994,
+          "y": -146.34375
         },
-        "scale": 1.1
+        "scale": 1.25
       },
       "timeline": {
         "isEditorActive": false,
@@ -1470,17 +1463,15 @@
     "[CYC-8048.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
-          "3": {
-            "$selected": true
-          }
+          "2": {}
         }
       },
       "transform": {
         "translate": {
-          "x": -240,
-          "y": -640
+          "x": -139.22000000000003,
+          "y": -214.03777777777788
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1492,11 +1483,9 @@
     "[CYC-8048.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "4": {},
-          "9": {
-            "$selected": true
-          },
-          "10": {}
+          "3": {},
+          "8": {},
+          "9": {}
         }
       },
       "transform": {
@@ -1504,7 +1493,7 @@
           "x": -240,
           "y": -520
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1514,13 +1503,15 @@
       }
     },
     "[CYC-8048.eez-project]:/userPages/2[flow-state]": {
-      "selection": {},
+      "selection": {
+        "0": {}
+      },
       "transform": {
         "translate": {
           "x": -240,
           "y": -760
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1530,13 +1521,20 @@
       }
     },
     "[CYC-8048.eez-project]:/userPages/3[flow-state]": {
-      "selection": {},
+      "selection": {
+        "0": {
+          "4": {},
+          "7": {
+            "$selected": true
+          }
+        }
+      },
       "transform": {
         "translate": {
-          "x": -240,
-          "y": -760
+          "x": -121.49555969238276,
+          "y": -231.92572331261348
         },
-        "scale": 1.1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1560,13 +1558,13 @@
   "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
-    "PADDING",
     "TEXT",
-    "BACKGROUND",
-    "BORDER"
+    "BORDER",
+    "SHADOW",
+    "OUTLINE"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 1.1,
+  "flowZoom": 0.8,
   "implementationLanguage": "C"
 }

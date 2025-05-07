@@ -216,6 +216,7 @@ const char * throttleName[4] = {
 #define ADDR_LEN 5
 #define SPEED_LEN 3
 //#define DIR_LEN 1
+#define FNUM_LEN 3
 #define FNAME_LEN 10
 
 char locoName[NUM_LOCOS][NAME_LEN +1];
@@ -223,7 +224,7 @@ char locoAddress[NUM_LOCOS][ADDR_LEN +1];
 uint32_t locoSpeed[NUM_LOCOS];
 uint8_t locoDir[NUM_LOCOS];
 char funcName[NUM_LOCOS][NUM_FUNC_SLOTS][FNAME_LEN +1];
-char funcNumber[NUM_LOCOS][NUM_FUNC_SLOTS][4];          // 4 characters to store "255"
+char funcNumber[NUM_LOCOS][NUM_FUNC_SLOTS][FNUM_LEN+1];          // 4 characters to store "255"
 uint8_t funcState[NUM_LOCOS][NUM_FUNC_SLOTS];
 uint8_t funcOption[NUM_LOCOS][NUM_FUNC_SLOTS];
 
@@ -313,5 +314,3 @@ uint16_t editingID = 0;
 uint8_t functionEditSlot = 0;
 
 #endif
-
-

@@ -1,8 +1,9 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432.eez-project]:/userPages/9",
-    "selectedBitmapObject": "[CYC-2432.eez-project]:/bitmaps/1",
-    "subnavigationSelectedItems": {}
+    "selectedUserPageObject": "[CYC-2432.eez-project]:/userPages/3",
+    "subnavigationSelectedItems": {
+      "variables-tab/sub-navigation/selected-item": "Global"
+    }
   },
   "layoutModel": {
     "rootEditor": {
@@ -22,7 +23,6 @@
           },
           {
             "type": "border",
-            "selected": 2,
             "size": 240,
             "location": "right",
             "children": [
@@ -111,16 +111,16 @@
         ],
         "layout": {
           "type": "row",
-          "id": "#ca3c3e22-e525-4ec4-a5b0-a24b55da7c67",
+          "id": "#ad08be58-2ff2-4079-8cc9-d73cb8a424fe",
           "children": [
             {
               "type": "row",
-              "id": "#37c5501c-60d8-4962-a094-eac40181cef8",
+              "id": "#94e8b22b-2f0f-48eb-9915-045909c3d320",
               "weight": 15,
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#f592d1f7-2cff-48fb-86a6-9e7035defea0",
+                  "id": "#22e1c5e1-0c0f-4f7e-b360-2203f8cf2830",
                   "weight": 1,
                   "enableClose": false,
                   "children": [
@@ -152,13 +152,13 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#c59305bc-9245-4b9c-8e8d-d7e00a3b434d",
+                  "id": "#53d0970f-a698-4adb-b5a0-a9f797713210",
                   "weight": 1,
                   "enableClose": false,
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#e7d5311b-e3b6-4144-8b98-6d608feb278f",
+                      "id": "#aee41068-dbac-439d-bd75-3e1bde01c39b",
                       "name": "Widgets Structure",
                       "component": "flow-structure",
                       "enableClose": false,
@@ -168,7 +168,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#1ef2ee64-439f-4063-a350-d875e7e98071",
+                  "id": "#efb37618-774f-43f4-86a2-ed04c2ba38bf",
                   "weight": 1,
                   "enableClose": false,
                   "children": [
@@ -187,31 +187,32 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 49.29193037974684,
+              "weight": 65,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
-                  "id": "#24bf0fc1-5a63-49f0-87f0-5dd7705c3eaf",
-                  "name": "Info",
+                  "id": "#98a353c8-3647-4b0d-a711-b18bc91002c9",
+                  "name": "EditLoco",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-2432.eez-project]:/userPages/9",
+                    "objectPath": "[CYC-2432.eez-project]:/userPages/3",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
-              "id": "#4c67228a-df2c-4187-acbc-f6cd1913d7ed",
-              "weight": 35.70806962025316,
+              "id": "#4ac4b583-b01b-4a5e-8773-3fdda3deaf39",
+              "weight": 20,
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#a9b84600-4a21-4144-93b2-d2dbd2e2f628",
+                  "id": "#59e523b6-b668-47ac-b186-4c1e8ffb673e",
                   "weight": 2,
                   "children": [
                     {
@@ -222,12 +223,11 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
-                  "id": "#6e53133f-aa4d-4021-a562-a97d0658bd99",
+                  "id": "#ac0a86e9-c8c6-4748-8639-da2e777527c6",
                   "weight": 1,
                   "children": [
                     {
@@ -310,11 +310,11 @@
         ],
         "layout": {
           "type": "row",
-          "id": "#0bfb095b-d6b0-4e31-84e3-6b7b836a6f92",
+          "id": "#3fbb10ae-1480-4530-8fa8-52278608c45c",
           "children": [
             {
               "type": "tabset",
-              "id": "#f2d14c60-f6c3-48b8-a9b8-c08d32842290",
+              "id": "#75d7e1a9-88ab-477b-984e-936ee6002322",
               "weight": 0,
               "enableClose": false,
               "children": [
@@ -339,7 +339,7 @@
             },
             {
               "type": "tabset",
-              "id": "#22282703-c896-44c0-972d-922a8cfcab9a",
+              "id": "#2ceaf51f-5d1f-4005-ac25-fab69acea2f4",
               "weight": 0,
               "children": [
                 {
@@ -368,17 +368,17 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#2abe387a-7328-4899-b09d-7329fc7c26e1",
+          "id": "#9d1a5e9a-04e0-46f3-9563-bfdb01a4a9d9",
           "children": [
             {
               "type": "row",
-              "id": "#2a3de40d-7cba-43b9-8d3a-4e6fb49ab3e9",
+              "id": "#996fc69c-bb56-4bc8-a89f-ecae272ec796",
               "weight": 0,
               "width": 320,
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#2eadc528-93fc-4071-bbbf-7a0ba8bd8c70",
+                  "id": "#0386c309-ba00-4c39-a716-7957e986dfb6",
                   "weight": 1,
                   "children": [
                     {
@@ -409,12 +409,12 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#eb8ad3cc-1291-443f-bab8-78a6b2adbdd9",
+                  "id": "#4e7a315a-9ee1-40e7-81bb-7d2445eb1e2e",
                   "weight": 1,
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#ff923039-176f-4e54-bbac-e92eb0f82652",
+                      "id": "#5f0a9219-2733-4e36-a6e1-a774a7e13518",
                       "name": "Active Flows",
                       "component": "active-flows",
                       "enableClose": false,
@@ -424,12 +424,12 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#656e9d74-5b7c-476c-b33a-27df3a4d70e6",
+                  "id": "#3354ce40-a8e4-4cc2-a2b6-58df71efef01",
                   "weight": 2,
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#60cb03d7-d080-4110-b3d2-6266fc9666f8",
+                      "id": "#45183169-cd06-4469-8b4d-f5f2abdd7fff",
                       "name": "Watch",
                       "component": "watch",
                       "enableClose": false,
@@ -450,18 +450,18 @@
             },
             {
               "type": "row",
-              "id": "#2a758420-6ce7-473b-b90e-d7017724d145",
+              "id": "#3ddb160a-4413-4f12-99e1-51656fbfd1b6",
               "weight": 0,
               "width": 320,
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#450d891e-8bd3-42cd-8b08-33507b880c4c",
+                  "id": "#e1e4693a-35da-4f12-af5a-69d5fe2c6994",
                   "weight": 1,
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#ceec6194-5aa8-4479-b7aa-9a08b6f397bb",
+                      "id": "#134fe068-20dd-47a5-82b3-ca7823f5dcd8",
                       "name": "Queue",
                       "component": "queue",
                       "enableClose": false,
@@ -479,7 +479,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#725d3d0b-3009-4a14-882b-c06065ebf48f",
+                  "id": "#d1616b66-9f38-45f2-bafa-d231d1dc5f89",
                   "weight": 2,
                   "children": [
                     {
@@ -510,15 +510,15 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#36a4ff7b-4e5c-4812-8021-b73c8876ea7d",
+          "id": "#c520cbed-7610-41e7-8cae-2018506fd039",
           "children": [
             {
               "type": "row",
-              "id": "#23abbc7b-f405-4d49-a76d-47d1e28d54e4",
+              "id": "#0b204df7-886f-47b5-9aba-18a41d0d8e88",
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#24ee4205-6fbe-47f1-bb4e-d8818027ecc8",
+                  "id": "#cf80fce9-1790-455d-814e-3580be3f8349",
                   "weight": 75,
                   "enableDrop": false,
                   "enableDrag": false,
@@ -527,17 +527,16 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#1c3530c4-20c1-4415-a0e7-83344ab5ba76",
+                      "id": "#16216fac-edaa-4747-a832-77245e73713d",
                       "name": "Bitmaps",
                       "component": "bitmaps",
                       "enableClose": false
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
-                  "id": "#8d4ada36-99cc-4a2d-a6e1-b09080e98687",
+                  "id": "#9139b9a8-dfb4-41df-a963-5d4c0220010e",
                   "weight": 25,
                   "enableDrop": false,
                   "enableDrag": false,
@@ -546,7 +545,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#7c3d1df9-98fd-4b75-b2d6-18afcfa96f20",
+                      "id": "#4e1844c7-e31a-4827-a585-6effcbed8555",
                       "name": "Preview",
                       "component": "preview",
                       "enableClose": false
@@ -571,11 +570,11 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#e2f0b051-9855-4c1e-ad65-00c01ad71f2a",
+          "id": "#9e901eff-57d4-4695-90e5-d87e4927bb73",
           "children": [
             {
               "type": "tabset",
-              "id": "#065fecc6-af9b-4940-9549-3216bec694c7",
+              "id": "#3f30ee9f-15ac-4d7a-8571-0f404673a1b7",
               "enableDrop": false,
               "enableDrag": false,
               "enableClose": false,
@@ -583,7 +582,7 @@
               "children": [
                 {
                   "type": "tab",
-                  "id": "#991c66fe-6dbf-4ea6-91fc-7a43d8b66d2e",
+                  "id": "#fff3cf8e-5f82-4fe1-a2b5-3d6971b75fd5",
                   "component": "glyphs",
                   "enableClose": false
                 }
@@ -591,7 +590,7 @@
             },
             {
               "type": "tabset",
-              "id": "#c9e6edb2-77ec-4b82-b5c7-6b6b5aa3b72a",
+              "id": "#f49e22e8-7c82-4bc2-b308-80f3d6d96a46",
               "enableDrop": false,
               "enableDrag": false,
               "enableClose": false,
@@ -599,7 +598,7 @@
               "children": [
                 {
                   "type": "tab",
-                  "id": "#3d58146e-cc9a-486b-9864-8d7d65053ba5",
+                  "id": "#7a09ac33-b9cb-4946-bcc6-afb03bf237e0",
                   "component": "editor",
                   "enableClose": false
                 }
@@ -621,15 +620,15 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#0985a269-79a4-4784-a90c-093fe397da92",
+          "id": "#7c02c3d8-65b6-4785-b18b-cbfed6ce4bfc",
           "children": [
             {
               "type": "row",
-              "id": "#428072ec-cfbe-44e6-8629-0c62c48da585",
+              "id": "#d0a5004b-5b9f-4f94-9d78-5e16898108fe",
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#fef00ab4-bb62-4e82-86a2-9b71f656ca21",
+                  "id": "#e9f185ad-1012-4bfc-8f96-30f4ef7ebb25",
                   "children": [
                     {
                       "type": "tab",
@@ -649,7 +648,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#6444fc2a-96d5-4a40-ba70-1a6bcbcb28be",
+                  "id": "#1a2f5819-d647-4aa9-af44-5b9de6846df9",
                   "children": [
                     {
                       "type": "tab",
@@ -678,15 +677,15 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#4dc15953-2e94-4d65-a343-10e48ac26084",
+          "id": "#7bacbe94-c56e-4cec-a7c6-b7b457ad7bcb",
           "children": [
             {
               "type": "row",
-              "id": "#e17cd5d6-e7c0-4d20-a375-692cb86f402c",
+              "id": "#41ef32be-78b8-474b-8943-1e92a1157289",
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#84416986-af98-4742-999e-4cac6088d3fe",
+                  "id": "#68cef6b2-4666-4f19-975a-244ab91f0447",
                   "weight": 75,
                   "enableDrop": false,
                   "enableDrag": false,
@@ -695,7 +694,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#876501f2-e8ba-46e3-a7fa-4ba071efc51f",
+                      "id": "#9028d94d-a6db-493e-939f-3cc31ff152a9",
                       "name": "Styles",
                       "component": "styles",
                       "enableClose": false
@@ -704,7 +703,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#5a717f2f-9233-4d16-ac16-1294c11b7e96",
+                  "id": "#4790f60b-c59a-408b-865b-d2a46988a4f8",
                   "weight": 25,
                   "enableDrop": false,
                   "enableDrag": false,
@@ -713,7 +712,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#b2e647b8-deb0-4540-a70c-ac645475a82f",
+                      "id": "#4d9fb852-12d9-4de9-8c45-91f26b01ea2b",
                       "name": "Preview",
                       "component": "preview",
                       "enableClose": false
@@ -738,15 +737,15 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#0c9ce01b-6923-4766-a523-614390dbba06",
+          "id": "#42d667be-6359-4b9a-a60d-2ec602128756",
           "children": [
             {
               "type": "row",
-              "id": "#152c2a37-223a-43ef-be1e-6aa3fc0c453d",
+              "id": "#122b1a15-ae24-4753-ad7d-4df90af2f227",
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#df0b7bb8-47a0-438a-b8b5-728e10f99b3d",
+                  "id": "#1e89c0bc-5459-4cc5-9a0c-4b62883ae763",
                   "weight": 75,
                   "enableDrop": false,
                   "enableDrag": false,
@@ -755,7 +754,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#5876ab57-822c-4ebf-af6c-838c35ca3ddc",
+                      "id": "#22467235-eccc-40e2-a3d8-a153e7f0a91c",
                       "name": "Styles",
                       "component": "styles",
                       "enableClose": false
@@ -764,7 +763,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#2c2ce46e-88c2-4941-9dce-c2bf42bed878",
+                  "id": "#6d465d84-89c2-46cc-9f32-605d8c78da07",
                   "weight": 25,
                   "enableDrop": false,
                   "enableDrag": false,
@@ -773,7 +772,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#8bf04f3a-3b38-4d15-a4fd-1916bdc1b51b",
+                      "id": "#fef77c91-ff4d-4430-a3d8-12f3ac65c04f",
                       "name": "Preview",
                       "component": "preview",
                       "enableClose": false
@@ -798,15 +797,15 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#9b26b80d-7c18-459b-83ce-71ff1e50ef3b",
+          "id": "#d33ac884-7eee-4ef2-a0a8-d96e4d5a65c5",
           "children": [
             {
               "type": "row",
-              "id": "#c619c2c0-1349-4736-9361-d9430ff82109",
+              "id": "#335037cb-0215-4ed6-9eb3-01c869648f25",
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#cf628c83-a70b-4b72-b448-db18176a87f6",
+                  "id": "#082ee935-eb9f-4995-a22a-a5e1cd006667",
                   "enableDrop": false,
                   "enableDrag": false,
                   "enableClose": false,
@@ -814,7 +813,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#ef8e3fbf-149b-4f46-80ba-af8b5775cb58",
+                      "id": "#26629d37-889f-4e63-a9f4-cba85c61fb4d",
                       "component": "themes",
                       "enableClose": false
                     }
@@ -822,7 +821,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#7c2a7377-fa2e-41e5-a51f-558d01ceba43",
+                  "id": "#153e35af-46c2-4008-80b0-4b5ebcc5f7a8",
                   "enableDrop": false,
                   "enableDrag": false,
                   "enableClose": false,
@@ -830,7 +829,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#922253e7-41e0-40c2-aa55-475f9d2283ef",
+                      "id": "#81a6afa2-3a66-46b1-a891-06c9cb520dd8",
                       "component": "colors",
                       "enableClose": false
                     }
@@ -854,15 +853,15 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#183c9fb5-3806-4017-9a47-56f2c44edc7c",
+          "id": "#f68653bd-953f-41e4-8b7b-88b996d9ff64",
           "children": [
             {
               "type": "row",
-              "id": "#611bb1e4-f00e-4e6b-a047-810bc555ba88",
+              "id": "#2759b5da-bb98-4bc2-b78b-a7ee1b94ba7a",
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#0c38428e-713e-4055-8916-de7e5baa68ce",
+                  "id": "#cb5b6ecb-ce05-4d89-9712-ce39b62d28e2",
                   "children": [
                     {
                       "type": "tab",
@@ -875,7 +874,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#ad65240c-5e0a-4588-b3dc-60c576c5b352",
+                  "id": "#d2d763f0-017b-4e8e-a5e6-72e05b2a0121",
                   "children": [
                     {
                       "type": "tab",
@@ -888,7 +887,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#64d22130-8500-4abd-87bb-a8d7980660f4",
+                  "id": "#1b854e88-ebbc-4f4c-88cd-f895fd8db3aa",
                   "children": [
                     {
                       "type": "tab",
@@ -917,15 +916,15 @@
         "borders": [],
         "layout": {
           "type": "row",
-          "id": "#80841d47-209d-471e-8df9-8d422f503b8d",
+          "id": "#1cc2a056-184b-4b31-9516-4a64ea239cde",
           "children": [
             {
               "type": "row",
-              "id": "#309b7cd8-21a5-4091-ac0f-2d5edd98d610",
+              "id": "#e5bb09ad-c113-4d38-b2d3-0e12eb247097",
               "children": [
                 {
                   "type": "tabset",
-                  "id": "#08515a7b-57ec-4800-b423-465732aed180",
+                  "id": "#4352996e-b858-4b4d-afca-183c72541968",
                   "weight": 50,
                   "enableDrop": false,
                   "enableDrag": false,
@@ -934,7 +933,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#b9f7fbc8-3ed7-4c2f-8e24-e0b3aa182c1c",
+                      "id": "#52cd9c4d-0e36-45d6-9cd0-e4adf761fc5b",
                       "name": "Groups",
                       "component": "groups",
                       "enableClose": false
@@ -943,7 +942,7 @@
                 },
                 {
                   "type": "tabset",
-                  "id": "#922116f1-5c3c-47b0-8819-20e86d774b8a",
+                  "id": "#2ecfba7d-2659-4eda-8ba4-3d948ed87f90",
                   "weight": 50,
                   "enableDrop": false,
                   "enableDrag": false,
@@ -952,7 +951,7 @@
                   "children": [
                     {
                       "type": "tab",
-                      "id": "#d1785f3f-0ab5-4ace-9fcf-b6114c23b2aa",
+                      "id": "#0ae8222d-a473-4eaa-8392-f8651a0f9d67",
                       "name": "Group Widgets",
                       "component": "order",
                       "enableClose": false
@@ -969,7 +968,7 @@
   "selectedBuildConfiguration": "Default",
   "features": {},
   "objects": {
-    "[CYC-DCCpp-2432-17Mar25.eez-project]:/userPages/0[flow-state]": {
+    "[CYC-2432_new.eez-project]:/userPages/0[flow-state]": {
       "selection": {},
       "transform": {
         "translate": {
@@ -985,799 +984,20 @@
         "scrollLeft": 0
       }
     },
-    "[CYC-DCCpp-2432-17Mar25.eez-project]:/userPages/1[flow-state]": {
+    "[CYC-2432_new.eez-project]:/userPages/3[flow-state]": {
       "selection": {
         "0": {
-          "8": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -40
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432-17Mar25.eez-project]:/userPages/3[flow-state]": {
-      "selection": {
-        "0": {
-          "4": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_17Mar25/CYC-DCCpp-2432-17Mar25.eez-project]:/userPages/1[flow-state]": {
-      "selection": {
-        "0": {
-          "8": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -40
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_17Mar25/CYC-DCCpp-2432-17Mar25.eez-project]:/userPages/0[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_17Mar25/CYC-DCCpp-2432-17Mar25.eez-project]:/userPages/2[flow-state]": {
-      "selection": {
-        "0": {
-          "11": {
-            "$selected": true
-          },
-          "12": {
-            "$selected": true
-          },
-          "13": {
-            "$selected": true
-          },
-          "14": {
-            "$selected": true
-          },
-          "15": {
-            "$selected": true
-          },
-          "16": {
-            "$selected": true
-          },
-          "17": {
-            "$selected": true
-          },
-          "18": {
-            "$selected": true
-          },
-          "19": {
-            "$selected": true
-          },
-          "20": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-18Mar25.eez-project]:/userPages/2[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_18Mar25/CYC-DCCpp-2432CYD-18Mar25.eez-project]:/userPages/2[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_18Mar25/CYC-DCCpp-2432CYD-18Mar25.eez-project]:/userPages/1[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-19Mar25.eez-project]:/userPages/0[flow-state]": {
-      "selection": {
-        "0": {
-          "11": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-19Mar25.eez-project]:/userPages/1[flow-state]": {
-      "selection": {
-        "0": {
-          "16": {}
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -310.875,
-          "y": -425.125
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-19Mar25.eez-project]:/userPages/7[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": 19.285714285714278,
-          "y": -323
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-19Mar25.eez-project]:/userPages/5[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-19Mar25.eez-project]:/userPages/4[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-19Mar25.eez-project]:/userPages/2[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/1[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/2[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/3[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/4[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/5[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/6[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/7[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/8[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/9[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/10[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/0[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.25
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_2Apr25/CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/0[flow-state]": {
-      "selection": {
-        "0": {
-          "11": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -153,
-          "y": -320
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_2Apr25/CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/4[flow-state]": {
-      "selection": {
-        "0": {
-          "4": {}
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -159.6428571428571,
-          "y": -339.29999999999995
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_2Apr25/CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/1[flow-state]": {
-      "selection": {
-        "0": {
-          "11": {
-            "$selected": true
-          },
-          "12": {
-            "$selected": true
-          },
-          "13": {
-            "$selected": true
-          },
-          "15": {
-            "0": {
-              "$selected": true
-            },
-            "$selected": true
-          },
-          "16": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -165,
-          "y": -318
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_2Apr25/CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/2[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -166,
-          "y": -327
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_2Apr25/CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/3[flow-state]": {
-      "selection": {
-        "0": {
-          "10": {
-            "$selected": true
-          },
-          "11": {
-            "$selected": true
-          },
-          "12": {
-            "$selected": true
-          },
-          "13": {
-            "$selected": true
-          },
-          "14": {
-            "$selected": true
-          },
-          "15": {
-            "$selected": true
-          },
-          "16": {
-            "$selected": true
-          },
-          "17": {
-            "$selected": true
-          },
-          "18": {
-            "$selected": true
-          },
-          "19": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -179,
-          "y": -336
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_2Apr25/CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/5[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC_DCCPP_2Apr25/CYC-DCCpp-2432CYD-2Apr25.eez-project]:/userPages/6[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-4Apr25.eez-project]:/userPages/0[flow-state]": {
-      "selection": {
-        "0": {
-          "1": {},
-          "2": {},
-          "7": {},
-          "9": {}
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -280
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-4Apr25.eez-project]:/userPages/9[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-4Apr25.eez-project]:/userPages/8[flow-state]": {
-      "selection": {
-        "0": {
-          "0": {},
-          "1": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -280
-        },
-        "scale": 2
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-4Apr25.eez-project]:/userPages/1[flow-state]": {
-      "selection": {
-        "0": {
-          "8": {
-            "$selected": true
-          },
-          "9": {},
-          "17": {}
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -173.625,
-          "y": -239.375
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-DCCpp-2432CYD-4Apr25.eez-project]:/userPages/5[flow-state]": {
-      "selection": {
-        "0": {
-          "4": {
-            "$selected": true
-          },
-          "5": {
-            "$selected": true
-          },
           "6": {
             "$selected": true
-          },
-          "7": {
-            "$selected": true
-          },
-          "8": {
-            "$selected": true
-          },
-          "17": {
-            "$selected": true
-          },
-          "18": {
-            "$selected": true
           }
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -400
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-2432.eez-project]:/userPages/1[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
           "y": -160
         },
-        "scale": 1.5
+        "scale": 1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1789,12 +1009,65 @@
     "[CYC-2432.eez-project]:/userPages/0[flow-state]": {
       "selection": {
         "0": {
-          "1": {
-            "0": {}
-          },
-          "2": {},
-          "10": {},
-          "11": {
+          "4": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -212.625,
+          "y": -77.875
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/1[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -160
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/2[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -160
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/3[flow-state]": {
+      "selection": {
+        "0": {
+          "6": {
             "$selected": true
           }
         }
@@ -1804,7 +1077,87 @@
           "x": -120,
           "y": -160
         },
-        "scale": 1.5
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/4[flow-state]": {
+      "selection": {
+        "0": {
+          "9": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -280
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/5[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -160
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/6[flow-state]": {
+      "selection": {
+        "0": {
+          "1": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -400
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/7[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -160
+        },
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1815,18 +1168,14 @@
     },
     "[CYC-2432.eez-project]:/userPages/8[flow-state]": {
       "selection": {
-        "0": {
-          "5": {
-            "$selected": true
-          }
-        }
+        "0": {}
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -280
+          "y": -160
         },
-        "scale": 1.5
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1838,29 +1187,7 @@
     "[CYC-2432.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "4": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -280
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC-3248/CYC-2432.eez-project]:/userPages/9[flow-state]": {
-      "selection": {
-        "0": {
-          "4": {
+          "3": {
             "$selected": true
           }
         }
@@ -1870,110 +1197,7 @@
           "x": -120,
           "y": -160
         },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC-3248/CYC-2432.eez-project]:/userPages/0[flow-state]": {
-      "selection": {
-        "0": {
-          "8": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[../CYC-3248/CYC-2432.eez-project]:/userPages/8[flow-state]": {
-      "selection": {
-        "0": {
-          "4": {
-            "$selected": true
-          },
-          "5": {
-            "$selected": true
-          },
-          "6": {
-            "$selected": true
-          },
-          "7": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-2432.eez-project]:/userPages/7[flow-state]": {
-      "selection": {
-        "0": {
-          "5": {
-            "$selected": true
-          },
-          "6": {
-            "$selected": true
-          },
-          "7": {
-            "$selected": true
-          },
-          "8": {
-            "$selected": true
-          },
-          "9": {
-            "$selected": true
-          }
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -400
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-2432.eez-project]:/userPages/5[flow-state]": {
-      "selection": {},
-      "transform": {
-        "translate": {
-          "x": -120,
-          "y": -160
-        },
-        "scale": 1.5
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1997,12 +1221,12 @@
   "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
-    "TEXT",
-    "PADDING",
-    "BACKGROUND"
+    "BORDER",
+    "SHADOW",
+    "TEXT"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 1.5,
+  "flowZoom": 1.75,
   "implementationLanguage": "C"
 }

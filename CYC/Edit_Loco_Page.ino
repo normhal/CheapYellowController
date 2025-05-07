@@ -256,8 +256,8 @@ void action_fedit_slot(lv_event_t * e)
     default:
       break;
   }  
-  strcpy(funcName[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fname));
-  strcpy(funcNumber[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fnum));
+  strcpy(funcName[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fname));      //checked - EEZ
+  strcpy(funcNumber[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fnum));     //Checked - EEZ
   if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOption[editingID][functionEditSlot] = 1;
   else funcOption[editingID][functionEditSlot] = 0;
   lv_textarea_set_text(objects.ta_fname, "");
@@ -326,8 +326,8 @@ void action_fclear_slot(lv_event_t * e)
       break;
   }
   funcOption[editingID][functionEditSlot] = 0;
-  strcpy(funcName[editingID][functionEditSlot], "");
-  strcpy(funcNumber[editingID][functionEditSlot], "255");
+  strcpy(funcName[editingID][functionEditSlot], "");          //Checked
+  strcpy(funcNumber[editingID][functionEditSlot], "255");     //Checked
 }
 
 /* 
@@ -362,8 +362,8 @@ void action_edit_loco_button(lv_event_t * e)
       loadScreen(SCREEN_ID_PROGRAM);
       break;
     case (32):       //Done
-      strcpy(locoName[editingID], lv_textarea_get_text(objects.ta_name));
-      strcpy(locoAddress[editingID], lv_textarea_get_text(objects.ta_address));
+      strcpy(locoName[editingID], lv_textarea_get_text(objects.ta_name));         //Checked - EEZ
+      strcpy(locoAddress[editingID], lv_textarea_get_text(objects.ta_address));   //Checked - EEZ
       lv_table_set_cell_value(objects.tbl_roster, editingID, 0, locoName[editingID]);
       lv_table_set_cell_value(objects.tbl_roster, editingID, 1, locoAddress[editingID]);
       locosDirty = 1;
