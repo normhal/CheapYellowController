@@ -80,10 +80,8 @@ static void throttle_selection_handler_cb(lv_event_t * e);
 
 uint8_t thresholdSpeed = 15;
 uint8_t REAccAmount = 1;
-//uint8_t REpinA;
-//uint8_t lastREpinA;
-uint8_t powerState = 1;
-uint8_t brightness = 230;
+
+uint8_t brightness = 250;
 uint8_t timeout = 20;
 
 unsigned long lastButtonPress = 0;

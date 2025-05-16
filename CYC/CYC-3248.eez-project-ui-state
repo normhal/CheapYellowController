@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-3248.eez-project]:/userPages/4",
+    "selectedUserPageObject": "[CYC-3248.eez-project]:/userPages/1",
     "selectedBitmapObject": "[CYC-3248.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {}
   },
@@ -194,10 +194,10 @@
                 {
                   "type": "tab",
                   "id": "#6723a9af-d361-498e-99d0-398633f958ea",
-                  "name": "Program",
+                  "name": "Throttle",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-3248.eez-project]:/userPages/4",
+                    "objectPath": "[CYC-3248.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1987,7 +1987,11 @@
     "[CYC-3248.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
-          "5": {}
+          "5": {},
+          "8": {
+            "$selected": true
+          },
+          "11": {}
         }
       },
       "transform": {
@@ -2025,9 +2029,10 @@
     "[CYC-3248.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "15": {
+          "13": {
             "$selected": true
-          }
+          },
+          "15": {}
         }
       },
       "transform": {
@@ -2061,7 +2066,8 @@
   "lvglState": "PRESSED",
   "lvglExpandedPropertiesGroup": [
     "SHADOW",
-    "BACKGROUND"
+    "BACKGROUND",
+    "TEXT"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,

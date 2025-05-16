@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/4",
+    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/1",
     "selectedBitmapObject": "[CYC-2432THMI.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {}
   },
@@ -194,10 +194,10 @@
                 {
                   "type": "tab",
                   "id": "#a0b2b84d-d36e-4e22-b769-1f7839ea8df9",
-                  "name": "Program",
+                  "name": "Throttle",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/4",
+                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1364,7 +1364,10 @@
     "[CYC-2432THMI.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
-          "2": {}
+          "2": {},
+          "6": {
+            "$selected": true
+          }
         }
       },
       "transform": {

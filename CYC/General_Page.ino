@@ -23,7 +23,6 @@ void action_general_button(lv_event_t * e)
   switch(pressedButton)
   {
     case 1: 
-      Serial.println("Stop Pressed");
       for(int i = 0; i < NUM_LOCOS; i++) 
       {
         if(locoSpeed[i] != 0)
@@ -31,25 +30,22 @@ void action_general_button(lv_event_t * e)
           locoSpeed[i] = 0;
           setSpeed(atoi(locoAddress[i]), locoSpeed[i], locoDir[i]);
         }
-      lv_obj_add_state(objects.slider, LV_STATE_DISABLED);
       }
+      lv_label_set_text(objects.lbl_stop, "Go");
+      lv_obj_add_state(objects.slider, LV_STATE_DISABLED);
       break;
     case 2: 
-      Serial.println("Go Pressed");
       lv_label_set_text(objects.lbl_stop, "Stop");
       lv_obj_clear_state(objects.slider, LV_STATE_DISABLED);
       break;
     case 3: 
-      Serial.println("Power Off Pressed");
       lv_label_set_text(objects.lbl_power, "Power On");
-//      powerState = 0;
-      client.print("<0>");
+      if(!client.print("<0>")) lv_img_set_src(objects.img_wifi, &img_x);
       break;
     case 4:
       Serial.println("Power On Pressed");
       lv_label_set_text(objects.lbl_power, "Power Off");
-//      powerState = 1;
-      client.print("<1 JOIN>");
+      if(!client.print("<1 JOIN>")) lv_img_set_src(objects.img_wifi, &img_x);
       break;
     case 5:
       Serial.println("DCC++EX Pressed");

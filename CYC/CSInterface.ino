@@ -37,21 +37,13 @@ void receiveCMD()
 */
 void parse(char *com)
 {
-//  for(int c = 0; c < MAX_COMMAND_LENGTH; c++) Serial.print(com[c]);
-//  Serial.println();
-//
   switch(com[0])
   {
     case 'p':       //Power Command Received from Command Station
     {
-//      Serial.println("Power ON Received");
-//      if(com[1] == '1') lv_obj_add_flag(objects.btn_power, LV_STATE_CHECKED);
-      if(com[1] == '1') powerState = 1;   //lv_obj_add_flag(objects.btn_power, LV_STATE_CHECKED);
-//      if(com[1] == '1') lv_obj_add_flag(objects.btn_power, LV_STATE_CHECKED);
-//      Serial.println("Power OFF Received");
-//      if(com[1] == '0') lv_obj_clear_flag(objects.btn_power, LV_STATE_CHECKED);
-      if(com[1] == '0') powerState = 0;   //lv_obj_clear_flag(objects.btn_power, LV_STATE_CHECKED);
-//      else if(com[1] == '0') lv_obj_clear_flag(objects.btn_power, LV_STATE_CHECKED);
+      String msg = com;
+      if(msg == "p1") lv_obj_clear_state(objects.btn_power, LV_STATE_CHECKED);
+      if(msg == "p0") lv_obj_add_state(objects.btn_power, LV_STATE_CHECKED);
       break;
     }
     case 'r':       //Response to Programming Track "Read" command

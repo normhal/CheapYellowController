@@ -279,22 +279,24 @@ void populateCredentials(const char *path)
   }
   cp.parseLeftover();
 
-  uint16_t *credID = (uint16_t *)cp["ID"];
-  char **ssid = (char **)cp["SSID"];
-  char **password = (char **)cp["Password"];
-  char **ipAddress = (char **)cp["IPAddress"];
-  uint16_t *port = (uint16_t *)cp["Port"];
+  uint16_t *lfID = (uint16_t *)cp["ID"];
+  char **lfssid = (char **)cp["SSID"];
+  char **lfpassword = (char **)cp["Password"];
+  char **lfipAddress = (char **)cp["IPAddress"];
+  uint16_t *lfport = (uint16_t *)cp["Port"];
 
   Serial.print("Credentials read from LittleFS: ");
   Serial.println(cp.getRowsCount());
 
   for(int row = 0; row < cp.getRowsCount(); row++)      
   {
-    netwks[row].id = credID[row];
-    netwks[row].ssid = ssid[row];
-    netwks[row].password = password[row];
-    netwks[row].ipAddress = ipAddress[row];
-    netwks[row].nwPort = port[row];
+    netwks[row].id = lfID[row];
+    netwks[row].ssid = lfssid[row];
+    netwks[row].password = lfpassword[row];
+    netwks[row].ipAddress = lfipAddress[row];
+    netwks[row].nwPort = lfport[row];
+    Serial.printf("SSID Read: %s\n", lfssid[row]);
+    Serial.printf("SSID Read: %s\n", netwks[row].ssid.c_str());
   }
   file.close();
   Serial.print("Credential Rows Read: ");

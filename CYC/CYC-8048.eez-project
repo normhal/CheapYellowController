@@ -91,7 +91,11 @@
       ],
       "destinationFolder": ".",
       "separateFolderForImagesAndFonts": false,
+      "imageExportMode": "source",
+      "fontExportMode": "source",
+      "fileSystemPath": "",
       "lvglInclude": "lvgl.h",
+      "screensLifetimeSupport": false,
       "generateSourceCodeForEezFramework": false,
       "compressFlowDefinition": false,
       "executionQueueSize": 1000,
@@ -1509,7 +1513,9 @@
       "left": 0,
       "top": 0,
       "width": 480,
-      "height": 800
+      "height": 800,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "7589fbcd-2c17-45f8-a3b6-296ae8ba9894",
@@ -2320,7 +2326,7 @@
               "objID": "7006ae37-8c98-4295-e42c-91f56b78c35c",
               "type": "LVGLLabelWidget",
               "left": 11,
-              "top": 185,
+              "top": 192,
               "width": 103,
               "height": 32,
               "customInputs": [],
@@ -2370,9 +2376,9 @@
               "objID": "61d3c72e-eae9-4642-874f-2666a7be0349",
               "type": "LVGLLabelWidget",
               "left": 122,
-              "top": 185,
-              "width": 83,
-              "height": 32,
+              "top": 188,
+              "width": 100,
+              "height": 40,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -2387,7 +2393,7 @@
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
-              "heightUnit": "px",
+              "heightUnit": "content",
               "children": [],
               "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
               "hiddenFlagType": "literal",
@@ -2404,7 +2410,7 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "text_font": "MONTSERRAT_24",
+                      "text_font": "MONTSERRAT_36",
                       "text_color": "#0",
                       "text_align": "CENTER"
                     }
@@ -4167,7 +4173,9 @@
               },
               "groupIndex": 0,
               "min": 0,
+              "minType": "literal",
               "max": 126,
+              "maxType": "literal",
               "mode": "NORMAL",
               "value": 0,
               "valueType": "literal",
@@ -4181,7 +4189,7 @@
               "left": 368,
               "top": 188,
               "width": 90,
-              "height": 27,
+              "height": 40,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -4213,7 +4221,7 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "text_font": "MONTSERRAT_24",
+                      "text_font": "MONTSERRAT_36",
                       "text_align": "CENTER",
                       "text_color": "#0"
                     }
@@ -4377,7 +4385,7 @@
               "objID": "381ddc65-7cce-4085-bbcd-d805fccf933c",
               "type": "LVGLLabelWidget",
               "left": 271,
-              "top": 186,
+              "top": 192,
               "width": 82,
               "height": 32,
               "customInputs": [],
@@ -4698,7 +4706,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "9f7d9ace-8f4b-4f48-c490-6a8eabdeaab7",
@@ -5223,7 +5233,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "d81289ce-39c5-4c02-97de-8011a0e3a322",
@@ -8270,7 +8282,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "0ed7fc9c-5805-4935-aa9a-92edc2b2d6a8",
@@ -9595,7 +9609,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "860c67f0-7e00-4181-f9c6-04f9ceb68ed2",
@@ -11277,7 +11293,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "18ce3f46-d941-40f7-bcff-4a411a57357b",
@@ -11837,7 +11855,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "4dc83c5f-f133-44c5-d22e-ad7a9418121a",
@@ -12584,7 +12604,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "6eb8cfa4-d496-40c0-e719-cc3be2f0bbcf",
@@ -13137,7 +13159,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "e53c37e5-f286-4998-8495-116b6581a736",
@@ -13543,7 +13567,9 @@
       "top": 0,
       "width": 480,
       "height": 800,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     }
   ],
   "userWidgets": [],
@@ -13563,21 +13589,27 @@
       "name": "DCC-EX",
       "image": "data:image/png;base64,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",
       "bpp": 16,
-      "alwaysBuild": false
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
     },
     {
       "objID": "e87d1d7e-ce0e-4487-991a-e9bea54be39a",
       "name": "6",
       "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAASCAIAAAAluTLKAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADBklEQVQ4y41UXUhTYRj+qAMdcekgAo3RjrJAYUFdJNIPIQQeWCnZwItdOLsJmbBRmdDMVSsqM7S2HLJlyRhlq0ZZGI0CI5m62tT5Qzgssthk6KylE9ffM7/dVG7z42U879+z7z3vcw7pbyOr2oNz5EQlKdlJ8nOJIIPQAwAXQaRQsGrjv36fgZxVkvIDEpVKZbfbfT5fOBz+vXIA4CKIlEQiwR9I8+LFaEnKaNQw9RqFy+WiFEvfPsxOOQIjhulBHQwALoI0izKFQsEwjGgzaa39j/FVC7l5np+cnETpwqzv4xt1fwfXXEPk+0nBVpKdmZgaAK7iIGczqcNBH4rRwvM8UmW74yQJxl6joLfHjPTi3MT7nnJnM6k9wioqZQaDwe12h0IheikAuAjKZDKWZbMFpE5VHgpOIWU2mwUCwTYReXaZkHd3cr7OeH/9jH1+qx8wMW0nhS1XdZTlx3JkftoZHDXRqQHgIkjZdTqdUCjE1BaLBRGv15snzrHUETL6sHh5ITDRzeMB21rllGtuyjHRXeq4wBw7RHYVkE1ZiakBigqZU6rSMbeD8srlcsQrKiqWFsPD94sTUw+0s7jdpyETiiJB10jXDoeeVB/mGhu1TqczEAjQqQHgarVajuPWryP79hT5/X7ETSbTxkzmro79azPD96QYhw5+6wz39Ik9Fouh+nvIOzNuplMDwEUQKWgIvBjZaDSisa9Duop68EDxO/5cGYlEKLunU4R180UE+qAHoKxE1HVbjwIcpVKZsYG8uJ6bVI8gpdsAl62B1NfKrFYrlRQVClwsGtRisRirQPHjppw07wzGx+Aem3TIE9d5LBqa9dvp1ABwqbalUmlWJuO2bk//FtJFYfto9r+sem1gNPK4qrEKWCHHXGyoikaj83OBztPsmt5rapAUnsBgO3vjihqqjq0cALVaDW1L8regINknhiRLwKAkqqcvnksw6g57XO3HU3Wlyo092gvlA1TzBDuF1RwtQzBFSxpGapAR1cq1Jn3q262VEZeCtmFpb0ftD13A+swYGZbEAAAAAElFTkSuQmCC",
       "bpp": 16,
-      "alwaysBuild": false
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
     },
     {
       "objID": "94196842-ac6d-463c-eeeb-5336a4c0cde5",
       "name": "X",
       "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAASCAIAAAAluTLKAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADKUlEQVQ4y4VUbUhTYRQ+2AUn3mz/usJoMxYYGBWYSCrhj+L+CCsb9rMZJIiS0Qf70YeUPxQjZrgctpnFMtOVoy+UhMBE1DSnLpXSNNKYIrpyZeLU2zPfu/mtLy/jvOc857nn2Tkcaimh4J04SL4w+nrebz+/RZfPUPJB2h1JfBixAwNPOBECAEjgkbWcZMUDYYloIYTKovmsrCy73e5yuTwej7R4YOAJJ0JarTabyEd+PLI2ZHQc5SSOkxZxktE4MzU0MehwdxcPf8zFhYEnnH56o5HBQJoRQUXZaxjfG+n+bbG/v1+qr5d4nqG/JZHuCEXvoh3hsmoYeLbHCfJXed5ts4miiFDKYT+JzNhg4htqLfjw9GTfl9oTLZnkZQlEfaI4Pj7OVMNoa2urjY5mIWAKjsWOjw4iZLFYeJ7fo6K3BUSfHgm/x5wL876R9rxWM1dyRWm8k+tpbJQEuZC508dHWvyqx7rNC2k6uTpBsBkMSqWS4zir1QpSp9MZpRasV4k+v4if/evuey02FVNFkY5VNDnoGDDFzkbIldaFkYLIHijcTdRjy2dV63Q6SE5NTZ2Z9nRVx8uqW0sVqO5Hpxkg72hzd9UBRx6ln9I8uHlNCmiUFAq5FVptgkazLYSSEuIGBgaQYjabt4dzlbmKFZ3pehYzN+tlwstuaN68svt8PqD/uGr/RQa6D7ooQXK7EcIMaTQaSDaZTEhsehizzvTgD8Vvb53e6/Uy9o7HqieZNL2TgoxunjKSVVXleQDg6PX6sFB6dy9yw3kEKaC/huvBVXGdDCf39wW4gqrhURGp1Wq0AuCXhcJyhtWMTD6Ed1TEdD4tD7bbE8cPfzBMJQjBzsRwXEQ412bbtyp9HUbWqNnW+iBddQjtVRFawRFVBkr28nzVWW5t7vqMPZdoLlTO9Oj1mGrf4oGRk5NjDsgHBsitGXsvLNHNX8xm8/SzIx8XBp5dHc2uQxQkBX4zRmwnLB6G/q6jnppETD786SKhp7iZ51LghAdRBgOebb8tttlQ2pITY8Rm5W5hXukymcCwz2+2zZZv3KW/tSZxrNeCy6pbpWntxv0PLOmsxITLRqgAAAAASUVORK5CYII=",
       "bpp": 16,
-      "alwaysBuild": false
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
     }
   ],
   "colors": [],
