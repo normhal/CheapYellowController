@@ -34,12 +34,14 @@
 #include "images.h"
 
 // other includes for platformio RKS 27/05/2025
+#ifdef PLATFORMIO_BUILD
 #include "Menu_Page.h"
 #include "Program_Page.h"
 #include "Edit_Loco_Page.h"
 #include "Little_FS.h"
 #include "CSInterface.h"
 #include "Throttle_Page.h"
+#endif
 
 WiFiClient client;
 
