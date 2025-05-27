@@ -17,14 +17,29 @@
 
 const uint8_t TFT_BACKLIGHT = 246;
 
-Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
-    40 /* DE */, 41 /* VSYNC */, 39 /* HSYNC */, 42 /* PCLK */,
-    45 /* R0 */, 48 /* R1 */, 47 /* R2 */, 21 /* R3 */, 14 /* R4 */,
-    5 /* G0 */, 6 /* G1 */, 7 /* G2 */, 15 /* G3 */, 16 /* G4 */, 4 /* G5 */,
-    8 /* B0 */, 3 /* B1 */, 46 /* B2 */, 9 /* B3 */, 1 /* B4 */,
-    0 /* hsync_polarity */, 1 /* hsync_front_porch */, 1 /* hsync_pulse_width */, 43 /* hsync_back_porch */,
-    0 /* vsync_polarity */, 3 /* vsync_front_porch */, 1 /* vsync_pulse_width */, 12 /* vsync_back_porch */,
-    1 /* pclk_active_neg */, 9000000 /* prefer_speed */);
+
+ Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
+     40 /* DE */, 41 /* VSYNC */, 39 /* HSYNC */, 42 /* PCLK */,
+     45 /* R0 */, 48 /* R1 */, 47 /* R2 */, 21 /* R3 */, 14 /* R4 */,
+     5 /* G0 */, 6 /* G1 */, 7 /* G2 */, 15 /* G3 */, 16 /* G4 */, 4 /* G5 */,
+     8 /* B0 */, 3 /* B1 */, 46 /* B2 */, 9 /* B3 */, 1 /* B4 */,
+     0 /* hsync_polarity */, 1 /* hsync_front_porch */, 1 /* hsync_pulse_width */, 43 /* hsync_back_porch */,
+     0 /* vsync_polarity */, 3 /* vsync_front_porch */, 1 /* vsync_pulse_width */, 12 /* vsync_back_porch */,
+     1 /* pclk_active_neg */, 9000000 /* prefer_speed */);
+
+
+
+//
+// From Elecrow website
+// https://www.elecrow.com/wiki/esp32-display-432727-intelligent-touch-screen-wi-fi26ble-480272-hmi-display.html
+//
+//Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
+//  GFX_NOT_DEFINED /* CS */, GFX_NOT_DEFINED /* SCK */, GFX_NOT_DEFINED /* SDA */,
+//  40 /* DE */, 41 /* VSYNC */, 39 /* HSYNC */, 42 /* PCLK */,
+//  45 /* R0 */, 48 /* R1 */, 47 /* R2 */, 21 /* R3 */, 14 /* R4 */,
+//  5 /* G0 */, 6 /* G1 */, 7 /* G2 */, 15 /* G3 */, 16 /* G4 */, 4 /* G5 */,
+//  8 /* B0 */, 3 /* B1 */, 46 /* B2 */, 9 /* B3 */, 1 /* B4 */
+//);
 
 Arduino_RGB_Display *gfx = new Arduino_RGB_Display(DISPLAY_WIDTH, DISPLAY_HEIGHT, rgbpanel, ROTATION , AUTO_FLUSH);
 
@@ -35,7 +50,6 @@ Arduino_DataBus *bus = create_default_Arduino_DataBus();
  ******************************************************************************/
 
 #include <xpt2046.h>
-//#include <XPT2046.h>
 /*
 int16_t touch_map_x1 = 4000;      //90;
 int16_t touch_map_x2 = 0;      //1900;
@@ -51,8 +65,8 @@ int16_t touch_map_y2 = 110;    //1800;  //171;
 #define TOUCHSCREEN_SCLK_PIN (12)
 #define TOUCHSCREEN_MISO_PIN (13)
 #define TOUCHSCREEN_MOSI_PIN (11)
-#define TOUCHSCREEN_CS_PIN   (38)
-#define TOUCHSCREEN_IRQ_PIN  (18)
+#define TOUCHSCREEN_CS_PIN   (0)                // (38)     // RT
+#define TOUCHSCREEN_IRQ_PIN  (36)               // (18)     // RT
 
 XPT2046 ts = XPT2046(SPI, TOUCHSCREEN_CS_PIN, TOUCHSCREEN_IRQ_PIN);
 

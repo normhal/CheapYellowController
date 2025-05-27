@@ -68,10 +68,13 @@
 //#define ESP2432S028R           // Sunton ESP32-2432S028R Classic CYD  ESP32     tick 
 //#define ESP2432THMIR           //LilyGo T-HMI                         ESP32-S3  tick
 //#define ESP3248S035C           // Sunton ESP32-3248S035C              ESP32     tick 
-#define ESP3248S035R           // Sunton ESP32-3248S035R              ESP32     .  
+//#define ESP3248S035R           // Sunton ESP32-3248S035R              ESP32     .  
 //#define ESP3248W535C           //Guition JC3248W535C - in testing     ESP32-S3  tick
 //#define ESP4827S043C           // Sunton ESP32-4827S043C              ESP32-S3  tick
 //#define ESP4827S043R           // Sunton ESP32-4827S043R              ESP32-S3  tick
+
+#define ESP32DIS06043H           // Elcrow ESP32-DIS06043H              ESP32-S3     by RKS
+
 //#define ESP4827W543C           //Guition JC4827W543C - in testing
 //#define ESP4827W543R           //Guition JC4827W543R - in testing
 //#define ESP4848S040C           //Guition JC4848W440C - in development
@@ -149,12 +152,12 @@ void my_disp_flush( lv_disp_drv_t* disp_drv, const lv_area_t* area, lv_color_t* 
 */
 void setBacklight(uint8_t brightness)
 {
-  ledcSetup(0, 5000, 8);                          //If using ESP Boards 2.0.x LEDChannel, frequency, resolution
-  ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
-  ledcWrite(0, brightness);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
+//  ledcSetup(0, 5000, 8);                          //If using ESP Boards 2.0.x LEDChannel, frequency, resolution
+//  ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
+//  ledcWrite(0, brightness);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
 
-//  ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
-//  ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
+  ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
+  ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
 }
 /*
  ********************************************************************************************************
