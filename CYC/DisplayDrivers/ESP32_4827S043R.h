@@ -7,10 +7,10 @@
 
 #define GFX_BL 2 // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 #define ROTATION 1
-#define SCREEN_WIDTH 272          //Using EEZ Orientation
-#define SCREEN_HEIGHT 480
-#define DISPLAY_WIDTH 480         //Physical Display Properties ex rotation
-#define DISPLAY_HEIGHT 272
+
+const uint16_t SCREEN_WIDTH = 272;          //Using EEZ Orientation
+const uint16_t SCREEN_HEIGHT = 480;
+
 #define AUTO_FLUSH true
 
 #define NAME_COL_WIDTH 210
@@ -26,7 +26,7 @@ Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
     0 /* vsync_polarity */, 3 /* vsync_front_porch */, 1 /* vsync_pulse_width */, 12 /* vsync_back_porch */,
     1 /* pclk_active_neg */, 9000000 /* prefer_speed */);
 
-Arduino_RGB_Display *gfx = new Arduino_RGB_Display(DISPLAY_WIDTH, DISPLAY_HEIGHT, rgbpanel, ROTATION , AUTO_FLUSH);
+Arduino_RGB_Display *gfx = new Arduino_RGB_Display(SCREEN_HEIGHT, SCREEN_WIDTH, rgbpanel, ROTATION , AUTO_FLUSH);
 
 Arduino_DataBus *bus = create_default_Arduino_DataBus();
 
@@ -34,53 +34,78 @@ Arduino_DataBus *bus = create_default_Arduino_DataBus();
  * End of Arduino_GFX setting
  ******************************************************************************/
 
-#include <xpt2046.h>
-//#include <XPT2046.h>
-/*
-int16_t touch_map_x1 = 4000;      //90;
-int16_t touch_map_x2 = 0;      //1900;
-int16_t touch_map_y1 = 0;      //3800;    //1863;  //1870;
-int16_t touch_map_y2 = 4000;      //400;     //120; //180;
-*/
-bool touch_swap_xy = false;
-int16_t touch_map_x1 = 190;   //12;  //297;
-int16_t touch_map_x2 = 1880;    //1850;  //3825;
-int16_t touch_map_y1 = 1910;   //80;  //3860;
-int16_t touch_map_y2 = 110;    //1800;  //171;
+#include <XPT2046_Touchscreen.h>
+#include <SPI.h>
 
-#define TOUCHSCREEN_SCLK_PIN (12)
-#define TOUCHSCREEN_MISO_PIN (13)
-#define TOUCHSCREEN_MOSI_PIN (11)
-#define TOUCHSCREEN_CS_PIN   (38)
-#define TOUCHSCREEN_IRQ_PIN  (18)
+#define TOUCH_CS 38   
+#define TOUCH_IRQ 18   
+#define TOUCH_MOSI 11 
+#define TOUCH_MISO 13 
+#define TOUCH_CLK 12  
 
-XPT2046 ts = XPT2046(SPI, TOUCHSCREEN_CS_PIN, TOUCHSCREEN_IRQ_PIN);
+class TouchConfig {
+  public:
+    XPT2046_Touchscreen* ts;
+    SPIClass* touchSPI;
 
-//Initialize the Touch Controller
+    // MAP TOUCH COORDINATES TO SCREEN DIMENSIONS
+    const int minX = 300;
+    const int maxX = 3800;
+    const int minY = 3800;
+    const int maxY = 300;
+
+    TouchConfig() {
+      touchSPI = new SPIClass(HSPI);
+      ts = new XPT2046_Touchscreen(TOUCH_CS, TOUCH_IRQ);
+    }
+
+    bool begin() {
+      touchSPI->begin(TOUCH_CLK, TOUCH_MISO, TOUCH_MOSI, TOUCH_CS);
+        if (!ts->begin(*touchSPI)) {
+        return false;
+      }
+      ts->setRotation(1); // CHOOSE ROTATION HERE
+      return true;
+    }
+
+    void getScaledPoint(int& x, int& y, int& z) {
+      if (ts->touched()) {
+        TS_Point p = ts->getPoint();
+        // Scale the point to the screen dimensions
+        x = constrain(map(p.x, minX, maxX, 0, SCREEN_WIDTH), 0, SCREEN_WIDTH);
+        y = constrain(map(p.y, minY, maxY, 0, SCREEN_HEIGHT), 0, SCREEN_HEIGHT);
+        z = p.z;
+      }
+    }
+
+    bool isTouched() {
+      return ts->touched();
+    }
+};
+
+TouchConfig ts;
+
 void initTouch()
 {
-  SPI.begin(TOUCHSCREEN_SCLK_PIN, TOUCHSCREEN_MISO_PIN, TOUCHSCREEN_MOSI_PIN);
-  ts.begin(SCREEN_WIDTH, SCREEN_HEIGHT);
-//  ts.setCal(touch_map_x1, touch_map_x2, touch_map_y1, touch_map_y2, DISPLAY_WIDTH, DISPLAY_HEIGHT); // Raw xmin, xmax, ymin, ymax, width, height
-  ts.setRotation(ROTATION);
+    if(!ts.begin()) Serial.println("Touch Init Failed");
+    else Serial.println("Touch Init Completed");
 }
 
 //create a touch object
 void my_touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data)
 {
-  if (ts.pressed()) 
+  if (ts.isTouched()) 
   {
-    data->state = LV_INDEV_STATE_PR;
-//    data->point.x = ts.X(); //map(p.x, touch_map_x1, touch_map_x2, 1, SCREEN_WIDTH);
-//    data->point.y = ts.Y(); //map(p.y, touch_map_y1, touch_map_y2, 1, SCREEN_HEIGHT);
-
-    data->point.x = map(ts.RawY(), touch_map_x1, touch_map_x2, 1, SCREEN_WIDTH);
-    data->point.y = map(ts.RawX(), touch_map_y1, touch_map_y2, 1, SCREEN_HEIGHT);
- //   Serial.printf("RawX: %d X: %d - RawY: %d Y: %d\n", ts.RawX(), data->point.x, ts.RawY(), data->point.y );
+    data->state = LV_INDEV_STATE_PRESSED;
+    int x, y, z;
+    ts.getScaledPoint(x, y, z);
+    data->point.x = x;
+    data->point.y = y;
+    Serial.printf("X: %d, Y: %d\n", x, y);
   }
   else
   {
-    data->state = LV_INDEV_STATE_REL;
+    data->state = LV_INDEV_STATE_RELEASED;
   }
 }
 

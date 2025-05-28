@@ -1,7 +1,7 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432.eez-project]:/userPages/1",
-    "selectedBitmapObject": "[CYC-2432.eez-project]:/bitmaps/0",
+    "selectedUserPageObject": "[CYC-2432.eez-project]:/userPages/0",
+    "selectedBitmapObject": "[CYC-2432.eez-project]:/bitmaps/14",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -196,7 +196,7 @@
                 {
                   "type": "tab",
                   "id": "#98a353c8-3647-4b0d-a711-b18bc91002c9",
-                  "name": "Throttle",
+                  "name": "EditAcc",
                   "component": "editor",
                   "config": {
                     "objectPath": "[CYC-2432.eez-project]:/userPages/1",
@@ -1012,17 +1012,17 @@
     "[CYC-2432.eez-project]:/userPages/0[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "3": {
+          "1": {},
+          "3": {},
+          "10": {
             "$selected": true
-          },
-          "4": {}
+          }
         }
       },
       "transform": {
         "translate": {
-          "x": -212.625,
-          "y": -296.9640338581373
+          "x": -120,
+          "y": -400
         },
         "scale": 1.75
       },
@@ -1036,7 +1036,9 @@
     "[CYC-2432.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
-          "6": {
+          "1": {},
+          "3": {},
+          "11": {
             "$selected": true
           }
         }
@@ -1044,7 +1046,7 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -400
         },
         "scale": 1.75
       },
@@ -1120,12 +1122,16 @@
     },
     "[CYC-2432.eez-project]:/userPages/5[flow-state]": {
       "selection": {
-        "0": {}
+        "0": {
+          "3": {
+            "$selected": true
+          }
+        }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -269.54451692906866
         },
         "scale": 1.75
       },
@@ -1139,7 +1145,8 @@
     "[CYC-2432.eez-project]:/userPages/6[flow-state]": {
       "selection": {
         "0": {
-          "1": {
+          "1": {},
+          "3": {
             "$selected": true
           }
         }
@@ -1147,7 +1154,7 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -400
+          "y": -290.45548307093134
         },
         "scale": 1.75
       },
@@ -1227,13 +1234,14 @@
   "searchMatchWholeWord": false,
   "replaceEnabled": false,
   "replaceText": "",
+  "pageRuntimeFrontFace": true,
   "breakpoints": {},
   "watchExpressions": [],
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
   "lvglPart": "MAIN",
-  "lvglState": "PRESSED",
+  "lvglState": "CHECKED",
   "lvglExpandedPropertiesGroup": [
     "BORDER",
     "SHADOW",

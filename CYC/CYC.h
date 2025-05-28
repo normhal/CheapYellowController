@@ -54,6 +54,8 @@ WiFiClient client;
   #include "DisplayDrivers/ESP32_2432S028R.h"
 #elif defined ESP2432THMIR
   #include "DisplayDrivers/ESP32_2432THMIR.h"
+#elif defined ESP2432S032R
+  #include "DisplayDrivers/ESP32_2432S032R.h"
 #elif defined ESP3248S035R
   #include "DisplayDrivers/ESP32_3248S035R.h"
 #elif defined ESP3248S035C

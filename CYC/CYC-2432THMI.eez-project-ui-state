@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/6",
     "selectedBitmapObject": "[CYC-2432THMI.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {}
   },
@@ -187,17 +187,17 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 65.67101584342964,
+              "weight": 52.28641171684296,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
                   "id": "#a0b2b84d-d36e-4e22-b769-1f7839ea8df9",
-                  "name": "Throttle",
+                  "name": "EditAcc",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/1",
+                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/6",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -208,7 +208,7 @@
             {
               "type": "row",
               "id": "#7db3ab66-ed69-4cfb-8d79-56d36025c236",
-              "weight": 19.328984156570364,
+              "weight": 32.71358828315704,
               "children": [
                 {
                   "type": "tabset",
@@ -1337,20 +1337,12 @@
     },
     "[CYC-2432THMI.eez-project]:/userPages/0[flow-state]": {
       "selection": {
-        "0": {
-          "0": {
-            "$selected": true
-          },
-          "2": {},
-          "3": {},
-          "4": {},
-          "10": {}
-        }
+        "0": {}
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -400
         },
         "scale": 2
       },
@@ -1365,15 +1357,17 @@
       "selection": {
         "0": {
           "2": {},
-          "6": {
+          "4": {
             "$selected": true
-          }
+          },
+          "6": {},
+          "7": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -400
         },
         "scale": 2
       },
@@ -1405,9 +1399,10 @@
     "[CYC-2432THMI.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "11": {
+          "0": {
             "$selected": true
-          }
+          },
+          "11": {}
         }
       },
       "transform": {
@@ -1426,9 +1421,7 @@
     },
     "[CYC-2432THMI.eez-project]:/userPages/5[flow-state]": {
       "selection": {
-        "0": {
-          "7": {}
-        }
+        "0": {}
       },
       "transform": {
         "translate": {
@@ -1469,7 +1462,8 @@
     "[CYC-2432THMI.eez-project]:/userPages/7[flow-state]": {
       "selection": {
         "0": {
-          "0": {
+          "0": {},
+          "2": {
             "$selected": true
           },
           "7": {}
@@ -1491,12 +1485,62 @@
     },
     "[CYC-2432THMI.eez-project]:/userPages/2[flow-state]": {
       "selection": {
-        "0": {}
+        "0": {
+          "3": {
+            "$selected": true
+          }
+        }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432THMI.eez-project]:/userPages/10[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "1": {},
+          "2": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432THMI.eez-project]:/userPages/11[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "1": {},
+          "2": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -280
         },
         "scale": 2
       },
@@ -1514,13 +1558,14 @@
   "searchMatchWholeWord": false,
   "replaceEnabled": false,
   "replaceText": "",
+  "pageRuntimeFrontFace": true,
   "breakpoints": {},
   "watchExpressions": [],
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
   "lvglPart": "MAIN",
-  "lvglState": "PRESSED",
+  "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "PADDING",
