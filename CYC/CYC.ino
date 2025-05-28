@@ -72,8 +72,8 @@
 //#define ESP3248W535C           //Guition JC3248W535C - in testing     ESP32-S3  tick
 //#define ESP4827S043C           // Sunton ESP32-4827S043C              ESP32-S3  tick
 //#define ESP4827S043R           // Sunton ESP32-4827S043R              ESP32-S3  tick
-
-#define ESP32DIS06043H           // Elcrow ESP32-DIS06043H              ESP32-S3     by RKS
+//#define ESP32DIS06043H         // Elcrow ESP32-DIS06043H            ESP32-S3  tick   by RKS
+//#define ESP32DIS08070H         // Elcrow ESP32-DIS08070H            ESP32-S3         by RKS
 
 //#define ESP4827W543C           //Guition JC4827W543C - in testing
 //#define ESP4827W543R           //Guition JC4827W543R - in testing

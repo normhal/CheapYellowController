@@ -80,6 +80,8 @@ WiFiClient client;
 //  #include "DisplayDrivers/ESP32_4848S040C.h"
 #elif defined ESP32DIS06043H
   #include "DisplayDrivers/ESP32_DIS06043H.h"
+#elif defined ESP32DIS08070H
+  #include "DisplayDrivers/ESP32_DIS08070H.h"
 #endif
 
 void dd_locos_cb(lv_event_t * e);
