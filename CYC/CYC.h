@@ -34,12 +34,14 @@
 #include "images.h"
 
 // other includes for platformio RKS 27/05/2025
+#ifdef PLATFORMIO_BUILD
 #include "Menu_Page.h"
 #include "Program_Page.h"
 #include "Edit_Loco_Page.h"
 #include "Little_FS.h"
 #include "CSInterface.h"
 #include "Throttle_Page.h"
+#endif
 
 WiFiClient client;
 
@@ -78,6 +80,8 @@ WiFiClient client;
 //  #include "DisplayDrivers/ESP32_4848S040C.h"
 #elif defined ESP32DIS06043H
   #include "DisplayDrivers/ESP32_DIS06043H.h"
+#elif defined ESP32DIS08070H
+  #include "DisplayDrivers/ESP32_DIS08070H.h"
 #endif
 
 void dd_locos_cb(lv_event_t * e);

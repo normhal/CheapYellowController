@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/0",
     "selectedBitmapObject": "[CYC-4827.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -71,6 +71,7 @@
           },
           {
             "type": "border",
+            "selected": 1,
             "location": "bottom",
             "children": [
               {
@@ -195,10 +196,10 @@
                 {
                   "type": "tab",
                   "id": "#a1cdbd76-72c9-4afa-a6cb-ec2bb37044cc",
-                  "name": "Throttle",
+                  "name": "Main",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-4827.eez-project]:/userPages/1",
+                    "objectPath": "[CYC-4827.eez-project]:/userPages/0",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1066,9 +1067,7 @@
     "[CYC-4827.eez-project]:/userPages/0[flow-state]": {
       "selection": {
         "0": {
-          "1": {
-            "$selected": true
-          },
+          "1": {},
           "2": {},
           "3": {},
           "4": {},
@@ -1081,7 +1080,7 @@
       "transform": {
         "translate": {
           "x": -277.4999999999999,
-          "y": -49.955483070931336
+          "y": -409.95548307093134
         },
         "scale": 1.5
       },
