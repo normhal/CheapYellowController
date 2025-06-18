@@ -58,14 +58,13 @@ void action_roster_button(lv_event_t * e)
     case 29:
       rosterMode = NORMAL_MODE;
       break;
-    case 30:       //Return to Calling Page
-      loadScreen(SCREEN_ID_MAIN);
+    case 30:       //Cancel
+      loadScreen(callingPage);
       break;
     case 31:       //Edit Loco
       callingPage = SCREEN_ID_ROSTER;
       rosterMode = EDIT_MODE;
       lv_obj_clear_state(objects.btn_select_loco, LV_STATE_CHECKED);
-//      loadScreen(SCREEN_ID_EDIT_LOCO);
       break;
     case 32:       //Select Loco
       rosterMode = SELECT_MODE;

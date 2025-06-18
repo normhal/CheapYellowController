@@ -92,7 +92,11 @@
       ],
       "destinationFolder": ".",
       "separateFolderForImagesAndFonts": false,
+      "imageExportMode": "source",
+      "fontExportMode": "source",
+      "fileSystemPath": "",
       "lvglInclude": "lvgl.h",
+      "screensLifetimeSupport": false,
       "generateSourceCodeForEezFramework": false,
       "compressFlowDefinition": false,
       "executionQueueSize": 1000,
@@ -612,13 +616,13 @@
                       "shadow_spread": 2,
                       "shadow_opa": 128,
                       "text_font": "MONTSERRAT_18",
-                      "shadow_color": "#0"
+                      "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_color": "#ffff00",
                       "bg_grad_dir": "VER",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "shadow_width": 0,
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
@@ -628,7 +632,7 @@
                       "shadow_opa": 128
                     },
                     "CHECKED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_color": "#00ff00",
                       "bg_grad_dir": "VER",
                       "shadow_width": 5,
@@ -761,11 +765,11 @@
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
                       "shadow_opa": 128,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "border_width": 1
                     },
                     "PRESSED": {
-                      "bg_color": "0",
+                      "bg_color": "#000000",
                       "bg_grad_color": "#00ff00",
                       "bg_grad_dir": "VER",
                       "shadow_width": 0,
@@ -777,7 +781,7 @@
                       "shadow_opa": 128
                     },
                     "CHECKED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_color": "#00ff00",
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
@@ -1105,7 +1109,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
@@ -1116,10 +1120,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -1238,7 +1242,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
@@ -1249,10 +1253,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -1323,7 +1327,7 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127,
                       "text_font": "MONTSERRAT_24",
                       "text_color": "#ffffff",
@@ -1332,10 +1336,10 @@
                       "border_width": 1
                     },
                     "CHECKED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#ff0000",
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "text_color": "#ffffff",
                       "border_post": false,
                       "shadow_width": 0,
@@ -1420,7 +1424,7 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "pad_top": 0,
                       "text_color": "#ffffff",
                       "shadow_width": 5,
@@ -1598,7 +1602,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "10c56b27-f0f2-4447-d852-5a2fa4984fc5",
@@ -1776,7 +1782,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
@@ -1784,13 +1790,13 @@
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
                       "shadow_opa": 127,
-                      "shadow_color": "#0"
+                      "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "shadow_width": 0,
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
@@ -1903,7 +1909,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
@@ -1911,13 +1917,13 @@
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
                       "shadow_opa": 127,
-                      "shadow_color": "#0"
+                      "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "shadow_width": 0,
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
@@ -2030,7 +2036,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
@@ -2038,13 +2044,13 @@
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
                       "shadow_opa": 127,
-                      "shadow_color": "#0"
+                      "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "shadow_width": 0,
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
@@ -2155,7 +2161,7 @@
                       "border_width": 1,
                       "border_color": "#000000",
                       "text_font": "MONTSERRAT_14",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "text_align": "CENTER",
                       "pad_row": 0,
                       "pad_right": 4,
@@ -2273,7 +2279,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "text_font": "MONTSERRAT_16",
-                      "text_color": "0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -2338,12 +2344,12 @@
                       "bg_color": "#c89600",
                       "border_color": "#000000",
                       "border_width": 1,
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127
                     },
                     "CHECKED": {
@@ -2352,7 +2358,7 @@
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0,
                       "bg_color": "#ffff00",
-                      "text_color": "0"
+                      "text_color": "#000000"
                     },
                     "PRESSED": {
                       "bg_color": "#ffff00",
@@ -2360,7 +2366,7 @@
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0,
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -2370,7 +2376,7 @@
               "buttons": [
                 {
                   "objID": "089ca53c-239f-4f1c-87f8-386c08e140cf",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2379,7 +2385,7 @@
                 {
                   "objID": "1c5961c6-6ae1-41e4-eb44-28c467e20637",
                   "newLine": false,
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2393,7 +2399,7 @@
                 },
                 {
                   "objID": "140657c0-0cee-49c2-ec2e-67d15f41d34c",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2401,7 +2407,7 @@
                 },
                 {
                   "objID": "7cc81f74-3a70-4c06-9317-9ee4511cd936",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2416,7 +2422,7 @@
                 },
                 {
                   "objID": "44bb79c5-8cc8-4afe-a6f6-a002401eee10",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2424,7 +2430,7 @@
                 },
                 {
                   "objID": "331ac4a0-682d-40ab-8afd-df63b534b276",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2439,7 +2445,7 @@
                 },
                 {
                   "objID": "b64e687e-eb77-49af-b22b-8188b8ef963b",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2447,7 +2453,7 @@
                 },
                 {
                   "objID": "a67e994f-f5f1-4608-b234-b10e055549bc",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2461,7 +2467,7 @@
                 },
                 {
                   "objID": "169a4b44-2128-451e-8d8a-7f87dca8a50d",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2469,7 +2475,7 @@
                 },
                 {
                   "objID": "95a670f3-6207-4c8f-8246-a38a6f145805",
-                  "text": "",
+                  "text": " ",
                   "width": 1,
                   "ctrlHidden": true,
                   "ctrlDisabled": false,
@@ -2573,7 +2579,9 @@
               },
               "groupIndex": 0,
               "min": 0,
+              "minType": "literal",
               "max": 126,
+              "maxType": "literal",
               "mode": "NORMAL",
               "value": 0,
               "valueType": "literal",
@@ -2619,7 +2627,7 @@
                     "DEFAULT": {
                       "text_font": "MONTSERRAT_16",
                       "text_align": "CENTER",
-                      "text_color": "0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -2852,10 +2860,10 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0"
+                      "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#ff0000"
                     }
@@ -3018,7 +3026,7 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127,
                       "text_font": "MONTSERRAT_24"
                     },
@@ -3029,7 +3037,7 @@
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0,
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -3140,7 +3148,7 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127,
                       "text_font": "MONTSERRAT_24"
                     },
@@ -3151,7 +3159,7 @@
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0,
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -3218,10 +3226,10 @@
                       "bg_color": "#ffffff",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#000000",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "text_font": "MONTSERRAT_14",
                       "border_width": 1,
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
@@ -3331,7 +3339,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "3a93398a-3581-4c70-e117-1645e275ab8b",
@@ -3506,21 +3516,21 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -3633,21 +3643,21 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -3852,11 +3862,11 @@
                           "shadow_width": 2,
                           "shadow_ofs_x": 2,
                           "shadow_spread": 2,
-                          "shadow_color": "#0",
+                          "shadow_color": "#000000",
                           "shadow_opa": 127,
                           "shadow_ofs_y": 2,
                           "bg_color": "#c89600",
-                          "text_color": "#0"
+                          "text_color": "#000000"
                         }
                       }
                     }
@@ -3880,21 +3890,21 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -3931,7 +3941,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "aa78687d-dfb9-4ddc-83f2-68022ed1ce46",
@@ -4108,7 +4120,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_14",
                       "shadow_width": 5,
@@ -4119,10 +4131,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -4240,7 +4252,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_14",
                       "shadow_width": 5,
@@ -4251,10 +4263,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -4372,7 +4384,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_14",
                       "shadow_width": 5,
@@ -4383,10 +4395,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -4441,7 +4453,7 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1,
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
@@ -4514,7 +4526,7 @@
                       "shadow_spread": 2,
                       "shadow_opa": 127,
                       "border_width": 1,
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "text_align": "CENTER"
                     }
                   }
@@ -4569,7 +4581,7 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1,
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
@@ -4636,7 +4648,7 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1,
                       "shadow_width": 5,
                       "shadow_ofs_x": 3,
@@ -4857,7 +4869,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -4902,8 +4914,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -5054,7 +5066,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -5099,8 +5111,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -5250,7 +5262,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -5295,8 +5307,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -5446,7 +5458,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -5491,8 +5503,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -5642,7 +5654,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -5687,8 +5699,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -5839,7 +5851,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -5884,8 +5896,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -6035,7 +6047,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -6080,8 +6092,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -6231,7 +6243,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -6276,8 +6288,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -6427,7 +6439,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -6472,8 +6484,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -6623,7 +6635,7 @@
                           "align": "DEFAULT",
                           "border_color": "#000000",
                           "border_width": 1,
-                          "text_color": "#0",
+                          "text_color": "#000000",
                           "text_align": "CENTER",
                           "radius": 7,
                           "bg_color": "#ffffff",
@@ -6668,8 +6680,8 @@
                       "shadow_spread": 2,
                       "shadow_width": 10,
                       "bg_color": "#ffff00",
-                      "text_color": "#0",
-                      "shadow_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_color": "#000000"
                     },
                     "DEFAULT": {
                       "bg_color": "#c89600",
@@ -6856,7 +6868,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "dee57a79-9e28-4b13-f345-60145f1de86e",
@@ -6985,7 +6999,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_14",
                       "shadow_width": 5,
@@ -6996,10 +7010,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -7117,7 +7131,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_14",
                       "shadow_width": 5,
@@ -7128,10 +7142,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -7299,7 +7313,7 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "text_font": "MONTSERRAT_16"
                     },
                     "CHECKED": {
@@ -7309,13 +7323,13 @@
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0,
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "text_font": "MONTSERRAT_16"
                     },
                     "PRESSED": {
                       "bg_color": "#ffff00",
                       "bg_grad_dir": "NONE",
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -7427,7 +7441,7 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127,
                       "text_font": "MONTSERRAT_16"
                     },
@@ -7438,13 +7452,13 @@
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0,
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "text_font": "MONTSERRAT_16"
                     },
                     "PRESSED": {
                       "bg_color": "#ffff00",
                       "bg_grad_dir": "NONE",
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -7515,7 +7529,7 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "shadow_opa": 127,
                       "text_font": "MONTSERRAT_14"
                     },
@@ -7526,7 +7540,7 @@
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0,
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -7748,11 +7762,11 @@
                       "text_font": "MONTSERRAT_16",
                       "pad_left": 1,
                       "text_align": "CENTER",
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1
                     },
                     "CHECKED": {
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1
                     }
                   }
@@ -7812,11 +7826,11 @@
                       "text_font": "MONTSERRAT_16",
                       "pad_left": 1,
                       "text_align": "CENTER",
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1
                     },
                     "CHECKED": {
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1
                     }
                   }
@@ -7876,12 +7890,12 @@
                       "pad_bottom": 2,
                       "text_font": "MONTSERRAT_16",
                       "pad_left": 2,
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1
                     },
                     "CHECKED": {
                       "bg_color": "#ffff00",
-                      "border_color": "#0",
+                      "border_color": "#000000",
                       "border_width": 1
                     },
                     "PRESSED": {
@@ -7968,7 +7982,7 @@
                       "shadow_ofs_x": 3,
                       "shadow_ofs_y": 3,
                       "shadow_spread": 2,
-                      "shadow_color": "#0",
+                      "shadow_color": "#000000",
                       "text_font": "MONTSERRAT_16",
                       "text_color": "#f0f0f0"
                     },
@@ -7979,7 +7993,7 @@
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0,
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -8212,7 +8226,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "260a04dd-de08-46c2-d6b5-9e37a0b25aed",
@@ -8388,15 +8404,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -8502,15 +8528,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -8593,7 +8629,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "6440c010-d16a-4023-dd74-eabf55370f73",
@@ -8769,15 +8807,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_x": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0
                     }
                   }
                 }
@@ -8883,15 +8931,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_x": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0
                     }
                   }
                 }
@@ -8974,7 +9032,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "75bc2ae5-6bb3-444b-cbf4-f5a54715ba0b",
@@ -9146,17 +9206,27 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "bg_color": "#fff",
+                      "bg_color": "#ffffff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -9262,15 +9332,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -9315,7 +9395,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "bg_color": "#FFFFFF",
-                      "text_color": "0",
+                      "text_color": "#000000",
                       "pad_top": 4,
                       "pad_bottom": 4
                     }
@@ -9367,7 +9447,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "bg_color": "#ffffff",
-                      "text_color": "0",
+                      "text_color": "#000000",
                       "pad_top": 0,
                       "pad_bottom": 0
                     }
@@ -9421,7 +9501,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "bg_color": "#ffffff",
-                      "text_color": "0",
+                      "text_color": "#000000",
                       "pad_top": 0,
                       "pad_bottom": 0
                     }
@@ -9475,7 +9555,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "bg_color": "ffffff",
-                      "text_color": "0",
+                      "text_color": "#000000",
                       "pad_top": 0,
                       "pad_bottom": 0
                     }
@@ -9529,7 +9609,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "bg_color": "ffffff",
-                      "text_color": "0",
+                      "text_color": "#000000",
                       "pad_top": 0,
                       "pad_bottom": 0
                     }
@@ -9644,15 +9724,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -9758,15 +9848,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -9872,15 +9972,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -9986,15 +10096,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -10100,15 +10220,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -10214,15 +10344,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0,
+                      "shadow_ofs_x": 0
                     }
                   }
                 }
@@ -10453,7 +10593,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "62832cf1-1c29-432b-96bc-ba183ef44174",
@@ -10629,15 +10771,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_x": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0
                     }
                   }
                 }
@@ -10743,15 +10895,25 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
-                      "text_font": "MONTSERRAT_24"
+                      "text_font": "MONTSERRAT_24",
+                      "shadow_width": 5,
+                      "shadow_ofs_x": 3,
+                      "shadow_ofs_y": 3,
+                      "shadow_spread": 2,
+                      "shadow_color": "#000000",
+                      "shadow_opa": 127
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0"
+                      "text_color": "#000000",
+                      "shadow_width": 0,
+                      "shadow_ofs_x": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_spread": 0
                     }
                   }
                 }
@@ -10870,7 +11032,7 @@
                       "border_width": 1,
                       "transform_width": -3,
                       "transform_height": -3,
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#ffffff",
                       "bg_opa": 255,
@@ -10924,11 +11086,11 @@
                   "MAIN": {
                     "DEFAULT": {
                       "bg_color": "#ffffff",
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     },
                     "CHECKED": {
                       "bg_color": "#ffffff",
-                      "text_color": "#0"
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -11011,7 +11173,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "2768adcf-87d0-4ca4-d827-81adb3ca838e",
@@ -11140,7 +11304,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 10,
@@ -11151,10 +11315,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -11272,7 +11436,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 10,
@@ -11283,10 +11447,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -11404,7 +11568,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 10,
@@ -11415,10 +11579,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -11768,7 +11932,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "e78bac52-0817-43ce-c1fa-e59aff374eba",
@@ -11897,7 +12063,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
@@ -11908,10 +12074,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -12029,7 +12195,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 5,
@@ -12040,10 +12206,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -12332,7 +12498,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     },
     {
       "objID": "d1ae4899-4937-4012-da1e-a067f5988456",
@@ -12461,7 +12629,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 10,
@@ -12472,10 +12640,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -12593,7 +12761,7 @@
                     "DEFAULT": {
                       "bg_color": "#fff",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#0",
+                      "bg_grad_color": "#000000",
                       "outline_width": 1,
                       "text_font": "MONTSERRAT_24",
                       "shadow_width": 10,
@@ -12604,10 +12772,10 @@
                       "shadow_color": "#000000"
                     },
                     "PRESSED": {
-                      "bg_color": "#0",
+                      "bg_color": "#000000",
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
-                      "text_color": "#0",
+                      "text_color": "#000000",
                       "transform_width": -2,
                       "transform_height": -2,
                       "shadow_width": 0,
@@ -12716,7 +12884,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "Tools Used and References\nEEZ Studio Version 0.23.2\n(https://www.envox.eu)\n\nArduino IDEs and Libraries\nESP32 Boards Version 2.0.16\nlvgl Version 8.4\n\nWhilst everything here is \"Open Source\", I request you respect the originality of everyone's work and give credit where you think it's due:-)\n\n(c) Norman Halland (normhal)\nnormhal@gmail.com\nhttps://github.com/normhal/CYC\n\nVersion 1.0.2\n12 May 2025",
+              "text": "Tools Used and References\nEEZ Studio Version 0.23.2\n(https://www.envox.eu)\n\nArduino IDEs and Libraries\nESP32 Boards Version 3.2.0\nlvgl Version 8.4\n\nWhilst everything here is \"Open Source\", please respect the originality of everyones work.\n\n(c) Norman Halland (normhal)\nnormhal@gmail.com\nhttps://github.com/normhal/CheapYellowController\n\nVersion 1.0.4\n16 June 2025",
               "textType": "literal",
               "longMode": "WRAP",
               "recolor": false
@@ -12750,7 +12918,9 @@
       "top": 0,
       "width": 240,
       "height": 320,
-      "isUsedAsUserWidget": false
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
     }
   ],
   "userWidgets": [],
@@ -12770,21 +12940,27 @@
       "name": "DCC-EX",
       "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHIAAAAYCAIAAACp0D4WAAAABnRSTlMA/wD/AP83WBt9AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADuElEQVRo3tVZOyx1QRCewjMR0Wg8QjwSjUehIKKhQCWikYggEQqFQimiEFEqUCmUEgohgniETlQSJCpRiEcIgiAo7j97z3XP2T27e3bXnpvfZpqzZ2d25tvd2ZlZiCSuwQ+ZMf6lBrTBKmQGpa40KzoY2KU4aYBK7vf3tzvo7s7tn5mB1VV4etI1jD8eAGpqwJnr6AiCGCNextFRk6Vl7Nrbo+j5mfSfn1MyX14o5a+uhHo+PIBkt5J2fe0KGhsDpmVlwfKyOrLUMPC1w0Pyq7Mz9uln/PriMKanx9YjL4/hkjW5XZOTpL+9ndKkoQG8i4HLn5TEUfX1FUpKKGkcWL1YxKf36peaCqenKsi6A5qb+bM6fysrmf4Y1/095ORwucgYPDe8fqU19tvlwFpWJlxghwYHuX8jAiV1YPUPW18HyV/c3aJZnZHJyRxMkYaGJIzw9mYT1h8Hw58rTrgxi4qEsMqcgAGsSPn5Ql/e2Bhgv+evy/XxARkZ6oxWYI3JlPNGfaASphZg7e7m7zhcXp4/EhnjMm5sKHElHlakjg64vXW9n11YqZHom7iwHhxoHVVWoA5qv4FVL6TxhEMBS/tbWOfn+bAuLBjCOjDwv8FKScDrVOW42IHVf5bpfo0I1/EqIcGK2+3iAh4f2fhPXQIGXnV1EDqsU1OhwBpO0kzifzRtcVEXVkrIyQm5NlSSV3NYh4f5sG5vGzqBkZEQYfWmA11dIA6tApLgaL4XJqx0FEX5IDNYl5ZMuKRJCh/WigpFWMFfOcEosKrKshOgoqi0NP6VFU9ddAG6uUkErAqhFQtrSwsw/iQsWOfm+Nmn1+0aANTaquEHiouhoIAiJ5uwBCsVTm1uAhO02IcVD0K80MAVggMKC02CdpU7gU08fU3TLpDXebmODuOK3Fw76UBg5g5MUpCdbbJhp6cTE7fKy+SiyJ8Kz23CGo+r5NAjHR8bVp339yHBsEpqVBI929qUSy3j47Jt6FTJJHfo56f6TUK1aJnVhFERVtwN6Hyxju4fILgkIoFb5/ISSktB9dEFHQedjcSovFzkwqg2MUHudIO3k9lZ4pQT/Ojy/g7OswXTv7ICtbWBzy0kIoruJLGr7usjeQ7uRzwvUccBovsh0KaUFGhqIhsEUwNMGZHOzmBnh5C8FpWZSXTAMANds8OI9fmtLdjdBdMiVswuh9A05umlp4dIq66mBPb3k8H19fxZ1tZcgUi9vQJYQadpnEAjURZ1MLArcK5gCYo6/fbWsAfKn3jQ/geXAtxshrCV2gAAAABJRU5ErkJggg==",
       "bpp": 16,
-      "alwaysBuild": false
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
     },
     {
       "objID": "1e0c7c2c-494a-4b7c-9f20-e114a780c2ed",
       "name": "6",
       "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAASCAIAAAAluTLKAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADBklEQVQ4y41UXUhTYRj+qAMdcekgAo3RjrJAYUFdJNIPIQQeWCnZwItdOLsJmbBRmdDMVSsqM7S2HLJlyRhlq0ZZGI0CI5m62tT5Qzgssthk6KylE9ffM7/dVG7z42U879+z7z3vcw7pbyOr2oNz5EQlKdlJ8nOJIIPQAwAXQaRQsGrjv36fgZxVkvIDEpVKZbfbfT5fOBz+vXIA4CKIlEQiwR9I8+LFaEnKaNQw9RqFy+WiFEvfPsxOOQIjhulBHQwALoI0izKFQsEwjGgzaa39j/FVC7l5np+cnETpwqzv4xt1fwfXXEPk+0nBVpKdmZgaAK7iIGczqcNBH4rRwvM8UmW74yQJxl6joLfHjPTi3MT7nnJnM6k9wioqZQaDwe12h0IheikAuAjKZDKWZbMFpE5VHgpOIWU2mwUCwTYReXaZkHd3cr7OeH/9jH1+qx8wMW0nhS1XdZTlx3JkftoZHDXRqQHgIkjZdTqdUCjE1BaLBRGv15snzrHUETL6sHh5ITDRzeMB21rllGtuyjHRXeq4wBw7RHYVkE1ZiakBigqZU6rSMbeD8srlcsQrKiqWFsPD94sTUw+0s7jdpyETiiJB10jXDoeeVB/mGhu1TqczEAjQqQHgarVajuPWryP79hT5/X7ETSbTxkzmro79azPD96QYhw5+6wz39Ik9Fouh+nvIOzNuplMDwEUQKWgIvBjZaDSisa9Duop68EDxO/5cGYlEKLunU4R180UE+qAHoKxE1HVbjwIcpVKZsYG8uJ6bVI8gpdsAl62B1NfKrFYrlRQVClwsGtRisRirQPHjppw07wzGx+Aem3TIE9d5LBqa9dvp1ABwqbalUmlWJuO2bk//FtJFYfto9r+sem1gNPK4qrEKWCHHXGyoikaj83OBztPsmt5rapAUnsBgO3vjihqqjq0cALVaDW1L8regINknhiRLwKAkqqcvnksw6g57XO3HU3Wlyo092gvlA1TzBDuF1RwtQzBFSxpGapAR1cq1Jn3q262VEZeCtmFpb0ftD13A+swYGZbEAAAAAElFTkSuQmCC",
       "bpp": 16,
-      "alwaysBuild": false
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
     },
     {
       "objID": "ac2d5aa7-5ff1-4830-c0cb-8515a688f66c",
       "name": "X",
       "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAASCAIAAAAluTLKAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADKUlEQVQ4y4VUbUhTYRQ+2AUn3mz/usJoMxYYGBWYSCrhj+L+CCsb9rMZJIiS0Qf70YeUPxQjZrgctpnFMtOVoy+UhMBE1DSnLpXSNNKYIrpyZeLU2zPfu/mtLy/jvOc857nn2Tkcaimh4J04SL4w+nrebz+/RZfPUPJB2h1JfBixAwNPOBECAEjgkbWcZMUDYYloIYTKovmsrCy73e5yuTwej7R4YOAJJ0JarTabyEd+PLI2ZHQc5SSOkxZxktE4MzU0MehwdxcPf8zFhYEnnH56o5HBQJoRQUXZaxjfG+n+bbG/v1+qr5d4nqG/JZHuCEXvoh3hsmoYeLbHCfJXed5ts4miiFDKYT+JzNhg4htqLfjw9GTfl9oTLZnkZQlEfaI4Pj7OVMNoa2urjY5mIWAKjsWOjw4iZLFYeJ7fo6K3BUSfHgm/x5wL876R9rxWM1dyRWm8k+tpbJQEuZC508dHWvyqx7rNC2k6uTpBsBkMSqWS4zir1QpSp9MZpRasV4k+v4if/evuey02FVNFkY5VNDnoGDDFzkbIldaFkYLIHijcTdRjy2dV63Q6SE5NTZ2Z9nRVx8uqW0sVqO5Hpxkg72hzd9UBRx6ln9I8uHlNCmiUFAq5FVptgkazLYSSEuIGBgaQYjabt4dzlbmKFZ3pehYzN+tlwstuaN68svt8PqD/uGr/RQa6D7ooQXK7EcIMaTQaSDaZTEhsehizzvTgD8Vvb53e6/Uy9o7HqieZNL2TgoxunjKSVVXleQDg6PX6sFB6dy9yw3kEKaC/huvBVXGdDCf39wW4gqrhURGp1Wq0AuCXhcJyhtWMTD6Ed1TEdD4tD7bbE8cPfzBMJQjBzsRwXEQ412bbtyp9HUbWqNnW+iBddQjtVRFawRFVBkr28nzVWW5t7vqMPZdoLlTO9Oj1mGrf4oGRk5NjDsgHBsitGXsvLNHNX8xm8/SzIx8XBp5dHc2uQxQkBX4zRmwnLB6G/q6jnppETD786SKhp7iZ51LghAdRBgOebb8tttlQ2pITY8Rm5W5hXukymcCwz2+2zZZv3KW/tSZxrNeCy6pbpWntxv0PLOmsxITLRqgAAAAASUVORK5CYII=",
       "bpp": 16,
-      "alwaysBuild": false
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
     }
   ],
   "colors": [],

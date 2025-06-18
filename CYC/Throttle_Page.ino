@@ -50,8 +50,9 @@ void populateLocoDetails()                //Fill the page with Active Loco's det
     itoa(locoSpeed[activeLocoID], speedString, 10);
     lv_label_set_text(objects.lbl_slider,speedString);                    //Update the speed label to the previously set speed value
     lv_label_set_text(objects.lbl_address, locoAddress[activeLocoID]);    //Update the address label to the previously set address
+#if defined ROTARY_ENCODER    
     ss.setEncoderPosition(locoSpeed[activeLocoID]);
-
+#endif
     //Setup the Direction
     if(locoDir[activeLocoID] == 1)
     { lv_obj_add_state(objects.sw_dir, LV_STATE_CHECKED);
@@ -157,7 +158,9 @@ void setSpeed(uint16_t locoAddr, uint16_t newSpeed, uint8_t newDir)
   lv_label_set_text(objects.lbl_slider,speedString);
   String speedCMD = ("<t " + String(locoAddr) + " "
          + speedString + " " + String(newDir) + ">");
+#if defined ROTARY_ENCODER    
   ss.setEncoderPosition(newSpeed);
+#endif
   Serial.println(speedCMD);
   if(!client.print(speedCMD)) Serial.println("Transmit Failed");
 }
@@ -248,8 +251,8 @@ void action_throttle_button(lv_event_t * e)
       loadScreen(SCREEN_ID_ROSTER);
       break;
     case 32:    //Acc
-//      callingPage = SCREEN_ID_THROTTLE;
-//      loadScreen(SCREEN_ID_ACCESSORIES);
+      callingPage = SCREEN_ID_THROTTLE;
+      loadScreen(SCREEN_ID_ACCESSORIES);
       break;
     default:
       break;

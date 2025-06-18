@@ -87,34 +87,14 @@ void dd_locos_cb(lv_event_t * e);
 static void throttle_selection_handler_cb(lv_event_t * e);
 /*
  ************************************************************************************************************************
- * Rotary Encoder i2c values
+ * Rotary Encoder Values
  ************************************************************************************************************************
 */
-#define SS_SWITCH        24
-#define SEESAW_ADDR    0x36
-
-//#define RX1 15
-//#define TX1 16
-//#define I2CSDA 17
-//#define I2CSCL 18
-
-//TwoWire RE_Bus = TwoWire(1);      //For Capacitive Displays
-//Adafruit_seesaw ss(&Wire1);       //For Capacitive Displays
-
-//seesaw_NeoPixel sspixel = seesaw_NeoPixel(1, SS_NEOPIX, NEO_GRB + NEO_KHZ800);
 
 int32_t encoder_position = 0;
 uint8_t RE_button_active = 0;
-
-#define SS_SWITCH        24
-#define SEESAW_ADDR      0x36
-/*
-#define RX1 15
-#define TX1 16    
-#define RE_SDA 17
-#define RE_CLK 18
-*/
-//Adafruit_seesaw ss;
+uint8_t encoder_present = 0;
+unsigned long re_timer = 0;
 
 /*
  ************************************************************************************************************************

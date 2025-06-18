@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/6",
+    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/1",
     "selectedBitmapObject": "[CYC-2432THMI.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {}
   },
@@ -70,6 +70,8 @@
           },
           {
             "type": "border",
+            "selected": 0,
+            "size": 157.5,
             "location": "bottom",
             "children": [
               {
@@ -194,15 +196,16 @@
                 {
                   "type": "tab",
                   "id": "#a0b2b84d-d36e-4e22-b769-1f7839ea8df9",
-                  "name": "EditAcc",
+                  "name": "Throttle",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/6",
+                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
@@ -212,7 +215,7 @@
                 {
                   "type": "tabset",
                   "id": "#50aa0cba-0e2f-4ac2-b97e-3f7773d6adfa",
-                  "weight": 2,
+                  "weight": 2.4735099337748343,
                   "children": [
                     {
                       "type": "tab",
@@ -222,13 +225,12 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
                   "id": "#51de1363-c799-4de8-84f7-8618456761d9",
-                  "weight": 1,
+                  "weight": 0.5264900662251656,
                   "children": [
                     {
                       "type": "tab",
@@ -1294,15 +1296,19 @@
     "[CYC-2432THMI.eez-project]:/userPages/8[flow-state]": {
       "selection": {
         "0": {
-          "3": {
+          "1": {
             "$selected": true
-          }
+          },
+          "2": {
+            "$selected": true
+          },
+          "3": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -280
+          "y": -400
         },
         "scale": 2
       },
@@ -1364,16 +1370,17 @@
     "[CYC-2432THMI.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
-          "2": {
+          "2": {},
+          "6": {},
+          "7": {
             "$selected": true
-          },
-          "6": {}
+          }
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -520
+          "y": -181
         },
         "scale": 2
       },
@@ -1405,15 +1412,16 @@
     "[CYC-2432THMI.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "11": {
+          "0": {
             "$selected": true
-          }
+          },
+          "11": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -280
+          "y": -400
         },
         "scale": 2
       },
@@ -1428,6 +1436,9 @@
       "selection": {
         "0": {
           "0": {},
+          "1": {
+            "$selected": true
+          },
           "2": {
             "$selected": true
           }
@@ -1474,17 +1485,18 @@
     "[CYC-2432THMI.eez-project]:/userPages/7[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "3": {
+          "0": {
             "$selected": true
           },
+          "3": {},
+          "6": {},
           "7": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -118.17806771627465
+          "y": -358.17806771627465
         },
         "scale": 2
       },
@@ -1497,12 +1509,16 @@
     },
     "[CYC-2432THMI.eez-project]:/userPages/2[flow-state]": {
       "selection": {
-        "0": {}
+        "0": {
+          "3": {
+            "$selected": true
+          }
+        }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -400
         },
         "scale": 2
       },
@@ -1522,7 +1538,7 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -400
         },
         "scale": 2
       },
@@ -1536,13 +1552,16 @@
     "[CYC-2432THMI.eez-project]:/userPages/11[flow-state]": {
       "selection": {
         "0": {
-          "0": {}
+          "0": {},
+          "3": {
+            "$selected": true
+          }
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -280
+          "y": -400
         },
         "scale": 2
       },
@@ -1566,7 +1585,7 @@
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
   "lvglPart": "MAIN",
-  "lvglState": "PRESSED",
+  "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "PADDING",

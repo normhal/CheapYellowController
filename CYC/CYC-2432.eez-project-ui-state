@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432.eez-project]:/userPages/11",
+    "selectedUserPageObject": "[CYC-2432.eez-project]:/userPages/8",
     "selectedBitmapObject": "[CYC-2432.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -72,6 +72,7 @@
           },
           {
             "type": "border",
+            "selected": 0,
             "location": "bottom",
             "children": [
               {
@@ -196,15 +197,16 @@
                 {
                   "type": "tab",
                   "id": "#98a353c8-3647-4b0d-a711-b18bc91002c9",
-                  "name": "Info",
+                  "name": "Scan",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-2432.eez-project]:/userPages/11",
+                    "objectPath": "[CYC-2432.eez-project]:/userPages/8",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
@@ -224,8 +226,7 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -1037,7 +1038,8 @@
     "[CYC-2432.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
-          "6": {
+          "6": {},
+          "7": {
             "$selected": true
           }
         }
@@ -1045,7 +1047,7 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -280
+          "y": -400
         },
         "scale": 1.75
       },
@@ -1063,7 +1065,7 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -280
         },
         "scale": 1.75
       },
@@ -1085,7 +1087,7 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -280
         },
         "scale": 1.75
       },
@@ -1121,12 +1123,19 @@
     },
     "[CYC-2432.eez-project]:/userPages/5[flow-state]": {
       "selection": {
-        "0": {}
+        "0": {
+          "1": {
+            "$selected": true
+          },
+          "2": {
+            "$selected": true
+          }
+        }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -280
         },
         "scale": 1.75
       },
@@ -1141,6 +1150,9 @@
       "selection": {
         "0": {
           "1": {
+            "$selected": true
+          },
+          "2": {
             "$selected": true
           }
         }
@@ -1161,12 +1173,23 @@
     },
     "[CYC-2432.eez-project]:/userPages/7[flow-state]": {
       "selection": {
-        "0": {}
+        "0": {
+          "1": {},
+          "2": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {
+            "$selected": true
+          }
+        }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -280
         },
         "scale": 1.75
       },
@@ -1180,15 +1203,17 @@
     "[CYC-2432.eez-project]:/userPages/8[flow-state]": {
       "selection": {
         "0": {
-          "3": {
+          "1": {},
+          "2": {
             "$selected": true
-          }
+          },
+          "3": {}
         }
       },
       "transform": {
         "translate": {
-          "x": -120,
-          "y": -260
+          "x": -40,
+          "y": -301
         },
         "scale": 1.75
       },
@@ -1210,7 +1235,7 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -400
         },
         "scale": 1.75
       },
@@ -1224,7 +1249,8 @@
     "[CYC-2432.eez-project]:/userPages/11[flow-state]": {
       "selection": {
         "0": {
-          "2": {
+          "2": {},
+          "3": {
             "$selected": true
           }
         }
@@ -1232,7 +1258,23 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -280
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/10[flow-state]": {
+      "selection": {},
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -280
         },
         "scale": 1.75
       },
@@ -1256,7 +1298,7 @@
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
   "lvglPart": "MAIN",
-  "lvglState": "PRESSED",
+  "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "BORDER",
     "SHADOW",

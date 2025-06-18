@@ -23,7 +23,7 @@ void action_edit_acc_button(lv_event_t * e)
   switch(pressedButton)
   {
     case 30:       //Return to Calling Page
-//      loadScreen(SCREEN_ID_MAIN);
+      loadScreen(SCREEN_ID_ACCESSORIES);
       break;
     case 32:       //Select Loco
       loadScreen(SCREEN_ID_ACCESSORIES);

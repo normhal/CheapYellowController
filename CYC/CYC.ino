@@ -66,27 +66,36 @@
 *******************************************************************************************************************************/
 // Note: "t..." - not ready, "tick" = tested on physical device, "tock" = Batch file created and tested
 
-//#define ESP2432S028R           // Sunton ESP32-2432S028R Classic CYD  ESP32     tick
+//#define ESP2432S028R           // Sunton ESP32-2432S028R Classic CYD  ESP32     ticked 16 June
 //#define ESP2432THMIR           //LilyGo T-HMI                         ESP32-S3  t...
-//#define ESP2432S032R           // Sunton ESP32-2432S032R              ESP32     tick
+//#define ESP2432S032R           // Sunton ESP32-2432S032R              ESP32     ticked 16 June
 //#define ESP2432S032C           // Sunton ESP32-2432S032C  Planned     ESP32
-//#define ESP3248S035C           // Sunton ESP32-3248S035C              ESP32     t... 
-//#define ESP3248S035R           // Sunton ESP32-3248S035R              ESP32     tick  
-//#define ESP3248W535C           //Guition JC3248W535C - in testing     ESP32-S3  t...
-//#define ESP4827S043C           // Sunton ESP32-4827S043C              ESP32-S3  t...
-//#define ESP4827S043R           // Sunton ESP32-4827S043R              ESP32-S3  t...
+//#define ESP3248S035C           // Sunton ESP32-3248S035C              ESP32     ticked 16 June
+//#define ESP3248S035R           // Sunton ESP32-3248S035R              ESP32     ticked 16 June  
+//#define ESP3248W535C            //Guition JC3248W535C                 ESP32-S3  ticked 16 June
+//#define ESP4827S043C           // Sunton ESP32-4827S043C              ESP32-S3  ticked 16 June
+#define ESP4827S043R           // Sunton ESP32-4827S043R              ESP32-S3  ticked 16 June
 
 //#define ESP32DIS06043H         // Elcrow ESP32-DIS06043H              ESP32-S3  t...   by RKS
 //#define ESP32DIS08070H         // Elcrow ESP32-DIS08070H              ESP32-S3  t...   by RKS
 
-//#define ESP4827W543C           //Guition JC4827W543C                  ESP32-S3  tick
-#define ESP4827W543R           //Guition JC4827W543R                  ESP32-S3  tick
+//#define ESP4827W543C           //Guition JC4827W543C                  ESP32-S3  ticked 16 June
+//#define ESP4827W543R           //Guition JC4827W543R                  ESP32-S3  ticked 16 June
 //#define ESP4848S040C           //Guition JC4848W440C - in development
-//#define ESP8048S043C           // Sunton ESP32-8048S043C              ESP32-S3  t...  
-//#define ESP8048S050C           // Sunton ESP32-8048S050C              ESP32-S3  t...
-//#define ESP8048W550C           //Guition JC8048W550C                  ESP32-S3  t...         
+//#define ESP8048S043C           // Sunton ESP32-8048S043C              ESP32-S3  ticked 16 June
+//#define ESP8048S050C           // Sunton ESP32-8048S050C              ESP32-S3  ticked 16 June
+//#define ESP8048W550C           //Guition JC8048W550C                  ESP32-S3  ticked 16 June
 
-/******************************************************************************************************************************/
+//*****************************************************************************************************************************
+// Rotary Encoder Compile Inclusion
+//*****************************************************************************************************************************
+// IMPORTANT NOTES REGARDING ROTARY ENCODER CONNECTIONS
+//
+//#define ROTARY_ENCODER                //Un-Comment to include Rotary Encoder Support
+
+//*****************************************************************************************************************************
+// Don't modify anything below the above two sections
+//*****************************************************************************************************************************
 
 #include "CYC.h"
 
@@ -156,12 +165,12 @@ void my_disp_flush( lv_disp_drv_t* disp_drv, const lv_area_t* area, lv_color_t* 
 */
 void setBacklight(uint8_t brightness)
 {
-  ledcSetup(0, 5000, 8);                          //If using ESP Boards 2.0.x LEDChannel, frequency, resolution
-  ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
-  ledcWrite(0, brightness);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
+//  ledcSetup(0, 5000, 8);                          //If using ESP Boards 2.0.x LEDChannel, frequency, resolution
+//  ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
+//  ledcWrite(0, brightness);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
 
-//  ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
-//  ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
+  ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
+  ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
 }
 /*
  ********************************************************************************************************
@@ -178,12 +187,10 @@ void setup()
     digitalWrite(10 /* PWD */, HIGH);
   #endif
 
+#if  defined ROTARY_ENCODER
   initRE();                         //Initialize Rotary Encoder if Enabled in Display Driver
+#endif
 
-  //Serial1.setPins(RX1, TX1);
-  //Wire1.setPins(I2CSDA, I2CSCL);
-
-  // Init Display
   if (!gfx->begin())
   {
     Serial.println("gfx->begin() failed!");
@@ -346,7 +353,8 @@ void setup()
 
     rosterMode = GUEST_INACTIVE;
 
-    lv_table_set_col_width(objects.tbl_roster, 0, NAME_COL_WIDTH);
+    lv_table_set_col_width(objects.tbl_roster, 0, NAME_COL0_WIDTH);
+    lv_table_set_col_width(objects.tbl_roster, 1, NAME_COL1_WIDTH);
 /*
 ******************************************************************************************************************
 * Set TFT Backlight Brightness - can be changed in the Relevant Display Driver
@@ -359,11 +367,9 @@ void setup()
 * Setup Rotary Encoder
 ******************************************************************************************************************
 */
-
+#if defined ROTARY_ENCODER
   Serial.println("Looking for seesaw!");
 
-//  Wire1.begin(I2CSDA, I2CSCL);
-  
   if (! ss.begin(SEESAW_ADDR)) Serial.println("Couldn't find seesaw on default address");
   else Serial.println("seesaw started");
 
@@ -373,18 +379,19 @@ void setup()
     Serial.print("Wrong firmware loaded? ");
     Serial.println(version);
   }
-  else Serial.println("Found Product 4991");
-
-  ss.pinMode(SS_SWITCH, INPUT_PULLUP);
-
-  // set starting position
-  encoder_position = 0;
-
-  Serial.println("Turning on interrupts");
-  delay(10);
-  ss.setGPIOInterrupts((uint32_t)1 << SS_SWITCH, 1);
-  ss.enableEncoderInterrupt();
-
+  else 
+  {
+    Serial.println("Found Product 4991");
+    encoder_present = 1;
+    ss.pinMode(SS_SWITCH, INPUT_PULLUP);
+    encoder_position = 0;
+    Serial.println("Turning on interrupts");
+    delay(10);
+    ss.setGPIOInterrupts((uint32_t)1 << SS_SWITCH, 1);
+    ss.enableEncoderInterrupt();
+  }
+  re_timer = millis();
+#endif
   Serial.println("Setup Done!");
 }
 /*
@@ -402,45 +409,56 @@ void loop()
 
   receiveCMD();
 
-  if (! ss.digitalRead(SS_SWITCH)) 
+#if defined ROTARY_ENCODER
+  if(encoder_present)                       //Sample Rotary Encoder if it's been found:-)
   {
-    if(RE_button_active != 1)
+    if(!ss.digitalRead(SS_SWITCH))          //First check if the Direction Button has been pressed
     {
-      RE_button_active = 1;
-//      Serial.println("Button pressed!");
-      if(locoDir[activeLocoID] == 1)
+      if(RE_button_active != 1)             //Check if it's already been processed
       {
-//        Serial.println("Setting Direction Reverse");
-        lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);
-        setLocoRev();
-      }
-      else
-      { 
-//        Serial.println("Setting Direction Forward");
-        lv_obj_add_state(objects.sw_dir, LV_STATE_CHECKED);
-        setLocoFwd();
+        RE_button_active = 1;
+        if(locoDir[activeLocoID] == 1)      //Currently Forward?
+        {
+          lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);     // Do this because the TFT wasn't the source
+          setLocoRev();                     //Change to Reverse
+        }
+        else
+        { 
+          lv_obj_add_state(objects.sw_dir, LV_STATE_CHECKED);
+          setLocoFwd();
+        }
       }
     }
-  }
-  else RE_button_active = 0;
+    else RE_button_active = 0;              //Now clear the processed flag
 
-  int32_t new_position = ss.getEncoderPosition();
-  if (encoder_position != new_position) 
-  {
-    if(new_position > 127) 
+    int32_t new_position = ss.getEncoderPosition();   //Now read the Encoder Position
+    if (encoder_position != new_position)             //and see if it changed
     {
-      ss.setEncoderPosition(127);
-      new_position = 127;
+      if(new_position > 127)                          //make sure it's not greater than 127
+      {
+        ss.setEncoderPosition(127);                   //force the encoder to the max value
+        new_position = 127;                           //and record the value
+      }
+      if(new_position < 0)                            //and make sure it hasn't gone beyond 0
+      {
+        ss.setEncoderPosition(0);
+        new_position  = 0;
+      }
+      int32_t re_change = new_position - encoder_position;    //-ve = decrease
+      unsigned long elapsed_time = millis() - re_timer;
+      if(elapsed_time <= 200)
+      {
+        int32_t rate = (200-elapsed_time)/10;
+        new_position = new_position + (re_change * rate);
+        if(new_position > 127) new_position = 127;
+        if(new_position < 0) new_position = 0;
+        ss.setEncoderPosition(new_position);
+      } 
+      locoSpeed[activeLocoID] = new_position; //update the Active loco
+      setSpeed(atoi(locoAddress[activeLocoID]), locoSpeed[activeLocoID], locoDir[activeLocoID]); //and tell DCC-EX
+      encoder_position = new_position;      // and save for next round
+      re_timer = millis();
     }
-    if(new_position < 0)
-    {
-      ss.setEncoderPosition(0);
-      new_position  = 0;
-    }
-    locoSpeed[activeLocoID] = new_position;
-    setSpeed(atoi(locoAddress[activeLocoID]), locoSpeed[activeLocoID], locoDir[activeLocoID]);
-    encoder_position = new_position;      // and save for next round
-//    Serial.println(new_position);         // display new position
   }
-  
+#endif
 }

@@ -23,10 +23,11 @@ void action_accessories_button(lv_event_t * e)
   switch(pressedButton)
   {
     case 30:       //Edit Button
+      callingPage = SCREEN_ID_ACCESSORIES;
       loadScreen(SCREEN_ID_EDIT_ACC);
       break;
-    case 32:       //Select Loco
-      loadScreen(SCREEN_ID_MAIN);
+    case 32:       //Done
+      loadScreen(callingPage);
      break;
     default:
       break;
