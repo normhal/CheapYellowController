@@ -22,6 +22,14 @@ void action_config_button(lv_event_t * e)
   int pressedButton = *((int*)(&user_data));
   switch(pressedButton)
   {
+    case (29):
+      dccexProtocol.setDelegate(&myDelegate);               
+      dccexProtocol.connect(&client);
+      dccexProtocol.getLists(true, true, false, false);
+      Serial.println("Print Pressed");
+      listRoster();
+      Serial.println("Roster List Printed");
+      break;
     case (30):       //WiFi
     {
       enum ScreensEnum callingPage = SCREEN_ID_CONFIG;

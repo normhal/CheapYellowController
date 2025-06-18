@@ -186,16 +186,17 @@ typedef struct _objects_t {
     lv_obj_t *ta_tft_backlight;
     lv_obj_t *ta_wifi_timeout;
     lv_obj_t *kbd_config;
-    lv_obj_t *info_button_9;
     lv_obj_t *obj51;
-    lv_obj_t *done_button_9;
+    lv_obj_t *info_button_9;
     lv_obj_t *obj52;
+    lv_obj_t *done_button_9;
     lv_obj_t *obj53;
-    lv_obj_t *credits_button_10;
     lv_obj_t *obj54;
-    lv_obj_t *done_button_10;
+    lv_obj_t *credits_button_10;
     lv_obj_t *obj55;
+    lv_obj_t *done_button_10;
     lv_obj_t *obj56;
+    lv_obj_t *obj57;
 } objects_t;
 
 extern objects_t objects;

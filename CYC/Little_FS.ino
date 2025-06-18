@@ -143,7 +143,7 @@ void populateLocoArray(const char *path)
     strcpy(locoAddress[row], "");
     locoSpeed[row] = 0;
     locoDir[row] = 1;
-    Serial.printf("Wrote Blank Record %d\n", row);
+//    Serial.printf("Wrote Blank Record %d\n", row);
     locoCount = row;
   }
   file.close();

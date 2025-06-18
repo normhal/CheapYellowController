@@ -24,7 +24,6 @@
 #include <WiFi.h>
 #include <Arduino_GFX_Library.h>
 #include <EEPROM.h>
-//#include <DCCEXProtocol.h>
 #include <LittleFS.h>
 #include <CSV_Parser.h>
 #include <Adafruit_seesaw.h>
@@ -43,6 +42,11 @@
 #include "CSInterface.h"
 #include "Throttle_Page.h"
 #endif
+
+#include "Dccex_Protocol.h"
+
+DCCEXProtocol dccexProtocol;
+MyDelegate myDelegate;
 
 WiFiClient client;
 

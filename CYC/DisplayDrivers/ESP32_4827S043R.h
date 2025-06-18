@@ -5,7 +5,7 @@
  * Start of Arduino_GFX setting
  ******************************************************************************/
 
-#define TFT_BACKLIGHT 250
+#define TFT_BACKLIGHT 245
 
 #define GFX_BL 2 // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 

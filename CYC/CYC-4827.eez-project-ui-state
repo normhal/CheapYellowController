@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[../../../GitHub/normhal/CheapYellowController/CYC/CYC-4827.eez-project]:/userPages/9",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -195,11 +195,11 @@
               "children": [
                 {
                   "type": "tab",
-                  "id": "#43f4d6d2-e255-49f3-bf3e-04f44289b2bf",
-                  "name": "Throttle",
+                  "id": "#097fcd71-031c-41a4-bc0a-153ea2af1b90",
+                  "name": "Config",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-4827.eez-project]:/userPages/1",
+                    "objectPath": "[../../../GitHub/normhal/CheapYellowController/CYC/CYC-4827.eez-project]:/userPages/9",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1110,16 +1110,18 @@
     "[CYC-4827.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "1": {
+          "0": {},
+          "1": {},
+          "3": {},
+          "9": {
             "$selected": true
-          },
-          "3": {}
+          }
         }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -480
+          "y": -360
         },
         "scale": 1.5
       },
@@ -1607,6 +1609,29 @@
         "secondToPx": 200,
         "scrollLeft": 0
       }
+    },
+    "[../../../GitHub/normhal/CheapYellowController/CYC/CYC-4827.eez-project]:/userPages/9[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "1": {},
+          "3": {},
+          "9": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -136,
+          "y": -360
+        },
+        "scale": 1.5
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
     }
   },
   "activeOutputSection": 0,
@@ -1627,10 +1652,10 @@
     "TEXT",
     "BORDER",
     "SHADOW",
-    "BACKGROUND",
     "PADDING",
     "OUTLINE",
-    "MISCELLANEOUS"
+    "MISCELLANEOUS",
+    "BACKGROUND"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
