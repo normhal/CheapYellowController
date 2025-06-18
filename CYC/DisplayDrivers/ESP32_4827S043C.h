@@ -5,17 +5,23 @@
  * Start of Arduino_GFX setting
  ******************************************************************************/
 
+#define TFT_BACKLIGHT 246
+
 #define GFX_BL 2 // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
+
 #define ROTATION 1
+
 #define SCREEN_WIDTH 272          //Using EEZ Orientation
 #define SCREEN_HEIGHT 480
-#define DISPLAY_WIDTH 480         //Physical Display Properties ex rotation
-#define DISPLAY_HEIGHT 272
+
+#define NAME_COL0_WIDTH 200
+#define NAME_COL1_WIDTH 50
+
+/*******************************************************************************
+ * Display Driver for GFX Library for Arduino by "moononournation"
+ ******************************************************************************/
+
 #define AUTO_FLUSH true
-
-#define NAME_COL_WIDTH 210
-
-#define TFT_BACKLIGHT 246
 
 Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
     40 /* DE */, 41 /* VSYNC */, 39 /* HSYNC */, 42 /* PCLK */,
@@ -26,9 +32,27 @@ Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
     0 /* vsync_polarity */, 3 /* vsync_front_porch */, 1 /* vsync_pulse_width */, 12 /* vsync_back_porch */,
     1 /* pclk_active_neg */, 9000000 /* prefer_speed */);
 
-Arduino_RGB_Display *gfx = new Arduino_RGB_Display(DISPLAY_WIDTH, DISPLAY_HEIGHT, rgbpanel, ROTATION , AUTO_FLUSH);
+Arduino_RGB_Display *gfx = new Arduino_RGB_Display(SCREEN_HEIGHT, SCREEN_WIDTH, rgbpanel, ROTATION , AUTO_FLUSH);
 
 Arduino_DataBus *bus = create_default_Arduino_DataBus();
+
+/*******************************************************************************
+ * Rotary Encoder Specifics
+ * Encoder shares I2C bus with Touch on 19 and 20
+ ******************************************************************************/
+ 
+ #define I2C_SDA 19
+ #define I2C_SCL 20
+
+ #define SS_SWITCH        24
+ #define SEESAW_ADDR    0x36
+
+ Adafruit_seesaw ss;       //For Capacitive Displays
+
+ void initRE()
+ {
+    // Initialization done by "ss.begin(SEESAW_ADDR)" in main sketch
+ }
 
 /*******************************************************************************
  * Capacitive Touch
@@ -67,8 +91,8 @@ void my_touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data)
   //  TP_Point p = ts.getPoint();
     data->state = LV_INDEV_STATE_PR;
 //    #if defined(TOUCH_SWAP_XY)
-      touch_last_x = map(ts.points[0].y, TOUCH_MAP_X1, TOUCH_MAP_X2, 0, DISPLAY_HEIGHT - 1);
-      touch_last_y = map(ts.points[0].x, TOUCH_MAP_Y1, TOUCH_MAP_Y2, 0, DISPLAY_WIDTH - 1);
+      touch_last_x = map(ts.points[0].y, TOUCH_MAP_X1, TOUCH_MAP_X2, 0, SCREEN_WIDTH - 1);
+      touch_last_y = map(ts.points[0].x, TOUCH_MAP_Y1, TOUCH_MAP_Y2, 0, SCREEN_HEIGHT - 1);
 //    #else
 //      touch_last_x = map(ts.points[0].x, TOUCH_MAP_X1, TOUCH_MAP_X2, DISPLAY_HEIGHT - 1, 0);
 //      touch_last_y = map(ts.points[0].y, TOUCH_MAP_Y1, TOUCH_MAP_Y2, DISPLAY_WIDTH - 1, 0);

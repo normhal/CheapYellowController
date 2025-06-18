@@ -14,12 +14,8 @@
 
 #define ROTATION 1
 
-// Display
-//#define TFT_rot   0
-//#define TFT_res_W 272
-//#define TFT_res_H 480
-
-#define NAME_COL_WIDTH 240
+#define NAME_COL0_WIDTH 200
+#define NAME_COL1_WIDTH 50
 
 /*******************************************************************************
  * Display Driver for GFX Library for Arduino by "moononournation"
@@ -50,11 +46,12 @@ Arduino_GFX *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, panel);
  * Rotary Encoder Specifics
  ******************************************************************************/
  
- //#define RX_1 15
- //#define TX_1 16
- #define I2C_SDA 17
- #define I2C_SCL 18
- 
+ #define I2C_SDA          17
+ #define I2C_SCL          18
+ #define SS_SWITCH        24
+ #define SEESAW_ADDR    0x36
+
+
  TwoWire RE_Bus = TwoWire(1);      //For Capacitive Displays
  Adafruit_seesaw ss(&Wire1);       //For Capacitive Displays
 

@@ -5,14 +5,14 @@
  * Settings specific to this Display Model
  ******************************************************************************/
  
-#define TFT_BACKLIGHT 16
+#define TFT_BACKLIGHT 250
 
 #define GFX_BL 1
 
 #define SCREEN_WIDTH 320          //Using EEZ Orientation
 #define SCREEN_HEIGHT 480
-#define DISPLAY_WIDTH 480         //Physical Display Properties ex rotation
-#define DISPLAY_HEIGHT 320
+//#define DISPLAY_WIDTH 480         //Physical Display Properties ex rotation
+//#define DISPLAY_HEIGHT 320
 
 #define ROTATION 0
 
@@ -45,23 +45,23 @@ Arduino_Canvas *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, g, 0, 0, R
  * Rotary Encoder Specifics
  ******************************************************************************/
  
- #define RX_1 12
- #define TX_1 13
- #define I2C_SDA 27
- #define I2C_SCL 22
- 
- Adafruit_seesaw ss;
+ #define I2C_SDA          17
+ #define I2C_SCL          18
+ #define SS_SWITCH        24
+ #define SEESAW_ADDR    0x36
+
+ TwoWire RE_Bus = TwoWire(1);      //For Capacitive Displays
+ Adafruit_seesaw ss(&RE_Bus);       //For Capacitive Displays
  
  void initRE()
  {
-//   Serial1.setPins(RX_1, TX_1);
-//   Wire.setPins(I2C_SDA, I2C_SCL);
- //  Wire.begin(I2C_SDA, I2C_SCL);
+   RE_Bus.setPins(I2C_SDA, I2C_SCL);
  }
  
 /*******************************************************************************
  * Capacitive Touch
  ******************************************************************************/
+
 #include "AXS15231B_touch.h"
 
 #define Touch_SDA  4
@@ -71,22 +71,13 @@ Arduino_Canvas *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, g, 0, 0, R
 
 // Touch offsets
 
-#define Touch_X_min 12
-#define Touch_X_max 310
-#define Touch_Y_min 14
-#define Touch_Y_max 461
-/*
-#define Touch_X_min 0
+#define Touch_X_min 1
 #define Touch_X_max 320
-#define Touch_Y_min 
+#define Touch_Y_min 1
 #define Touch_Y_max 480
-*/
-
-uint16_t last_x = 0, last_y = 0;
 
 AXS15231B_Touch ts(Touch_SCL, Touch_SDA, Touch_INT, Touch_ADDR, ROTATION);
 
-//Initialize the Touch Controller
 void initTouch()
 {
   ts.begin();
@@ -101,20 +92,11 @@ void my_touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data)
   if (ts.touched()) 
   {
     ts.readData(&x, &y);
-    if(x != last_x && y != last_y)
-    {
-      data->state = LV_INDEV_STATE_PRESSED;
-      data->point.x = x;
-      data->point.y = y;
-      delay(100);
-    }
-//    else 
-//    {
-//      data->state = LV_INDEV_STATE_RELEASED;
-//    }
+    data->state = LV_INDEV_STATE_PRESSED;
+    data->point.x = x;
+    data->point.y = y;
+    delay(10);
   } 
-  last_x = x;
-  last_y = y;
 }
 
 #endif

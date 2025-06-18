@@ -14,7 +14,8 @@
 
 #define ROTATION 1
 
-#define NAME_COL_WIDTH 210
+#define NAME_COL0_WIDTH 200
+#define NAME_COL1_WIDTH 50
 
 /*******************************************************************************
  * Display Driver for GFX Library for Arduino by "moononournation"
@@ -47,8 +48,11 @@ Arduino_GFX *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, panel);
  * Rotary Encoder Specifics
  ******************************************************************************/
  
- #define I2C_SDA 17
- #define I2C_SCL 18
+ #define I2C_SDA          17
+ #define I2C_SCL          18
+ #define SS_SWITCH        24
+ #define SEESAW_ADDR    0x36
+
 
  TwoWire RE_Bus = TwoWire(1);      //For Capacitive Displays
  Adafruit_seesaw ss(&Wire1);       //For Capacitive Displays
@@ -133,11 +137,7 @@ void my_touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data)
     ts.getScaledPoint(x, y, z);
     data->point.x = x;
     data->point.y = y;
-    Serial.printf("X: %d, Y: %d\n", x, y);
-  }
-  else
-  {
-    data->state = LV_INDEV_STATE_RELEASED;
+//    Serial.printf("X: %d, Y: %d\n", x, y);
   }
 }
 

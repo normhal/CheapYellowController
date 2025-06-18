@@ -14,7 +14,8 @@ const uint16_t SCREEN_HEIGHT = 320;
 
 #define ROTATION 0
 
-#define NAME_COL_WIDTH 180
+#define NAME_COL0_WIDTH 180
+#define NAME_COL1_WIDTH 45
 
 /*******************************************************************************
  * Display Driver for GFX Library for Arduino by "moononournation"
@@ -37,13 +38,14 @@ Arduino_GFX *gfx = new Arduino_ST7789(bus, TFT_RST, ROTATION, IPS);
  * Rotary Encoder Specifics
  ******************************************************************************/
  
+#define SS_SWITCH        24
+#define SEESAW_ADDR    0x36
+
 Adafruit_seesaw ss;
  
 void initRE()
 {
-//   Serial1.setPins(RX_1, TX_1);
-//  Wire.setPins(I2C_SDA, I2C_SCL);
-//  Wire.begin(I2C_SDA, I2C_SCL);
+
 }
  
 /*******************************************************************************

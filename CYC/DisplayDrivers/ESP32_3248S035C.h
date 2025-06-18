@@ -5,7 +5,7 @@
  * Settings specific to this Display Model
  ******************************************************************************/
 
-#define TFT_BACKLIGHT 64
+#define TFT_BACKLIGHT 250
 
 #define GFX_BL 27
 
@@ -14,7 +14,8 @@
 
 #define ROTATION 0
 
-#define NAME_COL_WIDTH 240
+#define NAME_COL0_WIDTH 240
+#define NAME_COL1_WIDTH 60
 
 /*******************************************************************************
  * Display Driver for GFX Library for Arduino by "moononournation"
@@ -38,8 +39,11 @@ Arduino_GFX *gfx = new Arduino_ST7796(bus, TFT_RST, ROTATION);
  * Rotary Encoder Specifics
  ******************************************************************************/
  
- #define I2C_SDA 21
- #define I2C_SCL 22
+#define SS_SWITCH        24
+#define SEESAW_ADDR    0x36
+
+#define I2C_SDA 21
+#define I2C_SCL 22
  
  TwoWire RE_Bus = TwoWire(1);      //For Capacitive Displays
  Adafruit_seesaw ss(&Wire1);       //For Capacitive Displays
