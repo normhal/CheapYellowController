@@ -22,14 +22,25 @@ void action_config_button(lv_event_t * e)
   int pressedButton = *((int*)(&user_data));
   switch(pressedButton)
   {
-    case (29):
-      dccexProtocol.setDelegate(&myDelegate);               
-      dccexProtocol.connect(&client);
-      dccexProtocol.getLists(true, true, false, false);
-      Serial.println("Print Pressed");
-      listRoster();
-      Serial.println("Roster List Printed");
+    case (28):              //Reload Local Roster
+      Serial.println("Reload Pressed");
+      setupLocalRoster();
       break;
+    case (29):              //Retrieve EX-Rail Roster
+    {
+      Serial.println("Replace Pressed");
+      //First Clear the existing Roster by setting Address to blank
+      const char* lAddr = "    ";
+      for(int i = 0; i < NUM_LOCOS; i++)
+      {
+        strcpy(locoAddress[i], lAddr);
+//       Serial.println(i);
+      }
+      dccexProtocol.getLists(true,false,false,false);
+      Serial.println("List Request Sent");
+//      delay(1000);
+      break;
+    }
     case (30):       //WiFi
     {
       enum ScreensEnum callingPage = SCREEN_ID_CONFIG;

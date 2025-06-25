@@ -3,16 +3,14 @@
 * DCCEXProtocol goodies
 **************************************************************************************
 */
-//DCCEXProtocol dccexProtocol;
-//MyDelegate myDelegate;
-//Throttle *throttles[numLocoSlots+1];
-
-uint8_t lastEntry;
-uint16_t rosterList[NUM_LOCOS];
-
+//
+//uint8_t lastEntry;
+//uint16_t rosterList[NUM_LOCOS];
+/*
 void listRoster()
 {
   Serial.println("Calling DCCEX");
+  Serial.printf("First Entry: %d\n", dccexProtocol.roster->getFirst());
   uint8_t i = 0;
   for (Loco *dccexLoco = dccexProtocol.roster->getFirst(); dccexLoco; dccexLoco = dccexLoco->getNext()) 
   {
@@ -24,9 +22,11 @@ void listRoster()
   }
 //  Serial.println("DCCEX Roster Received");
 }
+*/
 
+/*
 void receivedRosterList() 
 {
   listRoster();
 }
-
+*/

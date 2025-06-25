@@ -22,10 +22,10 @@ static void menu_cb(lv_event_t * e)
   lv_obj_t * obj = lv_event_get_target(e);
   if(code == LV_EVENT_VALUE_CHANGED) 
   {
-    uint32_t menuItem = lv_btnmatrix_get_selected_btn(objects.menu_mtx);    //Retrieve the Selected Throttle number
+    uint32_t menuItem = lv_btnmatrix_get_selected_btn(objects.menu_mtx);    //
     switch (menuItem)
     {
-      case CONFIG:
+      case CONFIG:                            //Config Button
         callingPage = SCREEN_ID_MAIN;
         char  str[4];
         itoa(brightness, str, 10);
@@ -34,7 +34,7 @@ static void menu_cb(lv_event_t * e)
         lv_textarea_set_text(objects.ta_wifi_timeout, str);
         loadScreen(SCREEN_ID_CONFIG);  
         break;
-      case ROSTER:
+      case ROSTER:                            //Roster Button
         callingPage = SCREEN_ID_MAIN;
         loadScreen(SCREEN_ID_ROSTER);  
         break;

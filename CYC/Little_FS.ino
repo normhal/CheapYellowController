@@ -400,9 +400,7 @@ void saveLocos(fs::FS &fs, const char * path, const char * message)
   for(row = 0; row < NUM_LOCOS; row++)      //ALWAYS write the full number of locos to preserve LocoID link to functions and selectedIDs
   {
     String message = String(row) + "," +  locoName[row] + "," + locoAddress[row] + "\n";
-//    Serial.print(message);
     file.print(message);
-//    Serial.print(".");
   }
   Serial.printf("%d Loco records written\n", row);
   file.close();

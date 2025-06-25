@@ -16,7 +16,9 @@
 
 #define ROTATION 0
 
-#define NAME_COL_WIDTH 240
+#define NAME_COL0_WIDTH 240
+#define NAME_COL1_WIDTH 60
+
 
 /*******************************************************************************
  * Display Driver for GFX Library for Arduino by "moononournation"

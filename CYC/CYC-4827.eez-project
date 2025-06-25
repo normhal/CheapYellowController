@@ -13379,7 +13379,7 @@
                   "type": "LVGLLabelWidget",
                   "left": 0,
                   "top": 0,
-                  "width": 50,
+                  "width": 51,
                   "height": 22,
                   "customInputs": [],
                   "customOutputs": [],
@@ -13419,7 +13419,7 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": "Print",
+                  "text": "Load",
                   "textType": "literal",
                   "longMode": "WRAP",
                   "recolor": false
@@ -13495,7 +13495,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "Press to Print EXRail Roster",
+              "text": "Load Roster from EX-Rail",
               "textType": "literal",
               "longMode": "WRAP",
               "recolor": false

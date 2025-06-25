@@ -72,9 +72,9 @@
 //#define ESP2432S032C           // Sunton ESP32-2432S032C  Planned     ESP32
 //#define ESP3248S035C           // Sunton ESP32-3248S035C              ESP32     ticked 16 June
 //#define ESP3248S035R           // Sunton ESP32-3248S035R              ESP32     ticked 16 June  
-//#define ESP3248W535C            //Guition JC3248W535C                 ESP32-S3  ticked 16 June
+#define ESP3248W535C            //Guition JC3248W535C                 ESP32-S3  ticked 16 June
 //#define ESP4827S043C           // Sunton ESP32-4827S043C              ESP32-S3  ticked 16 June
-#define ESP4827S043R           // Sunton ESP32-4827S043R              ESP32-S3  ticked 16 June
+//#define ESP4827S043R           // Sunton ESP32-4827S043R              ESP32-S3  ticked 16 June
 
 //#define ESP32DIS06043H         // Elcrow ESP32-DIS06043H              ESP32-S3  t...   by RKS
 //#define ESP32DIS08070H         // Elcrow ESP32-DIS08070H              ESP32-S3  t...   by RKS
@@ -97,15 +97,225 @@
 // Don't modify anything below the above two sections
 //*****************************************************************************************************************************
 
+#include <DCCEXProtocol.h>
+#include <WiFi.h>
+
+#include "credentials.h"
+
+void printRoster();
+void printTurnouts();
+void printRoutes();
+void printTurntables();
+
 #include "CYC.h"
+
+
+DCCEXProtocol dccexProtocol;
+
+// Delegate class
+class MyDelegate : public DCCEXProtocolDelegate {
+
+public:
+  void receivedServerVersion(int major, int minor, int patch) override {
+    Serial.print("\n\nReceived version: ");
+    Serial.print(major);
+    Serial.print(".");
+    Serial.print(minor);
+    Serial.print(".");
+    Serial.println(patch);
+  }
+
+  void receivedTrackPower(TrackPower state) override {
+    Serial.print("\n\nReceived Track Power: ");
+    Serial.println(state);
+    Serial.println("\n\n");
+  }
+
+  void receivedRosterList() override 
+  {
+    Serial.println("\n\nReceived Roster");
+    uint16_t id = 0;
+    for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
+    {
+      std::string s = std::to_string(loco->getAddress());
+      const char* lAddr = s.c_str();
+      strcpy(locoAddress[id], lAddr);
+      Serial.printf("Address: %s ", lAddr);
+      const char *lName = loco->getName();
+      strcpy(locoName[id], lName);
+      Serial.printf(" Name: %s\n", lName);
+      lv_table_set_cell_value(objects.tbl_roster, id, 0, locoName[id]);
+      lv_table_set_cell_value(objects.tbl_roster, id, 1, locoAddress[id]);
+
+ //     char *lAddr;
+ //     itoa(ad, lAddr, 1);
+//      itoa(ad, lAddr,4);
+//      locoSpeed[id] = 0;
+//      locoDir[id] = 1;       //Default to Forward
+//      Serial.println();
+//      Serial.printf("Loco ID: %d ", id);
+//      Serial.printf("Address: %s ", locoAddress[id]);
+//      Serial.printf(" Name: %s ", locoName[id]);
+      id++;
+    //  Serial.println();
+    }
+  }
+  void receivedTurnoutList() override 
+  {
+    Serial.print("\n\nReceived Turnouts/Points list");
+//    printTurnouts();
+    Serial.println("\n\n");
+  }
+  void receivedRouteList() override {
+    Serial.print("\n\nReceived Routes List");
+//    printRoutes();
+    Serial.println("\n\n");
+  }
+  void receivedTurntableList() override {
+    Serial.print("\n\nReceived Turntables list");
+//   printTurntables();
+    Serial.println("\n\n");
+  }
+};
+
+WiFiClient client;
+MyDelegate myDelegate;
+
+/*
+void printRoster()
+{
+//  uint8_t i = 0;
+  for (Loco *dccexLoco = dccexProtocol.roster->getFirst(); dccexLoco; dccexLoco = dccexLoco->getNext()) 
+  {
+//    rosterList[i] = dccexLoco->getAddress();
+    Serial.print(dccexLoco->getAddress());
+    Serial.print(" ");
+    Serial.println(dccexLoco->getName());
+//    i++;
+//    Serial.printf("Entry: %d has the Address: ", i);  //    Serial.print("Address: ");
+//    Serial.println(dccexLoco->getAddress());
+//    if(i>50) return;
+//    lastEntry = i;
+  }
+}
+*/
+//  Serial.println("DCCEX Roster Received");
+
+void printRoster() 
+{
+/*
+//  Serial.println("Listing Roster...");
+  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
+  {
+    int id = loco->getAddress();
+    const char *lname = loco->getName();
+    Serial.print(id);
+    Serial.print(" ~");
+    Serial.print(lname);
+    Serial.println("~");
+    for (int i = 0; i < 32; i++) 
+    {
+      const char *fName = loco->getFunctionName(i);
+      if (fName != nullptr) 
+      {
+        Serial.print("Fun ");
+        Serial.print(fName);
+        if (loco->isFunctionMomentary(i)) 
+        {
+          Serial.print(" - Momentary");
+        }
+        Serial.println();
+      }
+    }
+  }
+//  Serial.println("Roster Listed");
+}
+*/
+  uint16_t id = 1;      //Start at 1
+  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
+  {
+    int ad = loco->getAddress();
+    const char *name = loco->getName();
+    Serial.println();
+    Serial.printf("Loco ID: %d Address: ", id);
+    Serial.print(ad);
+    Serial.print(" Name: ");
+    Serial.print(name);
+    Serial.println();
+
+    for (int i = 0; i < 32; i++) 
+    {
+      const char *fName = loco->getFunctionName(i);
+      if (fName != nullptr) 
+      {
+        Serial.printf("    Function Number: %d ", i);
+        Serial.print(fName);
+        if (loco->isFunctionMomentary(i)) {
+          Serial.print(" - Momentary");
+        }
+        Serial.println();
+      }
+    }
+    id++;
+    Serial.println();
+  }
+}
+
+void printTurnouts() {
+  for (Turnout *turnout = dccexProtocol.turnouts->getFirst(); turnout; turnout = turnout->getNext()) {
+    int id = turnout->getId();
+    const char *name = turnout->getName();
+    Serial.print(id);
+    Serial.print(" ~");
+    Serial.print(name);
+    Serial.println("~");
+  }
+  Serial.println("\n");
+}
+
+void printRoutes() {
+  for (Route *route = dccexProtocol.routes->getFirst(); route; route = route->getNext()) {
+    int id = route->getId();
+    const char *name = route->getName();
+    Serial.print(id);
+    Serial.print(" ~");
+    Serial.print(name);
+    Serial.println("~");
+  }
+  Serial.println("\n");
+}
+
+void printTurntables() {
+  for (Turntable *turntable = dccexProtocol.turntables->getFirst(); turntable; turntable = turntable->getNext()) {
+    int id = turntable->getId();
+    const char *name = turntable->getName();
+    Serial.print(id);
+    Serial.print(" ~");
+    Serial.print(name);
+    Serial.println("~");
+
+    int j = 0;
+    for (TurntableIndex *turntableIndex = turntable->getFirstIndex(); turntableIndex;
+         turntableIndex = turntableIndex->getNextIndex()) {
+      const char *indexName = turntableIndex->getName();
+      Serial.print("  index");
+      Serial.print(j);
+      Serial.print(" ~");
+      Serial.print(indexName);
+      Serial.println("~");
+      j++;
+    }
+  }
+  Serial.println("\n");
+}
+
+File file;
 
 uint32_t bufSize;
 
 lv_disp_draw_buf_t draw_buf;
 lv_color_t *disp_draw_buf;
 lv_disp_drv_t disp_drv;
-
-File file;
 
 #if LV_USE_LOG != 0
 /* Serial debugging */
@@ -115,6 +325,7 @@ void my_print(const char * buf)
   Serial.flush();
 }
 #endif
+
 /*
  ********************************************************************************************************
  * Call-Back routine for Textarea fields
@@ -269,11 +480,13 @@ void setup()
     lv_obj_add_event_cb(objects.dd_ssids, dd_cb, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(objects.dd_locos, dd_locos_cb, LV_EVENT_ALL, NULL);
 
-    // Callback definitions - Menu, Throttle, Roster
+    // Callback definitions - Menu, Throttle, Functions, Roster
     lv_obj_add_event_cb(objects.menu_mtx, menu_cb, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(objects.throttle_mtx, throttle_selection_handler_cb, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(objects.function_mtx, functions_cb, LV_EVENT_PRESSED, NULL);
     lv_obj_add_event_cb(objects.function_mtx, functions_cb, LV_EVENT_RELEASED, NULL);
+    lv_obj_add_event_cb(objects.ex_functions_mtx, ex_functions_cb, LV_EVENT_PRESSED, NULL);
+    lv_obj_add_event_cb(objects.ex_functions_mtx, ex_functions_cb, LV_EVENT_RELEASED, NULL);
     lv_obj_add_event_cb(objects.track_mtx, track_cb, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(objects.cv_mtx, cv_cb, LV_EVENT_ALL, NULL);
 
@@ -328,28 +541,12 @@ void setup()
 
     delay(100);
 
-    Serial.println("Now populating Locos...");
-    populateLocoArray("/locos.txt");
-
-    // Set all function numbers to 255
-    for(int i = 0; i < NUM_LOCOS; i++)
-    {
-      for(int j = 0; j < NUM_FUNC_SLOTS; j++) strcpy(funcNumber[i][j], "255");
-    }
-  
-    Serial.println("Now populating Functions");
-    populateLocoFunctions("/functions.txt");
-
     Serial.println("Now loading List of Credentials");
     populateCredentials("/credentials.txt");
     
-    Serial.println("Now Populating the Roster...");
-    for(int i = 0; i < locoCount; i++)
-    {
-      lv_table_set_cell_value(objects.tbl_roster, i, 0, locoName[i]);
-      lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddress[i]);
-    }
-    Serial.println("Roster Populated");
+    delay(100);
+
+    setupLocalRoster();
 
     rosterMode = GUEST_INACTIVE;
 
@@ -393,6 +590,26 @@ void setup()
   re_timer = millis();
 #endif
   Serial.println("Setup Done!");
+
+  Serial.println("Connecting to WiFi..");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED)
+  delay(100);
+  Serial.print("Connected with IP: ");
+  Serial.println(WiFi.localIP());
+  Serial.println("Connecting to the server...");
+  if (!client.connect(serverAddress, serverPort)) 
+  {
+    Serial.println("connection failed");
+//    while (1)
+//      delay(1000);
+  }
+  Serial.println("Connected to the server");
+
+//  dccexProtocol.setLogStream(&Serial);
+  dccexProtocol.setDelegate(&myDelegate);
+  dccexProtocol.connect(&client);
+  Serial.println("DCC-EX connected");
 }
 /*
  ********************************************************************************************************
@@ -401,13 +618,15 @@ void setup()
 */
 void loop() 
 {
+  dccexProtocol.check();
+
   lv_timer_handler();
 
 //  ui_t...();
 
   gfx->flush();
 
-  receiveCMD();
+//  receiveCMD();
 
 #if defined ROTARY_ENCODER
   if(encoder_present)                       //Sample Rotary Encoder if it's been found:-)

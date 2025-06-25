@@ -29,7 +29,7 @@ static void tbl_roster_cb(lv_event_t * e)
     lv_textarea_set_text(objects.ta_name, locoName[editingID]);
     lv_textarea_set_text(objects.ta_address, locoAddress[editingID]);
 
-    //Now set the functions
+    //Now set the functions ready for the Edit Page
     setupFuncEditSlots();
     rosterMode = NORMAL_MODE;
     callingPage = SCREEN_ID_ROSTER;
@@ -73,4 +73,99 @@ void action_roster_button(lv_event_t * e)
     default:
       break;
   }
+}
+/*
+ **********************************************************************************************************
+ * Initialize Local Roster
+ **********************************************************************************************************
+*/
+void setupLocalRoster()
+{
+  Serial.println("Now populating Locos...");
+  populateLocoArray("/locos.txt");
+
+  // Set all function numbers to 255
+  for(int i = 0; i < NUM_LOCOS; i++)
+  {
+    for(int j = 0; j < NUM_FUNC_SLOTS; j++) strcpy(funcNumber[i][j], "255");
+  }
+  
+  Serial.println("Now populating Functions");
+  populateLocoFunctions("/functions.txt");
+
+  Serial.println("Now Populating the Roster...");
+  for(int i = 0; i < locoCount; i++)                    //Using the count from LittleFS
+  {
+    lv_table_set_cell_value(objects.tbl_roster, i, 0, locoName[i]);
+    lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddress[i]);
+  }
+  Serial.println("Local Roster Populated");
+}
+/*
+ **********************************************************************************************************
+ * Initialize EX-Rail Roster
+ **********************************************************************************************************
+*/
+void setupExrailRoster()
+{
+  dccexProtocol.getLists(true,false,false,false);
+  delay(1000);
+  Serial.println("Replacing Roster with EX-Rail list");
+  uint16_t id = 0;  
+//  delay(500);   
+  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
+  {
+    int ad = loco->getAddress();
+    const char *name = loco->getName();
+    Serial.println();
+    Serial.printf("Loco ID: %d Address: ", id);
+    Serial.print(ad);
+    Serial.print(" Name: ");
+    Serial.print(name);
+    Serial.println();
+    id++;
+  }
+/*
+  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
+  {
+    int ad = loco->getAddress();
+    const char *lName = loco->getName();
+    strcpy(locoName[id], lName);
+    char *lAddr;
+    itoa(ad, lAddr,4);
+    strcpy(locoAddress[id], lAddr);
+    locoSpeed[id] = 0;
+    locoDir[id] = 1;       //Default to Forward
+    Serial.println();
+    Serial.printf("Loco ID: %d ", id);
+    Serial.printf("Address: %s ", locoAddress[id]);
+    Serial.printf(" Name: %s ", locoName[id]);
+    delay(1000);
+    */
+  /*
+    for (int i = 0; i < 32; i++) 
+    {
+      const char *fName = loco->getFunctionName(i);
+      if (fName != nullptr) 
+      {
+        Serial.printf("    Function Number: %d ", i);
+        Serial.print(fName);
+        if (loco->isFunctionMomentary(i)) {
+          Serial.print(" - Momentary");
+        }
+        Serial.println();
+      }
+    }
+
+    id++;
+    Serial.println();
+  }
+  Serial.println("Now Populating the Roster...");
+  for(int i = 0; i < id; i++)
+  {
+    lv_table_set_cell_value(objects.tbl_roster, i, 0, locoName[i]);
+    lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddress[i]);
+  }
+  */
+//  }
 }
