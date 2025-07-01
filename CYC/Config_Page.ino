@@ -23,22 +23,31 @@ void action_config_button(lv_event_t * e)
   switch(pressedButton)
   {
     case (28):              //Reload Local Roster
-      Serial.println("Reload Pressed");
+      lv_label_set_text(objects.lbl_roster, "Restoring Local Roster");
       setupLocalRoster();
+      lv_label_set_text(objects.lbl_roster, "Local Roster Restored");
       break;
     case (29):              //Retrieve EX-Rail Roster
     {
-      Serial.println("Replace Pressed");
-      //First Clear the existing Roster by setting Address to blank
-      const char* lAddr = "    ";
+      dccexProtocol.disconnect();
+      //First Clear the Roster
       for(int i = 0; i < NUM_LOCOS; i++)
       {
-        strcpy(locoAddress[i], lAddr);
-//       Serial.println(i);
+        lv_table_set_cell_value(objects.tbl_roster, i, 0, "");
+        lv_table_set_cell_value(objects.tbl_roster, i, 1, "");
+        locoName[i][0] = '\0';
+        locoAddress[i][0] = '\0';
+        //Now clear the Functions
+        for(uint8_t f = 0; f < NUM_FUNC_SLOTS; f++) 
+        {
+          strcpy(funcNumber[i][f], "255");
+          strcpy(funcName[i][f], " ");
+        }
       }
+      dccexProtocol.connect(&client);
+      lv_label_set_text(objects.lbl_roster,"Sending List Request");
       dccexProtocol.getLists(true,false,false,false);
       Serial.println("List Request Sent");
-//      delay(1000);
       break;
     }
     case (30):       //WiFi

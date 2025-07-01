@@ -216,7 +216,7 @@ void populateLocoFunctions(String);
 #define NUM_LOCO_SLOTS 10
 #define NUM_FUNC_SLOTS 10
 #define NUM_LOCOS 100
-//#define LOCOS_PER_ROSTER_PAGE 10
+#define NUM_FUNCS 29
 
 #define NUM_ACCS 252
 

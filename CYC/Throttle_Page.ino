@@ -233,7 +233,7 @@ void action_throttle_button(lv_event_t * e)
       break;
     case 29:    //More Button
     {
-      for(int i = 0; i< NUM_FUNC_SLOTS; i++)
+      for(int i = 0; i< NUM_FUNCS; i++)
       {
         int val = atoi(funcNumber[activeLocoID][i]);
         if(val != 255)
@@ -335,10 +335,15 @@ static void ex_functions_cb(lv_event_t * e)
       if(lv_obj_get_state(objects.desc_button) == LV_STATE_CHECKED)
       {
         Serial.printf("Function Pressed: %d\n", fNum);
-        std::string s = std::to_string(fNum);
-        s = "Function Pressed: F" + s;
-        const char* fDesc = s.c_str();
-        lv_label_set_text(objects.func_description, fDesc);
+        Serial.printf("Active ID: %d\n", activeLocoID);
+        Serial.println(funcName[activeLocoID][fNum]);
+//        std::string s = std::to_string(fNum);
+//        s = "Function Pressed: F" + s;
+//        const char* fDesc = s.c_str();
+//        lv_label_set_text(objects.func_description, fDesc);
+        lv_label_set_text(objects.func_description, funcName[activeLocoID][fNum]);
+
+
 //        if(funcState[activeLocoID][fslot] == 1) funcState[activeLocoID][fslot] = 0;
 //        else funcState[activeLocoID][fslot] = 1;
 //        //Send the DCCEX Command...

@@ -30,13 +30,14 @@ void action_wifi_button(lv_event_t * e)
       break;
     case 7:     //Connect
     {
+      if(WiFi.isConnected()) WiFi.disconnect();
       lv_label_set_text(objects.lbl_wifi_status, "Connecting to WiFi...");
       WiFi.begin(lv_textarea_get_text(objects.ta_ssid), lv_textarea_get_text(objects.ta_password));
       int timeOut = timeout;
       while (WiFi.status() != WL_CONNECTED)
       {
-//        Serial.print(".");
-        delay(200);
+        Serial.print(".");
+        delay(100);
         timeOut = timeOut -1;
         if(timeOut <0)
         {

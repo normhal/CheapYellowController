@@ -72,8 +72,8 @@
 //#define ESP2432S032C           // Sunton ESP32-2432S032C  Planned     ESP32
 //#define ESP3248S035C           // Sunton ESP32-3248S035C              ESP32     ticked 16 June
 //#define ESP3248S035R           // Sunton ESP32-3248S035R              ESP32     ticked 16 June  
-#define ESP3248W535C            //Guition JC3248W535C                 ESP32-S3  ticked 16 June
-//#define ESP4827S043C           // Sunton ESP32-4827S043C              ESP32-S3  ticked 16 June
+//#define ESP3248W535C            //Guition JC3248W535C                 ESP32-S3  ticked 16 June
+#define ESP4827S043C           // Sunton ESP32-4827S043C              ESP32-S3  ticked 16 June
 //#define ESP4827S043R           // Sunton ESP32-4827S043R              ESP32-S3  ticked 16 June
 
 //#define ESP32DIS06043H         // Elcrow ESP32-DIS06043H              ESP32-S3  t...   by RKS
@@ -133,33 +133,57 @@ public:
 
   void receivedRosterList() override 
   {
-    Serial.println("\n\nReceived Roster");
-    uint16_t id = 0;
+//    Serial.println("\n\nReceived Roster");
+    uint16_t lId = 0;
     for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
     {
+      //First the Loco Name
+      const char *lName = loco->getName();
+      strcpy(locoName[lId], lName);
+      Serial.println();
+      Serial.printf("Name: %s ", lName);
+    
+      //Then the Loco Address
       std::string s = std::to_string(loco->getAddress());
       const char* lAddr = s.c_str();
-      strcpy(locoAddress[id], lAddr);
-      Serial.printf("Address: %s ", lAddr);
-      const char *lName = loco->getName();
-      strcpy(locoName[id], lName);
-      Serial.printf(" Name: %s\n", lName);
-      lv_table_set_cell_value(objects.tbl_roster, id, 0, locoName[id]);
-      lv_table_set_cell_value(objects.tbl_roster, id, 1, locoAddress[id]);
+      strcpy(locoAddress[lId], lAddr);
+      Serial.printf("Address: %s\n", lAddr);
+      lv_table_set_cell_value(objects.tbl_roster, lId, 0, locoName[lId]);
+      lv_table_set_cell_value(objects.tbl_roster, lId, 1, locoAddress[lId]);
 
- //     char *lAddr;
- //     itoa(ad, lAddr, 1);
-//      itoa(ad, lAddr,4);
-//      locoSpeed[id] = 0;
-//      locoDir[id] = 1;       //Default to Forward
-//      Serial.println();
-//      Serial.printf("Loco ID: %d ", id);
-//      Serial.printf("Address: %s ", locoAddress[id]);
-//      Serial.printf(" Name: %s ", locoName[id]);
-      id++;
-    //  Serial.println();
+      //Now for the Functions
+      uint8_t sN = 0;                      //Function Slot Number
+      for (int fN = 0; fN < 32; fN++) 
+      {
+        const char *fName = loco->getFunctionName(fN);
+        if(fName != NULL) 
+        {
+          if(fName[0] != '\0')          //This is to block an unused function
+          {
+            Serial.printf("Button Enabled: %d\n", fN);
+//            if(loco->isFunctionOn(fN)) Serial.println("Set to CHECKED");
+//            else Serial.println("Left UNCHECKED");
+//          lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, fN, LV_BTNMATRIX_CTRL_DISABLED);
+//          if(loco->isFunctionOn(fN)) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, fN, LV_BTNMATRIX_CTRL_CHECKED);
+            if(sN < NUM_FUNCS)
+            {
+              Serial.printf("Function Name: %s Number: %d\n", fName, fN);
+              strcpy(funcName[lId][sN], fName);
+              std::string f = std::to_string(fN);
+ //             const char* fNum = f.c_str();
+              strcpy(funcNumber[lId][sN], f.c_str());
+              Serial.printf("Received Number: %s Slot: %d LocoID: %d\n", funcNumber[lId][sN], sN, lId);
+              sN++;
+            }
+          }
+        }
+      }
+      lId++;
     }
+    lv_label_set_text(objects.lbl_roster, "EX-Rail Roster Received");
   }
+
+
   void receivedTurnoutList() override 
   {
     Serial.print("\n\nReceived Turnouts/Points list");
@@ -181,82 +205,41 @@ public:
 WiFiClient client;
 MyDelegate myDelegate;
 
-/*
-void printRoster()
-{
-//  uint8_t i = 0;
-  for (Loco *dccexLoco = dccexProtocol.roster->getFirst(); dccexLoco; dccexLoco = dccexLoco->getNext()) 
-  {
-//    rosterList[i] = dccexLoco->getAddress();
-    Serial.print(dccexLoco->getAddress());
-    Serial.print(" ");
-    Serial.println(dccexLoco->getName());
-//    i++;
-//    Serial.printf("Entry: %d has the Address: ", i);  //    Serial.print("Address: ");
-//    Serial.println(dccexLoco->getAddress());
-//    if(i>50) return;
-//    lastEntry = i;
-  }
-}
-*/
-//  Serial.println("DCCEX Roster Received");
-
 void printRoster() 
 {
-/*
-//  Serial.println("Listing Roster...");
+  uint16_t lId = 1;      //Start at 1
   for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
   {
-    int id = loco->getAddress();
-    const char *lname = loco->getName();
-    Serial.print(id);
-    Serial.print(" ~");
-    Serial.print(lname);
-    Serial.println("~");
-    for (int i = 0; i < 32; i++) 
+    uint16_t lAd = loco->getAddress();
+    const char *lName = loco->getName();
+    Serial.printf("\nLoco ID: %d Address: %d Name: %s\n", lId, lAd, lName);
+    uint8_t sN = 0;                      //Function Slot Number
+    for (uint8_t fN = 0; fN < 32; fN++) 
     {
-      const char *fName = loco->getFunctionName(i);
-      if (fName != nullptr) 
+      const char *fName = loco->getFunctionName(fN);
+      if(fName != NULL) 
       {
-        Serial.print("Fun ");
-        Serial.print(fName);
-        if (loco->isFunctionMomentary(i)) 
+        if(fName[0] != '\0')          //This is to block an unused function
         {
-          Serial.print(" - Momentary");
+          Serial.printf("Button Enabled: %d ", fN);
+          if(loco->isFunctionOn(fN)) Serial.println("Set to CHECKED");
+          else Serial.println("Left UNCHECKED");
+//          lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, fN, LV_BTNMATRIX_CTRL_DISABLED);
+//          if(loco->isFunctionOn(fN)) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, fN, LV_BTNMATRIX_CTRL_CHECKED);
+          if(sN < NUM_FUNCS)
+          {
+            Serial.printf("Function Name: %s Number: %d\n", fName, fN);
+            strcpy(funcName[lId][sN], fName);
+//            funcNumber[lId][sN] = fN;
+            sN++;
+          }
+          Serial.println(loco->isFunctionOn(fN));
+          Serial.println(loco->isFunctionMomentary(fN));
+          Serial.println(loco->getFunctionStates());
         }
-        Serial.println();
       }
     }
-  }
-//  Serial.println("Roster Listed");
-}
-*/
-  uint16_t id = 1;      //Start at 1
-  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
-  {
-    int ad = loco->getAddress();
-    const char *name = loco->getName();
-    Serial.println();
-    Serial.printf("Loco ID: %d Address: ", id);
-    Serial.print(ad);
-    Serial.print(" Name: ");
-    Serial.print(name);
-    Serial.println();
-
-    for (int i = 0; i < 32; i++) 
-    {
-      const char *fName = loco->getFunctionName(i);
-      if (fName != nullptr) 
-      {
-        Serial.printf("    Function Number: %d ", i);
-        Serial.print(fName);
-        if (loco->isFunctionMomentary(i)) {
-          Serial.print(" - Momentary");
-        }
-        Serial.println();
-      }
-    }
-    id++;
+    lId++;
     Serial.println();
   }
 }
@@ -376,12 +359,12 @@ void my_disp_flush( lv_disp_drv_t* disp_drv, const lv_area_t* area, lv_color_t* 
 */
 void setBacklight(uint8_t brightness)
 {
-//  ledcSetup(0, 5000, 8);                          //If using ESP Boards 2.0.x LEDChannel, frequency, resolution
-//  ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
-//  ledcWrite(0, brightness);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
+  ledcSetup(0, 5000, 8);                          //If using ESP Boards 2.0.x LEDChannel, frequency, resolution
+  ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
+  ledcWrite(0, brightness);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
 
-  ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
-  ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
+//  ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
+//  ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
 }
 /*
  ********************************************************************************************************
@@ -532,6 +515,20 @@ void setup()
     // Read all LittleFS data files and populate working arrays
     //*****************************************************************************************************
     //
+  Serial.println("Connecting to WiFi..");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) delay(100); 
+  Serial.print("Connected with IP: ");
+  Serial.println(WiFi.localIP());
+  Serial.println("Connecting to the server...");
+  if (!client.connect(serverAddress, serverPort)) 
+  {
+    Serial.println("connection failed");
+//    while (1)
+//      delay(1000);
+  }
+  Serial.println("Connected to the server");
+
     LittleFS.begin();
 
     delay(100);
@@ -590,21 +587,6 @@ void setup()
   re_timer = millis();
 #endif
   Serial.println("Setup Done!");
-
-  Serial.println("Connecting to WiFi..");
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  delay(100);
-  Serial.print("Connected with IP: ");
-  Serial.println(WiFi.localIP());
-  Serial.println("Connecting to the server...");
-  if (!client.connect(serverAddress, serverPort)) 
-  {
-    Serial.println("connection failed");
-//    while (1)
-//      delay(1000);
-  }
-  Serial.println("Connected to the server");
 
 //  dccexProtocol.setLogStream(&Serial);
   dccexProtocol.setDelegate(&myDelegate);
