@@ -216,7 +216,7 @@ void populateLocoFunctions(String);
 #define NUM_LOCO_SLOTS 10
 #define NUM_FUNC_SLOTS 10
 #define NUM_LOCOS 100
-#define NUM_FUNCS 29
+const char NUM_FUNCS = 28;
 
 #define NUM_ACCS 252
 
@@ -238,17 +238,21 @@ const char * throttleName[4] = {
 #define SPEED_LEN 3
 //#define DIR_LEN 1
 #define FNUM_LEN 3
-#define FNAME_LEN 10
+#define FNAME_LEN 16
 
 char locoName[NUM_LOCOS][NAME_LEN +1];
 char locoAddress[NUM_LOCOS][ADDR_LEN +1];                         //Address "" = unused record
 uint32_t savedSpeed[NUM_LOCOS];
 uint32_t locoSpeed[NUM_LOCOS];
 uint8_t locoDir[NUM_LOCOS];
-char funcName[NUM_LOCOS][NUM_FUNC_SLOTS][FNAME_LEN +1];
-char funcNumber[NUM_LOCOS][NUM_FUNC_SLOTS][FNUM_LEN+1];          // 4 characters to store "255"
-uint8_t funcState[NUM_LOCOS][NUM_FUNC_SLOTS];
-uint8_t funcOption[NUM_LOCOS][NUM_FUNC_SLOTS];
+//char funcName[NUM_LOCOS][NUM_FUNC_SLOTS][FNAME_LEN +1];
+//char funcNumber[NUM_LOCOS][NUM_FUNC_SLOTS][FNUM_LEN+1];          // 4 characters to store "255"
+//uint8_t funcState[NUM_LOCOS][NUM_FUNC_SLOTS];
+//uint8_t funcOption[NUM_LOCOS][NUM_FUNC_SLOTS];
+char funcName[NUM_LOCOS][NUM_FUNCS][FNAME_LEN +1];
+char funcNumber[NUM_LOCOS][NUM_FUNCS][FNUM_LEN+1];          // 4 characters to store "255"
+uint8_t funcState[NUM_LOCOS][NUM_FUNCS];
+uint8_t funcOption[NUM_LOCOS][NUM_FUNCS];
 //uint8_t resumeOnGo = 0;
 //uint8_t runState = 1;                                           //1 = Running, 0 = Stopped
 

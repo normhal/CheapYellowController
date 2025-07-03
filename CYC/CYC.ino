@@ -520,11 +520,12 @@ void setup()
   while (WiFi.status() != WL_CONNECTED) delay(100); 
   Serial.print("Connected with IP: ");
   Serial.println(WiFi.localIP());
+  lv_img_set_src(objects.img_wifi, &img_6);
   Serial.println("Connecting to the server...");
   if (!client.connect(serverAddress, serverPort)) 
   {
     Serial.println("connection failed");
-//    while (1)
+    lv_img_set_src(objects.img_wifi, &img_x);//    while (1)
 //      delay(1000);
   }
   Serial.println("Connected to the server");

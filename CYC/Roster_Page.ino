@@ -87,7 +87,7 @@ void setupLocalRoster()
   // Set all function numbers to 255
   for(int i = 0; i < NUM_LOCOS; i++)
   {
-    for(int j = 0; j < NUM_FUNC_SLOTS; j++) strcpy(funcNumber[i][j], "255");
+    for(int j = 0; j < NUM_FUNCS; j++) strcpy(funcNumber[i][j], "255");
   }
   
   Serial.println("Now populating Functions");

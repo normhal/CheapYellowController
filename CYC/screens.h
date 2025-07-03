@@ -10,6 +10,7 @@ extern "C" {
 typedef struct _objects_t {
     lv_obj_t *main;
     lv_obj_t *throttle;
+    lv_obj_t *functions;
     lv_obj_t *roster;
     lv_obj_t *edit_loco;
     lv_obj_t *program;
@@ -20,7 +21,6 @@ typedef struct _objects_t {
     lv_obj_t *config;
     lv_obj_t *credits;
     lv_obj_t *info;
-    lv_obj_t *functions;
     lv_obj_t *btn_stop;
     lv_obj_t *btn_power;
     lv_obj_t *sw_dir;
@@ -71,21 +71,29 @@ typedef struct _objects_t {
     lv_obj_t *kbd_guest;
     lv_obj_t *obj10;
     lv_obj_t *obj11;
-    lv_obj_t *btn_cancel_edit_loco;
+    lv_obj_t *cancel_button_9;
     lv_obj_t *obj12;
+    lv_obj_t *done_button_19;
     lv_obj_t *obj13;
+    lv_obj_t *desc_button;
     lv_obj_t *obj14;
+    lv_obj_t *func_description;
+    lv_obj_t *ex_functions_mtx;
+    lv_obj_t *btn_cancel_edit_loco;
     lv_obj_t *obj15;
-    lv_obj_t *tbl_roster;
     lv_obj_t *obj16;
-    lv_obj_t *btn_edit_loco_cancel_1;
     lv_obj_t *obj17;
-    lv_obj_t *btn_prog_edit_loco_1;
     lv_obj_t *obj18;
-    lv_obj_t *btn_edit_loco_done_1;
+    lv_obj_t *tbl_roster;
     lv_obj_t *obj19;
-    lv_obj_t *ta_name;
+    lv_obj_t *btn_edit_loco_cancel_1;
     lv_obj_t *obj20;
+    lv_obj_t *btn_prog_edit_loco_1;
+    lv_obj_t *obj21;
+    lv_obj_t *btn_edit_loco_done_1;
+    lv_obj_t *obj22;
+    lv_obj_t *ta_name;
+    lv_obj_t *obj23;
     lv_obj_t *ta_address;
     lv_obj_t *ta_fname;
     lv_obj_t *ta_fnum;
@@ -113,14 +121,14 @@ typedef struct _objects_t {
     lv_obj_t *n_kbd_edit_loco;
     lv_obj_t *a_kbd_edit_loco;
     lv_obj_t *cancel_button_5;
-    lv_obj_t *obj21;
-    lv_obj_t *done_button_5;
-    lv_obj_t *obj22;
-    lv_obj_t *obj23;
-    lv_obj_t *track_mtx;
     lv_obj_t *obj24;
+    lv_obj_t *done_button_5;
     lv_obj_t *obj25;
     lv_obj_t *obj26;
+    lv_obj_t *track_mtx;
+    lv_obj_t *obj27;
+    lv_obj_t *obj28;
+    lv_obj_t *obj29;
     lv_obj_t *ta_cvn;
     lv_obj_t *ta_cvv;
     lv_obj_t *ta_adr;
@@ -129,86 +137,78 @@ typedef struct _objects_t {
     lv_obj_t *lbl_ps2;
     lv_obj_t *kbd_program;
     lv_obj_t *done_button_13;
-    lv_obj_t *obj27;
+    lv_obj_t *obj30;
     lv_obj_t *edit_button_13;
-    lv_obj_t *obj28;
-    lv_obj_t *obj29;
+    lv_obj_t *obj31;
+    lv_obj_t *obj32;
     lv_obj_t *h_line_1;
     lv_obj_t *done_button_14;
-    lv_obj_t *obj30;
-    lv_obj_t *done_button_12;
-    lv_obj_t *obj31;
-    lv_obj_t *cancel_button_12;
-    lv_obj_t *obj32;
     lv_obj_t *obj33;
+    lv_obj_t *done_button_12;
+    lv_obj_t *obj34;
+    lv_obj_t *cancel_button_12;
+    lv_obj_t *obj35;
+    lv_obj_t *obj36;
     lv_obj_t *selected_image;
     lv_obj_t *btn_wifi_select;
-    lv_obj_t *obj34;
+    lv_obj_t *obj37;
     lv_obj_t *btn_wifi_scan;
-    lv_obj_t *obj35;
+    lv_obj_t *obj38;
     lv_obj_t *dd_ssids;
     lv_obj_t *ta_ssid;
     lv_obj_t *ta_password;
     lv_obj_t *ta_ip_address;
     lv_obj_t *ta_port;
     lv_obj_t *btn_wifi_connect;
-    lv_obj_t *obj36;
-    lv_obj_t *btn_wifi_save;
-    lv_obj_t *obj37;
-    lv_obj_t *btn_wifi_enable;
-    lv_obj_t *obj38;
-    lv_obj_t *config_button9;
     lv_obj_t *obj39;
-    lv_obj_t *retry_button9;
+    lv_obj_t *btn_wifi_save;
     lv_obj_t *obj40;
-    lv_obj_t *done_button9;
+    lv_obj_t *btn_wifi_enable;
     lv_obj_t *obj41;
+    lv_obj_t *config_button9;
+    lv_obj_t *obj42;
+    lv_obj_t *retry_button9;
+    lv_obj_t *obj43;
+    lv_obj_t *done_button9;
+    lv_obj_t *obj44;
     lv_obj_t *lbl_wifi_status;
     lv_obj_t *lbl_wifi_status2;
     lv_obj_t *kb_numeric;
     lv_obj_t *kb_alpha;
     lv_obj_t *lbl_scan;
     lv_obj_t *config_button9_3;
-    lv_obj_t *obj42;
+    lv_obj_t *obj45;
     lv_obj_t *done_button9_3;
-    lv_obj_t *obj43;
-    lv_obj_t *obj44;
+    lv_obj_t *obj46;
+    lv_obj_t *obj47;
     lv_obj_t *list_scan_pg_ssids;
     lv_obj_t *txt_scan_status;
     lv_obj_t *wifi_button;
-    lv_obj_t *obj45;
-    lv_obj_t *uodate_button;
-    lv_obj_t *obj46;
-    lv_obj_t *done_button_7;
-    lv_obj_t *obj47;
     lv_obj_t *obj48;
+    lv_obj_t *uodate_button;
     lv_obj_t *obj49;
+    lv_obj_t *done_button_7;
     lv_obj_t *obj50;
-    lv_obj_t *ta_tft_backlight;
-    lv_obj_t *ta_wifi_timeout;
-    lv_obj_t *kbd_config;
     lv_obj_t *obj51;
     lv_obj_t *obj52;
     lv_obj_t *obj53;
-    lv_obj_t *lbl_roster;
-    lv_obj_t *info_button_9;
+    lv_obj_t *ta_tft_backlight;
+    lv_obj_t *ta_wifi_timeout;
+    lv_obj_t *kbd_config;
     lv_obj_t *obj54;
-    lv_obj_t *done_button_9;
     lv_obj_t *obj55;
     lv_obj_t *obj56;
-    lv_obj_t *credits_button_10;
+    lv_obj_t *lbl_roster;
+    lv_obj_t *info_button_9;
     lv_obj_t *obj57;
-    lv_obj_t *done_button_10;
+    lv_obj_t *done_button_9;
     lv_obj_t *obj58;
     lv_obj_t *obj59;
-    lv_obj_t *cancel_button_9;
+    lv_obj_t *credits_button_10;
     lv_obj_t *obj60;
-    lv_obj_t *done_button_19;
+    lv_obj_t *done_button_10;
     lv_obj_t *obj61;
-    lv_obj_t *desc_button;
     lv_obj_t *obj62;
-    lv_obj_t *func_description;
-    lv_obj_t *ex_functions_mtx;
 } objects_t;
 
 extern objects_t objects;
@@ -216,17 +216,17 @@ extern objects_t objects;
 enum ScreensEnum {
     SCREEN_ID_MAIN = 1,
     SCREEN_ID_THROTTLE = 2,
-    SCREEN_ID_ROSTER = 3,
-    SCREEN_ID_EDIT_LOCO = 4,
-    SCREEN_ID_PROGRAM = 5,
-    SCREEN_ID_ACCESSORIES = 6,
-    SCREEN_ID_EDIT_ACC = 7,
-    SCREEN_ID_WI_FI = 8,
-    SCREEN_ID_SCAN = 9,
-    SCREEN_ID_CONFIG = 10,
-    SCREEN_ID_CREDITS = 11,
-    SCREEN_ID_INFO = 12,
-    SCREEN_ID_FUNCTIONS = 13,
+    SCREEN_ID_FUNCTIONS = 3,
+    SCREEN_ID_ROSTER = 4,
+    SCREEN_ID_EDIT_LOCO = 5,
+    SCREEN_ID_PROGRAM = 6,
+    SCREEN_ID_ACCESSORIES = 7,
+    SCREEN_ID_EDIT_ACC = 8,
+    SCREEN_ID_WI_FI = 9,
+    SCREEN_ID_SCAN = 10,
+    SCREEN_ID_CONFIG = 11,
+    SCREEN_ID_CREDITS = 12,
+    SCREEN_ID_INFO = 13,
 };
 
 void create_screen_main();
@@ -234,6 +234,9 @@ void tick_screen_main();
 
 void create_screen_throttle();
 void tick_screen_throttle();
+
+void create_screen_functions();
+void tick_screen_functions();
 
 void create_screen_roster();
 void tick_screen_roster();
@@ -264,9 +267,6 @@ void tick_screen_credits();
 
 void create_screen_info();
 void tick_screen_info();
-
-void create_screen_functions();
-void tick_screen_functions();
 
 void tick_screen_by_id(enum ScreensEnum screenId);
 void tick_screen(int screen_index);

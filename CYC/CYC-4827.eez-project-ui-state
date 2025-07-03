@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/9",
+    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/2",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -196,16 +196,15 @@
                 {
                   "type": "tab",
                   "id": "#06827771-4750-41ea-9421-67da44eb76ab",
-                  "name": "Config",
+                  "name": "Functions",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-4827.eez-project]:/userPages/9",
+                    "objectPath": "[CYC-4827.eez-project]:/userPages/2",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ],
-              "active": true
+              ]
             },
             {
               "type": "row",
@@ -225,7 +224,8 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
@@ -1113,10 +1113,7 @@
           "0": {},
           "1": {},
           "3": {},
-          "9": {},
-          "10": {
-            "$selected": true
-          }
+          "9": {}
         }
       },
       "transform": {
@@ -1136,12 +1133,18 @@
     "[CYC-4827.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "2": {
-            "$selected": true
-          },
+          "0": {},
+          "1": {},
+          "2": {},
           "10": {},
           "11": {},
-          "12": {}
+          "12": {},
+          "15": {},
+          "16": {
+            "0": {
+              "$selected": true
+            }
+          }
         }
       },
       "transform": {
@@ -1163,6 +1166,9 @@
         "0": {
           "0": {},
           "4": {},
+          "6": {
+            "0": {}
+          },
           "9": {
             "$selected": true
           }
@@ -1185,13 +1191,16 @@
     "[CYC-4827.eez-project]:/userPages/2[flow-state]": {
       "selection": {
         "0": {
-          "3": {}
+          "3": {},
+          "4": {
+            "$selected": true
+          }
         }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -480
+          "y": -360
         },
         "scale": 1.5
       },
@@ -1206,8 +1215,7 @@
       "selection": {
         "0": {
           "0": {},
-          "7": {},
-          "12": {
+          "4": {
             "$selected": true
           }
         }
@@ -1288,16 +1296,7 @@
           "5": {},
           "6": {},
           "7": {},
-          "8": {},
-          "11": {
-            "$selected": true
-          },
-          "12": {
-            "$selected": true
-          },
-          "13": {
-            "$selected": true
-          }
+          "8": {}
         }
       },
       "transform": {
@@ -1317,13 +1316,16 @@
     "[CYC-4827.eez-project]:/userPages/10[flow-state]": {
       "selection": {
         "0": {
-          "2": {}
+          "0": {},
+          "1": {},
+          "3": {},
+          "9": {}
         }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -600
+          "y": -360
         },
         "scale": 1.5
       },
@@ -1459,12 +1461,18 @@
     },
     "[CYC-4827.eez-project]:/userPages/12[flow-state]": {
       "selection": {
-        "0": {}
+        "0": {
+          "0": {},
+          "1": {},
+          "4": {
+            "$selected": true
+          }
+        }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -480
+          "y": -360
         },
         "scale": 1.5
       },
@@ -1647,13 +1655,12 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "MAIN",
-  "lvglState": "DEFAULT",
+  "lvglPart": "ITEMS",
+  "lvglState": "CHECKED",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "BORDER",
     "SHADOW",
-    "PADDING",
     "OUTLINE",
     "MISCELLANEOUS",
     "BACKGROUND"

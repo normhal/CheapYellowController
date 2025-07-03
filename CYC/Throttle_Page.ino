@@ -116,6 +116,8 @@ static void functions_cb(lv_event_t * e)
 //        Serial.printf("Function Pressed: %d\n", funcOption[activeLocoID][fslot]);
         if(funcState[activeLocoID][fslot] == 1) funcState[activeLocoID][fslot] = 0;
         else funcState[activeLocoID][fslot] = 1;
+        Serial.printf("ActiveID: %d Slot: %d Function: %d\n", activeLocoID, fslot, atoi(funcNumber[activeLocoID][fslot]));
+//        Serial.printf("ActiveID: %d Slot: %d\n", activeLocoID, fslot);
         //Send the DCCEX Command...
         String functionCMD = ("<F " + String(locoAddress[activeLocoID]) + " " + String(atoi(funcNumber[activeLocoID][fslot])) + " " + String(funcState[activeLocoID][fslot]) + ">");
         Serial.println(functionCMD);
@@ -233,13 +235,16 @@ void action_throttle_button(lv_event_t * e)
       break;
     case 29:    //More Button
     {
-      for(int i = 0; i< NUM_FUNCS; i++)
+      for(uint16_t val = 0; val < NUM_FUNCS; val++)
       {
-        int val = atoi(funcNumber[activeLocoID][i]);
-        if(val != 255)
+        uint16_t fNum = atoi(funcNumber[activeLocoID][val]);
+        lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, fNum, LV_BTNMATRIX_CTRL_CHECKED);
+         Serial.printf("Processing: %d, %d\n", fNum, val);
+        if(fNum != 255)
         {
-          Serial.printf("Setting Function: %d\n", val);
-          lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, val, LV_BTNMATRIX_CTRL_DISABLED);
+          Serial.printf("Setting Function: %d, %d\n", fNum, val);
+          lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, fNum, LV_BTNMATRIX_CTRL_DISABLED);
+          if(funcState[activeLocoID][val] == 1) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, fNum, LV_BTNMATRIX_CTRL_CHECKED);
         }
       }
 //      clearGuest();
@@ -248,6 +253,12 @@ void action_throttle_button(lv_event_t * e)
 //      lv_textarea_set_text(objects.ta_address, locoAddress[editingID]);
 //      setupFuncEditSlots();
       loadScreen(SCREEN_ID_FUNCTIONS);
+/*
+      for(int fNum = 0; fNum < NUM_FUNCS; fNum++)
+      {
+        if(funcState[activeLocoID][fNum] == 1) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, fNum, LV_BTNMATRIX_CTRL_CHECKED);
+      }
+*/
       break;
     }
     case 30:    //Prog Button
@@ -327,9 +338,42 @@ static void ex_functions_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target(e);
     uint32_t fNum = lv_btnmatrix_get_selected_btn(obj); 
+    Serial.printf("Button: %d\n", fNum);
     if(fNum == 65535) return;
-//    Serial.printf("Button: %d\n", fNum);
     if(lv_btnmatrix_has_btn_ctrl(obj, fNum, LV_BTNMATRIX_CTRL_DISABLED)) return;
+
+//    if(funcName[activeLocoID][fslot] != "")
+//    {
+      if(code == LV_EVENT_PRESSED)
+      {
+//        Serial.printf("Function Pressed: %d\n", funcOption[activeLocoID][fslot]);
+        lv_label_set_text(objects.func_description, funcName[activeLocoID][fNum]);
+        if(funcState[activeLocoID][fNum] == 1) funcState[activeLocoID][fNum] = 0;
+        else funcState[activeLocoID][fNum] = 1;
+        //Send the DCCEX Command...
+        String functionCMD = ("<F " + String(locoAddress[activeLocoID]) + " " + String(atoi(funcNumber[activeLocoID][fNum])) + " " + String(funcState[activeLocoID][fNum]) + ">");
+        Serial.println(functionCMD);
+//        client.print(functionCMD);
+        if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+      }else if(code == LV_EVENT_RELEASED)
+      {
+ //       Serial.printf("Function Released: %d\n", funcOption[activeLocoID][fslot]);
+        lv_label_set_text(objects.func_description, "");
+        if(funcOption[activeLocoID][fNum] == 1)              //Check if Momentary
+        {
+          lv_btnmatrix_clear_btn_ctrl(obj, fNum, LV_BTNMATRIX_CTRL_CHECKED);
+          funcState[activeLocoID][fNum] = 0;
+          //Send the DCCEX Command...
+          String functionCMD = ("<F " + String(locoAddress[activeLocoID]) + " " + String(atoi(funcNumber[activeLocoID][fNum])) + " " + String(funcState[activeLocoID][fNum]) + ">");
+          Serial.println(functionCMD);
+          if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+//          client.print(functionCMD);
+        }
+      }
+//    }
+
+
+/*
     if(code == LV_EVENT_PRESSED)
     {
       if(lv_obj_get_state(objects.desc_button) == LV_STATE_CHECKED)
@@ -371,5 +415,6 @@ static void ex_functions_cb(lv_event_t * e)
  //       }
       }
     }
+  */
   }
 }
