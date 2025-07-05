@@ -26,7 +26,7 @@ static void tbl_roster_cb(lv_event_t * e)
   if(rosterMode == EDIT_MODE)
   {
     editingID = row;
-    lv_textarea_set_text(objects.ta_name, locoName[editingID]);
+    lv_textarea_set_text(objects.ta_name, locoNames[editingID]);
     lv_textarea_set_text(objects.ta_address, locoAddress[editingID]);
 
     //Now set the functions ready for the Edit Page
@@ -87,7 +87,7 @@ void setupLocalRoster()
   // Set all function numbers to 255
   for(int i = 0; i < NUM_LOCOS; i++)
   {
-    for(int j = 0; j < NUM_FUNCS; j++) strcpy(funcNumber[i][j], "255");
+    for(int j = 0; j < NUM_FUNCS; j++) funcSlots[i][j] = 255;
   }
   
   Serial.println("Now populating Functions");
@@ -96,7 +96,7 @@ void setupLocalRoster()
   Serial.println("Now Populating the Roster...");
   for(int i = 0; i < locoCount; i++)                    //Using the count from LittleFS
   {
-    lv_table_set_cell_value(objects.tbl_roster, i, 0, locoName[i]);
+    lv_table_set_cell_value(objects.tbl_roster, i, 0, locoNames[i]);
     lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddress[i]);
   }
   Serial.println("Local Roster Populated");

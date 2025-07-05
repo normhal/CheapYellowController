@@ -30,24 +30,121 @@ static void fname_cb(lv_event_t * e)
   functionsDirty = 1;
   if(code == LV_EVENT_VALUE_CHANGED)
   {
-    if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOption[editingID][fslot] = 1;
-    else funcOption[editingID][functionEditSlot] = 0;
+    if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][fslot] = 1;
+    else funcOptions[editingID][functionEditSlot] = 0;
     lv_textarea_set_text(objects.ta_fname, " ");
     lv_textarea_set_text(objects.ta_fnum, " ");
     lv_obj_clear_state(objects.f_option, LV_STATE_CHECKED);
   }
 }
-
+// Logic here is:
+// Cycle through each of 28 functions placing up to 10 functions according to their assigned slot
+// funcSlots[locoID][fNum] = slot where a slot 255 is unassigned
+//
 void setupFuncEditSlots()
 {
-    int i = 0;
-    int val = atoi(funcNumber[editingID][i]);
-    if(val != 255)
+  for(uint8_t fNum = 0; fNum < NUM_FUNCS; fNum++)                           //0 to 28
+  {  
+    std::string s = std::to_string(fNum);
+    uint8_t fSlot = funcSlots[editingID][fNum];
+    if(funcNames[editingID][fNum] != "")
     {
-      lv_obj_add_state(objects.btn_s0, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s0, funcName[editingID][i]); 
+      switch (fSlot)
+      {
+        case (0):
+        {
+          lv_obj_add_state(objects.btn_s0, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s0, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_0, s.c_str());
+          break;
+        }
+        case (1):
+        {
+          lv_obj_add_state(objects.btn_s1, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s1, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_1, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_1, s.c_str());
+          break;
+        }
+        case (2):
+        {
+          lv_obj_add_state(objects.btn_s2, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s2, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_2, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_2, s.c_str());
+          break;
+        }
+        case (3):
+        {
+          lv_obj_add_state(objects.btn_s3, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s3, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_3, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_3, s.c_str());
+          break;
+        }
+        case (4):
+        {
+          lv_obj_add_state(objects.btn_s4, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s4, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_4, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_4, s.c_str());
+          break;
+        }
+        case (5):
+        {
+          lv_obj_add_state(objects.btn_s5, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s5, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_5, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_5, s.c_str());
+          break;
+        }
+        case (6):
+        {
+          lv_obj_add_state(objects.btn_s6, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s6, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_6, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_6, s.c_str());
+          break;
+        }
+        case (7):
+        {
+          lv_obj_add_state(objects.btn_s7, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s7, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_7, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_7, s.c_str());
+          break;
+        }
+        case (8):
+        {
+          lv_obj_add_state(objects.btn_s8, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s8, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_8, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_8, s.c_str());
+          break;
+        }
+        case (9):
+        {
+          lv_obj_add_state(objects.btn_s9, LV_STATE_CHECKED);                 //Slot 0 is used
+          lv_label_set_text(objects.lbl_s9, funcNames[editingID][fNum]);      //by funcName of func
+          lv_obj_clear_flag(objects.fn_9, LV_OBJ_FLAG_HIDDEN);
+          lv_label_set_text(objects.fn_9, s.c_str());
+          break;
+        }
+        default:
+        break;
+      }
+    }
+  }
+}
+/*
+    uint8_t funcSlot = funcSlots[editingID][fNum]);
+    if(funcSlot != 255)
+    {
+      lv_obj_add_state(objects.btn_s0, LV_STATE_CHECKED);                 //Slot 0 is used
+      lv_label_set_text(objects.lbl_s0, funcNames[editingID][fNum]);      //by funcName of func
       lv_obj_clear_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_0,funcNumber[editingID][i]);
+//      lv_label_set_text(objects.fn_0,funcNumber[editingID][slotNum]);
     }else
     {
       lv_obj_clear_state(objects.btn_s0, LV_STATE_CHECKED);
@@ -55,14 +152,15 @@ void setupFuncEditSlots()
       lv_obj_add_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
       lv_label_set_text(objects.fn_0,"");
     }
-    i = 1;
-    val = atoi(funcNumber[editingID][i]);
+    fSlot = 1;
+//    val = atoi(funcNumber[editingID][i]);
+    val = funcSlots[editingID][fSlot];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s1, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s1, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s1, funcNames[editingID][fSlot]); 
       lv_obj_clear_flag(objects.fn_1, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_1,funcNumber[editingID][i]);
+//      lv_label_set_text(objects.fn_1,funcNumber[editingID][fSlot]);
     }else
     {
       lv_obj_clear_state(objects.btn_s1, LV_STATE_CHECKED);
@@ -71,14 +169,15 @@ void setupFuncEditSlots()
       lv_label_set_text(objects.fn_1,"");
     }
 
-    i = 2;
-    val = atoi(funcNumber[editingID][i]);
+    fSlot = 2;
+//    val = atoi(funcNumber[editingID][fSlot]);
+    val = funcSlots[editingID][fSlot];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s2, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s2, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s2, funcNames[editingID][i]); 
       lv_obj_clear_flag(objects.fn_2, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_2,funcNumber[editingID][i]);
+//      lv_label_set_text(objects.fn_2,funcNumber[editingID][i]);
     }else
     {
       lv_obj_clear_state(objects.btn_s2, LV_STATE_CHECKED);
@@ -88,13 +187,14 @@ void setupFuncEditSlots()
     }
 
     i = 3;
-    val = atoi(funcNumber[editingID][i]);
+//    val = atoi(funcNumber[editingID][i]);
+    val = funcSlots[editingID][i];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s3, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s3, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s3, funcNames[editingID][i]); 
       lv_obj_clear_flag(objects.fn_3, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_3,funcNumber[editingID][i]);
+//      lv_label_set_text(objects.fn_3,funcNumber[editingID][i]);
     }else
     {
       lv_obj_clear_state(objects.btn_s3, LV_STATE_CHECKED);
@@ -104,13 +204,14 @@ void setupFuncEditSlots()
     }
 
     i = 4;
-    val = atoi(funcNumber[editingID][i]);
+//    val = atoi(funcNumber[editingID][i]);
+    val = funcSlots[editingID][i];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s4, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s4, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s4, funcNames[editingID][i]); 
       lv_obj_clear_flag(objects.fn_4, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_4,funcNumber[editingID][i]);
+//      lv_label_set_text(objects.fn_4,funcNumber[editingID][i]);
     }else
     {
       lv_obj_clear_state(objects.btn_s4, LV_STATE_CHECKED);
@@ -120,13 +221,14 @@ void setupFuncEditSlots()
     }
 
     i = 5;
-    val = atoi(funcNumber[editingID][i]);
+//    val = atoi(funcNumber[editingID][i]);
+    val = funcSlots[editingID][i];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s5, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s5, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s5, funcNames[editingID][i]); 
       lv_obj_clear_flag(objects.fn_5, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_5,funcNumber[editingID][i]);
+//      lv_label_set_text(objects.fn_5,funcNumber[editingID][i]);
     }else
     {
       lv_obj_clear_state(objects.btn_s5, LV_STATE_CHECKED);
@@ -136,13 +238,14 @@ void setupFuncEditSlots()
     }
 
     i = 6;
-    val = atoi(funcNumber[editingID][i]);
+//    val = atoi(funcNumber[editingID][i]);
+    val = funcSlots[editingID][i];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s6, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s6, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s6, funcNames[editingID][i]); 
       lv_obj_clear_flag(objects.fn_6, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_6,funcNumber[editingID][i]);
+//      lv_label_set_text(objects.fn_6,funcNumber[editingID][i]);
     }else
     {
       lv_obj_clear_state(objects.btn_s6, LV_STATE_CHECKED);
@@ -152,13 +255,14 @@ void setupFuncEditSlots()
     }
 
     i = 7;
-    val = atoi(funcNumber[editingID][i]);
+//    val = atoi(funcNumber[editingID][i]);
+    val = funcSlots[editingID][i];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s7, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s7, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s7, funcNames[editingID][i]); 
       lv_obj_clear_flag(objects.fn_7, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_7,funcNumber[editingID][i]);
+//      lv_label_set_text(objects.fn_7,funcNumber[editingID][i]);
     }else
     {
       lv_obj_clear_state(objects.btn_s7, LV_STATE_CHECKED);
@@ -168,13 +272,14 @@ void setupFuncEditSlots()
     }
 
     i = 8;
-    val = atoi(funcNumber[editingID][i]);
+//    val = atoi(funcNumber[editingID][i]);
+    val = funcSlots[editingID][i];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s8, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s8, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s8, funcNames[editingID][i]); 
       lv_obj_clear_flag(objects.fn_8, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_8,funcNumber[editingID][i]);
+ //     lv_label_set_text(objects.fn_8,funcNumber[editingID][i]);
     }else
     {
       lv_obj_clear_state(objects.btn_s8, LV_STATE_CHECKED);
@@ -184,13 +289,14 @@ void setupFuncEditSlots()
     }
 
     i = 9;
-    val = atoi(funcNumber[editingID][i]);
+//    val = atoi(funcNumber[editingID][i]);
+    val = funcSlots[editingID][i];
     if(val != 255)
     {
       lv_obj_add_state(objects.btn_s9, LV_STATE_CHECKED);
-      lv_label_set_text(objects.lbl_s9, funcName[editingID][i]); 
+      lv_label_set_text(objects.lbl_s9, funcNames[editingID][i]); 
       lv_obj_clear_flag(objects.fn_9, LV_OBJ_FLAG_HIDDEN);
-      lv_label_set_text(objects.fn_9,funcNumber[editingID][i]);
+ //     lv_label_set_text(objects.fn_9,funcNumber[editingID][i]);
     }else
     {
       lv_obj_clear_state(objects.btn_s9, LV_STATE_CHECKED);
@@ -198,7 +304,8 @@ void setupFuncEditSlots()
       lv_obj_add_flag(objects.fn_9, LV_OBJ_FLAG_HIDDEN);
       lv_label_set_text(objects.fn_9,"");
     }
-}
+*/   
+
 
 void action_fedit_slot(lv_event_t * e)
 {
@@ -213,19 +320,19 @@ void action_fedit_slot(lv_event_t * e)
     case 0:
       lv_label_set_text(objects.lbl_s0, lv_textarea_get_text(objects.ta_fname));
       lv_label_set_text(objects.fn_0, lv_textarea_get_text(objects.ta_fnum));
-      if(funcOption[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_0, &option_style, 1);
+      if(funcOptions[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_0, &option_style, 1);
       lv_obj_clear_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
       break;
     case 1:
       lv_label_set_text(objects.lbl_s1, lv_textarea_get_text(objects.ta_fname));
       lv_label_set_text(objects.fn_1, lv_textarea_get_text(objects.ta_fnum));
-      if(funcOption[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_1, &option_style, LV_PART_MAIN | LV_STATE_DEFAULT);
+      if(funcOptions[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_1, &option_style, LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_flag(objects.fn_1, LV_OBJ_FLAG_HIDDEN);
       break;
     case 2:
       lv_label_set_text(objects.lbl_s2, lv_textarea_get_text(objects.ta_fname));
       lv_label_set_text(objects.fn_2, lv_textarea_get_text(objects.ta_fnum));
-      if(funcOption[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_2, &option_style, 7);
+      if(funcOptions[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_2, &option_style, 7);
       lv_obj_clear_flag(objects.fn_2, LV_OBJ_FLAG_HIDDEN);
       //ToDo update Option setting
       break;
@@ -274,10 +381,10 @@ void action_fedit_slot(lv_event_t * e)
     default:
       break;
   }  
-  strcpy(funcName[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fname));      //checked - EEZ
-  strcpy(funcNumber[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fnum));     //Checked - EEZ
-  if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOption[editingID][functionEditSlot] = 1;
-  else funcOption[editingID][functionEditSlot] = 0;
+  strcpy(funcNames[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fname));      //checked - EEZ
+//  strcpy(funcNumber[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fnum));     //Checked - EEZ
+  if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][functionEditSlot] = 1;
+  else funcOptions[editingID][functionEditSlot] = 0;
   lv_textarea_set_text(objects.ta_fname, "");
   lv_textarea_set_text(objects.ta_fnum, "");
   lv_obj_clear_state(objects.f_option, LV_STATE_CHECKED);
@@ -287,10 +394,9 @@ void action_fclear_slot(lv_event_t * e)
 {
   void *user_data = lv_event_get_user_data(e);
   int functionEditSlot = *((int*)(&user_data));
-  lv_textarea_set_text(objects.ta_fname, funcName[editingID][functionEditSlot]);
-  lv_textarea_set_text(objects.ta_fnum, funcNumber[editingID][functionEditSlot]);
+  lv_textarea_set_text(objects.ta_fname, funcNames[editingID][functionEditSlot]);
   functionsDirty = 1;
-  if(funcOption[editingID][functionEditSlot] == 1) 
+  if(funcOptions[editingID][functionEditSlot] == 1) 
   { 
     lv_obj_add_state(objects.f_option, LV_STATE_CHECKED);
   }
@@ -302,50 +408,60 @@ void action_fclear_slot(lv_event_t * e)
   {
     case 0:
       lv_label_set_text(objects.lbl_s0, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_0));
       lv_obj_add_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
       break;
     case 1:
       lv_label_set_text(objects.lbl_s1, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_1));
       lv_obj_add_flag(objects.fn_1, LV_OBJ_FLAG_HIDDEN);
       break;
     case 2:
       lv_label_set_text(objects.lbl_s2, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_2));
       lv_obj_add_flag(objects.fn_2, LV_OBJ_FLAG_HIDDEN);
       break;
     case 3:
       lv_label_set_text(objects.lbl_s3, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_3));
       lv_obj_add_flag(objects.fn_3, LV_OBJ_FLAG_HIDDEN);
       break;
     case 4:
       lv_label_set_text(objects.lbl_s4, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_4));
       lv_obj_add_flag(objects.fn_4, LV_OBJ_FLAG_HIDDEN);
       break;
     case 5:
       lv_label_set_text(objects.lbl_s5, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_5));
       lv_obj_add_flag(objects.fn_5, LV_OBJ_FLAG_HIDDEN);
       break;
     case 6:
       lv_label_set_text(objects.lbl_s6, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_6));
       lv_obj_add_flag(objects.fn_6, LV_OBJ_FLAG_HIDDEN);
       break;
     case 7:
       lv_label_set_text(objects.lbl_s7, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_7));
       lv_obj_add_flag(objects.fn_7, LV_OBJ_FLAG_HIDDEN);
       break;
     case 8:
       lv_label_set_text(objects.lbl_s8, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_8));
       lv_obj_add_flag(objects.fn_8, LV_OBJ_FLAG_HIDDEN);
       break;
     case 9:
       lv_label_set_text(objects.lbl_s9, "");
+      lv_textarea_set_text(objects.ta_fnum, lv_label_get_text(objects.fn_9));
       lv_obj_add_flag(objects.fn_9, LV_OBJ_FLAG_HIDDEN);
       break;
     default:
       break;
   }
-  funcOption[editingID][functionEditSlot] = 0;
-  strcpy(funcName[editingID][functionEditSlot], "");          //Checked
-  strcpy(funcNumber[editingID][functionEditSlot], "255");     //Checked
+  funcOptions[editingID][functionEditSlot] = 0;
+  strcpy(funcNames[editingID][functionEditSlot], "");          //Checked
+ // strcpy(funcNumber[editingID][functionEditSlot], "255");     //Checked
 }
 
 void action_edit_loco_button(lv_event_t * e)
@@ -362,9 +478,9 @@ void action_edit_loco_button(lv_event_t * e)
       loadScreen(SCREEN_ID_PROGRAM);
       break;
     case (32):       //Done
-      strcpy(locoName[editingID], lv_textarea_get_text(objects.ta_name));         //Checked - EEZ
+      strcpy(locoNames[editingID], lv_textarea_get_text(objects.ta_name));         //Checked - EEZ
       strcpy(locoAddress[editingID], lv_textarea_get_text(objects.ta_address));   //Checked - EEZ
-      lv_table_set_cell_value(objects.tbl_roster, editingID, 0, locoName[editingID]);
+      lv_table_set_cell_value(objects.tbl_roster, editingID, 0, locoNames[editingID]);
       lv_table_set_cell_value(objects.tbl_roster, editingID, 1, locoAddress[editingID]);
       locosDirty = 1;
       if(callingPage == SCREEN_ID_THROTTLE) populateThrottle();
@@ -381,7 +497,7 @@ static void chkbox_event_cb(lv_event_t * e)
   lv_obj_t * obj = lv_event_get_target(e);
   if(code == LV_EVENT_VALUE_CHANGED) 
   {
-    if(lv_obj_get_state(obj) == LV_STATE_CHECKED) funcOption[editingID][functionEditSlot] = 0; //States are 3 for Checked, 2 for UnChecked
-    else funcOption[editingID][functionEditSlot] = 1;
+    if(lv_obj_get_state(obj) == LV_STATE_CHECKED) funcOptions[editingID][functionEditSlot] = 0; //States are 3 for Checked, 2 for UnChecked
+    else funcOptions[editingID][functionEditSlot] = 1;
   }
 }

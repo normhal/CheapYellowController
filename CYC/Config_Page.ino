@@ -35,13 +35,13 @@ void action_config_button(lv_event_t * e)
       {
         lv_table_set_cell_value(objects.tbl_roster, i, 0, "");
         lv_table_set_cell_value(objects.tbl_roster, i, 1, "");
-        locoName[i][0] = '\0';
+        locoNames[i][0] = '\0';
         locoAddress[i][0] = '\0';
         //Now clear the Functions
         for(uint8_t f = 0; f < NUM_FUNC_SLOTS; f++) 
         {
-          strcpy(funcNumber[i][f], "255");
-          strcpy(funcName[i][f], " ");
+//          strcpy(funcNumber[i][f], "255");
+          strcpy(funcNames[i][f], " ");
         }
       }
       dccexProtocol.connect(&client);

@@ -107,6 +107,9 @@ void printTurnouts();
 void printRoutes();
 void printTurntables();
 
+//static void ex_functions_cb(lv_event_t * e);
+//static void functions_cb(lv_event_t * e);
+
 #include "CYC.h"
 
 
@@ -139,7 +142,7 @@ public:
     {
       //First the Loco Name
       const char *lName = loco->getName();
-      strcpy(locoName[lId], lName);
+      strcpy(locoNames[lId], lName);
       Serial.println();
       Serial.printf("Name: %s ", lName);
     
@@ -148,7 +151,7 @@ public:
       const char* lAddr = s.c_str();
       strcpy(locoAddress[lId], lAddr);
       Serial.printf("Address: %s\n", lAddr);
-      lv_table_set_cell_value(objects.tbl_roster, lId, 0, locoName[lId]);
+      lv_table_set_cell_value(objects.tbl_roster, lId, 0, locoNames[lId]);
       lv_table_set_cell_value(objects.tbl_roster, lId, 1, locoAddress[lId]);
 
       //Now for the Functions
@@ -168,11 +171,11 @@ public:
             if(sN < NUM_FUNCS)
             {
               Serial.printf("Function Name: %s Number: %d\n", fName, fN);
-              strcpy(funcName[lId][sN], fName);
-              std::string f = std::to_string(fN);
+              strcpy(funcNames[lId][sN], fName);
+//              std::string f = std::to_string(fN);
  //             const char* fNum = f.c_str();
-              strcpy(funcNumber[lId][sN], f.c_str());
-              Serial.printf("Received Number: %s Slot: %d LocoID: %d\n", funcNumber[lId][sN], sN, lId);
+              funcSlots[lId][sN] = fN;                                                                          //Check this
+              Serial.printf("Received Number: %s Slot: %d LocoID: %d\n", funcSlots[lId][sN], sN, lId);
               sN++;
             }
           }
@@ -229,7 +232,7 @@ void printRoster()
           if(sN < NUM_FUNCS)
           {
             Serial.printf("Function Name: %s Number: %d\n", fName, fN);
-            strcpy(funcName[lId][sN], fName);
+            strcpy(funcNames[lId][sN], fName);
 //            funcNumber[lId][sN] = fN;
             sN++;
           }
@@ -466,8 +469,8 @@ void setup()
     // Callback definitions - Menu, Throttle, Functions, Roster
     lv_obj_add_event_cb(objects.menu_mtx, menu_cb, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(objects.throttle_mtx, throttle_selection_handler_cb, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(objects.function_mtx, functions_cb, LV_EVENT_PRESSED, NULL);
-    lv_obj_add_event_cb(objects.function_mtx, functions_cb, LV_EVENT_RELEASED, NULL);
+    lv_obj_add_event_cb(objects.functions_mtx, functions_cb, LV_EVENT_PRESSED, NULL);
+    lv_obj_add_event_cb(objects.functions_mtx, functions_cb, LV_EVENT_RELEASED, NULL);
     lv_obj_add_event_cb(objects.ex_functions_mtx, ex_functions_cb, LV_EVENT_PRESSED, NULL);
     lv_obj_add_event_cb(objects.ex_functions_mtx, ex_functions_cb, LV_EVENT_RELEASED, NULL);
     lv_obj_add_event_cb(objects.track_mtx, track_cb, LV_EVENT_ALL, NULL);

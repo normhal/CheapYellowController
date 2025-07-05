@@ -64,7 +64,7 @@ typedef struct _objects_t {
     lv_obj_t *btn_edit;
     lv_obj_t *obj8;
     lv_obj_t *lbl_address;
-    lv_obj_t *function_mtx;
+    lv_obj_t *functions_mtx;
     lv_obj_t *slider;
     lv_obj_t *lbl_slider;
     lv_obj_t *obj9;

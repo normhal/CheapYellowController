@@ -16,6 +16,8 @@
  *
  *****************************************************************************************************************************
 */
+void setSpeed(uint16_t locoAddr, uint16_t newSpeed, uint8_t newDir);
+
 void action_general_button(lv_event_t * e)
 {
   void *user_data = lv_event_get_user_data(e);

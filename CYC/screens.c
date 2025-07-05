@@ -948,9 +948,9 @@ void create_screen_throttle() {
             lv_label_set_text(obj, "");
         }
         {
-            // Function_Mtx
+            // Functions_Mtx
             lv_obj_t *obj = lv_btnmatrix_create(parent_obj);
-            objects.function_mtx = obj;
+            objects.functions_mtx = obj;
             lv_obj_set_pos(obj, 1, 143);
             lv_obj_set_size(obj, 270, 237);
             static const char *map[15] = {

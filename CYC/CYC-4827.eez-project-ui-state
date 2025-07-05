@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/2",
+    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/5",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -196,15 +196,16 @@
                 {
                   "type": "tab",
                   "id": "#06827771-4750-41ea-9421-67da44eb76ab",
-                  "name": "Functions",
+                  "name": "EditLoco",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-4827.eez-project]:/userPages/2",
+                    "objectPath": "[CYC-4827.eez-project]:/userPages/5",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
@@ -224,8 +225,7 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -1067,13 +1067,13 @@
     "[CYC-4827.eez-project]:/userPages/0[flow-state]": {
       "selection": {
         "0": {
-          "1": {}
+          "11": {}
         }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -480
+          "y": -360
         },
         "scale": 1.5
       },
@@ -1133,17 +1133,48 @@
     "[CYC-4827.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "1": {},
-          "2": {},
+          "0": {
+            "$selected": true
+          },
+          "1": {
+            "0": {
+              "$selected": true
+            },
+            "$selected": true
+          },
+          "2": {
+            "0": {
+              "$selected": true
+            },
+            "$selected": true
+          },
+          "3": {
+            "$selected": true
+          },
+          "4": {
+            "$selected": true
+          },
+          "5": {
+            "$selected": true
+          },
+          "6": {
+            "$selected": true
+          },
+          "7": {
+            "$selected": true
+          },
+          "8": {
+            "$selected": true
+          },
+          "9": {
+            "$selected": true
+          },
           "10": {},
           "11": {},
           "12": {},
           "15": {},
           "16": {
-            "0": {
-              "$selected": true
-            }
+            "0": {}
           }
         }
       },
@@ -1239,15 +1270,15 @@
         "0": {
           "1": {},
           "2": {},
-          "3": {
-            "$selected": true
+          "3": {},
+          "4": {},
+          "5": {},
+          "10": {
+            "1": {
+              "$selected": true
+            }
           },
-          "4": {
-            "$selected": true
-          },
-          "5": {
-            "$selected": true
-          }
+          "11": {}
         }
       },
       "transform": {
@@ -1641,6 +1672,24 @@
         "secondToPx": 200,
         "scrollLeft": 0
       }
+    },
+    "[CYC-4827.eez-project]:/userPages/13[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -136,
+          "y": -480
+        },
+        "scale": 1.5
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
     }
   },
   "activeOutputSection": 0,
@@ -1656,14 +1705,15 @@
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
   "lvglPart": "ITEMS",
-  "lvglState": "CHECKED",
+  "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "BORDER",
     "SHADOW",
     "OUTLINE",
     "MISCELLANEOUS",
-    "BACKGROUND"
+    "BACKGROUND",
+    "PADDING"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,

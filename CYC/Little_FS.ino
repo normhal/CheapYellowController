@@ -57,6 +57,102 @@ void listDir(fs::FS &fs, const char *dirname, uint8_t levels)
   }
 }
 
+//****************************************************************************************************************
+//  Parser Routine which loads the Locos file from LittleFS
+//****************************************************************************************************************
+void populateLocoArray(const char *path)
+{
+  File file = LittleFS.open(path, "r");
+  if(!file)
+  {
+      Serial.println("Failed to open file for reading");
+      return;
+  }
+  Serial.println("Calling Locos Parser");
+  CSV_Parser cp("udss", true, ',');
+
+  while (file.available()) 
+  {
+    cp << (char)file.read();
+  }
+  cp.parseLeftover();
+
+  uint16_t *locoId = (uint16_t *)cp["ID"];
+  char **locoLongName = (char **)cp["LongName"];
+  char **locoAddr = (char **)cp["Address"];
+
+  Serial.print("Locos read from LittleFS: ");
+  Serial.println(cp.getRowsCount());
+
+  locoCount = cp.getRowsCount();
+  for(int row = 0; row < cp.getRowsCount(); row++)      
+  {
+    strcpy(locoNames[row], locoLongName[row]);
+    strcpy(locoAddress[row], locoAddr[row]);
+    locoSpeed[row] = 0;
+    locoDir[row] = 1;       //Default to Forward
+  }
+  for(int row = locoCount; row < NUM_LOCOS; row++)  //Fill the rest of the Array with Blanks
+  {
+    strcpy(locoNames[row], "");
+    strcpy(locoAddress[row], "");
+    locoSpeed[row] = 0;
+    locoDir[row] = 1;
+//    Serial.printf("Wrote Blank Record %d\n", row);
+    locoCount = row;
+  }
+  file.close();
+}
+
+//****************************************************************************************************************
+//  Parser Routine which loads the Function file from LittleFS and populates the related Locos
+//****************************************************************************************************************
+
+void populateLocoFunctions(const char *path)
+{
+  File file = LittleFS.open(path, "r");
+  if(!file)
+  {
+      Serial.println("Failed to open file for reading");
+      return;
+  }
+
+  Serial.println("Calling Functions Parser");
+  CSV_Parser cp("ududsudud", true, ',');       //5x uint16_t values
+
+  Serial.print("Reading from file: ");
+  Serial.println(path);
+
+  while (file.available()) 
+  {
+    cp << (char)file.read();
+  }
+  cp.parseLeftover();
+
+  uint16_t *locoid = (uint16_t*)cp["LocoID"];         //Loco ID
+  uint16_t *function = (uint16_t*)cp["Function"];      //Function Number
+  char **name = (char**)cp["Name"];                   //Function Name
+  uint16_t *slot = (uint16_t*)cp["Slot"];             //Function Slot
+  uint16_t *option = (uint16_t*)cp["Momentary"];      //Function Option
+
+  Serial.print("Functions read from LittleFS: ");
+  Serial.println(cp.getRowsCount());
+
+  for(int row = 0; row < cp.getRowsCount(); row++)      
+  {
+//    funcNumber[locoid[row]][slot[row]] = function[row]; 
+    funcSlots[locoid[row]][function[row]] = slot[row];
+//    Serial.println(function[row]);
+    strcpy(funcNames[locoid[row]][function[row]], name[row]);
+//    Serial.println(name[row]);
+    funcOptions[locoid[row]][function[row]] = option[row];                                             //0= Function | Momentary, 1=image
+//    Serial.println(option[row]);
+//    Serial.printf("LocoID: %d Function: %d Slot: %d Name: %s Option: %d\n", locoid[row], function[row], slot[row], name[row], option[row]);
+    Serial.printf("FuncSlots: %d\n", funcSlots[locoid[row]][function[row]]);
+  }
+  file.close();
+}
+
 /****************************************************************************************************************
   Parser Routine which loads the Accessory file from LittleFS
 ****************************************************************************************************************/
@@ -102,100 +198,6 @@ void populateAccArray(const char *path)
   Serial.println(cp.getRowsCount());
 }
 */
-//****************************************************************************************************************
-//  Parser Routine which loads the Locos file from LittleFS
-//****************************************************************************************************************
-void populateLocoArray(const char *path)
-{
-  File file = LittleFS.open(path, "r");
-  if(!file)
-  {
-      Serial.println("Failed to open file for reading");
-      return;
-  }
-  Serial.println("Calling Locos Parser");
-  CSV_Parser cp("udss", true, ',');
-
-  while (file.available()) 
-  {
-    cp << (char)file.read();
-  }
-  cp.parseLeftover();
-
-  uint16_t *locoId = (uint16_t *)cp["ID"];
-  char **locoLongName = (char **)cp["LongName"];
-  char **locoAddr = (char **)cp["Address"];
-
-  Serial.print("Locos read from LittleFS: ");
-  Serial.println(cp.getRowsCount());
-
-  locoCount = cp.getRowsCount();
-  for(int row = 0; row < cp.getRowsCount(); row++)      
-  {
-    strcpy(locoName[row], locoLongName[row]);
-    strcpy(locoAddress[row], locoAddr[row]);
-    locoSpeed[row] = 0;
-    locoDir[row] = 1;       //Default to Forward
-  }
-  for(int row = locoCount; row < NUM_LOCOS; row++)  //Fill the rest of the Array with Blanks
-  {
-    strcpy(locoName[row], "");
-    strcpy(locoAddress[row], "");
-    locoSpeed[row] = 0;
-    locoDir[row] = 1;
-//    Serial.printf("Wrote Blank Record %d\n", row);
-    locoCount = row;
-  }
-  file.close();
-}
-
-//****************************************************************************************************************
-//  Parser Routine which loads the Function file from LittleFS and populates the related Locos
-//****************************************************************************************************************
-
-void populateLocoFunctions(const char *path)
-{
-  File file = LittleFS.open(path, "r");
-  if(!file)
-  {
-      Serial.println("Failed to open file for reading");
-      return;
-  }
-
-  Serial.println("Calling Functions Parser");
-  CSV_Parser cp("udssudud", true, ',');       //5x uint16_t values
-
-  Serial.print("Reading from file: ");
-  Serial.println(path);
-
-  while (file.available()) 
-  {
-    cp << (char)file.read();
-  }
-  cp.parseLeftover();
-
-  uint16_t *locoid = (uint16_t*)cp["LocoID"];         //Loco ID
-  char **function = (char**)cp["Function"];           //Function Number
-  char **name = (char**)cp["Name"];                   //Function Name
-  uint16_t *slot = (uint16_t*)cp["Slot"];             //Function Slot
-  uint16_t *option = (uint16_t*)cp["Momentary"];      //Function Option
-
-  Serial.print("Functions read from LittleFS: ");
-  Serial.println(cp.getRowsCount());
-
-  for(int row = 0; row < cp.getRowsCount(); row++)      
-  {
-//    funcNumber[locoid[row]][slot[row]] = function[row]; 
-    strcpy(funcNumber[locoid[row]][slot[row]], function[row]);
-//    Serial.println(function[row]);
-    strcpy(funcName[locoid[row]][slot[row]], name[row]);
-//    Serial.println(name[row]);
-    funcOption[locoid[row]][slot[row]] = option[row];                                             //0= Function | Momentary, 1=image
-//    Serial.println(option[row]);
-  }
-  file.close();
-}
-
 /*
 ****************************************************************************************************************
   Parser Routine which loads the Routes Array from LittleFS
@@ -399,7 +401,7 @@ void saveLocos(fs::FS &fs, const char * path, const char * message)
   int row = 0;
   for(row = 0; row < NUM_LOCOS; row++)      //ALWAYS write the full number of locos to preserve LocoID link to functions and selectedIDs
   {
-    String message = String(row) + "," +  locoName[row] + "," + locoAddress[row] + "\n";
+    String message = String(row) + "," +  locoNames[row] + "," + locoAddress[row] + "\n";
     file.print(message);
   }
   Serial.printf("%d Loco records written\n", row);
@@ -450,6 +452,7 @@ void deleteFile(fs::FS &fs, const char * path){
 //
 void saveFunctions(fs::FS &fs, const char * path, const char * message)
 {
+/*
   Serial.printf("Writing file: %s\r\n", path);
 
   File file = fs.open(path, "w");
@@ -493,6 +496,7 @@ void saveFunctions(fs::FS &fs, const char * path, const char * message)
   renameFile(LittleFS, "/functions.old", "/functions.bak");
   renameFile(LittleFS, "/functions.txt", "/functions.old");
   renameFile(LittleFS, "/functions.new", "/functions.txt");
+*/  
 }
 
 //
