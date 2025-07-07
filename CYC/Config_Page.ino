@@ -40,7 +40,6 @@ void action_config_button(lv_event_t * e)
         //Now clear the Functions
         for(uint8_t f = 0; f < NUM_FUNC_SLOTS; f++) 
         {
-//          strcpy(funcNumber[i][f], "255");
           strcpy(funcNames[i][f], " ");
         }
       }

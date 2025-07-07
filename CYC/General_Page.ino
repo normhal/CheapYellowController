@@ -27,10 +27,10 @@ void action_general_button(lv_event_t * e)
     case 1: 
       for(int i = 0; i < NUM_LOCOS; i++) 
       {
-        if(locoSpeed[i] != 0)
+        if(locoSpeeds[i] != 0)
         {
-          locoSpeed[i] = 0;
-          setSpeed(atoi(locoAddress[i]), locoSpeed[i], locoDir[i]);
+          locoSpeeds[i] = 0;
+          setSpeed(atoi(locoAddress[i]), locoSpeeds[i], locoDirs[i]);
         }
       }
       lv_label_set_text(objects.lbl_stop, "Go");

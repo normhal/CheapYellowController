@@ -136,7 +136,7 @@ public:
 
   void receivedRosterList() override 
   {
-//    Serial.println("\n\nReceived Roster");
+    Serial.println("\n\nReceived Roster");
     uint16_t lId = 0;
     for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
     {
@@ -156,29 +156,20 @@ public:
 
       //Now for the Functions
       uint8_t sN = 0;                      //Function Slot Number
-      for (int fN = 0; fN < 32; fN++) 
+      for (int fN = 0; fN < 28; fN++) 
       {
+        funcSlots[lId][fN] = 255;
         const char *fName = loco->getFunctionName(fN);
         if(fName != NULL) 
         {
           if(fName[0] != '\0')          //This is to block an unused function
           {
-            Serial.printf("Button Enabled: %d\n", fN);
-//            if(loco->isFunctionOn(fN)) Serial.println("Set to CHECKED");
-//            else Serial.println("Left UNCHECKED");
-//          lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, fN, LV_BTNMATRIX_CTRL_DISABLED);
-//          if(loco->isFunctionOn(fN)) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, fN, LV_BTNMATRIX_CTRL_CHECKED);
-            if(sN < NUM_FUNCS)
-            {
-              Serial.printf("Function Name: %s Number: %d\n", fName, fN);
-              strcpy(funcNames[lId][sN], fName);
-//              std::string f = std::to_string(fN);
- //             const char* fNum = f.c_str();
-              funcSlots[lId][sN] = fN;                                                                          //Check this
-              Serial.printf("Received Number: %s Slot: %d LocoID: %d\n", funcSlots[lId][sN], sN, lId);
-              sN++;
-            }
+            Serial.printf("Function Name: %s Number: %d Slot: %d\n", fName, fN, sN);
+            strcpy(funcNames[lId][fN], fName);
+            funcSlots[lId][fN] = sN;                                                                          //Check this
+            if(sN < NUM_FUNCS) sN++;
           }
+//          else funcSlots[lId][fN] = 255;
         }
       }
       lId++;
@@ -518,10 +509,13 @@ void setup()
     // Read all LittleFS data files and populate working arrays
     //*****************************************************************************************************
     //
+    delay(1000);
+
   Serial.println("Connecting to WiFi..");
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) delay(100); 
-  Serial.print("Connected with IP: ");
+  delay(1000);
+  if(WiFi.status() != WL_CONNECTED) Serial.println("WiFi NOT Connected"); 
+  else Serial.print("Connected with IP: ");
   Serial.println(WiFi.localIP());
   lv_img_set_src(objects.img_wifi, &img_6);
   Serial.println("Connecting to the server...");

@@ -243,13 +243,14 @@ const char * throttleName[4] = {
 char locoNames[NUM_LOCOS][NAME_LEN +1];
 char locoAddress[NUM_LOCOS][ADDR_LEN +1];                         //Address "" = unused record
 uint32_t savedSpeed[NUM_LOCOS];
-uint32_t locoSpeed[NUM_LOCOS];
-uint8_t locoDir[NUM_LOCOS];
+uint32_t locoSpeeds[NUM_LOCOS];
+uint8_t locoDirs[NUM_LOCOS];
 //char funcName[NUM_LOCOS][NUM_FUNC_SLOTS][FNAME_LEN +1];
 //char funcNumber[NUM_LOCOS][NUM_FUNC_SLOTS][FNUM_LEN+1];          // 4 characters to store "255"
 //uint8_t funcState[NUM_LOCOS][NUM_FUNC_SLOTS];
 //uint8_t funcOption[NUM_LOCOS][NUM_FUNC_SLOTS];
-uint8_t func2Slot[NUM_FUNCS];                                //Stores the Slot Number used by a Function
+uint8_t func2Slot[NUM_FUNCS];                                     //Stores the Slot Number used by a Function;
+uint8_t slot2Func[NUM_FUNC_SLOTS];                                //Stores the Function Number used by a Slot;
 char funcNames[NUM_LOCOS][NUM_FUNCS][FNAME_LEN +1];
 uint8_t funcSlots[NUM_LOCOS][NUM_FUNCS];
 //char funcNumber[NUM_LOCOS][NUM_FUNCS][FNUM_LEN+1];          // 4 characters to store "255"

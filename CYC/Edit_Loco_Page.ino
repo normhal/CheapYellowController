@@ -26,12 +26,12 @@ static void fname_cb(lv_event_t * e)
 {
   lv_event_code_t code = lv_event_get_code(e);
   lv_obj_t * obj = lv_event_get_target(e);
-  uint32_t fslot = lv_btnmatrix_get_selected_btn(obj); 
+  uint32_t fSlot = lv_btnmatrix_get_selected_btn(obj); 
   functionsDirty = 1;
   if(code == LV_EVENT_VALUE_CHANGED)
   {
-    if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][fslot] = 1;
-    else funcOptions[editingID][functionEditSlot] = 0;
+    if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][fSlot] = 1;
+    else funcOptions[editingID][fSlot] = 0;
     lv_textarea_set_text(objects.ta_fname, " ");
     lv_textarea_set_text(objects.ta_fnum, " ");
     lv_obj_clear_state(objects.f_option, LV_STATE_CHECKED);
@@ -47,6 +47,7 @@ void setupFuncEditSlots()
   {  
     std::string s = std::to_string(fNum);
     uint8_t fSlot = funcSlots[editingID][fNum];
+    slot2Func[fSlot] = fNum;
     if(funcNames[editingID][fNum] != "")
     {
       switch (fSlot)
@@ -57,14 +58,19 @@ void setupFuncEditSlots()
           lv_label_set_text(objects.lbl_s0, funcNames[editingID][fNum]);      //by funcName of func
           lv_obj_clear_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_0, s.c_str());
+
+//          lv_obj_clear_state(objects.btn_s0, LV_STATE_CHECKED);
+//          lv_label_set_text(objects.lbl_s0, ""); 
+//          lv_obj_add_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
+//          lv_label_set_text(objects.fn_0,"");
           break;
         }
         case (1):
         {
           lv_obj_add_state(objects.btn_s1, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s1, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s1, funcNames[editingID][fNum]);      //fetch Name of func
           lv_obj_clear_flag(objects.fn_1, LV_OBJ_FLAG_HIDDEN);
-          lv_label_set_text(objects.fn_1, s.c_str());
+          lv_label_set_text(objects.fn_1, s.c_str());                         //Display the function number
           break;
         }
         case (2):
@@ -310,11 +316,16 @@ void setupFuncEditSlots()
 void action_fedit_slot(lv_event_t * e)
 {
   void *user_data = lv_event_get_user_data(e);
-  functionEditSlot = *((int*)(&user_data));
+  functionEditSlot = *((int*)(&user_data));                 //Supplied by Button Event
   functionsDirty = 1;
+  Serial.println("Functions set to Dirty");
   static lv_style_t option_style;
   lv_style_init(&option_style);
+  slot2Func[functionEditSlot] = atoi(lv_textarea_get_text(objects.ta_fnum));
   lv_style_set_bg_color(&option_style, lv_color_hex(0x07c0));
+  strcpy(funcNames[editingID][slot2Func[functionEditSlot]], lv_textarea_get_text(objects.ta_fname));
+  funcSlots[editingID][slot2Func[functionEditSlot]] = functionEditSlot;
+//  funcNames[editingID][slot2Func[functionEditSlot]] = lv_textarea_get_text(objects.ta_fname);
   switch (functionEditSlot)
   {
     case 0:
@@ -394,9 +405,11 @@ void action_fclear_slot(lv_event_t * e)
 {
   void *user_data = lv_event_get_user_data(e);
   int functionEditSlot = *((int*)(&user_data));
-  lv_textarea_set_text(objects.ta_fname, funcNames[editingID][functionEditSlot]);
+  lv_textarea_set_text(objects.ta_fname, funcNames[editingID][slot2Func[functionEditSlot]]);     //This is wrong - must be fNum
+  Serial.printf("Slot2Func value %d\n", slot2Func[functionEditSlot]);
   functionsDirty = 1;
-  if(funcOptions[editingID][functionEditSlot] == 1) 
+  Serial.println("Functions set to Dirty");
+  if(funcOptions[editingID][slot2Func[functionEditSlot]] == 1)                                   //Also wrong - must be fNum
   { 
     lv_obj_add_state(objects.f_option, LV_STATE_CHECKED);
   }

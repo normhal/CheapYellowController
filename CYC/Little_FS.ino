@@ -89,15 +89,15 @@ void populateLocoArray(const char *path)
   {
     strcpy(locoNames[row], locoLongName[row]);
     strcpy(locoAddress[row], locoAddr[row]);
-    locoSpeed[row] = 0;
-    locoDir[row] = 1;       //Default to Forward
+    locoSpeeds[row] = 0;
+    locoDirs[row] = 1;       //Default to Forward
   }
   for(int row = locoCount; row < NUM_LOCOS; row++)  //Fill the rest of the Array with Blanks
   {
     strcpy(locoNames[row], "");
     strcpy(locoAddress[row], "");
-    locoSpeed[row] = 0;
-    locoDir[row] = 1;
+    locoSpeeds[row] = 0;
+    locoDirs[row] = 1;
 //    Serial.printf("Wrote Blank Record %d\n", row);
     locoCount = row;
   }
@@ -148,7 +148,7 @@ void populateLocoFunctions(const char *path)
     funcOptions[locoid[row]][function[row]] = option[row];                                             //0= Function | Momentary, 1=image
 //    Serial.println(option[row]);
 //    Serial.printf("LocoID: %d Function: %d Slot: %d Name: %s Option: %d\n", locoid[row], function[row], slot[row], name[row], option[row]);
-    Serial.printf("FuncSlots: %d\n", funcSlots[locoid[row]][function[row]]);
+//    Serial.printf("FuncSlots: %d\n", funcSlots[locoid[row]][function[row]]);
   }
   file.close();
 }
@@ -452,7 +452,6 @@ void deleteFile(fs::FS &fs, const char * path){
 //
 void saveFunctions(fs::FS &fs, const char * path, const char * message)
 {
-/*
   Serial.printf("Writing file: %s\r\n", path);
 
   File file = fs.open(path, "w");
@@ -475,17 +474,19 @@ void saveFunctions(fs::FS &fs, const char * path, const char * message)
   int row = 0;
   for(row = 0; row < NUM_LOCOS; row++)          //  while(hcLoco[row].LocoAddress !=0)
   {
-    for(uint8_t j = 0; j < NUM_FUNC_SLOTS; j++)
+    for(uint8_t j = 0; j < NUM_FUNCS; j++)
     {
-      if(funcNumber[row][j] != "255")
+      if(funcSlots[row][j] != 255)
       {
         //LocoID,Function,Name,Slot,Momentary
-        String record = String(row) + "," + String(funcNumber[row][j]) + "," + String(funcName[row][j]) + "," + 
-                        String(j)  + "," + String(funcOption[row][j]) + "\n";
+        String record = String(row) + "," + String(j) + "," + String(funcNames[row][j]) + "," + 
+                        String(funcSlots[row][j])  + "," + String(funcOptions[row][j]) + "\n";
         file.print(record); 
+        Serial.print(record);
         counter++;
       }
     }
+    Serial.println();
   }
   Serial.printf("%d Function Records written\n", counter);
   file.close();
@@ -495,8 +496,7 @@ void saveFunctions(fs::FS &fs, const char * path, const char * message)
   deleteFile(LittleFS, "/functions.bak");
   renameFile(LittleFS, "/functions.old", "/functions.bak");
   renameFile(LittleFS, "/functions.txt", "/functions.old");
-  renameFile(LittleFS, "/functions.new", "/functions.txt");
-*/  
+  renameFile(LittleFS, "/functions.new", "/functions.txt"); 
 }
 
 //
