@@ -616,7 +616,7 @@ void loop()
       if(RE_button_active != 1)             //Check if it's already been processed
       {
         RE_button_active = 1;
-        if(locoDir[activeLocoID] == 1)      //Currently Forward?
+        if(locoDirs[activeLocoID] == 1)      //Currently Forward?
         {
           lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);     // Do this because the TFT wasn't the source
           setLocoRev();                     //Change to Reverse
@@ -653,8 +653,8 @@ void loop()
         if(new_position < 0) new_position = 0;
         ss.setEncoderPosition(new_position);
       } 
-      locoSpeed[activeLocoID] = new_position; //update the Active loco
-      setSpeed(atoi(locoAddress[activeLocoID]), locoSpeed[activeLocoID], locoDir[activeLocoID]); //and tell DCC-EX
+      locoSpeeds[activeLocoID] = new_position; //update the Active loco
+//      setSpeed(atoi(locoAddress[activeLocoID]), locoSpeeds[activeLocoID], locoDirs[activeLocoID]); //and tell DCC-EX
       encoder_position = new_position;      // and save for next round
       re_timer = millis();
     }

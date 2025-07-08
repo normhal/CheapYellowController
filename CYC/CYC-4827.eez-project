@@ -2586,7 +2586,8 @@
                       "shadow_spread": 2,
                       "shadow_color": "#000000",
                       "shadow_opa": 127,
-                      "text_font": "MONTSERRAT_16"
+                      "text_font": "MONTSERRAT_16",
+                      "text_align": "CENTER"
                     },
                     "CHECKED": {
                       "bg_color": "#ffff00",
@@ -5349,7 +5350,7 @@
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
-              "heightUnit": "px",
+              "heightUnit": "content",
               "children": [],
               "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_ON_FOCUS|SCROLL_WITH_ARROW|SNAPPABLE|CHECKABLE",
               "hiddenFlagType": "literal",
@@ -5390,7 +5391,7 @@
               "oneLineMode": true,
               "passwordMode": false,
               "acceptedCharacters": "",
-              "maxTextLength": 10
+              "maxTextLength": 16
             },
             {
               "objID": "e33a73dd-f642-4f5d-ee28-15d302b7a7eb",
@@ -5515,7 +5516,7 @@
               "left": 10,
               "top": 220,
               "width": 120,
-              "height": 32,
+              "height": 34,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -5545,14 +5546,14 @@
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
-              "heightUnit": "px",
+              "heightUnit": "content",
               "children": [
                 {
                   "objID": "2462ae4f-01ec-4fd1-95f0-e4fe5ae98adf",
                   "type": "LVGLLabelWidget",
                   "left": 0,
                   "top": 0,
-                  "width": 0,
+                  "width": 85,
                   "height": 16,
                   "customInputs": [],
                   "customOutputs": [],
@@ -5567,7 +5568,7 @@
                   "identifier": "lblS0",
                   "leftUnit": "px",
                   "topUnit": "px",
-                  "widthUnit": "content",
+                  "widthUnit": "px",
                   "heightUnit": "content",
                   "children": [],
                   "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
@@ -5585,7 +5586,11 @@
                     "definition": {
                       "MAIN": {
                         "DEFAULT": {
-                          "align": "CENTER"
+                          "align": "CENTER",
+                          "text_align": "CENTER"
+                        },
+                        "CHECKED": {
+                          "text_align": "CENTER"
                         }
                       }
                     }
@@ -5601,7 +5606,7 @@
                   "objID": "f2a8c4f8-f550-4a31-a226-ecb7d729a174",
                   "type": "LVGLLabelWidget",
                   "left": -41,
-                  "top": -9,
+                  "top": 0,
                   "width": 32,
                   "height": 32,
                   "customInputs": [],
@@ -5697,7 +5702,11 @@
                       "shadow_ofs_y": 0,
                       "shadow_width": 0,
                       "text_color": "#ffffff",
-                      "pad_left": 41
+                      "pad_left": 41,
+                      "pad_top": 0,
+                      "pad_bottom": 0,
+                      "text_font": "MONTSERRAT_14",
+                      "text_align": "CENTER"
                     }
                   }
                 }
@@ -5784,6 +5793,9 @@
                       "MAIN": {
                         "DEFAULT": {
                           "align": "CENTER"
+                        },
+                        "CHECKED": {
+                          "text_align": "CENTER"
                         }
                       }
                     }

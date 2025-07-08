@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/5",
+    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/4",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -199,7 +199,7 @@
                   "name": "EditLoco",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-4827.eez-project]:/userPages/5",
+                    "objectPath": "[CYC-4827.eez-project]:/userPages/4",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -749,7 +749,7 @@
                 {
                   "type": "tabset",
                   "id": "#bd000bbb-1d0b-4306-bc03-36703d34ccfd",
-                  "weight": 75,
+                  "weight": 94,
                   "enableDrop": false,
                   "enableDrag": false,
                   "enableClose": false,
@@ -767,7 +767,7 @@
                 {
                   "type": "tabset",
                   "id": "#9d904968-3e3a-42b6-b3d8-117641fbf108",
-                  "weight": 25,
+                  "weight": 6,
                   "enableDrop": false,
                   "enableDrag": false,
                   "enableClose": false,
@@ -780,7 +780,8 @@
                       "component": "preview",
                       "enableClose": false
                     }
-                  ]
+                  ],
+                  "active": true
                 }
               ]
             }
@@ -1133,49 +1134,23 @@
     "[CYC-4827.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "0": {
-            "$selected": true
-          },
+          "0": {},
           "1": {
-            "0": {
-              "$selected": true
-            },
-            "$selected": true
+            "0": {}
           },
           "2": {
-            "0": {
-              "$selected": true
-            },
-            "$selected": true
+            "0": {}
           },
-          "3": {
-            "$selected": true
-          },
-          "4": {
-            "$selected": true
-          },
-          "5": {
-            "$selected": true
-          },
-          "6": {
-            "$selected": true
-          },
-          "7": {
-            "$selected": true
-          },
-          "8": {
-            "$selected": true
-          },
-          "9": {
-            "$selected": true
-          },
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
           "10": {},
           "11": {},
-          "12": {},
-          "15": {},
-          "16": {
-            "0": {}
-          }
+          "15": {}
         }
       },
       "transform": {
@@ -1273,11 +1248,7 @@
           "3": {},
           "4": {},
           "5": {},
-          "10": {
-            "1": {
-              "$selected": true
-            }
-          },
+          "10": {},
           "11": {}
         }
       },
@@ -1690,6 +1661,12 @@
         "secondToPx": 200,
         "scrollLeft": 0
       }
+    },
+    "[CYC-4827.eez-project]:/lvglStyles/styles[tree-state]": {
+      "0": {
+        "$selected": true
+      },
+      "1": {}
     }
   },
   "activeOutputSection": 0,
@@ -1704,8 +1681,8 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "ITEMS",
-  "lvglState": "DEFAULT",
+  "lvglPart": "MAIN",
+  "lvglState": "CHECKED",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "BORDER",

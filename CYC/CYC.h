@@ -82,6 +82,12 @@
 //  #include "DisplayDrivers/ESP32_4848S040C.h"
 #endif
 
+#define EEPROM_SIZE 100
+#define ROSTER_USE 0
+#define RE_USE 0
+#define ROSTER_MODE 0                       //Change to 1 to start with EX-Rail Roster download
+#define ROTARY_ENCODER 0                    //Change to 1 to Enable Rotary Encoder Support
+
 void dd_locos_cb(lv_event_t * e);
 static void throttle_selection_handler_cb(lv_event_t * e);
 /*

@@ -58,7 +58,9 @@ void populateLocoDetails()                //Fill the page with Active Loco's det
     if(locoDirs[activeLocoID] == 1)
     lv_obj_add_state(objects.sw_dir, LV_STATE_CHECKED);
     else lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);
-
+    
+    lv_obj_set_style_pad_column(objects.functions_mtx, 40, LV_PART_MAIN | LV_STATE_DEFAULT); //   lv_obj_set_style_pad_column(objects.functions_mtx, 40, LV_STYLE_MAIN);
+    
     for(uint16_t buttonPos = 0; buttonPos < NUM_FUNC_SLOTS; buttonPos++)
     {
       lv_btnmatrix_set_btn_ctrl(objects.functions_mtx, buttonPos, LV_BTNMATRIX_CTRL_HIDDEN);
@@ -132,10 +134,10 @@ static void functions_cb(lv_event_t * e)
       }else if(code == LV_EVENT_RELEASED)
       {
  //       Serial.printf("Function Released: %d\n", funcOption[activeLocoID][fSlot]);
-        if(funcOptions[activeLocoID][fSlot] == 1)              //Check if Momentary
+        if(funcOptions[activeLocoID][funcNum] == 1)              //Check if Momentary
         {
           lv_btnmatrix_clear_btn_ctrl(obj, func_xlate[fSlot], LV_BTNMATRIX_CTRL_CHECKED);
-          funcStates[activeLocoID][fSlot] = 0;
+          funcStates[activeLocoID][funcNum] = 0;
           //Send the DCCEX Command...
           String functionCMD = ("<F " + String(locoAddress[activeLocoID]) + " " + String(funcNum) + " " + String(funcStates[activeLocoID][funcNum]) + ">");
           Serial.println(functionCMD);
