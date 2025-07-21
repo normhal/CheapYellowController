@@ -31,16 +31,28 @@ static void fname_cb(lv_event_t * e)
   if(code == LV_EVENT_VALUE_CHANGED)
   {
     if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][fSlot] = 1;
-    else funcOptions[editingID][fSlot] = 0;
+    else funcOptions[editingID][functionEditSlot] = 0;
     lv_textarea_set_text(objects.ta_fname, " ");
     lv_textarea_set_text(objects.ta_fnum, " ");
     lv_obj_clear_state(objects.f_option, LV_STATE_CHECKED);
   }
 }
-// Logic here is:
-// Cycle through each of 28 functions placing up to 10 functions according to their assigned slot
-// funcSlots[locoID][fNum] = slot where a slot 255 is unassigned
-//
+
+static void chkbox_event_cb(lv_event_t * e)
+{
+  lv_event_code_t code = lv_event_get_code(e);
+  lv_obj_t * obj = lv_event_get_target(e);
+  uint8_t fNum = atoi(lv_textarea_get_text(objects.ta_fnum));
+  if(code == LV_EVENT_VALUE_CHANGED) 
+  {
+    uint8_t state = lv_obj_get_state(obj) & LV_STATE_CHECKED ? 1:0;
+//    Serial.printf("State Now: %d\n", state);
+    if(state == 0) funcOptions[editingID][fNum] = 0; //States are 1 for Checked, 0 for UnChecked
+    else funcOptions[editingID][fNum] = 1;
+//    Serial.printf("Option for Function: %d set to: %d\n", fNum, funcOptions[editingID][fNum]);
+  }
+}
+
 void setupFuncEditSlots()
 {
   for(uint8_t fNum = 0; fNum < NUM_FUNCS; fNum++)                           //0 to 28
@@ -48,8 +60,9 @@ void setupFuncEditSlots()
     std::string s = std::to_string(fNum);
     uint8_t fSlot = funcSlots[editingID][fNum];
     slot2Func[fSlot] = fNum;
-    if(funcNames[editingID][fNum] != "")
+    if((funcNames[editingID][fNum] != "")  && (fSlot != 255))
     {
+//      Serial.printf("fSlot: %d fNum: %d Name: %s\n", fSlot, fNum, funcNames[editingID][fNum]);
       switch (fSlot)
       {
         case (0):
@@ -139,11 +152,11 @@ void setupFuncEditSlots()
   }
 }
 
-void action_fedit_slot(lv_event_t * e)                      //Function details moved from editing fields to Buttons
+void action_fedit_slot(lv_event_t * e)
 {
   void *user_data = lv_event_get_user_data(e);
-  functionEditSlot = *((int*)(&user_data));                 //Actual User Slot Number Supplied by Button Event 3
-//  slot2Func[functionEditSlot] = atoi(lv_textarea_get_text(objects.ta_fnum)); //Get the Edited Function Number and save the slot it occupies
+  functionEditSlot = *((int*)(&user_data));                 //Actual User Slot Number Supplied by Button Event
+  //  slot2Func[functionEditSlot] = atoi(lv_textarea_get_text(objects.ta_fnum)); //Get the Edited Function Number and save the slot it occupies
   uint8_t fNum = atoi(lv_textarea_get_text(objects.ta_fnum));
 //  strcpy(funcNames[editingID][slot2Func[functionEditSlot]], lv_textarea_get_text(objects.ta_fname));
   strcpy(funcNames[editingID][fNum], lv_textarea_get_text(objects.ta_fname));
@@ -216,10 +229,10 @@ void action_fedit_slot(lv_event_t * e)                      //Function details m
     default:
       break;
   }  
-//  strcpy(funcNames[editingID][slot2Func[functionEditSlot]], lv_textarea_get_text(objects.ta_fname));      //checked - EEZ
+//  strcpy(funcNames[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fname));      //checked - EEZ
 //  strcpy(funcNumber[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fnum));     //Checked - EEZ
-//  if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][slot2Func[functionEditSlot]] = 1;
-//  else funcOptions[editingID][slot2Func[functionEditSlot]] = 0;
+//  if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][functionEditSlot] = 1;
+//  else funcOptions[editingID][functionEditSlot] = 0;
   if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][fNum] = 1;
   else funcOptions[editingID][fNum] = 0;
 
@@ -328,9 +341,9 @@ void action_edit_loco_button(lv_event_t * e)
       break;
     case (32):       //Done
       strcpy(locoNames[editingID], lv_textarea_get_text(objects.ta_name));         //Checked - EEZ
-      strcpy(locoAddress[editingID], lv_textarea_get_text(objects.ta_address));   //Checked - EEZ
+      strcpy(locoAddresses[editingID], lv_textarea_get_text(objects.ta_address));   //Checked - EEZ
       lv_table_set_cell_value(objects.tbl_roster, editingID, 0, locoNames[editingID]);
-      lv_table_set_cell_value(objects.tbl_roster, editingID, 1, locoAddress[editingID]);
+      lv_table_set_cell_value(objects.tbl_roster, editingID, 1, locoAddresses[editingID]);
       locosDirty = 1;
       if(callingPage == SCREEN_ID_THROTTLE) populateThrottle();
       loadScreen(callingPage);
@@ -340,13 +353,3 @@ void action_edit_loco_button(lv_event_t * e)
   }
 }
 
-static void chkbox_event_cb(lv_event_t * e)
-{
-  lv_event_code_t code = lv_event_get_code(e);
-  lv_obj_t * obj = lv_event_get_target(e);
-  if(code == LV_EVENT_VALUE_CHANGED) 
-  {
-    if(lv_obj_get_state(obj) == LV_STATE_CHECKED) funcOptions[editingID][functionEditSlot] = 0; //States are 3 for Checked, 2 for UnChecked
-    else funcOptions[editingID][functionEditSlot] = 1;
-  }
-}

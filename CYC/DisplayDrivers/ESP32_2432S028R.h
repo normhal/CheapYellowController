@@ -5,7 +5,9 @@
  * Settings specific to this Display Model
  ******************************************************************************/
  
-#define TFT_BACKLIGHT 64                        //Default Backlight Brightness
+#define TFT_BACKLIGHT 200
+#define MIN_BL 10
+#define FUNCCOL 80
 
 #define GFX_BL 21                               //Backlight Control Pin
 
@@ -14,7 +16,8 @@
 
 #define ROTATION 0
 
-#define NAME_COL_WIDTH 180
+#define NAME_COL0_WIDTH 180
+#define NAME_COL1_WIDTH 45
 
 /*******************************************************************************
  * Display Driver for GFX Library for Arduino by "moononournation"
@@ -36,6 +39,9 @@ Arduino_GFX *gfx = new Arduino_ILI9341(bus, TFT_MISO, ROTATION);
  * Rotary Encoder Specifics
  ******************************************************************************/
  
+ #define SS_SWITCH        24
+ #define SEESAW_ADDR    0x36
+
  #define RX_1 12
  #define TX_1 13
  #define I2C_SDA 27

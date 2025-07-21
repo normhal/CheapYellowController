@@ -21,14 +21,14 @@
 
 #include <Arduino.h>
 #include <lvgl.h>
-//#include <WiFi.h>
+#include <WiFi.h>
 #include <Arduino_GFX_Library.h>
-#include <EEPROM.h>
+//#include <EEPROM.h>
+#include <DCCEXProtocol.h>
 #include <LittleFS.h>
 #include <CSV_Parser.h>
 #include <Adafruit_seesaw.h>
-//#include <DCCEXProtocol.h>
-//#include "Dccex_Protocol.h"
+#include <Preferences.h>
 
 #include "ui.h"
 #include "screens.h"
@@ -45,6 +45,9 @@
 #include "Throttle_Page.h"
 #endif
 
+//WiFiClient client;
+
+Preferences eeProm;
 /*
  ************************************************************************************************************************
  * Display Panel Selection
@@ -82,12 +85,6 @@
 //  #include "DisplayDrivers/ESP32_4848S040C.h"
 #endif
 
-#define EEPROM_SIZE 100
-#define ROSTER_USE 0
-#define RE_USE 0
-#define ROSTER_MODE 0                       //Change to 1 to start with EX-Rail Roster download
-#define ROTARY_ENCODER 0                    //Change to 1 to Enable Rotary Encoder Support
-
 void dd_locos_cb(lv_event_t * e);
 static void throttle_selection_handler_cb(lv_event_t * e);
 /*
@@ -106,21 +103,23 @@ unsigned long re_timer = 0;
  * Display Panel configuration and definitions
  ************************************************************************************************************************
 */
-
-uint8_t thresholdSpeed = 15;
-//uint8_t REAccAmount = 1;
-
-uint8_t brightness = 250;
+// Configurable values
+uint8_t lcdBL;
+uint8_t reAccel = 10;
+//uint8_t brightness = 250;
 uint8_t timeout = 20;
+uint8_t funcCol = 90;
+uint8_t threshold = 15;
+bool def_roster = false;
 
-unsigned long lastButtonPress = 0;
-uint8_t aFlag = 0;
-uint8_t bFlag = 0;
-int encoderPos = 0;
-uint8_t oldEncPos = 0;
-uint8_t oldSpeed = 0;
-uint8_t reading = 0;
-uint8_t old_pos = 0;  //encoderPos;
+//unsigned long lastButtonPress = 0;
+//uint8_t aFlag = 0;
+//uint8_t bFlag = 0;
+//int encoderPos = 0;
+//uint8_t oldEncPos = 0;
+//uint8_t oldSpeed = 0;
+//uint8_t reading = 0;
+//uint8_t old_pos = 0;  //encoderPos;
 //boolean buttonState = 0;
 
 uint8_t trackSel = 99; 
@@ -150,6 +149,7 @@ enum ScreensEnum callingPage;
 
 static int foundNetworks = 0;
 unsigned long networkTimeout = 10 * 1000;
+
 String ssidList;
 
 struct NwCred
@@ -158,7 +158,7 @@ struct NwCred
   String ssid;
   String password;
   String ipAddress;
-  String nwPort;
+  uint16_t nwPort;
 };
 
 //typedef struct NwCred nwk;
@@ -244,22 +244,17 @@ const char * throttleName[4] = {
 #define SPEED_LEN 3
 //#define DIR_LEN 1
 #define FNUM_LEN 3
-#define FNAME_LEN 16
+#define FNAME_LEN 10
 
 char locoNames[NUM_LOCOS][NAME_LEN +1];
-char locoAddress[NUM_LOCOS][ADDR_LEN +1];                         //Address "" = unused record
+char locoAddresses[NUM_LOCOS][ADDR_LEN +1];
 uint32_t savedSpeed[NUM_LOCOS];
 uint32_t locoSpeeds[NUM_LOCOS];
 uint8_t locoDirs[NUM_LOCOS];
-//char funcName[NUM_LOCOS][NUM_FUNC_SLOTS][FNAME_LEN +1];
-//char funcNumber[NUM_LOCOS][NUM_FUNC_SLOTS][FNUM_LEN+1];          // 4 characters to store "255"
-//uint8_t funcState[NUM_LOCOS][NUM_FUNC_SLOTS];
-//uint8_t funcOption[NUM_LOCOS][NUM_FUNC_SLOTS];
 uint8_t func2Slot[NUM_FUNCS];                                     //Stores the Slot Number used by a Function;
 uint8_t slot2Func[NUM_FUNC_SLOTS];                                //Stores the Function Number used by a Slot;
-char funcNames[NUM_LOCOS][NUM_FUNCS][FNAME_LEN +1];
-uint8_t funcSlots[NUM_LOCOS][NUM_FUNCS];
-//char funcNumber[NUM_LOCOS][NUM_FUNCS][FNUM_LEN+1];          // 4 characters to store "255"
+char funcNames[NUM_LOCOS][NUM_FUNC_SLOTS][FNAME_LEN +1];
+uint8_t funcSlots[NUM_LOCOS][NUM_FUNCS];          // 4 characters to store "255"
 uint8_t funcStates[NUM_LOCOS][NUM_FUNCS];
 uint8_t funcOptions[NUM_LOCOS][NUM_FUNCS];
 //uint8_t resumeOnGo = 0;
@@ -293,7 +288,7 @@ HCRoute hcRoute[NUM_ROUTES];
  ****************************************************************************************************************
 */
 uint16_t map_xlate[] = {0, 3, 6, 9, 12, 1, 4, 7, 10, 13};
-uint16_t func_xlate[] = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
+uint16_t slotXlate[] = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
 uint16_t abs_xlate[] = {0, 5, 1, 6, 2, 7, 3, 8, 4, 9};
 
 const char * btnMap_functions[] = {

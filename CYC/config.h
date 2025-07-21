@@ -1,15 +1,8 @@
-/*
-*********************************************************************************************************
-* Config Values to configure Controller Startup
-* Items to configure
-* - Rotary Encoder presence
-*   - Accelleration Rate
-* - Roster Mode
-*   - Native or Ex-Rail
-* - Function Column Width
-*********************************************************************************************************
-*/
+// Default Options
 
+#define DEFAULT_ROSTER 0      //0 = Local, 1 = EX_Rail
+#define TIMEOUT 10
+#define REACCEL 20
+#define THRESHOLD 20
 
-#define ROSTER_MODE 0                       //Change to 1 to start with EX-Rail Roster download
-#define ROTARY_ENCODER 0                    //Change to 1 to Enable Rotary Encoder Support
+// Note: Tailor Function Column width (FUNCCOL), Lcd Backlight (TFT_BACKLIGHT) and Minimum Brightness (MIN_BL) in Display Drivers

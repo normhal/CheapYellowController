@@ -27,9 +27,9 @@ static void tbl_roster_cb(lv_event_t * e)
   {
     editingID = row;
     lv_textarea_set_text(objects.ta_name, locoNames[editingID]);
-    lv_textarea_set_text(objects.ta_address, locoAddress[editingID]);
+    lv_textarea_set_text(objects.ta_address, locoAddresses[editingID]);
 
-    //Now set the functions ready for the Edit Page
+    //Now set the functions
     setupFuncEditSlots();
     rosterMode = NORMAL_MODE;
     callingPage = SCREEN_ID_ROSTER;
@@ -81,6 +81,8 @@ void action_roster_button(lv_event_t * e)
 */
 void setupLocalRoster()
 {
+  lv_obj_clear_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
+  lv_label_set_text(objects.lbl_btn_roster, "Local");
   Serial.println("Now populating Locos...");
   populateLocoArray("/locos.txt");
 
@@ -97,7 +99,7 @@ void setupLocalRoster()
   for(int i = 0; i < locoCount; i++)                    //Using the count from LittleFS
   {
     lv_table_set_cell_value(objects.tbl_roster, i, 0, locoNames[i]);
-    lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddress[i]);
+    lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddresses[i]);
   }
   Serial.println("Local Roster Populated");
 }
@@ -106,66 +108,21 @@ void setupLocalRoster()
  * Initialize EX-Rail Roster
  **********************************************************************************************************
 */
-void setupExrailRoster()
+void setupEXRailRoster()
 {
-  dccexProtocol.getLists(true,false,false,false);
-  delay(1000);
-  Serial.println("Replacing Roster with EX-Rail list");
-  uint16_t id = 0;  
-//  delay(500);   
-  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
+  for(int i = 0; i < NUM_LOCOS; i++)
   {
-    int ad = loco->getAddress();
-    const char *name = loco->getName();
-    Serial.println();
-    Serial.printf("Loco ID: %d Address: ", id);
-    Serial.print(ad);
-    Serial.print(" Name: ");
-    Serial.print(name);
-    Serial.println();
-    id++;
-  }
-/*
-  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
-  {
-    int ad = loco->getAddress();
-    const char *lName = loco->getName();
-    strcpy(locoName[id], lName);
-    char *lAddr;
-    itoa(ad, lAddr,4);
-    strcpy(locoAddress[id], lAddr);
-    locoSpeed[id] = 0;
-    locoDir[id] = 1;       //Default to Forward
-    Serial.println();
-    Serial.printf("Loco ID: %d ", id);
-    Serial.printf("Address: %s ", locoAddress[id]);
-    Serial.printf(" Name: %s ", locoName[id]);
-    delay(1000);
-    */
-  /*
-    for (int i = 0; i < 32; i++) 
+    lv_obj_add_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
+    lv_label_set_text(objects.lbl_btn_roster, "EX-Rail");
+    lv_table_set_cell_value(objects.tbl_roster, i, 0, "");
+    lv_table_set_cell_value(objects.tbl_roster, i, 1, "");
+    locoNames[i][0] = '\0';
+    locoAddresses[i][0] = '\0';
+    //Now clear the Functions
+    for(uint8_t f = 0; f < NUM_FUNC_SLOTS; f++) 
     {
-      const char *fName = loco->getFunctionName(i);
-      if (fName != nullptr) 
-      {
-        Serial.printf("    Function Number: %d ", i);
-        Serial.print(fName);
-        if (loco->isFunctionMomentary(i)) {
-          Serial.print(" - Momentary");
-        }
-        Serial.println();
-      }
+      strcpy(funcNames[i][f], " ");
     }
-
-    id++;
-    Serial.println();
   }
-  Serial.println("Now Populating the Roster...");
-  for(int i = 0; i < id; i++)
-  {
-    lv_table_set_cell_value(objects.tbl_roster, i, 0, locoName[i]);
-    lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddress[i]);
-  }
-  */
-//  }
+  dccexProtocol.getLists(true, false, false, false);
 }

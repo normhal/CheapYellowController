@@ -6,6 +6,8 @@
  ******************************************************************************/
 
 #define TFT_BACKLIGHT 250
+#define MIN_BL 240
+#define FUNCCOL 140
 
 #define GFX_BL 2 // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 

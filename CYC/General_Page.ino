@@ -16,8 +16,6 @@
  *
  *****************************************************************************************************************************
 */
-void setSpeed(uint16_t locoAddr, uint16_t newSpeed, uint8_t newDir);
-
 void action_general_button(lv_event_t * e)
 {
   void *user_data = lv_event_get_user_data(e);
@@ -30,7 +28,7 @@ void action_general_button(lv_event_t * e)
         if(locoSpeeds[i] != 0)
         {
           locoSpeeds[i] = 0;
-          setSpeed(atoi(locoAddress[i]), locoSpeeds[i], locoDirs[i]);
+          setSpeed(atoi(locoAddresses[i]), locoSpeeds[i], locoDirs[i]);
         }
       }
       lv_label_set_text(objects.lbl_stop, "Go");

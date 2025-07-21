@@ -5,7 +5,9 @@
  * Settings specific to this Display Model
  ******************************************************************************/
  
-#define TFT_BACKLIGHT 64
+#define TFT_BACKLIGHT 200
+#define MIN_BL 10
+#define FUNCCOL 80
 
 #define GFX_BL 27
 

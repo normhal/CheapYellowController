@@ -5,14 +5,16 @@
  * Start of Arduino_GFX setting
  ******************************************************************************/
 
-#define TFT_BACKLIGHT 246
+#define TFT_BACKLIGHT 250
+#define MIN_BL 242
+#define FUNCCOL 100
 
 #define GFX_BL 2 // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 
-#define ROTATION 1
-
 #define SCREEN_WIDTH 272          //Using EEZ Orientation
 #define SCREEN_HEIGHT 480
+
+#define ROTATION 1
 
 #define NAME_COL0_WIDTH 200
 #define NAME_COL1_WIDTH 50

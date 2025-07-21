@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/4",
+    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/1",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -195,11 +195,11 @@
               "children": [
                 {
                   "type": "tab",
-                  "id": "#06827771-4750-41ea-9421-67da44eb76ab",
-                  "name": "EditLoco",
+                  "id": "#43f4d6d2-e255-49f3-bf3e-04f44289b2bf",
+                  "name": "Throttle",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-4827.eez-project]:/userPages/4",
+                    "objectPath": "[CYC-4827.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -749,7 +749,7 @@
                 {
                   "type": "tabset",
                   "id": "#bd000bbb-1d0b-4306-bc03-36703d34ccfd",
-                  "weight": 94,
+                  "weight": 75,
                   "enableDrop": false,
                   "enableDrag": false,
                   "enableClose": false,
@@ -767,7 +767,7 @@
                 {
                   "type": "tabset",
                   "id": "#9d904968-3e3a-42b6-b3d8-117641fbf108",
-                  "weight": 6,
+                  "weight": 25,
                   "enableDrop": false,
                   "enableDrag": false,
                   "enableClose": false,
@@ -780,8 +780,7 @@
                       "component": "preview",
                       "enableClose": false
                     }
-                  ],
-                  "active": true
+                  ]
                 }
               ]
             }
@@ -1068,13 +1067,13 @@
     "[CYC-4827.eez-project]:/userPages/0[flow-state]": {
       "selection": {
         "0": {
-          "11": {}
+          "1": {}
         }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -360
+          "y": -480
         },
         "scale": 1.5
       },
@@ -1111,16 +1110,16 @@
     "[CYC-4827.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "1": {},
-          "3": {},
-          "9": {}
+          "1": {
+            "$selected": true
+          },
+          "3": {}
         }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -360
+          "y": -480
         },
         "scale": 1.5
       },
@@ -1134,23 +1133,12 @@
     "[CYC-4827.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "1": {
-            "0": {}
-          },
           "2": {
-            "0": {}
+            "$selected": true
           },
-          "3": {},
-          "4": {},
-          "5": {},
-          "6": {},
-          "7": {},
-          "8": {},
-          "9": {},
           "10": {},
           "11": {},
-          "15": {}
+          "12": {}
         }
       },
       "transform": {
@@ -1171,13 +1159,7 @@
       "selection": {
         "0": {
           "0": {},
-          "4": {},
-          "6": {
-            "0": {}
-          },
-          "9": {
-            "$selected": true
-          }
+          "4": {}
         }
       },
       "transform": {
@@ -1197,16 +1179,13 @@
     "[CYC-4827.eez-project]:/userPages/2[flow-state]": {
       "selection": {
         "0": {
-          "3": {},
-          "4": {
-            "$selected": true
-          }
+          "3": {}
         }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -360
+          "y": -480
         },
         "scale": 1.5
       },
@@ -1221,7 +1200,8 @@
       "selection": {
         "0": {
           "0": {},
-          "4": {
+          "7": {},
+          "12": {
             "$selected": true
           }
         }
@@ -1245,11 +1225,15 @@
         "0": {
           "1": {},
           "2": {},
-          "3": {},
-          "4": {},
-          "5": {},
-          "10": {},
-          "11": {}
+          "3": {
+            "$selected": true
+          },
+          "4": {
+            "$selected": true
+          },
+          "5": {
+            "$selected": true
+          }
         }
       },
       "transform": {
@@ -1298,7 +1282,16 @@
           "5": {},
           "6": {},
           "7": {},
-          "8": {}
+          "8": {},
+          "11": {
+            "$selected": true
+          },
+          "12": {
+            "$selected": true
+          },
+          "13": {
+            "$selected": true
+          }
         }
       },
       "transform": {
@@ -1318,16 +1311,13 @@
     "[CYC-4827.eez-project]:/userPages/10[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "1": {},
-          "3": {},
-          "9": {}
+          "2": {}
         }
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -360
+          "y": -600
         },
         "scale": 1.5
       },
@@ -1463,18 +1453,12 @@
     },
     "[CYC-4827.eez-project]:/userPages/12[flow-state]": {
       "selection": {
-        "0": {
-          "0": {},
-          "1": {},
-          "4": {
-            "$selected": true
-          }
-        }
+        "0": {}
       },
       "transform": {
         "translate": {
           "x": -136,
-          "y": -360
+          "y": -480
         },
         "scale": 1.5
       },
@@ -1620,53 +1604,6 @@
         "secondToPx": 200,
         "scrollLeft": 0
       }
-    },
-    "[../../../GitHub/normhal/CheapYellowController/CYC/CYC-4827.eez-project]:/userPages/9[flow-state]": {
-      "selection": {
-        "0": {
-          "0": {},
-          "1": {},
-          "3": {},
-          "9": {}
-        }
-      },
-      "transform": {
-        "translate": {
-          "x": -136,
-          "y": -360
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-4827.eez-project]:/userPages/13[flow-state]": {
-      "selection": {
-        "0": {}
-      },
-      "transform": {
-        "translate": {
-          "x": -136,
-          "y": -480
-        },
-        "scale": 1.5
-      },
-      "timeline": {
-        "isEditorActive": false,
-        "position": 0,
-        "secondToPx": 200,
-        "scrollLeft": 0
-      }
-    },
-    "[CYC-4827.eez-project]:/lvglStyles/styles[tree-state]": {
-      "0": {
-        "$selected": true
-      },
-      "1": {}
     }
   },
   "activeOutputSection": 0,
@@ -1682,15 +1619,15 @@
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
   "lvglPart": "MAIN",
-  "lvglState": "CHECKED",
+  "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "BORDER",
     "SHADOW",
-    "OUTLINE",
-    "MISCELLANEOUS",
     "BACKGROUND",
-    "PADDING"
+    "PADDING",
+    "OUTLINE",
+    "MISCELLANEOUS"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
