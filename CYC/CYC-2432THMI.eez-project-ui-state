@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/9",
     "selectedBitmapObject": "[CYC-2432THMI.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {}
   },
@@ -196,10 +196,10 @@
                 {
                   "type": "tab",
                   "id": "#a0b2b84d-d36e-4e22-b769-1f7839ea8df9",
-                  "name": "Throttle",
+                  "name": "Config",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/1",
+                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/9",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1322,15 +1322,13 @@
     "[CYC-2432THMI.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "3": {
-            "$selected": true
-          }
+          "3": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -280
+          "y": -160
         },
         "scale": 2
       },
@@ -1374,13 +1372,14 @@
           "6": {},
           "7": {
             "$selected": true
-          }
+          },
+          "11": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -181
+          "y": -541
         },
         "scale": 2
       },
@@ -1553,15 +1552,31 @@
       "selection": {
         "0": {
           "0": {},
-          "3": {
-            "$selected": true
-          }
+          "3": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
           "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432THMI.eez-project]:/userPages/12[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -40
         },
         "scale": 2
       },

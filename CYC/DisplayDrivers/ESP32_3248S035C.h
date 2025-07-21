@@ -5,7 +5,9 @@
  * Settings specific to this Display Model
  ******************************************************************************/
 
-#define TFT_BACKLIGHT 250
+#define TFT_BACKLIGHT 200
+#define MIN_BL 10
+#define FUNCCOL 100
 
 #define GFX_BL 27
 
@@ -30,7 +32,6 @@
 #define TFT_MISO 12
 #define TFT_RST GFX_NOT_DEFINED
 #define SPI_NUM VSPI
-
 
 Arduino_DataBus *bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS, TFT_SCK, TFT_MOSI, TFT_MISO, SPI_NUM);
 Arduino_GFX *gfx = new Arduino_ST7796(bus, TFT_RST, ROTATION);

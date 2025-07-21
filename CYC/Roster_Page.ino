@@ -26,8 +26,8 @@ static void tbl_roster_cb(lv_event_t * e)
   if(rosterMode == EDIT_MODE)
   {
     editingID = row;
-    lv_textarea_set_text(objects.ta_name, locoName[editingID]);
-    lv_textarea_set_text(objects.ta_address, locoAddress[editingID]);
+    lv_textarea_set_text(objects.ta_name, locoNames[editingID]);
+    lv_textarea_set_text(objects.ta_address, locoAddresses[editingID]);
 
     //Now set the functions
     setupFuncEditSlots();
@@ -73,4 +73,56 @@ void action_roster_button(lv_event_t * e)
     default:
       break;
   }
+}
+/*
+ **********************************************************************************************************
+ * Initialize Local Roster
+ **********************************************************************************************************
+*/
+void setupLocalRoster()
+{
+  lv_obj_clear_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
+  lv_label_set_text(objects.lbl_btn_roster, "Local");
+  Serial.println("Now populating Locos...");
+  populateLocoArray("/locos.txt");
+
+  // Set all function numbers to 255
+  for(int i = 0; i < NUM_LOCOS; i++)
+  {
+    for(int j = 0; j < NUM_FUNCS; j++) funcSlots[i][j] = 255;
+  }
+  
+  Serial.println("Now populating Functions");
+  populateLocoFunctions("/functions.txt");
+
+  Serial.println("Now Populating the Roster...");
+  for(int i = 0; i < locoCount; i++)                    //Using the count from LittleFS
+  {
+    lv_table_set_cell_value(objects.tbl_roster, i, 0, locoNames[i]);
+    lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddresses[i]);
+  }
+  Serial.println("Local Roster Populated");
+}
+/*
+ **********************************************************************************************************
+ * Initialize EX-Rail Roster
+ **********************************************************************************************************
+*/
+void setupEXRailRoster()
+{
+  for(int i = 0; i < NUM_LOCOS; i++)
+  {
+    lv_obj_add_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
+    lv_label_set_text(objects.lbl_btn_roster, "EX-Rail");
+    lv_table_set_cell_value(objects.tbl_roster, i, 0, "");
+    lv_table_set_cell_value(objects.tbl_roster, i, 1, "");
+    locoNames[i][0] = '\0';
+    locoAddresses[i][0] = '\0';
+    //Now clear the Functions
+    for(uint8_t f = 0; f < NUM_FUNC_SLOTS; f++) 
+    {
+      strcpy(funcNames[i][f], " ");
+    }
+  }
+  dccexProtocol.getLists(true, false, false, false);
 }

@@ -30,42 +30,20 @@ void action_wifi_button(lv_event_t * e)
       break;
     case 7:     //Connect
     {
+      client.stop();
       lv_label_set_text(objects.lbl_wifi_status, "Connecting to WiFi...");
-      WiFi.begin(lv_textarea_get_text(objects.ta_ssid), lv_textarea_get_text(objects.ta_password));
-      int timeOut = timeout;
-      while (WiFi.status() != WL_CONNECTED)
-      {
-//        Serial.print(".");
-        delay(200);
-        timeOut = timeOut -1;
-        if(timeOut <0)
-        {
-          lv_label_set_text(objects.lbl_wifi_status, "Timeout trying to Connect...");
-          lv_img_set_src(objects.img_wifi, &img_x);
-          lv_label_set_text(objects.lbl_ps2,"");
-          break;
-        }
-      }
-      if(WiFi.status() == WL_CONNECTED)
-      {
-        lv_label_set_text(objects.lbl_wifi_status, "Connected to WiFi!");
-        lv_label_set_text(objects.lbl_wifi_status2, "Now connecting to DCCEX");
-        lv_img_set_src(objects.img_wifi, &img_6);
-        if(!client.connect(lv_textarea_get_text(objects.ta_ip_address), atoi(lv_textarea_get_text(objects.ta_port))))
-        {
-          lv_label_set_text(objects.lbl_wifi_status2, "Unable to Connect to DCCEX");
-        }else 
-        {
-          lv_label_set_text(objects.lbl_wifi_status2, "Connected to DCCEX!");
-          break;
-        }
-      }
+      ssid = lv_textarea_get_text(objects.ta_ssid);
+      password = lv_textarea_get_text(objects.ta_password);
+      ipAddress = lv_textarea_get_text(objects.ta_ip_address);
+      nwPort = atoi(lv_textarea_get_text(objects.ta_port));
+      connectWiFi();
       break;
     }
     case 8:     //Save
     {
-      String ssidList = netwks[0].ssid;
-      for(int i = 1; i < NUM_NWKS; i++)
+      ssidList = netwks[0].ssid;
+//      for(int i = 1; i < NUM_NWKS; i++)
+      for(int i = 0; i < NUM_NWKS; i++)
       {
         if(netwks[i].ssid == "") break;
         ssidList += "\n" + netwks[i].ssid;
@@ -76,7 +54,7 @@ void action_wifi_button(lv_event_t * e)
       netwks[activeIndex].ssid = lv_textarea_get_text(objects.ta_ssid);
       netwks[activeIndex].password = lv_textarea_get_text(objects.ta_password);
       netwks[activeIndex].ipAddress = lv_textarea_get_text(objects.ta_ip_address);
-      netwks[activeIndex].nwPort = lv_textarea_get_text(objects.ta_port);
+      netwks[activeIndex].nwPort = atoi(lv_textarea_get_text(objects.ta_port));
       saveCredentials(LittleFS, "/credentials.new", "ID,SSID,Password,IPAddress,Port\n");
       break;
     }
@@ -85,7 +63,7 @@ void action_wifi_button(lv_event_t * e)
       break;
     case 30:       //Config
       char  str[4];
-      itoa(brightness, str, 10);
+      itoa(lcdBL, str, 10);
       lv_textarea_set_text(objects.ta_tft_backlight, str);
       itoa(timeout, str, 10);
       lv_textarea_set_text(objects.ta_wifi_timeout, str);
@@ -116,7 +94,9 @@ void dd_cb(lv_event_t * e)
     lv_textarea_set_text(objects.ta_ssid, netwks[index].ssid.c_str());
     lv_textarea_set_text(objects.ta_password, netwks[index].password.c_str());
     lv_textarea_set_text(objects.ta_ip_address, netwks[index].ipAddress.c_str());
-    lv_textarea_set_text(objects.ta_port, netwks[index].nwPort.c_str());
+    char lvPort[5];
+    itoa(netwks[index].nwPort, lvPort, 10);
+    lv_textarea_set_text(objects.ta_port, lvPort);
     activeIndex = index;
 //    Serial.printf("Active Index = %d\n", activeIndex);
   }
@@ -151,8 +131,56 @@ static void ssid_selected(lv_event_t * e)
     lv_textarea_set_text(objects.ta_ssid, netwks[activeIndex].ssid.c_str());
     lv_textarea_set_text(objects.ta_password, netwks[activeIndex].password.c_str());
     lv_textarea_set_text(objects.ta_ip_address, netwks[activeIndex].ipAddress.c_str());
-    lv_textarea_set_text(objects.ta_port, netwks[activeIndex].nwPort.c_str());
+    char lvPort[5];
+    itoa(netwks[activeIndex].nwPort, lvPort, 10);
+    lv_textarea_set_text(objects.ta_port, lvPort);
 
     loadScreen(SCREEN_ID_WI_FI);
+  }
+}
+
+void connectWiFi()
+{
+//  ssid = netwks[activeIndex].ssid.c_str();
+//  password = netwks[activeIndex].password.c_str();
+//  ipAddress = netwks[activeIndex].ipAddress.c_str();
+//  nwPort = netwks[activeIndex].nwPort;
+
+Serial.printf("Connecting to WiFi with %s %s %s %d\n", ssid, password, ipAddress, nwPort);
+
+  int timeOut = timeout;
+//  int timeOut = 3;
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    WiFi.begin(ssid, password);
+    Serial.print(".");
+    delay(1000);
+    timeOut = timeOut -1;
+    if(timeOut <0)
+    {
+      lv_label_set_text(objects.lbl_wifi_status, "Timeout trying to Connect...");
+      lv_img_set_src(objects.img_wifi, &img_x);
+      lv_label_set_text(objects.lbl_ps2,"");
+      Serial.println("Timeout trying to Connect...");
+      break;
+    }
+  }
+  if(WiFi.status() == WL_CONNECTED)
+  {
+    lv_label_set_text(objects.lbl_wifi_status, "Connected to WiFi!");
+    lv_label_set_text(objects.lbl_wifi_status2, "Now connecting to DCCEX");
+    Serial.printf("Now Connecting to DCC-EX with: %s and: %d\n", ipAddress, nwPort);
+    client.connect(ipAddress.c_str(), nwPort);
+
+    if(!client.connected())
+    {
+      lv_label_set_text(objects.lbl_wifi_status2, "Unable to Connect to DCCEX");
+      lv_img_set_src(objects.img_wifi, &img_x);
+    }else 
+    {
+      lv_label_set_text(objects.lbl_wifi_status2, "Connected to DCCEX!");
+      lv_img_set_src(objects.img_wifi, &img_6);
+    }
+    Serial.println("Done");
   }
 }

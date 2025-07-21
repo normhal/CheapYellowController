@@ -27,12 +27,29 @@ static void menu_cb(lv_event_t * e)
     {
       case CONFIG:
         callingPage = SCREEN_ID_MAIN;
-        char  str[4];
-        itoa(brightness, str, 10);
+        char  str[2];
+        eeProm.begin("configs");
+        lcdBL = eeProm.getUInt("lcdBL", 20);
+//        Serial.printf("LCD_BL Value: %d\n", lcdBL);
+        itoa(lcdBL, str, 10);
         lv_textarea_set_text(objects.ta_tft_backlight, str);
+        timeout = eeProm.getUInt("timeout", 10);
         itoa(timeout, str, 10);
         lv_textarea_set_text(objects.ta_wifi_timeout, str);
+        reAccel = eeProm.getUInt("reAccel", 10);
+        itoa(reAccel, str, 10);
+        lv_textarea_set_text(objects.ta_re_accel, str);
+        funcCol = eeProm.getUInt("funcCol", 90);
+        itoa(funcCol, str, 10);
+        lv_textarea_set_text(objects.ta_func_col, str);
+        threshold = eeProm.getUInt("threshold", 15);
+        itoa(threshold, str, 10);
+        lv_textarea_set_text(objects.ta_threshold, str);
+        def_roster = eeProm.getBool("roster", false);
+        if(def_roster == false) lv_obj_clear_state(objects.btn_roster, LV_STATE_CHECKED);
+        else lv_obj_add_state(objects.btn_roster, LV_STATE_CHECKED);
         loadScreen(SCREEN_ID_CONFIG);  
+        eeProm.end();
         break;
       case ROSTER:
         callingPage = SCREEN_ID_MAIN;
@@ -47,6 +64,7 @@ static void menu_cb(lv_event_t * e)
         loadScreen(SCREEN_ID_PROGRAM);  
         break;
       case WIFI:
+      {
         ssidList = netwks[0].ssid;
         for(int i = 1; i <= NUM_NWKS; i++)
         {
@@ -58,9 +76,12 @@ static void menu_cb(lv_event_t * e)
         lv_textarea_set_text(objects.ta_ssid, netwks[activeIndex].ssid.c_str());
         lv_textarea_set_text(objects.ta_password, netwks[activeIndex].password.c_str());
         lv_textarea_set_text(objects.ta_ip_address , netwks[activeIndex].ipAddress.c_str());
-        lv_textarea_set_text(objects.ta_port, netwks[activeIndex].nwPort.c_str());
+        char lvPort[5];
+        itoa(netwks[activeIndex].nwPort, lvPort, 10);
+        lv_textarea_set_text(objects.ta_port, lvPort);
         loadScreen(SCREEN_ID_WI_FI);  
         break;
+      }
       case ROUTES:
 //        loadScreen(SCREEN_ID_ROUTES);  
         break;

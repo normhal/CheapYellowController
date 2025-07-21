@@ -4,21 +4,25 @@
 /*******************************************************************************
  * Start of Arduino_GFX setting
  ******************************************************************************/
-#define GFX_DEV_DEVICE ESP32_2432THMI
-
-#define ROTATION 0
+#define TFT_BACKLIGHT 200
+#define MIN_BL 10
+#define FUNCCOL 80
 
 #define GFX_BL 38
-
-#define DISPLAY_WIDTH 240
-#define DISPLAY_HEIGHT 320
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
 
-#define NAME_COL_WIDTH 180
+#define ROTATION 0
 
-#define TFT_BACKLIGHT 64
+#define NAME_COL0_WIDTH 180
+#define NAME_COL1_WIDTH 45
+
+/*******************************************************************************
+ * Display Driver for GFX Library for Arduino by "moononournation"
+ ******************************************************************************/
+
+#define GFX_DEV_DEVICE ESP32_2432THMI
 
 Arduino_DataBus *bus = new Arduino_ESP32PAR8(
     7 /* DC */, 6 /* CS */, 8 /* WR */, -1 /* RD */,

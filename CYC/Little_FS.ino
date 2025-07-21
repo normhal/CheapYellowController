@@ -132,18 +132,18 @@ void populateLocoArray(const char *path)
   locoCount = cp.getRowsCount();
   for(int row = 0; row < cp.getRowsCount(); row++)      
   {
-    strcpy(locoName[row], locoLongName[row]);
-    strcpy(locoAddress[row], locoAddr[row]);
-    locoSpeed[row] = 0;
-    locoDir[row] = 1;       //Default to Forward
+    strcpy(locoNames[row], locoLongName[row]);
+    strcpy(locoAddresses[row], locoAddr[row]);
+    locoSpeeds[row] = 0;
+    locoDirs[row] = 1;       //Default to Forward
   }
   for(int row = locoCount; row < NUM_LOCOS; row++)  //Fill the rest of the Array with Blanks
   {
-    strcpy(locoName[row], "");
-    strcpy(locoAddress[row], "");
-    locoSpeed[row] = 0;
-    locoDir[row] = 1;
-    Serial.printf("Wrote Blank Record %d\n", row);
+    strcpy(locoNames[row], "");
+    strcpy(locoAddresses[row], "");
+    locoSpeeds[row] = 0;
+    locoDirs[row] = 1;
+//    Serial.printf("Wrote Blank Record %d\n", row);
     locoCount = row;
   }
   file.close();
@@ -163,7 +163,7 @@ void populateLocoFunctions(const char *path)
   }
 
   Serial.println("Calling Functions Parser");
-  CSV_Parser cp("udssudud", true, ',');       //5x uint16_t values
+  CSV_Parser cp("ududsudud", true, ',');       //5x uint16_t values
 
   Serial.print("Reading from file: ");
   Serial.println(path);
@@ -175,7 +175,7 @@ void populateLocoFunctions(const char *path)
   cp.parseLeftover();
 
   uint16_t *locoid = (uint16_t*)cp["LocoID"];         //Loco ID
-  char **function = (char**)cp["Function"];           //Function Number
+  uint16_t *function = (uint16_t*)cp["Function"];           //Function Number
   char **name = (char**)cp["Name"];                   //Function Name
   uint16_t *slot = (uint16_t*)cp["Slot"];             //Function Slot
   uint16_t *option = (uint16_t*)cp["Momentary"];      //Function Option
@@ -186,12 +186,13 @@ void populateLocoFunctions(const char *path)
   for(int row = 0; row < cp.getRowsCount(); row++)      
   {
 //    funcNumber[locoid[row]][slot[row]] = function[row]; 
-    strcpy(funcNumber[locoid[row]][slot[row]], function[row]);
+    funcSlots[locoid[row]][function[row]] = slot[row];
 //    Serial.println(function[row]);
-    strcpy(funcName[locoid[row]][slot[row]], name[row]);
+    strcpy(funcNames[locoid[row]][function[row]], name[row]);
 //    Serial.println(name[row]);
-    funcOption[locoid[row]][slot[row]] = option[row];                                             //0= Function | Momentary, 1=image
+    funcOptions[locoid[row]][function[row]] = option[row];                                             //0= Function | Momentary, 1=image
 //    Serial.println(option[row]);
+//    Serial.printf("LocoID: %d Function: %d Slot: %d Name: %s Option: %d\n", locoid[row], function[row], slot[row], name[row], option[row]);
   }
   file.close();
 }
@@ -295,12 +296,12 @@ void populateCredentials(const char *path)
     netwks[row].password = lfpassword[row];
     netwks[row].ipAddress = lfipAddress[row];
     netwks[row].nwPort = lfport[row];
-    Serial.printf("SSID Read: %s\n", lfssid[row]);
-    Serial.printf("SSID Read: %s\n", netwks[row].ssid.c_str());
+//    Serial.printf("SSID Read: %s\n", lfssid[row]);
+//    Serial.printf("SSID Read: %s\n", netwks[row].ssid.c_str());
   }
   file.close();
-  Serial.print("Credential Rows Read: ");
-  Serial.println(cp.getRowsCount());
+//  Serial.print("Credential Rows Read: ");
+//  Serial.println(cp.getRowsCount());
 }
 
 //****************************************************************************************************************
@@ -399,7 +400,7 @@ void saveLocos(fs::FS &fs, const char * path, const char * message)
   int row = 0;
   for(row = 0; row < NUM_LOCOS; row++)      //ALWAYS write the full number of locos to preserve LocoID link to functions and selectedIDs
   {
-    String message = String(row) + "," +  locoName[row] + "," + locoAddress[row] + "\n";
+    String message = String(row) + "," +  locoNames[row] + "," + locoAddresses[row] + "\n";
 //    Serial.print(message);
     file.print(message);
 //    Serial.print(".");
@@ -476,11 +477,11 @@ void saveFunctions(fs::FS &fs, const char * path, const char * message)
   {
     for(uint8_t j = 0; j < NUM_FUNC_SLOTS; j++)
     {
-      if(funcNumber[row][j] != "255")
+      if(funcSlots[row][j] != 255)
       {
         //LocoID,Function,Name,Slot,Momentary
-        String record = String(row) + "," + String(funcNumber[row][j]) + "," + String(funcName[row][j]) + "," + 
-                        String(j)  + "," + String(funcOption[row][j]) + "\n";
+        String record = String(row) + "," + String(funcSlots[row][j]) + "," + String(funcNames[row][j]) + "," + 
+                        String(j)  + "," + String(funcOptions[row][j]) + "\n";
         file.print(record); 
         counter++;
       }

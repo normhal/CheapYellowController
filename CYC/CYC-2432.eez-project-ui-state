@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432.eez-project]:/userPages/8",
+    "selectedUserPageObject": "[CYC-2432.eez-project]:/userPages/9",
     "selectedBitmapObject": "[CYC-2432.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -73,6 +73,7 @@
           {
             "type": "border",
             "selected": 0,
+            "size": 40.5,
             "location": "bottom",
             "children": [
               {
@@ -197,10 +198,10 @@
                 {
                   "type": "tab",
                   "id": "#98a353c8-3647-4b0d-a711-b18bc91002c9",
-                  "name": "Scan",
+                  "name": "Config",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-2432.eez-project]:/userPages/8",
+                    "objectPath": "[CYC-2432.eez-project]:/userPages/9",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1041,7 +1042,8 @@
           "6": {},
           "7": {
             "$selected": true
-          }
+          },
+          "11": {}
         }
       },
       "transform": {
@@ -1175,21 +1177,20 @@
       "selection": {
         "0": {
           "1": {},
-          "2": {},
+          "7": {},
           "8": {},
-          "9": {},
+          "9": {
+            "$selected": true
+          },
           "10": {},
           "11": {},
-          "12": {},
-          "13": {
-            "$selected": true
-          }
+          "12": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -280
+          "y": -400
         },
         "scale": 1.75
       },
@@ -1213,7 +1214,7 @@
       "transform": {
         "translate": {
           "x": -40,
-          "y": -301
+          "y": -181
         },
         "scale": 1.75
       },
@@ -1227,7 +1228,44 @@
     "[CYC-2432.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "3": {
+          "3": {},
+          "4": {
+            "$selected": true
+          },
+          "5": {
+            "$selected": true
+          },
+          "6": {
+            "$selected": true
+          },
+          "7": {
+            "$selected": true
+          },
+          "9": {
+            "$selected": true
+          },
+          "10": {
+            "$selected": true
+          },
+          "11": {
+            "$selected": true
+          },
+          "12": {
+            "$selected": true
+          },
+          "13": {
+            "$selected": true
+          },
+          "14": {
+            "$selected": true
+          },
+          "15": {
+            "$selected": true
+          },
+          "16": {
+            "$selected": true
+          },
+          "17": {
             "$selected": true
           }
         }
@@ -1250,7 +1288,33 @@
       "selection": {
         "0": {
           "2": {},
-          "3": {
+          "3": {},
+          "4": {
+            "$selected": true
+          },
+          "5": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -160
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/10[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {
             "$selected": true
           }
         }
@@ -1269,12 +1333,21 @@
         "scrollLeft": 0
       }
     },
-    "[CYC-2432.eez-project]:/userPages/10[flow-state]": {
-      "selection": {},
+    "[CYC-2432.eez-project]:/userPages/12[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "3": {},
+          "4": {
+            "$selected": true
+          },
+          "5": {}
+        }
+      },
       "transform": {
         "translate": {
-          "x": -120,
-          "y": -280
+          "x": -160,
+          "y": -240
         },
         "scale": 1.75
       },
@@ -1303,7 +1376,8 @@
     "BORDER",
     "SHADOW",
     "TEXT",
-    "BACKGROUND"
+    "BACKGROUND",
+    "PADDING"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,

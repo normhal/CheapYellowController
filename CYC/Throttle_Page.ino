@@ -25,7 +25,7 @@ void populateThrottle()                   //Build the Loco DropDown List
   {
     if(selectedIDs[activeThrottle][i] != 255)                           //ignore unused Loco IDs
     {
-      lv_dropdown_add_option(objects.dd_locos,locoName[selectedIDs[activeThrottle][i]],i); //Add all valid Locos to the list
+      lv_dropdown_add_option(objects.dd_locos,locoNames[selectedIDs[activeThrottle][i]],i); //Add all valid Locos to the list
     }else
     {
       lv_dropdown_add_option(objects.dd_locos,"",i); //Blank out unused Loco IDs in the list
@@ -37,7 +37,6 @@ void populateThrottle()                   //Build the Loco DropDown List
 
 void clearGuest()
 {
-  rosterMode = GUEST_INACTIVE;
   //UNCHECK Guest_address TextArea 
 }
 
@@ -45,43 +44,52 @@ void populateLocoDetails()                //Fill the page with Active Loco's det
 {
   if(activeLocoID != 255)
   {
-    lv_slider_set_value(objects.slider, locoSpeed[activeLocoID], LV_ANIM_OFF);
+    lv_slider_set_value(objects.slider, locoSpeeds[activeLocoID], LV_ANIM_OFF);
     char speedString[10] = "";
-    itoa(locoSpeed[activeLocoID], speedString, 10);
+    itoa(locoSpeeds[activeLocoID], speedString, 10);
     lv_label_set_text(objects.lbl_slider,speedString);                    //Update the speed label to the previously set speed value
-    lv_label_set_text(objects.lbl_address, locoAddress[activeLocoID]);    //Update the address label to the previously set address
-#if defined ROTARY_ENCODER    
-    ss.setEncoderPosition(locoSpeed[activeLocoID]);
-#endif
+    lv_label_set_text(objects.lbl_address, locoAddresses[activeLocoID]);    //Update the address label to the previously set address
+
+    #if defined ROTARY_ENCODER    
+      ss.setEncoderPosition(locoSpeeds[activeLocoID]);
+    #endif
+
     //Setup the Direction
-    if(locoDir[activeLocoID] == 1)
+    if(locoDirs[activeLocoID] == 1)
     { lv_obj_add_state(objects.sw_dir, LV_STATE_CHECKED);
     }else lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);
-    //Setup the Function Buttons
-    for(int i = 0; i < NUM_FUNC_SLOTS; i++)
+
+    lv_obj_set_style_pad_column(objects.functions_mtx, funcCol, LV_PART_MAIN | LV_STATE_DEFAULT); //   lv_obj_set_style_pad_column(objects.functions_mtx, 40, LV_STYLE_MAIN);
+
+    //Clear the mtxSlots
+    for(uint8_t mtxSlot = 0; mtxSlot < NUM_FUNC_SLOTS; mtxSlot++)
     {
-      int val = atoi(funcNumber[activeLocoID][i]);
-      if(val != 255)
+      lv_btnmatrix_set_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
+//      lv_btnmatrix_set_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_DISABLED);
+    }
+
+    for(int funcNum = 0; funcNum < NUM_FUNCS; funcNum++)           //process ALL (28)possible functions
+    {
+      uint8_t funcSlot = funcSlots[activeLocoID][funcNum];            //Retrieve the 28 Function's designated Slot (0 - 9)
+      if(funcSlot >= 0 && funcSlot < NUM_FUNC_SLOTS)
       {
-        btnMap_functions[map_xlate[i]] = funcName[activeLocoID][i];
-        lv_btnmatrix_clear_btn_ctrl(objects.function_mtx, func_xlate[i], LV_BTNMATRIX_CTRL_HIDDEN);
-        if(funcState[activeLocoID][i] == 1)
-        { 
-          lv_btnmatrix_set_btn_ctrl(objects.function_mtx, func_xlate[i], LV_BTNMATRIX_CTRL_CHECKED);
-        }else
+        if(funcSlot != 255)
         {
-          lv_btnmatrix_clear_btn_ctrl(objects.function_mtx, func_xlate[i], LV_BTNMATRIX_CTRL_CHECKED);
+          uint8_t mtxSlot = slotXlate[funcSlot];                      //Convert the functions slot to the Matrix slot
+          btnMap_functions[map_xlate[funcSlot]] = funcNames[activeLocoID][funcNum];
+          lv_btnmatrix_clear_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
+          slot2Func[funcSlot] = funcNum;                              //record which slot contains which function
+          if(funcStates[activeLocoID][funcNum] == 1)
+          { 
+            lv_btnmatrix_set_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_CHECKED);
+          }else
+          {
+            lv_btnmatrix_clear_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_CHECKED);
+          }
         }
-      }else
-      {
-        btnMap_functions[map_xlate[i]] = " ";
-        lv_btnmatrix_set_btn_ctrl(objects.function_mtx, func_xlate[i], LV_BTNMATRIX_CTRL_HIDDEN);
       }
     }
-    lv_btnmatrix_set_map(objects.function_mtx, btnMap_functions);
-  }else
-  {
-    loadScreen(SCREEN_ID_ROSTER);
+    lv_btnmatrix_set_map(objects.functions_mtx, btnMap_functions);      //Display the Updated Map
   }
 }
 
@@ -91,7 +99,7 @@ static void throttle_selection_handler_cb(lv_event_t * e)
   lv_obj_t * obj = lv_event_get_target(e);
   if(code == LV_EVENT_VALUE_CHANGED) 
   {
-    uint32_t id = lv_btnmatrix_get_selected_btn(objects.throttle_mtx);    //Retrieve the Selected Throttle number
+    uint8_t id = lv_btnmatrix_get_selected_btn(objects.throttle_mtx);    //Retrieve the Selected Throttle number
     activeThrottle = id;                                                  //Make this the new Active Throttle
     populateThrottle();
     loadScreen(SCREEN_ID_THROTTLE);
@@ -100,37 +108,41 @@ static void throttle_selection_handler_cb(lv_event_t * e)
 
 static void functions_cb(lv_event_t * e)
 {
-  if(rosterMode == GUEST_INACTIVE)
+  if(rosterMode != GUEST_ACTIVE)
   {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target(e);
-    uint32_t mapslot = lv_btnmatrix_get_selected_btn(obj); 
-    if(mapslot >9) return;
-    uint32_t fslot = abs_xlate[mapslot];
-    if(funcName[activeLocoID][fslot] != "")
+    uint32_t mapSlot = lv_btnmatrix_get_selected_btn(obj); 
+//    Serial.printf("MapSlot: %d\n", mapSlot);
+    uint32_t fSlot = abs_xlate[mapSlot];
+//    Serial.printf("fSlot: %d\n", fSlot);
+    uint8_t funcNum = slot2Func[fSlot];     //check
+//    Serial.printf("Function Number: %d\n", funcNum);
+    if(funcNames[activeLocoID][funcNum] != "")    //check
     {
       if(code == LV_EVENT_PRESSED)
       {
-//        Serial.printf("Function Pressed: %d\n", funcOption[activeLocoID][fslot]);
-        if(funcState[activeLocoID][fslot] == 1) funcState[activeLocoID][fslot] = 0;
-        else funcState[activeLocoID][fslot] = 1;
+//        Serial.printf("Function Pressed: %d\n", funcOptions[activeLocoID][fslot]);
+        if(funcStates[activeLocoID][funcNum] == 1) funcStates[activeLocoID][funcNum] = 0;
+        else funcStates[activeLocoID][funcNum] = 1;
         //Send the DCCEX Command...
-        String functionCMD = ("<F " + String(locoAddress[activeLocoID]) + " " + String(atoi(funcNumber[activeLocoID][fslot])) + " " + String(funcState[activeLocoID][fslot]) + ">");
+        String functionCMD = ("<F " + String(locoAddresses[activeLocoID]) + " " + String(funcNum) + " " + String(funcStates[activeLocoID][funcNum]) + ">");
         Serial.println(functionCMD);
 //        client.print(functionCMD);
         if(!client.print(functionCMD)) Serial.println("Transmit Failed");
-      }else if(code == LV_EVENT_RELEASED)
+      }
+      if(code == LV_EVENT_RELEASED)
       {
- //       Serial.printf("Function Released: %d\n", funcOption[activeLocoID][fslot]);
-        if(funcOption[activeLocoID][fslot] == 1)
+//        Serial.printf("Function %d in Slot: %d has Option state: %d\n", funcNum, fSlot, funcOptions[activeLocoID][funcNum]);
+        if(funcOptions[activeLocoID][funcNum] == 1)
         {
-          lv_btnmatrix_clear_btn_ctrl(obj, func_xlate[fslot], LV_BTNMATRIX_CTRL_CHECKED);
-          funcState[activeLocoID][fslot] = 0;
+          lv_btnmatrix_clear_btn_ctrl(obj, mapSlot, LV_BTNMATRIX_CTRL_CHECKED);
+          funcStates[activeLocoID][funcNum] = 0;
           //Send the DCCEX Command...
-          String functionCMD = ("<F " + String(locoAddress[activeLocoID]) + " " + String(atoi(funcNumber[activeLocoID][fslot])) + " " + String(funcState[activeLocoID][fslot]) + ">");
+          String functionCMD = ("<F " + String(locoAddresses[activeLocoID]) + " " + String(funcNum) + " " + String(funcStates[activeLocoID][funcNum]) + ">");
           Serial.println(functionCMD);
           if(!client.print(functionCMD)) Serial.println("Transmit Failed");
-//          client.print(functionCMD);
+          client.print(functionCMD);
         }
       }
     }
@@ -139,7 +151,6 @@ static void functions_cb(lv_event_t * e)
 
 void dd_locos_cb(lv_event_t * e)
 {
-  //clearGuest();
   lv_event_code_t code = lv_event_get_code(e);
 //  lv_obj_t * obj = lv_event_get_target(e);
   if(code == LV_EVENT_VALUE_CHANGED) 
@@ -179,7 +190,7 @@ void action_throttle_button(lv_event_t * e)
       lv_label_set_text(objects.lbl_address, lv_textarea_get_text(objects.ta_guest_address));
       for(int i = 0; i < NUM_FUNC_SLOTS; i++)
       {
-        lv_btnmatrix_set_btn_ctrl(objects.function_mtx, func_xlate[i], LV_BTNMATRIX_CTRL_HIDDEN);        
+        lv_btnmatrix_set_btn_ctrl(objects.functions_mtx, slotXlate[i], LV_BTNMATRIX_CTRL_HIDDEN);        
       }
       gfx->flush(true);
       break;
@@ -197,8 +208,8 @@ void action_throttle_button(lv_event_t * e)
       if(rosterMode != GUEST_ACTIVE)
       {
 //        Serial.println("Setting Loco Speed");
-        locoSpeed[activeLocoID] = lv_slider_get_value(objects.slider);
-        setSpeed(atoi(locoAddress[activeLocoID]), locoSpeed[activeLocoID], locoDir[activeLocoID]);
+        locoSpeeds[activeLocoID] = lv_slider_get_value(objects.slider);
+        setSpeed(atoi(locoAddresses[activeLocoID]), locoSpeeds[activeLocoID], locoDirs[activeLocoID]);
       }else     //Guest Active
       {
 //        Serial.println("Setting Guest Speed");
@@ -219,34 +230,54 @@ void action_throttle_button(lv_event_t * e)
     }
     case 6:
 //      Serial.println("Clicked Up");
-      if(locoSpeed[activeLocoID] < 126) locoSpeed[activeLocoID] = locoSpeed[activeLocoID] + 1;
-      setSpeed(atoi(locoAddress[activeLocoID]), locoSpeed[activeLocoID], locoDir[activeLocoID]);
-//      Serial.printf("New Speed: %d\n", locoSpeed[activeLocoID]);
+      if(locoSpeeds[activeLocoID] < 126) locoSpeeds[activeLocoID] = locoSpeeds[activeLocoID] + 1;
+      setSpeed(atoi(locoAddresses[activeLocoID]), locoSpeeds[activeLocoID], locoDirs[activeLocoID]);
+//      Serial.printf("New Speed: %d\n", locoSpeeds[activeLocoID]);
       break;
     case 7:
 //      Serial.println("Clicked Down");
-      if(locoSpeed[activeLocoID] > 0) locoSpeed[activeLocoID] = locoSpeed[activeLocoID] - 1;
-      setSpeed(atoi(locoAddress[activeLocoID]), locoSpeed[activeLocoID], locoDir[activeLocoID]);
-//      Serial.printf("New Speed: %d\n", locoSpeed[activeLocoID]);
+      if(locoSpeeds[activeLocoID] > 0) locoSpeeds[activeLocoID] = locoSpeeds[activeLocoID] - 1;
+      setSpeed(atoi(locoAddresses[activeLocoID]), locoSpeeds[activeLocoID], locoDirs[activeLocoID]);
+//      Serial.printf("New Speed: %d\n", locoSpeeds[activeLocoID]);
       break;
-    case 29:    //Edit Button
+    case 29:    //Funcs Button
     {
+      if(rosterMode != GUEST_ACTIVE)
+      {
+        for(uint8_t i = 0; i < NUM_FUNCS; i++)
+        {
+          uint16_t fSlot = funcSlots[activeLocoID][i];
+          lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, i, LV_BTNMATRIX_CTRL_CHECKED);
+//        Serial.printf("Processing fSlot: %d and i: %d\n", fSlot, i);
+          if(fSlot != 255)
+          {
+//          Serial.printf("Setting i: %d\n", i);
+            lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, i, LV_BTNMATRIX_CTRL_DISABLED);
+            if(funcStates[activeLocoID][i] == 1) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, i, LV_BTNMATRIX_CTRL_CHECKED);
+          }
+        }
+        loadScreen(SCREEN_ID_FUNCTIONS);
+      }
+      break;
+    }
+/*    {
       clearGuest();
       editingID = activeLocoID;
-      lv_textarea_set_text(objects.ta_name, locoName[editingID]);
-      lv_textarea_set_text(objects.ta_address, locoAddress[editingID]);
+      lv_textarea_set_text(objects.ta_name, locoNames[editingID]);
+      lv_textarea_set_text(objects.ta_address, locoAddresses[editingID]);
       setupFuncEditSlots();
       callingPage = SCREEN_ID_THROTTLE;
       loadScreen(SCREEN_ID_EDIT_LOCO);
       break;
     }
+*/
     case 30:    //Prog Button
-      clearGuest();
+      rosterMode = GUEST_INACTIVE;
       callingPage = SCREEN_ID_THROTTLE;
       loadScreen(SCREEN_ID_PROGRAM);
       break;
     case 31:    //Roster
-      clearGuest();
+      rosterMode = GUEST_INACTIVE;
       callingPage = SCREEN_ID_THROTTLE;
       loadScreen(SCREEN_ID_ROSTER);
       break;
@@ -260,15 +291,15 @@ void action_throttle_button(lv_event_t * e)
 }
 void setLocoFwd()
 {
-  Serial.println("Direction set Forward");
+//  Serial.println("Direction set Forward");
   if(rosterMode != GUEST_ACTIVE)
   {
-    if(locoSpeed[activeLocoID] > thresholdSpeed) locoSpeed[activeLocoID] = 0;
-    locoDir[activeLocoID] = 1;
-    setSpeed(atoi(locoAddress[activeLocoID]), locoSpeed[activeLocoID], locoDir[activeLocoID]);
+    if(locoSpeeds[activeLocoID] > threshold) locoSpeeds[activeLocoID] = 0;
+    locoDirs[activeLocoID] = 1;
+    setSpeed(atoi(locoAddresses[activeLocoID]), locoSpeeds[activeLocoID], locoDirs[activeLocoID]);
   }else
   {
-    if(guestSpeed > thresholdSpeed) guestSpeed = 0;
+    if(guestSpeed > threshold) guestSpeed = 0;
     guestDir = 1;
     setSpeed(atoi(lv_textarea_get_text(objects.ta_guest_address)), guestSpeed, guestDir);
   }
@@ -276,16 +307,78 @@ void setLocoFwd()
 
 void setLocoRev()
 {
-  Serial.println("Direction set Reverse");
+//  Serial.println("Direction set Reverse");
   if(rosterMode != GUEST_ACTIVE)
   {
-    if(locoSpeed[activeLocoID] > thresholdSpeed) locoSpeed[activeLocoID] = 0;
-    locoDir[activeLocoID] = 0;
-    setSpeed(atoi(locoAddress[activeLocoID]), locoSpeed[activeLocoID], locoDir[activeLocoID]);
+    if(locoSpeeds[activeLocoID] > threshold) locoSpeeds[activeLocoID] = 0;
+    locoDirs[activeLocoID] = 0;
+    setSpeed(atoi(locoAddresses[activeLocoID]), locoSpeeds[activeLocoID], locoDirs[activeLocoID]);
   }else
   {
-    if(guestSpeed > thresholdSpeed) guestSpeed = 0;
+    if(guestSpeed > threshold) guestSpeed = 0;
     guestDir = 0;
     setSpeed(atoi(lv_textarea_get_text(objects.ta_guest_address)), guestSpeed, guestDir);
+  }
+}
+
+void action_functions_button(lv_event_t * e)
+{
+  void *user_data = lv_event_get_user_data(e);
+  int pressedButton = *((int*)(&user_data));
+  switch(pressedButton)
+  {
+    case 30:    //Cancel Button
+      populateLocoDetails();
+      loadScreen(SCREEN_ID_THROTTLE);
+      break;
+    case 31:    //Description Button
+      break;
+    case 32:    //Done Button
+      populateLocoDetails();
+      loadScreen(SCREEN_ID_THROTTLE);
+      break;
+    default:
+      break;
+  }
+}
+
+static void ex_functions_cb(lv_event_t * e)
+{
+  if(rosterMode != GUEST_ACTIVE)
+  {
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t * obj = lv_event_get_target(e);
+    uint32_t fNum = lv_btnmatrix_get_selected_btn(obj); 
+    if(fNum == 65535) return;
+//    Serial.printf("Button: %d\n", fNum);
+    if(lv_btnmatrix_has_btn_ctrl(obj, fNum, LV_BTNMATRIX_CTRL_DISABLED)) return;
+
+//    if(funcNames[activeLocoID][fSlot] != "")
+//    {
+    if(code == LV_EVENT_PRESSED)
+    {
+//      Serial.printf("Function Pressed: %d\n", fNum);
+      lv_label_set_text(objects.func_description, funcNames[activeLocoID][fNum]);
+      if(funcStates[activeLocoID][fNum] == 1) funcStates[activeLocoID][fNum] = 0;
+      else funcStates[activeLocoID][fNum] = 1;
+
+      //Send the DCCEX Command...
+      String functionCMD = ("<F " + String(locoAddresses[activeLocoID]) + " " + String(fNum) + " " + String(funcStates[activeLocoID][fNum]) + ">");
+      Serial.println(functionCMD);
+      if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+    }else if(code == LV_EVENT_RELEASED)
+    {
+ //       Serial.printf("Function Released: %d\n", funcOptions[activeLocoID][fSlot]);
+      lv_label_set_text(objects.func_description, "");
+      if(funcOptions[activeLocoID][fNum] == 1)              //Check if Momentary
+      {
+        lv_btnmatrix_clear_btn_ctrl(obj, fNum, LV_BTNMATRIX_CTRL_CHECKED);
+        funcStates[activeLocoID][fNum] = 0;
+          //Send the DCCEX Command...
+        String functionCMD = ("<F " + String(locoAddresses[activeLocoID]) + " " + String(fNum) + " " + String(funcStates[activeLocoID][fNum]) + ">");
+        Serial.println(functionCMD);
+        if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+      }
+    }
   }
 }

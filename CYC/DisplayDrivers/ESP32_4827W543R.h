@@ -6,6 +6,8 @@
  ******************************************************************************/
 
 #define TFT_BACKLIGHT 250
+#define MIN_BL 242
+#define FUNCCOL 100
 
 #define GFX_BL 1 // backlight pin
 
