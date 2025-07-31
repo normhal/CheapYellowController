@@ -15,36 +15,25 @@
  *  along with this program.  If not, see http://www.gnu.org/licenses
  *
  *****************************************************************************************************************************
-*/
+ */
+
+#ifndef WIFI_PAGE_H
+#define WIFI_PAGE_H
+
+void action_wifi_button(lv_event_t * e);
 /*
-
- *   By Ross Scanlon iam@rosscoe.com
-
+ ********************************************************************************************************
+ * Call-Back routine for WiFi Dropdown
+ ********************************************************************************************************
 */
-#ifndef THROTTLE_PAGE_H
-#define THROTTLE_PAGE_H
+void dd_cb(lv_event_t * e);
+/*
+ ********************************************************************************************************
+ * Handler for a Selected SSID from the list
+ ********************************************************************************************************
+*/
+static void ssid_selected(lv_event_t * e);
 
+void connectWiFi();
 
-void populateThrottle();
-
-void clearGuest();
-
-void populateLocoDetails();
-
-static void throttle_selection_handler_cb(lv_event_t * e);
-
-static void functions_cb(lv_event_t * e);
-
-void dd_locos_cb(lv_event_t * e);
-
-void setSpeed(uint16_t locoAddr, uint16_t newSpeed, uint8_t newDir);
-
-void action_throttle_button(lv_event_t * e);
-
-static void ex_functions_cb(lv_event_t * e);
-
-void setLocoRev();
-
-void setLocoFwd();
-
-#endif
+#endif // WIFI_PAGE_H

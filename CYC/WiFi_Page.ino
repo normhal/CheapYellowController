@@ -16,6 +16,8 @@
  *
  *****************************************************************************************************************************
 */
+#include "WiFi_Page.h"
+
 void action_wifi_button(lv_event_t * e)
 {
   void *user_data = lv_event_get_user_data(e);
