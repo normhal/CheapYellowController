@@ -5,17 +5,28 @@
  * Start of Arduino_GFX setting
  ******************************************************************************/
 
+#define TFT_BACKLIGHT 250
+#define MIN_BL 242
+#define FUNCCOL 100
+
 #define GFX_BL 2 // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 #define ROTATION 1
+
 #define SCREEN_WIDTH 272          //Using EEZ Orientation
 #define SCREEN_HEIGHT 480
+
 #define DISPLAY_WIDTH 480         //Physical Display Properties ex rotation
 #define DISPLAY_HEIGHT 272
+
 #define AUTO_FLUSH true
 
 #define NAME_COL_WIDTH 210
 
-const uint8_t TFT_BACKLIGHT = 246;
+#define NAME_COL0_WIDTH 200
+#define NAME_COL1_WIDTH 50
+
+
+//const uint8_t TFT_BACKLIGHT = 246;
 
 
  Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
@@ -48,6 +59,30 @@ Arduino_DataBus *bus = create_default_Arduino_DataBus();
 /*******************************************************************************
  * End of Arduino_GFX setting
  ******************************************************************************/
+
+
+/*******************************************************************************
+ * Rotary Encoder Specifics
+ * Encoder uses I2C bus on 37 and 38 these are available on GPIO_D of DIS06043H board
+ ******************************************************************************/
+ 
+ #define I2C_SDA 37
+ #define I2C_SCL 38
+
+ #define SS_SWITCH        24
+ #define SEESAW_ADDR    0x36
+
+ Adafruit_seesaw ss;
+
+ void initRE()
+ {
+    // Initialization done by "ss.begin(SEESAW_ADDR)" in main sketch
+    //Serial1.setPins(RX_1, TX_1);
+   Wire.setPins(I2C_SDA, I2C_SCL);
+//   Wire1.begin(I2C_SDA, I2C_SCL);
+}
+
+
 
 #include <xpt2046.h>
 /*

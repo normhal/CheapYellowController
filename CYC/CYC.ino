@@ -382,7 +382,6 @@ void setBacklight(uint8_t brightness)
   ledcSetup(0, 5000, 8);                          //If using ESP Boards 2.0.x LEDChannel, frequency, resolution
   ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
   ledcWrite(0, lcdBL);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
-
 //ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
 //ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
 }

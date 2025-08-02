@@ -37,12 +37,15 @@
 
 // other includes for platformio RKS 27/05/2025
 #ifdef PLATFORMIO_BUILD
+#include "EEPROM.h"
+#include "Roster_Page.h"
 #include "Menu_Page.h"
 #include "Program_Page.h"
 #include "Edit_Loco_Page.h"
 #include "Little_FS.h"
 #include "CSInterface.h"
 #include "Throttle_Page.h"
+#include "WiFi_Page.h"
 #endif
 
 //WiFiClient client;
@@ -83,6 +86,8 @@ Preferences eeProm;
 //  #include "DisplayDrivers/ESP32_8048S070C.h"
 //#elif defined ESP4848S040C     //TODO
 //  #include "DisplayDrivers/ESP32_4848S040C.h"
+#elif defined ESP32DIS06043H
+  #include "DisplayDrivers/ESP32_DIS06043H.h"
 #endif
 
 void dd_locos_cb(lv_event_t * e);
@@ -197,8 +202,10 @@ Network_Status_t networkStatus = NO_NETWORK;
  ****************************************************************************************************************
 */
 
-static void ta_event_cb(lv_event_t * e);
+#ifndef PLATFORMIO_BUILD
 static void dd_cb(lv_event_t * e);
+#endif
+static void ta_event_cb(lv_event_t * e);
 static void functions_cb(lv_event_t * e);
 static void tbl_roster_cb(lv_event_t * e);
 static void ssid_selected(lv_event_t * e);
@@ -207,6 +214,7 @@ void populateSelected(String);
 void populateSlots(uint8_t);
 void populateLocoArray(String);
 void populateLocoFunctions(String);
+
 /*
  ****************************************************************************************************************
  * Defines

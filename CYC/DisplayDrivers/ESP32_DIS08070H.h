@@ -15,7 +15,14 @@
 
 #define NAME_COL_WIDTH 360
 
-#define TFT_BACKLIGHT 230
+#define NAME_COL0_WIDTH 200
+#define NAME_COL1_WIDTH 50
+
+
+#define TFT_BACKLIGHT 250
+#define MIN_BL 242
+#define FUNCCOL 100
+
 
 //#define GFX_DEV_DEVICE ESP32_8048W550
 #define RGB_PANEL
@@ -33,6 +40,29 @@
  Arduino_RGB_Display *gfx = new Arduino_RGB_Display(DISPLAY_WIDTH, DISPLAY_HEIGHT, rgbpanel, ROTATION, AUTO_FLUSH);
 
 Arduino_DataBus *bus = create_default_Arduino_DataBus();
+
+
+/*******************************************************************************
+ * Rotary Encoder Specifics
+ * Encoder uses default I2C bus on 19 and 20
+ ******************************************************************************/
+ 
+#define I2C_SDA 19
+#define I2C_SCL 20
+
+#define SS_SWITCH        24
+#define SEESAW_ADDR    0x36
+
+Adafruit_seesaw ss;
+
+void initRE()
+ {
+    // Initialization done by "ss.begin(SEESAW_ADDR)" in main sketch
+    //Serial1.setPins(RX_1, TX_1);
+   Wire.setPins(I2C_SDA, I2C_SCL);
+//   Wire1.begin(I2C_SDA, I2C_SCL);
+ }
+
 
 /*******************************************************************************
  * Capacitive Touch
