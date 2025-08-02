@@ -86,6 +86,8 @@ Preferences eeProm;
 //  #include "DisplayDrivers/ESP32_8048S070C.h"
 //#elif defined ESP4848S040C     //TODO
 //  #include "DisplayDrivers/ESP32_4848S040C.h"
+#elif defined ESP32DIS06043H
+  #include "DisplayDrivers/ESP32_DIS06043H.h"
 #endif
 
 void dd_locos_cb(lv_event_t * e);
