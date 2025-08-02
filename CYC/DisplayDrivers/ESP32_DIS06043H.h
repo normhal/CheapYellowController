@@ -63,7 +63,7 @@ Arduino_DataBus *bus = create_default_Arduino_DataBus();
 
 /*******************************************************************************
  * Rotary Encoder Specifics
- * Encoder uses default I2C bus on 19 and 20
+ * Encoder uses I2C bus on 37 and 38 these are available on GPIO_D of DIS06043H board
  ******************************************************************************/
  
  #define I2C_SDA 37
