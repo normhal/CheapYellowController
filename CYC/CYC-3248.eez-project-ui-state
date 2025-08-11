@@ -1,7 +1,7 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-3248.eez-project]:/userPages/9",
-    "selectedBitmapObject": "[CYC-3248.eez-project]:/bitmaps/0",
+    "selectedUserPageObject": "[CYC-3248.eez-project]:/userPages/8",
+    "selectedActionObject": "[CYC-3248.eez-project]:/actions/30",
     "subnavigationSelectedItems": {}
   },
   "layoutModel": {
@@ -71,6 +71,7 @@
           {
             "type": "border",
             "selected": 0,
+            "size": 75.5,
             "location": "bottom",
             "children": [
               {
@@ -195,10 +196,10 @@
                 {
                   "type": "tab",
                   "id": "#6723a9af-d361-498e-99d0-398633f958ea",
-                  "name": "Config",
+                  "name": "EditAcc",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-3248.eez-project]:/userPages/9",
+                    "objectPath": "[CYC-3248.eez-project]:/userPages/8",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1783,19 +1784,23 @@
     "[CYC-3248.eez-project]:/userPages/0[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "4": {},
-          "10": {
+          "3": {},
+          "5": {},
+          "6": {
+            "0": {}
+          },
+          "8": {},
+          "9": {
             "$selected": true
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -323.34891774891776,
-          "y": -263.6948051948051
+          "x": -160,
+          "y": -360
         },
-        "scale": 1.25
+        "scale": 0.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1807,7 +1812,8 @@
     "[CYC-3248.eez-project]:/userPages/8[flow-state]": {
       "selection": {
         "0": {
-          "3": {
+          "3": {},
+          "6": {
             "$selected": true
           }
         }
@@ -1817,7 +1823,7 @@
           "x": -160,
           "y": -240
         },
-        "scale": 1.25
+        "scale": 0.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1829,13 +1835,7 @@
     "[CYC-3248.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "3": {},
-          "10": {},
-          "15": {
-            "$selected": true
-          },
-          "16": {},
-          "17": {}
+          "3": {}
         }
       },
       "transform": {
@@ -1843,7 +1843,7 @@
           "x": -48.25,
           "y": -341.0625
         },
-        "scale": 1.25
+        "scale": 0.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1901,17 +1901,16 @@
       "selection": {
         "0": {
           "1": {},
-          "5": {
-            "$selected": true
-          }
+          "2": {},
+          "8": {}
         }
       },
       "transform": {
         "translate": {
           "x": -160,
-          "y": -240
+          "y": -360
         },
-        "scale": 1.25
+        "scale": 0.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -2013,9 +2012,7 @@
           "8": {},
           "9": {
             "$selected": true
-          },
-          "11": {},
-          "14": {}
+          }
         }
       },
       "transform": {
@@ -2023,7 +2020,7 @@
           "x": -160,
           "y": -360
         },
-        "scale": 1.25
+        "scale": 0.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -2053,16 +2050,16 @@
     "[CYC-3248.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "13": {
+          "0": {
             "$selected": true
           },
-          "15": {}
+          "4": {}
         }
       },
       "transform": {
         "translate": {
           "x": -160,
-          "y": -240
+          "y": -360
         },
         "scale": 1.25
       },
@@ -2126,15 +2123,43 @@
       "selection": {
         "0": {
           "0": {},
-          "1": {}
+          "3": {
+            "$selected": true
+          },
+          "4": {},
+          "5": {},
+          "6": {}
         }
       },
       "transform": {
         "translate": {
           "x": -160,
-          "y": -480
+          "y": -360
         },
-        "scale": 1.25
+        "scale": 0.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-3248.eez-project]:/userPages/13[flow-state]": {
+      "selection": {
+        "0": {
+          "3": {},
+          "7": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -153.99915762098556,
+          "y": -300.5
+        },
+        "scale": 0.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -2165,6 +2190,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 1.25,
+  "flowZoom": 0.75,
   "implementationLanguage": "C"
 }

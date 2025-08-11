@@ -34,15 +34,15 @@
 #define TFT_RST GFX_NOT_DEFINED
 #define IPS true
 
-//#define DIRECT_MODE // Uncomment to enable full frame buffer
+//#define DIRECT_MODE // Uncomment to enable full frame buffer - not supported by Arduino_GFX
 
 Arduino_DataBus *bus = new Arduino_ESP32QSPI(TFT_CS, TFT_SCK, TFT_SDA0, TFT_SDA1, TFT_SDA2, TFT_SDA3);
 
-Arduino_NV3041A *panel = new Arduino_NV3041A(bus, TFT_RST, ROTATION, IPS);
+//Arduino_NV3041A *panel = new Arduino_NV3041A(bus, TFT_RST, ROTATION, IPS);
 
-Arduino_GFX *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, panel);
+Arduino_GFX *gfx = new Arduino_NV3041A(bus, GFX_NOT_DEFINED, ROTATION, IPS);
 
-#define CANVAS
+//#define CANVAS
 
 /*******************************************************************************
  * Rotary Encoder Specifics

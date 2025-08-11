@@ -16,51 +16,11 @@
  *
  *****************************************************************************************************************************
 */
-void listDir(fs::FS &fs, const char *dirname, uint8_t levels) 
-{
-  Serial.printf("Listing directory: %s\n", dirname);
-
-  File root = fs.open(dirname, "r");
-  if (!root) 
-  {
-    Serial.println("Failed to open directory");
-    return;
-  }
-  if (!root.isDirectory()) 
-  {
-    Serial.println("Not a directory");
-    return;
-  }
-
-  File file = root.openNextFile();
-
-  while (file) 
-  {
-    if (file.isDirectory()) 
-    {
-      Serial.print("  DIR : ");
-      Serial.println(file.name());
-      if (levels) 
-      {
-        listDir(fs, file.name(), levels - 1);
-      }
-    } else 
-    {
-      Serial.print("  FILE: ");
-      Serial.print(file.name());
-      Serial.print("  SIZE: ");
-      Serial.println(file.size());
-
-      // Serial.print(file);
-    }
-    file = root.openNextFile();
-  }
-}
 
 /****************************************************************************************************************
   Parser Routine which loads the Accessory file from LittleFS
 ****************************************************************************************************************/
-/*
+
 void populateAccArray(const char *path)
 {
   File file = LittleFS.open(path, "r");
@@ -70,7 +30,7 @@ void populateAccArray(const char *path)
       return;
   }
   Serial.println("Calling Acc Parser");
-  CSV_Parser cp("udsududud",  true, ',');
+  CSV_Parser cp("sssudud",  true, ',');
 
   while (file.available()) 
   {
@@ -78,11 +38,9 @@ void populateAccArray(const char *path)
   }
   cp.parseLeftover();
 
-//  if(cp.readFSfile(path))      // Serial.println("readFSfile failed");
-//  {
-  uint16_t *accId = (uint16_t *)cp["ID"];
+  char **accRow = (char **)cp["ID"];
   char **accName = (char **)cp["Name"];
-  uint16_t *accAddress = (uint16_t *)cp["Address"];
+  char **accAddress = (char **)cp["Address"];
   uint16_t *accImage = (uint16_t *)cp["Image"];
   uint16_t *accType = (uint16_t *)cp["Type"];
 
@@ -91,20 +49,23 @@ void populateAccArray(const char *path)
 
   for(int row = 0; row < cp.getRowsCount(); row++)      
   {
-    hcAcc[row].AccId = accId[row];
-    hcAcc[row].AccName = accName[row];
-    hcAcc[row].AccAddress = accAddress[row];
-    hcAcc[row].AccImage = accImage[row];
-    hcAcc[row].AccType = accType[row];
+    Turnouts.push_back(HCAcc());
+    Turnouts[row].AccRow = accRow[row];
+    Turnouts[row].AccName = accName[row];
+    Turnouts[row].AccAddress = accAddress[row];
+    Turnouts[row].AccImage = accImage[row];
+    Turnouts[row].AccType = accType[row];
+    Turnouts[row].AccState = 0;
   }
   file.close();
   Serial.print("Acc Rows Read: ");
   Serial.println(cp.getRowsCount());
 }
-*/
+
 //****************************************************************************************************************
 //  Parser Routine which loads the Locos file from LittleFS
 //****************************************************************************************************************
+
 void populateLocoArray(const char *path)
 {
   File file = LittleFS.open(path, "r");
@@ -132,20 +93,25 @@ void populateLocoArray(const char *path)
   locoCount = cp.getRowsCount();
   for(int row = 0; row < cp.getRowsCount(); row++)      
   {
-    strcpy(locoNames[row], locoLongName[row]);
-    strcpy(locoAddresses[row], locoAddr[row]);
-    locoSpeeds[row] = 0;
-    locoDirs[row] = 1;       //Default to Forward
+    Locomotives.push_back(HCLoco());
+    Locomotives[row].LocoName = locoLongName[row];
+    Locomotives[row].LocoAddress = locoAddr[row];
+    Locomotives[row].LocoSpeed = 0;
+    Locomotives[row].LocoDir = 1;       //Default to Forward
   }
-  for(int row = locoCount; row < NUM_LOCOS; row++)  //Fill the rest of the Array with Blanks
+  Serial.printf("Records Pushed %d\n", Locomotives.size());
+/*
+  for(int row = locoCount; row < Locomotives.size(); row++)  //Fill the rest of the Array with Blanks
   {
-    strcpy(locoNames[row], "");
-    strcpy(locoAddresses[row], "");
-    locoSpeeds[row] = 0;
-    locoDirs[row] = 1;
+    Locomotives.push_back(HCLoco());
+    Locomotives[row].LocoName = "";
+    Locomotives[row].LocoAddress = "";
+    Locomotives[row].LocoSpeed = 0;
+    Locomotives[row].LocoDir = 1;
 //    Serial.printf("Wrote Blank Record %d\n", row);
-    locoCount = row;
+//    locoCount = row;
   }
+*/
   file.close();
 }
 
@@ -163,7 +129,7 @@ void populateLocoFunctions(const char *path)
   }
 
   Serial.println("Calling Functions Parser");
-  CSV_Parser cp("ududsudud", true, ',');       //5x uint16_t values
+  CSV_Parser cp("ududsudud", true, ',');       //locoID, function, Name, slot, option
 
   Serial.print("Reading from file: ");
   Serial.println(path);
@@ -175,7 +141,7 @@ void populateLocoFunctions(const char *path)
   cp.parseLeftover();
 
   uint16_t *locoid = (uint16_t*)cp["LocoID"];         //Loco ID
-  uint16_t *function = (uint16_t*)cp["Function"];           //Function Number
+  uint16_t *function = (uint16_t*)cp["Function"];     //Function Number
   char **name = (char**)cp["Name"];                   //Function Name
   uint16_t *slot = (uint16_t*)cp["Slot"];             //Function Slot
   uint16_t *option = (uint16_t*)cp["Momentary"];      //Function Option
@@ -186,11 +152,11 @@ void populateLocoFunctions(const char *path)
   for(int row = 0; row < cp.getRowsCount(); row++)      
   {
 //    funcNumber[locoid[row]][slot[row]] = function[row]; 
-    funcSlots[locoid[row]][function[row]] = slot[row];
+    Locomotives[locoid[row]].FuncSlot[function[row]] = slot[row];
 //    Serial.println(function[row]);
-    strcpy(funcNames[locoid[row]][function[row]], name[row]);
+    Locomotives[locoid[row]].FuncName[function[row]] = name[row];
 //    Serial.println(name[row]);
-    funcOptions[locoid[row]][function[row]] = option[row];                                             //0= Function | Momentary, 1=image
+    Locomotives[locoid[row]].FuncOption[function[row]] = option[row];                                             //0= Function | Momentary, 1=image
 //    Serial.println(option[row]);
 //    Serial.printf("LocoID: %d Function: %d Slot: %d Name: %s Option: %d\n", locoid[row], function[row], slot[row], name[row], option[row]);
   }
@@ -367,7 +333,7 @@ void saveLittleFS()
   if(locosDirty == 1) saveLocos(LittleFS, "/locos.new", "ID,LongName, Address\n");
   if(functionsDirty == 1) saveFunctions(LittleFS, "/functions.new", "LocoID,Function,Name,Slot,Momentary\n");
   if(throttlesDirty == 1) saveThrottles(LittleFS, "/throttleids.new", "Throttle,Slot,LocoID\n");
-//  if(accessoriesDirty == 1) saveAccessories(LittleFS, "/accessories.new", "ID,Name,Address,Image,Type\n");
+  if(accessoriesDirty == 1) saveAccessories(LittleFS, "/accessories.new", "ID,Name,Address,Image,Type\n");
 //  if(routesDirty == 1) saveRoutes(LittleFS, "/routes.new", "ID,Acc1,State1,Acc2,State2,Acc3,State3,Acc4,State4,Acc5,State5,Acc6,State6\n");
   if(credentialsDirty == 1) saveCredentials(LittleFS, "/credentials.new", "ID,SSID,Password,IPAddress,Port\n");
   Serial.println("All Updated Files Saved");
@@ -400,7 +366,7 @@ void saveLocos(fs::FS &fs, const char * path, const char * message)
   int row = 0;
   for(row = 0; row < NUM_LOCOS; row++)      //ALWAYS write the full number of locos to preserve LocoID link to functions and selectedIDs
   {
-    String message = String(row) + "," +  locoNames[row] + "," + locoAddresses[row] + "\n";
+    String message = String(row) + "," +  Locomotives[row].LocoName + "," + Locomotives[row].LocoAddress + "\n";
 //    Serial.print(message);
     file.print(message);
 //    Serial.print(".");
@@ -472,16 +438,17 @@ void saveFunctions(fs::FS &fs, const char * path, const char * message)
   }
 
   int counter = 0;
-  int row = 0;
-  for(row = 0; row < NUM_LOCOS; row++)          //  while(hcLoco[row].LocoAddress !=0)
+  int locoID = 0;
+  for(locoID = 0; locoID < NUM_LOCOS; locoID++)  
   {
-    for(uint8_t j = 0; j < NUM_FUNC_SLOTS; j++)
+    for(uint8_t fNum = 0; fNum < NUM_FUNCS; fNum++)
     {
-      if(funcSlots[row][j] != 255)
+      if(Locomotives[locoID].FuncSlot[fNum] != 255)
       {
         //LocoID,Function,Name,Slot,Momentary
-        String record = String(row) + "," + String(funcSlots[row][j]) + "," + String(funcNames[row][j]) + "," + 
-                        String(j)  + "," + String(funcOptions[row][j]) + "\n";
+        String record = String(locoID) + "," + String(fNum) + "," + String(Locomotives[locoID].FuncName[fNum]) + "," + 
+                        String(Locomotives[locoID].FuncSlot[fNum])  + "," + String(Locomotives[locoID].FuncOption[fNum]) + "\n";
+//        Serial.println(record);
         file.print(record); 
         counter++;
       }
@@ -552,7 +519,7 @@ void saveThrottles(fs::FS &fs, const char * path, const char * message)
 // Save all Accessories
 //****************************************************************************************************************
 //
-/*
+
 void saveAccessories(fs::FS &fs, const char * path, const char * message)
 {
   Serial.printf("Writing file: %s\r\n", path);
@@ -574,9 +541,9 @@ void saveAccessories(fs::FS &fs, const char * path, const char * message)
   }
   int row = 0;
 
-  while(hcAcc[row].AccAddress != 0)
+  while(Turnouts[row].AccAddress != 0)
   {
-    String record = hcAcc[row].AccId + "," + hcAcc[row].AccName + "," + hcAcc[row].AccAddress + "," + hcAcc[row].AccImage + "," + hcAcc[row].AccType + "\n" ;
+    String record = Turnouts[row].AccRow + "," + Turnouts[row].AccName + "," + Turnouts[row].AccAddress + "," + Turnouts[row].AccImage + "," + Turnouts[row].AccType + "\n" ;
     file.print(record);
     row++;
   }
@@ -591,7 +558,111 @@ void saveAccessories(fs::FS &fs, const char * path, const char * message)
   renameFile(LittleFS, "/accessories.txt", "/accessories.old");
   renameFile(LittleFS, "/accessories.new", "/accessories.txt");
 }
+
+//
+//****************************************************************************************************************
+// Save DCC-EX Locos
+//****************************************************************************************************************
+//
+void saveDCCExLocos(fs::FS &fs, const char * path, const char * message)
+{
+  lv_label_set_text(objects.lbl_list_status, "Receiving DCC-EX Roster...");
+  uint16_t lId = 0;
+  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
+  {
+    Locomotives.push_back(HCLoco());
+    Locomotives[lId].LocoName = loco->getName();
+    Locomotives[lId].LocoAddress = loco->getAddress();
+//    Serial.printf("Loco ID: %d Name: %s and Address: %s\n", lId, Locomotives[lId].LocoName, Locomotives[lId].LocoAddress);
+    uint8_t funcSlot = 0;
+    for(uint8_t funcNum = 0; funcNum < NUM_FUNCS; funcNum++)
+    {
+      Locomotives[lId].FuncSlot[funcNum] = 255;
+      if(loco->getFunctionName(funcNum) != NULL)
+      {
+        Locomotives[lId].FuncName[funcNum] = loco->getFunctionName(funcNum);
+//        Serial.println(Locomotives[lId].FuncName[funcNum]);
+        Locomotives[lId].FuncSlot[funcNum] = funcSlot;
+        if(funcSlot < NUM_FUNC_SLOTS) funcSlot++;
+        else funcSlot = 255;
+      }
+    }
+//      Locomotives[lId].FuncOption[funcNum] = loco>isFunctionMomentary(funcNum);   //wrong
+//    Serial.println("Adding Loco to the Roster...");
+    lv_table_set_cell_value(objects.tbl_roster, lId, 0, Locomotives[lId].LocoName.c_str());
+    lv_table_set_cell_value(objects.tbl_roster, lId, 1, Locomotives[lId].LocoAddress.c_str());
+    lId++;
+  }  
+  Serial.println("Roster Populated");
+}
+//
+//****************************************************************************************************************
+// Save DCC-EX Accessories/Turnouts
+//****************************************************************************************************************
+//
+void saveDCCExAcc(fs::FS &fs, const char * path, const char * message)
+{
+  uint16_t row = 0;
+  for (Turnout *turnout = dccexProtocol.turnouts->getFirst(); turnout; turnout = turnout->getNext()) 
+  {
+    Turnouts.push_back(HCAcc());
+//    char str[5];
+    String s = String(row);            //    str = itoa(row, str, 10)
+    Turnouts[row].AccRow = s;
+    Turnouts[row].AccName = turnout->getName();
+    Turnouts[row].AccAddress = turnout->getId();
+    Turnouts[row].AccImage = 0;
+    Turnouts[row].AccType = 0;
+    row++;
+  }
+  Serial.printf("%d DCC-EX Turnouts Received!\n", row);
+
+
+//    String record = String(row) + "," + exAccName + "," + String(aId) + "," + 0 + "," + 0 + "\n" ;
+//    String record = hcAcc[row].AccId + "," + hcAcc[row].AccName + "," + hcAcc[row].AccAddress + "," + hcAcc[row].AccImage + "," + hcAcc[row].AccType + "\n" ;
+//
+/*
+  Serial.printf("Writing file: %s\r\n", path);
+
+  File file = fs.open(path, "w");
+  if(!file)
+  {
+    Serial.println("- failed to open file for writing");
+    return;
+  }
+  if(file.print(message))
+  {
+    Serial.println("Writing File");
+  } else 
+  {
+    Serial.println("- write failed");
+    file.close();
+    return;
+  }
+//  uint16_t fileRow = 0;
+//  for (Turnout *turnout = dccexProtocol.turnouts->getFirst(); turnout; turnout = turnout->getNext()) 
+//  {
+//    uint16_t aId = 0;
+//    uint16_t aId = (turnout->getId() - 1);
+//    String exAccName = turnout->getName();
+//    uint16_t exAccAddress = aId;
+  int i = 0;
+  for(i = 0; i < row; i++)
+  {
+    String record = String(i) + "," + Turnouts[i].AccName + "," + Turnouts[i].AccAddress + "," + Turnouts[i].AccImage + "," + Turnouts[i].AccType + "\n" ;
+    file.print(record);
+    Serial.print(record);
+  }
+  Serial.printf("%d EX Accessories written\n", i);
+  file.close();
+
+  deleteFile(LittleFS, "/exacc.bak");
+  renameFile(LittleFS, "/exacc.old", "/exacc.bak");
+  renameFile(LittleFS, "/exacc.txt", "/exacc.old");
+  renameFile(LittleFS, "/exacc.new", "/exacc.txt");
 */
+}
+
 //
 //****************************************************************************************************************
 // Save All Routes

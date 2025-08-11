@@ -26,11 +26,11 @@ static void tbl_roster_cb(lv_event_t * e)
   if(rosterMode == EDIT_MODE)
   {
     editingID = row;
-    lv_textarea_set_text(objects.ta_name, locoNames[editingID]);
-    lv_textarea_set_text(objects.ta_address, locoAddresses[editingID]);
+    lv_textarea_set_text(objects.ta_name, Locomotives[editingID].LocoName.c_str());
+    lv_textarea_set_text(objects.ta_address, Locomotives[editingID].LocoAddress.c_str());
 
     //Now set the functions
-    setupFuncEditSlots();
+    setupFuncEditSlots(editingID);
     rosterMode = NORMAL_MODE;
     callingPage = SCREEN_ID_ROSTER;
     lv_obj_clear_state(objects.btn_edit_loco, LV_STATE_CHECKED);
@@ -87,9 +87,9 @@ void setupLocalRoster()
   populateLocoArray("/locos.txt");
 
   // Set all function numbers to 255
-  for(int i = 0; i < NUM_LOCOS; i++)
+  for(int i = 0; i < Locomotives.size(); i++)
   {
-    for(int j = 0; j < NUM_FUNCS; j++) funcSlots[i][j] = 255;
+    for(int j = 0; j < NUM_FUNCS; j++) Locomotives[i].FuncSlot[j] = 255;
   }
   
   Serial.println("Now populating Functions");
@@ -98,8 +98,8 @@ void setupLocalRoster()
   Serial.println("Now Populating the Roster...");
   for(int i = 0; i < locoCount; i++)                    //Using the count from LittleFS
   {
-    lv_table_set_cell_value(objects.tbl_roster, i, 0, locoNames[i]);
-    lv_table_set_cell_value(objects.tbl_roster, i, 1, locoAddresses[i]);
+    lv_table_set_cell_value(objects.tbl_roster, i, 0, Locomotives[i].LocoName.c_str());
+    lv_table_set_cell_value(objects.tbl_roster, i, 1, Locomotives[i].LocoAddress.c_str());
   }
   Serial.println("Local Roster Populated");
 }
@@ -108,21 +108,27 @@ void setupLocalRoster()
  * Initialize EX-Rail Roster
  **********************************************************************************************************
 */
-void setupEXRailRoster()
+void setupDCCEXRoster()
 {
-  for(int i = 0; i < NUM_LOCOS; i++)
+  Serial.printf("Records to Clear: %d\n", Locomotives.size());
+  for(int i = 0; i < Locomotives.size(); i++)
   {
     lv_obj_add_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
-    lv_label_set_text(objects.lbl_btn_roster, "EX-Rail");
-    lv_table_set_cell_value(objects.tbl_roster, i, 0, "");
-    lv_table_set_cell_value(objects.tbl_roster, i, 1, "");
-    locoNames[i][0] = '\0';
-    locoAddresses[i][0] = '\0';
+//    lv_table_set_cell_value(objects.tbl_roster, i, 0, "");
+//    lv_table_set_cell_value(objects.tbl_roster, i, 1, "");
+    Locomotives[i].LocoName = "";
+    Locomotives[i].LocoAddress = "";
     //Now clear the Functions
     for(uint8_t f = 0; f < NUM_FUNC_SLOTS; f++) 
     {
-      strcpy(funcNames[i][f], " ");
+      Locomotives[i].FuncName[f] = " ";
+      Locomotives[i].FuncSlot[f] = 255;
+      Serial.printf("LocoID: %d FuncSlot: %d\n", i, f);
     }
   }
+  Serial.println("DCC-EX Roster Requested - Boot");
+//  Serial.println("<J R>");
+//  if(!client.print("<J R>")) Serial.println("Transmit Failed");
+
   dccexProtocol.getLists(true, false, false, false);
 }

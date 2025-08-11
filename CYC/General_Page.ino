@@ -23,12 +23,12 @@ void action_general_button(lv_event_t * e)
   switch(pressedButton)
   {
     case 1: 
-      for(int i = 0; i < NUM_LOCOS; i++) 
+      for(int i = 0; i < Locomotives.size(); i++) 
       {
-        if(locoSpeeds[i] != 0)
+        if(Locomotives[i].LocoSpeed != 0)
         {
-          locoSpeeds[i] = 0;
-          setSpeed(atoi(locoAddresses[i]), locoSpeeds[i], locoDirs[i]);
+          Locomotives[i].LocoSpeed = 0;
+          setSpeed(atoi(Locomotives[i].LocoAddress.c_str()), Locomotives[i].LocoSpeed, Locomotives[i].LocoDir);
         }
       }
       lv_label_set_text(objects.lbl_stop, "Go");

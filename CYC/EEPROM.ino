@@ -18,7 +18,7 @@ void initEEPROM()
   }
   timeout   = eeProm.getUInt("timeout", 10);
   reAccel   = eeProm.getUInt("reAccel", 10);
-  funcCol   = eeProm.getUInt("funcCol", 90);
+  funcCol   = eeProm.getUInt("funcCol", FUNCCOL);
   threshold = eeProm.getUInt("threshold", 15);
   def_roster = eeProm.getBool("roster", false);
   

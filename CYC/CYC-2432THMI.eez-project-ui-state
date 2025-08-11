@@ -1,7 +1,5 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/9",
-    "selectedBitmapObject": "[CYC-2432THMI.eez-project]:/bitmaps/0",
     "subnavigationSelectedItems": {}
   },
   "layoutModel": {
@@ -23,7 +21,7 @@
           {
             "type": "border",
             "selected": 2,
-            "size": 114.20673942565918,
+            "size": 60.5,
             "location": "right",
             "children": [
               {
@@ -189,28 +187,17 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 65.67101584342964,
+              "weight": 59.90819209039548,
+              "selected": -1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
-              "children": [
-                {
-                  "type": "tab",
-                  "id": "#a0b2b84d-d36e-4e22-b769-1f7839ea8df9",
-                  "name": "Config",
-                  "component": "editor",
-                  "config": {
-                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/9",
-                    "permanent": false
-                  },
-                  "icon": "svg:page"
-                }
-              ],
+              "children": [],
               "active": true
             },
             {
               "type": "row",
               "id": "#7db3ab66-ed69-4cfb-8d79-56d36025c236",
-              "weight": 19.328984156570364,
+              "weight": 25.09180790960452,
               "children": [
                 {
                   "type": "tabset",
@@ -445,10 +432,22 @@
               "type": "tabset",
               "id": "RUNTIME-EDITORS",
               "weight": 1,
-              "selected": -1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
-              "children": []
+              "children": [
+                {
+                  "type": "tab",
+                  "id": "#728b8d4f-6204-46ac-a32e-65453ac712b4",
+                  "name": "Accessories",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/0",
+                    "permanent": false
+                  },
+                  "icon": "svg:page"
+                }
+              ],
+              "active": true
             },
             {
               "type": "row",
@@ -1296,12 +1295,8 @@
     "[CYC-2432THMI.eez-project]:/userPages/8[flow-state]": {
       "selection": {
         "0": {
-          "1": {
-            "$selected": true
-          },
-          "2": {
-            "$selected": true
-          },
+          "1": {},
+          "2": {},
           "3": {}
         }
       },
@@ -1322,13 +1317,16 @@
     "[CYC-2432THMI.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "3": {}
+          "3": {},
+          "14": {
+            "$selected": true
+          }
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -160
+          "y": -400
         },
         "scale": 2
       },
@@ -1343,18 +1341,20 @@
       "selection": {
         "0": {
           "0": {},
+          "1": {},
           "2": {},
-          "3": {},
-          "4": {},
-          "10": {
+          "5": {
             "$selected": true
-          }
+          },
+          "6": {},
+          "7": {},
+          "8": {}
         }
       },
       "transform": {
         "translate": {
-          "x": -120,
-          "y": -400
+          "x": -330,
+          "y": -260.54451692906866
         },
         "scale": 2
       },
@@ -1411,16 +1411,15 @@
     "[CYC-2432THMI.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "0": {
-            "$selected": true
-          },
-          "11": {}
+          "0": {},
+          "5": {},
+          "6": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -400
+          "y": -160
         },
         "scale": 2
       },
@@ -1435,12 +1434,8 @@
       "selection": {
         "0": {
           "0": {},
-          "1": {
-            "$selected": true
-          },
-          "2": {
-            "$selected": true
-          }
+          "1": {},
+          "2": {}
         }
       },
       "transform": {
@@ -1462,15 +1457,16 @@
         "0": {
           "0": {},
           "1": {},
-          "2": {
+          "2": {},
+          "5": {
             "$selected": true
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -120,
-          "y": -269.54451692906866
+          "x": -330,
+          "y": -380.54451692906866
         },
         "scale": 2
       },
@@ -1484,12 +1480,10 @@
     "[CYC-2432THMI.eez-project]:/userPages/7[flow-state]": {
       "selection": {
         "0": {
-          "0": {
-            "$selected": true
-          },
-          "3": {},
-          "6": {},
-          "7": {}
+          "0": {},
+          "2": {},
+          "5": {},
+          "6": {}
         }
       },
       "transform": {
@@ -1552,7 +1546,9 @@
       "selection": {
         "0": {
           "0": {},
-          "3": {}
+          "3": {
+            "$selected": true
+          }
         }
       },
       "transform": {
@@ -1586,6 +1582,55 @@
         "secondToPx": 200,
         "scrollLeft": 0
       }
+    },
+    "[../CYC_112/CYC-2432THMI.eez-project]:/userPages/0[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "4": {},
+          "6": {},
+          "7": {},
+          "8": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -330,
+          "y": -380.54451692906866
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_112/CYC-2432THMI.eez-project]:/userPages/10[flow-state]": {
+      "selection": {
+        "0": {
+          "14": {},
+          "18": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
     }
   },
   "activeOutputSection": 0,
@@ -1594,6 +1639,7 @@
   "searchMatchWholeWord": false,
   "replaceEnabled": false,
   "replaceText": "",
+  "pageRuntimeFrontFace": true,
   "breakpoints": {},
   "watchExpressions": [],
   "showComponentDescriptions": true,

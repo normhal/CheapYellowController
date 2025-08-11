@@ -34,6 +34,7 @@
 #include "screens.h"
 #include "actions.h"
 #include "images.h"
+#include <vector>
 
 // other includes for platformio RKS 27/05/2025
 #ifdef PLATFORMIO_BUILD
@@ -53,16 +54,20 @@ Preferences eeProm;
  * Display Panel Selection
  ************************************************************************************************************************
 */
-#if defined ESP2432S028R
+#if defined ESP2432S028C
+  #include "DisplayDrivers/ESP32_2432S028C.h"
+#elif defined ESP2432S028R
   #include "DisplayDrivers/ESP32_2432S028R.h"
 #elif defined ESP2432THMIR
   #include "DisplayDrivers/ESP32_2432THMIR.h"
+#elif defined ESP2432S032C
+  #include "DisplayDrivers/ESP32_2432S032C.h"
 #elif defined ESP2432S032R
   #include "DisplayDrivers/ESP32_2432S032R.h"
-#elif defined ESP3248S035R
-  #include "DisplayDrivers/ESP32_3248S035R.h"
 #elif defined ESP3248S035C
   #include "DisplayDrivers/ESP32_3248S035C.h"
+#elif defined ESP3248S035R
+  #include "DisplayDrivers/ESP32_3248S035R.h"
 #elif defined ESP3248W535C
   #include "DisplayDrivers/ESP32_3248W535.h"
 #elif defined ESP4827S043R
@@ -79,14 +84,36 @@ Preferences eeProm;
   #include "DisplayDrivers/ESP32_8048S050C.h"
 #elif defined ESP8048W550C
   #include "DisplayDrivers/ESP32_8048W550.h"
-//#elif defined ESP8048S070C     //TODO
-//  #include "DisplayDrivers/ESP32_8048S070C.h"
+#elif defined ESP8048S070C
+  #include "DisplayDrivers/ESP32_8048S070C.h"
 //#elif defined ESP4848S040C     //TODO
 //  #include "DisplayDrivers/ESP32_4848S040C.h"
 #endif
 
-void dd_locos_cb(lv_event_t * e);
+using namespace std;
+
+/*
+ ****************************************************************************************************************
+ * Prototypes
+ ****************************************************************************************************************
+*/
+static void ta_event_cb(lv_event_t * e);
+static void dd_cb(lv_event_t * e);
+static void functions_cb(lv_event_t * e);
+static void tbl_roster_cb(lv_event_t * e);
+static void ssid_selected(lv_event_t * e);
+static void dd_locos_cb(lv_event_t * e);
 static void throttle_selection_handler_cb(lv_event_t * e);
+
+void populateSelected(String);
+void populateSlots(uint8_t);
+void populateLocoArray(String);
+void populateLocoFunctions(String);
+
+void saveDCCExAcc(fs::FS &fs, const char * path, const char * message);
+void saveDCCExLocos(fs::FS &fs, const char * path, const char * message);
+
+//void printTurnouts();
 /*
  ************************************************************************************************************************
  * Rotary Encoder Values
@@ -108,9 +135,10 @@ uint8_t lcdBL;
 uint8_t reAccel = 10;
 //uint8_t brightness = 250;
 uint8_t timeout = 20;
-uint8_t funcCol = 90;
+uint8_t funcCol = FUNCCOL;
 uint8_t threshold = 15;
-bool def_roster = false;
+bool def_roster = true;       //false = local, true = DCC-EX
+bool def_acc = false;        //false = local, true = DCC-EX
 
 //unsigned long lastButtonPress = 0;
 //uint8_t aFlag = 0;
@@ -193,22 +221,6 @@ Network_Status_t networkStatus = NO_NETWORK;
 
 /*
  ****************************************************************************************************************
- * Callback Prototypes
- ****************************************************************************************************************
-*/
-
-static void ta_event_cb(lv_event_t * e);
-static void dd_cb(lv_event_t * e);
-static void functions_cb(lv_event_t * e);
-static void tbl_roster_cb(lv_event_t * e);
-static void ssid_selected(lv_event_t * e);
-
-void populateSelected(String);
-void populateSlots(uint8_t);
-void populateLocoArray(String);
-void populateLocoFunctions(String);
-/*
- ****************************************************************************************************************
  * Defines
  ****************************************************************************************************************
 */
@@ -224,7 +236,7 @@ void populateLocoFunctions(String);
 #define NUM_LOCOS 100
 const char NUM_FUNCS = 28;
 
-#define NUM_ACCS 252
+#define NUM_ACCS 250
 
 #define NUM_ROUTES 48
 /*
@@ -232,13 +244,27 @@ const char NUM_FUNCS = 28;
  * Structures
  ****************************************************************************************************************
 */
-//  char* dd_locos;
 const char * throttleName[4] = {
   "Throttle A",
   "Throttle B",
   "Throttle C",
   "Throttle D"
 };
+
+struct HCLoco
+{
+  String LocoName;
+  String LocoAddress;
+  uint8_t SavedSpeed = 0;
+  uint8_t LocoSpeed = 0;
+  uint8_t LocoDir = 1;
+  uint8_t FuncNum[NUM_FUNCS];
+  String FuncName[NUM_FUNCS];
+  uint8_t FuncState[NUM_FUNCS];
+  uint8_t FuncOption[NUM_FUNCS];
+  uint8_t FuncSlot[NUM_FUNCS];
+};
+
 #define NAME_LEN 36
 #define ADDR_LEN 5
 #define SPEED_LEN 3
@@ -246,33 +272,31 @@ const char * throttleName[4] = {
 #define FNUM_LEN 3
 #define FNAME_LEN 10
 
-char locoNames[NUM_LOCOS][NAME_LEN +1];
-char locoAddresses[NUM_LOCOS][ADDR_LEN +1];
-uint32_t savedSpeed[NUM_LOCOS];
-uint32_t locoSpeeds[NUM_LOCOS];
-uint8_t locoDirs[NUM_LOCOS];
+//char locoNames[NUM_LOCOS][NAME_LEN +1];
+//char locoAddresses[NUM_LOCOS][ADDR_LEN +1];
+//uint32_t savedSpeed[NUM_LOCOS];
+//uint32_t locoSpeeds[NUM_LOCOS];
+//uint8_t locoDirs[NUM_LOCOS];
 uint8_t func2Slot[NUM_FUNCS];                                     //Stores the Slot Number used by a Function;
 uint8_t slot2Func[NUM_FUNC_SLOTS];                                //Stores the Function Number used by a Slot;
-char funcNames[NUM_LOCOS][NUM_FUNC_SLOTS][FNAME_LEN +1];
-uint8_t funcSlots[NUM_LOCOS][NUM_FUNCS];          // 4 characters to store "255"
-uint8_t funcStates[NUM_LOCOS][NUM_FUNCS];
-uint8_t funcOptions[NUM_LOCOS][NUM_FUNCS];
+//char funcNames[NUM_LOCOS][NUM_FUNC_SLOTS][FNAME_LEN +1];
+//uint8_t funcSlots[NUM_LOCOS][NUM_FUNCS];          // 4 characters to store "255"
+//uint8_t funcStates[NUM_LOCOS][NUM_FUNCS];
+//uint8_t funcOptions[NUM_LOCOS][NUM_FUNCS];
 //uint8_t resumeOnGo = 0;
 //uint8_t runState = 1;                                           //1 = Running, 0 = Stopped
 
+int16_t accStartID = 0;
 
-  struct HCAcc
-  {
-    uint16_t AccId;
-    const char *AccName;
-    uint16_t AccAddress;
-    uint16_t AccImage;
-    uint16_t AccType;
-  };
-  //list_of_accs[NUM_ACCS];
- 
-HCAcc hcAcc[NUM_ACCS];
-
+struct HCAcc
+{
+  String AccRow;
+  String AccName;      //char AccName[15];
+  String AccAddress;
+  uint16_t AccImage;
+  uint16_t AccType;
+  uint8_t AccState;
+};
 /*
   struct HCRoute
   {
@@ -290,6 +314,7 @@ HCRoute hcRoute[NUM_ROUTES];
 uint16_t map_xlate[] = {0, 3, 6, 9, 12, 1, 4, 7, 10, 13};
 uint16_t slotXlate[] = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
 uint16_t abs_xlate[] = {0, 5, 1, 6, 2, 7, 3, 8, 4, 9};
+uint16_t acc_map_xlate[] = {0,2,4,6,8,10,12,14,16,18};
 
 const char * btnMap_functions[] = {
                           " ", " ", "\n",
@@ -299,16 +324,25 @@ const char * btnMap_functions[] = {
                           " ", " ", NULL
                           };
 
-/*
-const char * funcMap_functions[] = {
-                          " ", " ", "\n",
-                          " ", " ", "\n",
-                          " ", " ", "\n",
-                          " ", " ", "\n",
-                          " ", " ", NULL
-                          };
-*/
 
+const char * btnMap_acc_state[] = {
+                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", "\n",
+                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", NULL
+                                  };
+
+const char * btnMap_acc_name[] =  {
+                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", "\n",
+                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", NULL
+                                  };
+/*
+const char * btnMap_acc_state[] = {
+                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", "\n", " ", NULL
+                                  };
+
+const char * btnMap_acc_name[] =  {
+                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", "\n", " ", NULL
+                                  };
+*/
 uint32_t activeIndex = 0;
 uint32_t activeSlot[THROTTLE_COUNT] = {0};
 uint8_t activeThrottle = 0;

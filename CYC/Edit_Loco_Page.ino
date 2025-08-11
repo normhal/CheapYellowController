@@ -30,8 +30,9 @@ static void fname_cb(lv_event_t * e)
   functionsDirty = 1;
   if(code == LV_EVENT_VALUE_CHANGED)
   {
-    if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][fSlot] = 1;
-    else funcOptions[editingID][functionEditSlot] = 0;
+//    if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) Locomotives.FuncOption[editingID][fSlot] = 1;
+    if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) Locomotives[editingID].FuncOption[fSlot] = 1;
+    else Locomotives[editingID].FuncOption[functionEditSlot] = 0;
     lv_textarea_set_text(objects.ta_fname, " ");
     lv_textarea_set_text(objects.ta_fnum, " ");
     lv_obj_clear_state(objects.f_option, LV_STATE_CHECKED);
@@ -47,28 +48,34 @@ static void chkbox_event_cb(lv_event_t * e)
   {
     uint8_t state = lv_obj_get_state(obj) & LV_STATE_CHECKED ? 1:0;
 //    Serial.printf("State Now: %d\n", state);
-    if(state == 0) funcOptions[editingID][fNum] = 0; //States are 1 for Checked, 0 for UnChecked
-    else funcOptions[editingID][fNum] = 1;
-//    Serial.printf("Option for Function: %d set to: %d\n", fNum, funcOptions[editingID][fNum]);
+    if(state == 0) Locomotives[editingID].FuncOption[fNum] = 0; //States are 1 for Checked, 0 for UnChecked
+    else Locomotives[editingID].FuncOption[fNum] = 1;
+//    Serial.printf("Option for Function: %d set to: %d\n", fNum, Locomotives.FuncOption[editingID][fNum]);
   }
 }
 
-void setupFuncEditSlots()
+void setupFuncEditSlots(uint8_t locoID)
 {
+  Serial.println("Setting up Functions for Edit");
+  lv_label_set_text(objects.lbl_s0, "");
+  lv_label_set_text(objects.fn_0, "");
   for(uint8_t fNum = 0; fNum < NUM_FUNCS; fNum++)                           //0 to 28
   {  
     std::string s = std::to_string(fNum);
-    uint8_t fSlot = funcSlots[editingID][fNum];
-    slot2Func[fSlot] = fNum;
-    if((funcNames[editingID][fNum] != "")  && (fSlot != 255))
+    uint8_t fSlot = Locomotives[locoID].FuncSlot[fNum];
+    Serial.printf("Working on Function: %d in Slot: %d\n", fNum, fSlot);
+    if(fSlot != 255)
     {
-//      Serial.printf("fSlot: %d fNum: %d Name: %s\n", fSlot, fNum, funcNames[editingID][fNum]);
+    slot2Func[fSlot] = fNum;
+    if((Locomotives[locoID].FuncName[fNum] != "")  && (fSlot != 255))
+    {
+      Serial.printf("fSlot: %d fNum: %d Name: %s\n", fSlot, fNum, Locomotives[locoID].FuncName[fNum]);
       switch (fSlot)
       {
         case (0):
         {
           lv_obj_add_state(objects.btn_s0, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s0, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s0, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_0, s.c_str());
           break;
@@ -76,7 +83,7 @@ void setupFuncEditSlots()
         case (1):
         {
           lv_obj_add_state(objects.btn_s1, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s1, funcNames[editingID][fNum]);      //fetch Name of func
+          lv_label_set_text(objects.lbl_s1, Locomotives[locoID].FuncName[fNum].c_str());      //fetch Name of func
           lv_obj_clear_flag(objects.fn_1, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_1, s.c_str());                         //Display the function number
           break;
@@ -84,7 +91,7 @@ void setupFuncEditSlots()
         case (2):
         {
           lv_obj_add_state(objects.btn_s2, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s2, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s2, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_2, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_2, s.c_str());
           break;
@@ -92,7 +99,7 @@ void setupFuncEditSlots()
         case (3):
         {
           lv_obj_add_state(objects.btn_s3, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s3, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s3, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_3, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_3, s.c_str());
           break;
@@ -100,7 +107,7 @@ void setupFuncEditSlots()
         case (4):
         {
           lv_obj_add_state(objects.btn_s4, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s4, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s4, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_4, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_4, s.c_str());
           break;
@@ -108,7 +115,7 @@ void setupFuncEditSlots()
         case (5):
         {
           lv_obj_add_state(objects.btn_s5, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s5, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s5, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_5, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_5, s.c_str());
           break;
@@ -116,7 +123,7 @@ void setupFuncEditSlots()
         case (6):
         {
           lv_obj_add_state(objects.btn_s6, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s6, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s6, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_6, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_6, s.c_str());
           break;
@@ -124,7 +131,7 @@ void setupFuncEditSlots()
         case (7):
         {
           lv_obj_add_state(objects.btn_s7, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s7, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s7, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_7, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_7, s.c_str());
           break;
@@ -132,7 +139,7 @@ void setupFuncEditSlots()
         case (8):
         {
           lv_obj_add_state(objects.btn_s8, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s8, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s8, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_8, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_8, s.c_str());
           break;
@@ -140,13 +147,14 @@ void setupFuncEditSlots()
         case (9):
         {
           lv_obj_add_state(objects.btn_s9, LV_STATE_CHECKED);                 //Slot 0 is used
-          lv_label_set_text(objects.lbl_s9, funcNames[editingID][fNum]);      //by funcName of func
+          lv_label_set_text(objects.lbl_s9, Locomotives[locoID].FuncName[fNum].c_str());      //by funcName of func
           lv_obj_clear_flag(objects.fn_9, LV_OBJ_FLAG_HIDDEN);
           lv_label_set_text(objects.fn_9, s.c_str());
           break;
         }
         default:
         break;
+      }
       }
     }
   }
@@ -158,29 +166,29 @@ void action_fedit_slot(lv_event_t * e)
   functionEditSlot = *((int*)(&user_data));                 //Actual User Slot Number Supplied by Button Event
   //  slot2Func[functionEditSlot] = atoi(lv_textarea_get_text(objects.ta_fnum)); //Get the Edited Function Number and save the slot it occupies
   uint8_t fNum = atoi(lv_textarea_get_text(objects.ta_fnum));
-//  strcpy(funcNames[editingID][slot2Func[functionEditSlot]], lv_textarea_get_text(objects.ta_fname));
-  strcpy(funcNames[editingID][fNum], lv_textarea_get_text(objects.ta_fname));
-//  funcSlots[editingID][slot2Func[functionEditSlot]] = functionEditSlot;
-  funcSlots[editingID][fNum] = functionEditSlot;
-
+//  strcpy(Locomotives.FuncName[editingID][slot2Func[functionEditSlot]], lv_textarea_get_text(objects.ta_fname));
+  Locomotives[editingID].FuncName[fNum] = lv_textarea_get_text(objects.ta_fname);
+//  Locomotives.FuncSlot[editingID][slot2Func[functionEditSlot]] = functionEditSlot;
+  Locomotives[editingID].FuncSlot[fNum] = functionEditSlot;
+  functionsDirty = 1;
   switch (functionEditSlot)
   {
     case 0:
       lv_label_set_text(objects.lbl_s0, lv_textarea_get_text(objects.ta_fname));
       lv_label_set_text(objects.fn_0, lv_textarea_get_text(objects.ta_fnum));
-//      if(funcOptions[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_0, &option_style, 1);
+//      if(Locomotives.FuncOption[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_0, &option_style, 1);
       lv_obj_clear_flag(objects.fn_0, LV_OBJ_FLAG_HIDDEN);
       break;
     case 1:
       lv_label_set_text(objects.lbl_s1, lv_textarea_get_text(objects.ta_fname));
       lv_label_set_text(objects.fn_1, lv_textarea_get_text(objects.ta_fnum));
-//      if(funcOptions[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_1, &option_style, LV_PART_MAIN | LV_STATE_DEFAULT);
+//      if(Locomotives.FuncOption[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_1, &option_style, LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_flag(objects.fn_1, LV_OBJ_FLAG_HIDDEN);
       break;
     case 2:
       lv_label_set_text(objects.lbl_s2, lv_textarea_get_text(objects.ta_fname));
       lv_label_set_text(objects.fn_2, lv_textarea_get_text(objects.ta_fnum));
-//      if(funcOptions[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_2, &option_style, 7);
+//      if(Locomotives.FuncOption[editingID][functionEditSlot] == 1) lv_obj_add_style(objects.fn_2, &option_style, 7);
       lv_obj_clear_flag(objects.fn_2, LV_OBJ_FLAG_HIDDEN);
       //ToDo update Option setting
       break;
@@ -229,12 +237,12 @@ void action_fedit_slot(lv_event_t * e)
     default:
       break;
   }  
-//  strcpy(funcNames[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fname));      //checked - EEZ
+//  strcpy(Locomotives.FuncName[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fname));      //checked - EEZ
 //  strcpy(funcNumber[editingID][functionEditSlot], lv_textarea_get_text(objects.ta_fnum));     //Checked - EEZ
-//  if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][functionEditSlot] = 1;
-//  else funcOptions[editingID][functionEditSlot] = 0;
-  if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) funcOptions[editingID][fNum] = 1;
-  else funcOptions[editingID][fNum] = 0;
+//  if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) Locomotives.FuncOption[editingID][functionEditSlot] = 1;
+//  else Locomotives.FuncOption[editingID][functionEditSlot] = 0;
+  if(lv_obj_get_state(objects.f_option) == LV_STATE_CHECKED) Locomotives[editingID].FuncOption[fNum] = 1;
+  else Locomotives[editingID].FuncOption[fNum] = 0;
 
   lv_textarea_set_text(objects.ta_fname, "");
   lv_textarea_set_text(objects.ta_fnum, "");
@@ -313,8 +321,8 @@ void action_fclear_slot(lv_event_t * e)           //Moving Button Function Detai
     default:
       break;
   }
-  lv_textarea_set_text(objects.ta_fname, funcNames[editingID][fNum]);     
-  if(funcOptions[editingID][fNum] == 1)                                   //Also wrong - must be fNum
+  lv_textarea_set_text(objects.ta_fname, Locomotives[editingID].FuncName[fNum].c_str());     
+  if(Locomotives[editingID].FuncOption[fNum] == 1)                              
   { 
     lv_obj_add_state(objects.f_option, LV_STATE_CHECKED);
   }
@@ -322,8 +330,8 @@ void action_fclear_slot(lv_event_t * e)           //Moving Button Function Detai
   {
     lv_obj_clear_state(objects.f_option, LV_STATE_CHECKED);
   }
-  funcOptions[editingID][fNum] = 0;
-  strcpy(funcNames[editingID][fNum], "");         
+  Locomotives[editingID].FuncOption[fNum] = 0;
+  Locomotives[editingID].FuncName[fNum] = "";         
 }
 
 void action_edit_loco_button(lv_event_t * e)
@@ -340,16 +348,16 @@ void action_edit_loco_button(lv_event_t * e)
       loadScreen(SCREEN_ID_PROGRAM);
       break;
     case (32):       //Done
-      strcpy(locoNames[editingID], lv_textarea_get_text(objects.ta_name));         //Checked - EEZ
-      strcpy(locoAddresses[editingID], lv_textarea_get_text(objects.ta_address));   //Checked - EEZ
-      lv_table_set_cell_value(objects.tbl_roster, editingID, 0, locoNames[editingID]);
-      lv_table_set_cell_value(objects.tbl_roster, editingID, 1, locoAddresses[editingID]);
+      Locomotives[editingID].LocoName = lv_textarea_get_text(objects.ta_name);         //Checked - EEZ
+      Locomotives[editingID].LocoAddress = lv_textarea_get_text(objects.ta_address);   //Checked - EEZ
+      lv_table_set_cell_value(objects.tbl_roster, editingID, 0, Locomotives[editingID].LocoName.c_str());
+      lv_table_set_cell_value(objects.tbl_roster, editingID, 1, Locomotives[editingID].LocoAddress.c_str());
       locosDirty = 1;
       if(callingPage == SCREEN_ID_THROTTLE) populateThrottle();
+      else buildFunctionsPage(editingID);
       loadScreen(callingPage);
       break;
     default:
       break;
   }
 }
-

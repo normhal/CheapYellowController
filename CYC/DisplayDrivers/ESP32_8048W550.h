@@ -69,7 +69,7 @@ Arduino_DataBus *bus = create_default_Arduino_DataBus();
 
 #define TOUCH_GT911_SCL 20
 #define TOUCH_GT911_SDA 19
-#define TOUCH_GT911_INT -1
+#define TOUCH_GT911_INT 18
 #define TOUCH_GT911_RST 38
 
 #define TOUCH_GT911_ROTATION ROTATION_NORMAL
@@ -106,9 +106,9 @@ void my_touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data)
 //    #endif
     data->point.x = touch_last_x;
     data->point.y = touch_last_y;
-    Serial.println(data->point.x);
-    Serial.println(data->point.y);
-    Serial.println();
+//    Serial.println(data->point.x);
+//    Serial.println(data->point.y);
+//    Serial.println();
 
     delay(100);
   }  

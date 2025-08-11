@@ -75,10 +75,11 @@
 *******************************************************************************************************************************/
 // Note: "t..." - not ready, "tick" = tested on physical device, "tock" = Batch file created and tested
 
+//#define ESP2432S028C           //Sunton ESP32-2432S028C Untested      ESP32     ticked 21 July
 //#define ESP2432S028R           //Sunton ESP32-2432S028R Classic CYD   ESP32     ticked 21 July
 //#define ESP2432THMIR           //LilyGo T-HMI                         ESP32-S3  ticked 21 July - No RE support yet
+//#define ESP2432S032C           //Sunton ESP32-2432S032C  Untested     ESP32
 //#define ESP2432S032R           //Sunton ESP32-2432S032R               ESP32     ticked 21 July
-//#define ESP2432S032C           //Sunton ESP32-2432S032C  Planned      ESP32
 //#define ESP3248S035C           //Sunton ESP32-3248S035C               ESP32     ticked 21 July
 //#define ESP3248S035R           //Sunton ESP32-3248S035R               ESP32     ticked 21 July  
 //#define ESP3248W535C           //Guition JC3248W535C                  ESP32-S3  ticked 16 June
@@ -91,16 +92,16 @@
 //#define ESP4827W543C           //Guition JC4827W543C                  ESP32-S3  ticked 21 July
 //#define ESP4827W543R           //Guition JC4827W543R                  ESP32-S3  ticked 21 July
 //#define ESP4848S040C           //Guition JC4848W440C - in development
-//#define ESP8048S043C           //Sunton ESP32-8048S043C               ESP32-S3  ticked 21 July
+#define ESP8048S043C           //Sunton ESP32-8048S043C               ESP32-S3  ticked 21 July
 //#define ESP8048S050C           //Sunton ESP32-8048S050C               ESP32-S3  ticked 21 July
 //#define ESP8048W550C           //Guition JC8048W550C                  ESP32-S3  ticked 21 July
+//#define ESP8048S070C           //Sunton ESP32-8048S050C               ESP32-S3  ticked 21 July
 
 //*****************************************************************************************************************************
 // Rotary Encoder Compile Inclusion
 //*****************************************************************************************************************************
-// IMPORTANT NOTES REGARDING ROTARY ENCODER CONNECTIONS
-//
-const char* build = "1.1.1";
+
+const char* build = "1.1.8";
 
 #define ROTARY_ENCODER                //Un-Comment to include Rotary Encoder Support
 
@@ -111,6 +112,9 @@ const char* build = "1.1.1";
 #include "CYC.h"
 #include "credentials.h"
 
+vector<HCAcc> Turnouts;
+vector<HCLoco> Locomotives;
+
 uint32_t bufSize;
 
 lv_disp_draw_buf_t draw_buf;
@@ -118,20 +122,6 @@ lv_color_t *disp_draw_buf;
 lv_disp_drv_t disp_drv;
 
 File file;
-
-#if LV_USE_LOG != 0
-/* Serial debugging */
-void my_print(const char * buf)
-{
-  Serial.printf(buf);
-  Serial.flush();
-}
-#endif
-
-//unsigned long lastTime = 0;
-
-bool done = false;
-
 WiFiClient client;
 DCCEXProtocol dccexProtocol;
 
@@ -148,187 +138,38 @@ public:
     Serial.println(patch);
   }
 
-  void receivedTrackPower(TrackPower state) override {
-    Serial.print("\n\nReceived Track Power: ");
-    Serial.println(state);
-    Serial.println("\n\n");
+  void receivedTrackPower(TrackPower state) override 
+  {
+    Serial.printf("Received Track Power: %d\n", state);    //Nothing done with this yet:-()
   }
 
   void receivedRosterList() override 
   {
-    lv_label_set_text(objects.lbl_roster, "EX-Rail Roster Received");
-//    Serial.println("\n\nReceived Roster");
-//    printRoster();
-
-    uint16_t lId = 0;
-    for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
-    {
-      //First the Loco Name
-      const char *lName = loco->getName();
-      Serial.printf("Name: %s LocoID: %d ", lName, lId);
-      strcpy(locoNames[lId], lName);
-    
-      //Then the Loco Address
-      std::string s = std::to_string(loco->getAddress());
-      const char* lAddr = s.c_str();
-      strcpy(locoAddresses[lId], lAddr);
-      Serial.printf("Address: %s\n", lAddr);
-      lv_table_set_cell_value(objects.tbl_roster, lId, 0, locoNames[lId]);
-      lv_table_set_cell_value(objects.tbl_roster, lId, 1, locoAddresses[lId]);
-
-      //Now for the Functions
-      uint8_t sN = 0;                      //Function Slot Number
-      for (int fN = 0; fN < 28; fN++) 
-      {
-        funcSlots[lId][fN] = 255;
-        const char *fName = loco->getFunctionName(fN);
-        if(fName != NULL) 
-        {
-          if(fName[0] != '\0')          //This is to block an unused function
-          {
-            Serial.printf("Function Name: %s Number: %d Slot: %d\n", fName, fN, sN);
-            strcpy(funcNames[lId][fN], fName);
-            funcSlots[lId][fN] = sN;                                                                          //Check this
-            if(sN < NUM_FUNCS) sN++;
-          }
-        }
-      }
-      lId++;
-    }
-    lv_label_set_text(objects.lbl_roster, "EX-Rail Roster Received and Loaded");
+    Serial.println("Receiving DCC-EX Locos");
+    saveDCCExLocos(LittleFS, "/exlocos.new", "ID,Name,Address\n");
+    Serial.println("DCC-EX Roster Received");
   }
-/*
-void printRoster() 
-{
-  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) {
-    int id = loco->getAddress();
-    const char *name = loco->getName();
-    Serial.print(id);
-    Serial.print(" ~");
-    Serial.print(name);
-    Serial.println("~");
-    for (int i = 0; i < 32; i++) {
-      const char *fName = loco->getFunctionName(i);
-      if (fName != nullptr) {
-        Serial.print("loadFunctionLabels() ");
-        Serial.print(fName);
-        if (loco->isFunctionMomentary(i)) {
-          Serial.print(" - Momentary");
-        }
-        Serial.println();
-      }
-    }
-  }
-  Serial.println("\n");
-}
-*/
+
   void receivedTurnoutList() override 
   {
-    Serial.print("\n\nReceived Turnouts/Points list");
-//    printTurnouts();
-    Serial.println("\n\n");
+    Serial.println("Receiving DCC-EX Turnouts");
+    saveDCCExAcc(LittleFS, "/exacc.new", "ID,Name,Address,Image,Type\n");
   }
+
   void receivedRouteList() override {
     Serial.print("\n\nReceived Routes List");
 //    printRoutes();
     Serial.println("\n\n");
   }
+
   void receivedTurntableList() override {
     Serial.print("\n\nReceived Turntables list");
-//   printTurntables();
+//    printTurntables();
     Serial.println("\n\n");
   }
 };
 
 MyDelegate myDelegate;
-/*
-void printRoster() 
-{
-  uint16_t lId = 1;      //Start at 1
-  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
-  {
-    uint16_t lAd = loco->getAddress();
-    const char *lName = loco->getName();
-    Serial.printf("\nLoco ID: %d Address: %d Name: %s\n", lId, lAd, lName);
-    uint8_t sN = 0;                      //Function Slot Number
-    for (uint8_t fN = 0; fN < 32; fN++) 
-    {
-      const char *fName = loco->getFunctionName(fN);
-      if(fName != NULL) 
-      {
-        if(fName[0] != '\0')          //This is to block an unused function
-        {
-          Serial.printf("Button Enabled: %d ", fN);
-          if(loco->isFunctionOn(fN)) Serial.println("Set to CHECKED");
-          else Serial.println("Left UNCHECKED");
-//          lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, fN, LV_BTNMATRIX_CTRL_DISABLED);
-//          if(loco->isFunctionOn(fN)) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, fN, LV_BTNMATRIX_CTRL_CHECKED);
-          if(sN < NUM_FUNCS)
-          {
-            Serial.printf("Function Name: %s Number: %d\n", fName, fN);
-            strcpy(funcNames[lId][sN], fName);
-//            funcNumber[lId][sN] = fN;
-            sN++;
-          }
-          Serial.println(loco->isFunctionOn(fN));
-          Serial.println(loco->isFunctionMomentary(fN));
-          Serial.println(loco->getFunctionStates());
-        }
-      }
-    }
-    lId++;
-    Serial.println();
-  }
-}
-*/
-void printTurnouts() {
-  for (Turnout *turnout = dccexProtocol.turnouts->getFirst(); turnout; turnout = turnout->getNext()) {
-    int id = turnout->getId();
-    const char *name = turnout->getName();
-    Serial.print(id);
-    Serial.print(" ~");
-    Serial.print(name);
-    Serial.println("~");
-  }
-  Serial.println("\n");
-}
-
-void printRoutes() {
-  for (Route *route = dccexProtocol.routes->getFirst(); route; route = route->getNext()) {
-    int id = route->getId();
-    const char *name = route->getName();
-    Serial.print(id);
-    Serial.print(" ~");
-    Serial.print(name);
-    Serial.println("~");
-  }
-  Serial.println("\n");
-}
-
-void printTurntables() {
-  for (Turntable *turntable = dccexProtocol.turntables->getFirst(); turntable; turntable = turntable->getNext()) {
-    int id = turntable->getId();
-    const char *name = turntable->getName();
-    Serial.print(id);
-    Serial.print(" ~");
-    Serial.print(name);
-    Serial.println("~");
-
-    int j = 0;
-    for (TurntableIndex *turntableIndex = turntable->getFirstIndex(); turntableIndex;
-         turntableIndex = turntableIndex->getNextIndex()) {
-      const char *indexName = turntableIndex->getName();
-      Serial.print("  index");
-      Serial.print(j);
-      Serial.print(" ~");
-      Serial.print(indexName);
-      Serial.println("~");
-      j++;
-    }
-  }
-  Serial.println("\n");
-}
-
 /*
  ********************************************************************************************************
  * Call-Back routine for Textarea fields
@@ -383,8 +224,8 @@ void setBacklight(uint8_t brightness)
   ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
   ledcWrite(0, lcdBL);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
 
-//ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
-//ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
+  //ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
+  //ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
 }
 /*
  ********************************************************************************************************
@@ -407,16 +248,6 @@ void setup()
   initRE();                         //Initialize Rotary Encoder if Enabled in Display Driver
 #endif
 
-  if (!gfx->begin())
-  {
-    Serial.println("gfx->begin() failed!");
-  }
-  gfx->fillScreen(RGB565_BLACK);
-
-  initTouch();
-
-  lv_init();
-
   #ifdef DIRECT_MODE
     bufSize = SCREEN_WIDTH * SCREEN_HEIGHT;
   #else
@@ -438,6 +269,17 @@ void setup()
     Serial.println("LVGL disp_draw_buf heap_caps_malloc failed! malloc again...");
     disp_draw_buf = (lv_color_t *)malloc(bufSize * 2);
   #endif // !ESP32
+
+  if (!gfx->begin())
+  {
+    Serial.println("gfx->begin() failed!");
+  }
+  gfx->fillScreen(RGB565_BLACK);
+
+  initTouch();
+
+  lv_init();
+
   if (!disp_draw_buf)
   {
     Serial.println("LVGL disp_draw_buf allocate failed!");
@@ -496,6 +338,8 @@ void setup()
     lv_obj_add_event_cb(objects.ex_functions_mtx, ex_functions_cb, LV_EVENT_RELEASED, NULL);
     lv_obj_add_event_cb(objects.track_mtx, track_cb, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(objects.cv_mtx, cv_cb, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(objects.acc_state_mtx, acc_cb, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(objects.acc_name_mtx, acc_cb, LV_EVENT_ALL, NULL);
 
     // Callback definitions for Edit Loco  
     lv_obj_add_event_cb(objects.btn_s0,function_name_cb, LV_EVENT_ALL, NULL);
@@ -528,6 +372,11 @@ void setup()
     lv_obj_add_event_cb(objects.ta_func_col, ta_event_cb, LV_EVENT_ALL, objects.kbd_config );
     lv_obj_add_event_cb(objects.ta_threshold, ta_event_cb, LV_EVENT_ALL, objects.kbd_config );
 
+    lv_obj_add_event_cb(objects.ta_acc_name, ta_event_cb, LV_EVENT_ALL, objects.a_kbd_acc );
+    lv_obj_add_event_cb(objects.ta_acc_address, ta_event_cb, LV_EVENT_ALL, objects.n_kbd_acc );
+    lv_obj_add_event_cb(objects.ta_acc_id, ta_event_cb, LV_EVENT_ALL, objects.n_kbd_acc );
+
+
     activeIndex = 0;              //Initialize the Index to the first in the SSID list
     CallingPage = 0;
 
@@ -551,6 +400,10 @@ void setup()
 
     Serial.println("Now loading List of Credentials");
     populateCredentials("/credentials.txt");
+
+//    Serial.println("Now loading List of Accessories");
+//    populateAccArray("/accessories.txt");
+
 /*
 ******************************************************************************************************************
 * Set TFT Backlight Brightness - can be changed in the Relevant Display Driver
@@ -596,10 +449,6 @@ void setup()
   
   connectWiFi();
 
-  rosterMode = GUEST_INACTIVE;
-  lv_table_set_col_width(objects.tbl_roster, 0, NAME_COL0_WIDTH);
-  lv_table_set_col_width(objects.tbl_roster, 1, NAME_COL1_WIDTH);
-
 //  dccexProtocol.setLogStream(&Serial);
   dccexProtocol.setDelegate(&myDelegate);
   dccexProtocol.connect(&client);
@@ -608,9 +457,31 @@ void setup()
   dccexProtocol.powerOn();
 
   eeProm.begin("configs", true);
-  if(eeProm.getBool("roster", def_roster) == true) setupEXRailRoster();
-  else setupLocalRoster();
+  if(eeProm.getBool("roster", def_roster) == true) 
+  {
+    setupDCCEXRoster();
+    lv_label_set_text(objects.lbl_btn_roster, "DCC-EX");
+  }
+  else 
+  {
+    setupLocalRoster();
+    lv_label_set_text(objects.lbl_btn_roster, "Local");
+  }
+  if(eeProm.getBool("accList", def_acc) == true) 
+  {
+    setupEXAcc();
+    lv_label_set_text(objects.lbl_btn_acc, "DCC-EX");
+  }
+  else 
+  {
+    setupLocalAcc();
+    lv_label_set_text(objects.lbl_btn_acc, "Local");
+  }
   eeProm.end();
+
+  rosterMode = GUEST_INACTIVE;
+  lv_table_set_col_width(objects.tbl_roster, 0, NAME_COL0_WIDTH);
+  lv_table_set_col_width(objects.tbl_roster, 1, NAME_COL1_WIDTH);
 
   Serial.println("Setup Done!");
   lv_label_set_text(objects.lbl_sketch_build, build);
@@ -627,7 +498,7 @@ void loop()
 
 //  ui_t...();
 
-  gfx->flush();
+//  gfx->flush();
 
   dccexProtocol.check();
 
@@ -643,7 +514,7 @@ void loop()
       if(RE_button_active != 1)             //Check if it's already been processed
       {
         RE_button_active = 1;
-        if(locoDirs[activeLocoID] == 1)      //Currently Forward?
+        if(Locomotives[activeLocoID].LocoDir == 1)      //Currently Forward?
         {
           lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);     // Do this because the TFT wasn't the source
           setLocoRev();                     //Change to Reverse
@@ -680,8 +551,8 @@ void loop()
         if(new_position < 0) new_position = 0;
         ss.setEncoderPosition(new_position);
       } 
-      locoSpeeds[activeLocoID] = new_position; //update the Active loco
-      setSpeed(atoi(locoAddresses[activeLocoID]), locoSpeeds[activeLocoID], locoDirs[activeLocoID]); //and tell DCC-EX
+      Locomotives[activeLocoID].LocoSpeed = new_position; //update the Active loco
+      setSpeed(atoi(Locomotives[activeLocoID].LocoAddress.c_str()), Locomotives[activeLocoID].LocoSpeed, Locomotives[activeLocoID].LocoDir); //and tell DCC-EX
       encoder_position = new_position;      // and save for next round
       re_timer = millis();
     }

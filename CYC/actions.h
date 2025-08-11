@@ -31,6 +31,7 @@ extern void action_tips_button(lv_event_t * e);
 extern void action_fclear_slot(lv_event_t * e);
 extern void action_fedit_slot(lv_event_t * e);
 extern void action_functions_button(lv_event_t * e);
+extern void action_turnout_button(lv_event_t * e);
 
 
 #ifdef __cplusplus

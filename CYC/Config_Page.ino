@@ -22,31 +22,70 @@ void action_config_button(lv_event_t * e)
   int pressedButton = *((int*)(&user_data));
   switch(pressedButton)
   {
-    case (28):        //Load EX-Rail Roster
+    case (25):        //Get Local Lists
     {
-      lv_label_set_text(objects.lbl_roster, "EX-Rail Roster Requested");
+      lv_label_set_text(objects.lbl_list_status, "Local Acc and Roster Requested");
+      Serial.println("Local ACC and Roster Requested");
+      setupLocalRoster();
+      setupLocalAcc();
+      lv_label_set_text(objects.lbl_list_status, "Local Acc and Roster Loaded");
+      break;
+    }
+    case (26):        //Default Roster Button - Load EX-Rail Roster
+    {
+      lv_label_set_text(objects.lbl_list_status, "DCC-EX Roster Requested");
+      lv_label_set_text(objects.lbl_btn_roster, "DCC-EX");
+      Serial.println("Setting to DCC-EX Boot up Roster");
       def_roster = true;
       eeProm.begin("configs", false);
-      setupEXRailRoster();
+//      setupDCCEXRoster();
       eeProm.putBool("roster", def_roster);
-      Serial.printf("Roster set to: %d\n", def_roster);
+      Serial.printf("Startup Roster set to: %d\n", def_roster);
       eeProm.end();
-      lv_label_set_text(objects.lbl_roster, "EX-Rail Roster Loaded");
+      lv_label_set_text(objects.lbl_list_status, "DCC-EX Roster Scheduled");
       break;
     }
-    case (29):        //Retrieve EX-Rail Roster
+    case (27):        //Default Roster Button - Load Local Roster
     {
-      lv_label_set_text(objects.lbl_roster, "Loading Local Roster");
+      lv_label_set_text(objects.lbl_list_status, "Local Roster Requested");
+      lv_label_set_text(objects.lbl_btn_roster, "Local");
+      Serial.println("Setting to Local Roster at Boot up");
       def_roster = false;
       eeProm.begin("configs", false);
-      setupLocalRoster();
+//      setupLocalRoster();
       eeProm.putBool("roster", def_roster);
-      Serial.printf("Roster set to: %d\n", def_roster);
+      Serial.printf("Start Roster set to: %d\n", def_roster);
       eeProm.end();
-      lv_label_set_text(objects.lbl_roster, "Local Roster Loaded");
+      lv_label_set_text(objects.lbl_list_status, "Local Roster Scheduled");
       break;
     }
-     case (30):       //WiFi
+    case (28):       //Ex_Rail Acc 
+    {
+      lv_label_set_text(objects.lbl_list_status, "DCC-EX Acc List Requested");
+      lv_label_set_text(objects.lbl_btn_acc, "DCC-EX");
+      def_acc = true;
+      eeProm.begin("configs", false);
+//      setupEXAcc();
+      eeProm.putBool("accList", def_acc);
+      Serial.printf("Start Acc List set to: %d\n", def_acc);
+      eeProm.end();
+      lv_label_set_text(objects.lbl_list_status, "DCC-EX Acc List Scheduled");
+      break;
+    }
+    case (29):       //Local Acc
+    {
+      lv_label_set_text(objects.lbl_list_status, "Local Acc List Requested");
+      lv_label_set_text(objects.lbl_btn_acc, "Local");
+      def_acc = false;
+      eeProm.begin("configs", false);
+//      setupLocalAcc();
+      eeProm.putBool("accList", def_acc);
+      Serial.printf("Start Acc List set to: %d\n", def_acc);
+      eeProm.end();
+      lv_label_set_text(objects.lbl_list_status, "Local Acc List Scheduled");
+      break;
+    }
+    case (30):       //WiFi
     {
       enum ScreensEnum callingPage = SCREEN_ID_CONFIG;
       loadScreen(SCREEN_ID_WI_FI);
