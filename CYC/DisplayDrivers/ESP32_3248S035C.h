@@ -8,6 +8,7 @@
 #define TFT_BACKLIGHT 200
 #define MIN_BL 10
 #define FUNCCOL 100
+#define ACC_PER_PAGE 8
 
 #define GFX_BL 27
 

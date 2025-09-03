@@ -58,19 +58,31 @@ void action_wifi_button(lv_event_t * e)
       saveCredentials(LittleFS, "/credentials.new", "ID,SSID,Password,IPAddress,Port\n");
       break;
     }
-    case 9:     //Enable
-      LV_LOG_USER("Enable Button Pressed");
+    case 9:     //Enable Button UnChecked
+      Serial.println("WiFi Disabled");
+      wifi_enabled = 0;
+      eeProm.begin("configs", false);
+      eeProm.putBool("wiFiState", wifi_enabled);
+      eeProm.end();
       break;
+    case 10:     //Enable Button Checked
+    {
+      Serial.println("WiFi Enabled");
+      wifi_enabled = 1;
+      eeProm.begin("configs", false);
+      eeProm.putBool("wiFiState", wifi_enabled);
+      eeProm.end();
+      connectWiFi();
+      break;
+    }
     case 30:       //Config
       char  str[4];
       itoa(lcdBL, str, 10);
       lv_textarea_set_text(objects.ta_tft_backlight, str);
       itoa(timeout, str, 10);
       lv_textarea_set_text(objects.ta_wifi_timeout, str);
+      if(re_enabled == true) lv_obj_add_state(objects.btn_re_enable, LV_STATE_CHECKED);
       loadScreen(SCREEN_ID_CONFIG);
-      break;
-    case 31:       //Retry
-        // Perform WiFi Retry
       break;
     case 32:       //Done
       loadScreen(SCREEN_ID_MAIN);
@@ -141,18 +153,13 @@ static void ssid_selected(lv_event_t * e)
 
 void connectWiFi()
 {
-//  ssid = netwks[activeIndex].ssid.c_str();
-//  password = netwks[activeIndex].password.c_str();
-//  ipAddress = netwks[activeIndex].ipAddress.c_str();
-//  nwPort = netwks[activeIndex].nwPort;
+  Serial.printf_P(PSTR ("Connecting to WiFi with %s %s %s %d\n"), ssid, password, ipAddress, nwPort);
 
-Serial.printf("Connecting to WiFi with %s %s %s %d\n", ssid, password, ipAddress, nwPort);
-
+  WiFi.begin(ssid, password);
   int timeOut = timeout;
 //  int timeOut = 3;
   while (WiFi.status() != WL_CONNECTED)
   {
-    WiFi.begin(ssid, password);
     Serial.print(".");
     delay(1000);
     timeOut = timeOut -1;
@@ -169,8 +176,11 @@ Serial.printf("Connecting to WiFi with %s %s %s %d\n", ssid, password, ipAddress
   {
     lv_label_set_text(objects.lbl_wifi_status, "Connected to WiFi!");
     lv_label_set_text(objects.lbl_wifi_status2, "Now connecting to DCCEX");
-    Serial.printf("Now Connecting to DCC-EX with: %s and: %d\n", ipAddress, nwPort);
+    Serial.printf_P(PSTR ("Now Connecting to DCC-EX with: %s and: %d\n"), ipAddress, nwPort);
     client.connect(ipAddress.c_str(), nwPort);
+
+    dccexProtocol.setDelegate(&myDelegate);
+    dccexProtocol.connect(&client);
 
     if(!client.connected())
     {

@@ -22,11 +22,14 @@ void action_edit_acc_button(lv_event_t * e)
   int pressedButton = *((int*)(&user_data));
   switch(pressedButton)
   {
-    case 30:       //Return to Calling Page
-      loadScreen(SCREEN_ID_ACCESSORIES);
+    case 30:       //Cancel - ignore any changes
+      loadScreen(callingPage);
       break;
-    case 32:       //Select Loco
-      loadScreen(SCREEN_ID_ACCESSORIES);
+    case 32:       //Done - apply any changes and set the Dirty flag
+      Turnouts[editingID].AccName = lv_textarea_get_text(objects.ta_acc_name);
+      Turnouts[editingID].AccAddress = lv_textarea_get_text(objects.ta_acc_address);;
+      accessoriesDirty = 1;
+      loadScreen(callingPage);
      break;
     default:
       break;

@@ -8,6 +8,7 @@
 #define TFT_BACKLIGHT 250
 #define MIN_BL 240
 #define FUNCCOL 140
+#define ACC_PER_PAGE 10
 
 #define GFX_BL 2 // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 
@@ -29,6 +30,8 @@
 
 #define RGB_PANEL
 
+//#define DIRECT_MODE
+
 Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
      40 /* DE */, 41 /* VSYNC */, 39 /* HSYNC */, 42 /* PCLK */,
      45 /* R0 */, 48 /* R1 */, 47 /* R2 */, 21 /* R3 */, 14 /* R4 */,
@@ -36,11 +39,13 @@ Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
      8 /* B0 */, 3 /* B1 */, 46 /* B2 */, 9 /* B3 */, 1 /* B4 */,
      0 /* hsync_polarity */, 8 /* hsync_front_porch */, 4 /* hsync_pulse_width */, 8 /* hsync_back_porch */,
      0 /* vsync_polarity */, 8 /* vsync_front_porch */, 4 /* vsync_pulse_width */, 8 /* vsync_back_porch */,
-     1 /* pclk_active_neg */, 16000000 /* prefer_speed */);
+     1 /* pclk_active_neg */, 15410000 /* prefer_speed */);
 
 Arduino_RGB_Display *gfx = new Arduino_RGB_Display(SCREEN_HEIGHT, SCREEN_WIDTH, rgbpanel, ROTATION, AUTO_FLUSH);
+//Arduino_GFX *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, g);
+//Arduino_DataBus *bus = create_default_Arduino_DataBus();
 
-Arduino_DataBus *bus = create_default_Arduino_DataBus();
+#define CANVAS
 
 /*******************************************************************************
  * Rotary Encoder Specifics
@@ -69,7 +74,7 @@ Arduino_DataBus *bus = create_default_Arduino_DataBus();
 
 #define TOUCH_GT911_SCL 20
 #define TOUCH_GT911_SDA 19
-#define TOUCH_GT911_INT -1
+#define TOUCH_GT911_INT 18
 #define TOUCH_GT911_RST 38
 
 #define TOUCH_GT911_ROTATION ROTATION_NORMAL
@@ -106,9 +111,9 @@ void my_touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data)
 //    #endif
     data->point.x = touch_last_x;
     data->point.y = touch_last_y;
-    Serial.println(data->point.x);
-    Serial.println(data->point.y);
-    Serial.println();
+//    Serial.println(data->point.x);
+//    Serial.println(data->point.y);
+//    Serial.println();
 
     delay(100);
   }  

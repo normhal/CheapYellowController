@@ -5,9 +5,10 @@
  * Settings specific to this Display Model
  ******************************************************************************/
  
-#define TFT_BACKLIGHT 250
+#define TFT_BACKLIGHT 240
 #define MIN_BL 10
 #define FUNCCOL 100
+#define ACC_PER_PAGE 10
 
 #define GFX_BL 1
 
@@ -34,13 +35,11 @@
 #define TFT_RST GFX_NOT_DEFINED
 #define IPS true
 
-//#define DIRECT_MODE // Uncomment to enable full frame buffer
+//#define DIRECT_MODE // Uncomment to enable full frame buffer - not supported by Arduino_GFX
 
 Arduino_DataBus *bus = new Arduino_ESP32QSPI(TFT_CS, TFT_SCK, TFT_SDA0, TFT_SDA1, TFT_SDA2, TFT_SDA3);
-
-Arduino_NV3041A *panel = new Arduino_NV3041A(bus, TFT_RST, ROTATION, IPS);
-
-Arduino_GFX *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, panel);
+Arduino_GFX *g = new Arduino_NV3041A(bus, GFX_NOT_DEFINED /* RST */, 1 /* rotation */, true /* IPS */);
+Arduino_GFX *gfx = new Arduino_Canvas(SCREEN_WIDTH /* width */, SCREEN_HEIGHT /* height */, g);
 
 #define CANVAS
 

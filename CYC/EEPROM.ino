@@ -9,6 +9,10 @@ void initEEPROM()
   if(!eeProm.isKey("funcCol")) eeProm.putUInt("funcCol", FUNCCOL);
   if(!eeProm.isKey("threshold")) eeProm.putUInt("threshold", THRESHOLD);
   if(!eeProm.isKey("roster")) eeProm.putBool("roster", DEFAULT_ROSTER);
+  if(!eeProm.isKey("accList")) eeProm.putBool("accList", DEFAULT_ACC);
+  if(!eeProm.isKey("rEncoder")) eeProm.putBool("rEncoder", ROTARY_ENCODER);
+  if(!eeProm.isKey("wiFiState")) eeProm.putBool("wiFiState", DEFAULT_WIFI);
+  
 
   lcdBL = eeProm.getUInt("lcdBL",0);
   if(lcdBL < MIN_BL)
@@ -18,9 +22,12 @@ void initEEPROM()
   }
   timeout   = eeProm.getUInt("timeout", 10);
   reAccel   = eeProm.getUInt("reAccel", 10);
-  funcCol   = eeProm.getUInt("funcCol", 90);
+  funcCol   = eeProm.getUInt("funcCol", FUNCCOL);
   threshold = eeProm.getUInt("threshold", 15);
   def_roster = eeProm.getBool("roster", false);
+  def_acc = eeProm.getBool("accList", false);
+  re_enabled = eeProm.getBool("rEncoder", true);
+  wifi_enabled = eeProm.getBool("wiFiState", true);
   
   eeProm.end();
 }

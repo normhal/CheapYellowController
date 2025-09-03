@@ -20,7 +20,7 @@ static void menu_cb(lv_event_t * e)
 {
   lv_event_code_t code = lv_event_get_code(e);
   lv_obj_t * obj = lv_event_get_target(e);
-  if(code == LV_EVENT_VALUE_CHANGED) 
+  if(code == LV_EVENT_PRESSED) 
   {
     uint32_t menuItem = lv_btnmatrix_get_selected_btn(objects.menu_mtx);    //Retrieve the Selected Throttle number
     switch (menuItem)
@@ -48,6 +48,7 @@ static void menu_cb(lv_event_t * e)
         def_roster = eeProm.getBool("roster", false);
         if(def_roster == false) lv_obj_clear_state(objects.btn_roster, LV_STATE_CHECKED);
         else lv_obj_add_state(objects.btn_roster, LV_STATE_CHECKED);
+        if(re_enabled == true) lv_obj_add_state(objects.btn_re_enable, LV_STATE_CHECKED);
         loadScreen(SCREEN_ID_CONFIG);  
         eeProm.end();
         break;
@@ -56,9 +57,13 @@ static void menu_cb(lv_event_t * e)
         loadScreen(SCREEN_ID_ROSTER);  
         break;
       case ACC:
+      {
+        Serial.println("Calling Draw Acc Page");
+        accDrawPage();                      //Draw from the last Acc Start ID
         callingPage = SCREEN_ID_MAIN;
         loadScreen(SCREEN_ID_ACCESSORIES);  
         break;
+      }
       case PROGRAM:
         callingPage = SCREEN_ID_MAIN;
         loadScreen(SCREEN_ID_PROGRAM);  
@@ -79,11 +84,12 @@ static void menu_cb(lv_event_t * e)
         char lvPort[5];
         itoa(netwks[activeIndex].nwPort, lvPort, 10);
         lv_textarea_set_text(objects.ta_port, lvPort);
+        if(wifi_enabled == true) lv_obj_add_state(objects.btn_wifi_enable, LV_STATE_CHECKED);
         loadScreen(SCREEN_ID_WI_FI);  
         break;
       }
-      case ROUTES:
-//        loadScreen(SCREEN_ID_ROUTES);  
+      case LAYOUT:
+        loadScreen(SCREEN_ID_LAYOUT);
         break;
       case SAVE:
         saveLittleFS();

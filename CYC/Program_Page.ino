@@ -24,6 +24,7 @@ void action_program_button(lv_event_t * e)
   {
     case 1:         //Read Button
       if(trackSel != 1) 
+//      if(lv_btnmatrix_btn_ctrl(objects.track_mtx, 1)
       {
         trackSel = 1;
         lv_label_set_text(objects.lbl_ps1, "Program Track Forced!");

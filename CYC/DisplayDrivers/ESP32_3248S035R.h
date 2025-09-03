@@ -8,6 +8,7 @@
 #define TFT_BACKLIGHT 200
 #define MIN_BL 10
 #define FUNCCOL 100
+#define ACC_PER_PAGE 8
 
 #define GFX_BL 27
 
@@ -107,8 +108,9 @@ TouchConfig ts;
 
 void initTouch()
 {
-    if(!ts.begin()) Serial.println("Touch Init Failed");
-    else Serial.println("Touch Init Completed");
+  ts.begin();
+//    if(!ts.begin()) Serial.println("Touch Init Failed");
+//    else Serial.println("Touch Init Completed");
 }
 
 //create a touch object

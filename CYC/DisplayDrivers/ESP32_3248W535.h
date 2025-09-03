@@ -6,17 +6,19 @@
  ******************************************************************************/
  
 #define TFT_BACKLIGHT 250
+#define MIN_BL 10
+#define FUNCCOL 100
+#define ACC_PER_PAGE 8
 
 #define GFX_BL 1
 
 #define SCREEN_WIDTH 320          //Using EEZ Orientation
 #define SCREEN_HEIGHT 480
-//#define DISPLAY_WIDTH 480         //Physical Display Properties ex rotation
-//#define DISPLAY_HEIGHT 320
 
 #define ROTATION 0
 
-#define NAME_COL_WIDTH 240
+#define NAME_COL0_WIDTH 240
+#define NAME_COL1_WIDTH 60
 
 /*******************************************************************************
  * Display Driver for GFX Library for Arduino by "moononournation"
