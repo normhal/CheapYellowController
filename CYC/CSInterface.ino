@@ -55,13 +55,13 @@ void parse(char *com)
         {
           if(String(token).startsWith("-1"))
           {
-            Serial.printf("Bad Message: %s\n", token);
+            Serial.printf_P(PSTR ("Bad Message: %s\n"), token);
             lv_label_set_text(objects.lbl_ps2, "Read Unsuccessful");
             token = "";
             lv_obj_clear_state(objects.btn_read, LV_STATE_CHECKED);
             break;
           }
-          Serial.printf("Token: %s\n", token);
+          Serial.printf_P(PSTR ("Token: %s\n"), token);
           lv_label_set_text(objects.lbl_ps2, "Read Successful");
           lv_textarea_set_text(objects.ta_adr, token);
           lv_obj_clear_state(objects.btn_read, LV_STATE_CHECKED);
@@ -98,11 +98,11 @@ void parse(char *com)
     case 'w':
     {
       char * token = strtok(com, " ");
-      Serial.printf("Received w message: %s\n", token);
+      Serial.printf_P(PSTR ("Received w message: %s\n"), token);
       token = strtok(NULL, " ");
       if(String(token).startsWith("-1"))
       {
-        Serial.printf("Received Nack Message: %s\n", token);
+        Serial.printf_P(PSTR ("Received Nack Message: %s\n"), token);
         lv_label_set_text(objects.lbl_ps2, "Write Unsuccessful");
         lv_obj_clear_state(objects.btn_write, LV_STATE_CHECKED);
       }

@@ -48,6 +48,7 @@ static void menu_cb(lv_event_t * e)
         def_roster = eeProm.getBool("roster", false);
         if(def_roster == false) lv_obj_clear_state(objects.btn_roster, LV_STATE_CHECKED);
         else lv_obj_add_state(objects.btn_roster, LV_STATE_CHECKED);
+        if(re_enabled == true) lv_obj_add_state(objects.btn_re_enable, LV_STATE_CHECKED);
         loadScreen(SCREEN_ID_CONFIG);  
         eeProm.end();
         break;
@@ -83,11 +84,12 @@ static void menu_cb(lv_event_t * e)
         char lvPort[5];
         itoa(netwks[activeIndex].nwPort, lvPort, 10);
         lv_textarea_set_text(objects.ta_port, lvPort);
+        if(wifi_enabled == true) lv_obj_add_state(objects.btn_wifi_enable, LV_STATE_CHECKED);
         loadScreen(SCREEN_ID_WI_FI);  
         break;
       }
-      case ROUTES:
-        loadScreen(SCREEN_ID_LAYOUT);  
+      case LAYOUT:
+        loadScreen(SCREEN_ID_LAYOUT);
         break;
       case SAVE:
         saveLittleFS();

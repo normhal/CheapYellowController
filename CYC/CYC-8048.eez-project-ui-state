@@ -1,7 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-8048.eez-project]:/userPages/13",
-    "selectedBitmapObject": "[CYC-8048.eez-project]:/bitmaps/48",
+    "selectedUserPageObject": "[CYC-8048.eez-project]:/userPages/12",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -197,11 +196,11 @@
               "children": [
                 {
                   "type": "tab",
-                  "id": "#48489a77-b21d-4721-a548-1139455c5ca2",
-                  "name": "Layout",
+                  "id": "#33c474c9-5833-45cf-aaed-1a59d9ed146e",
+                  "name": "Info",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-8048.eez-project]:/userPages/13",
+                    "objectPath": "[CYC-8048.eez-project]:/userPages/12",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1335,19 +1334,19 @@
           "0": {},
           "2": {},
           "52": {
-            "0": {
-              "$selected": true
-            }
+            "0": {}
           },
           "53": {},
           "54": {},
-          "55": {}
+          "55": {
+            "$selected": true
+          }
         }
       },
       "transform": {
         "translate": {
           "x": -222,
-          "y": -203
+          "y": -323
         },
         "scale": 0.8
       },
@@ -1382,10 +1381,11 @@
     "[CYC-8048.eez-project]:/userPages/6[flow-state]": {
       "selection": {
         "0": {
-          "0": {
+          "0": {},
+          "1": {},
+          "5": {
             "$selected": true
-          },
-          "1": {}
+          }
         }
       },
       "transform": {
@@ -1757,7 +1757,103 @@
         "0": {
           "0": {},
           "1": {},
-          "7": {
+          "7": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -240,
+          "y": -400
+        },
+        "scale": 0.8
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_ESP32S3_Dev/CYC-8048.eez-project]:/userPages/6[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "1": {},
+          "5": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -240,
+          "y": -400
+        },
+        "scale": 0.8
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_ESP32S3_Dev/CYC-8048.eez-project]:/userPages/0[flow-state]": {
+      "selection": {},
+      "transform": {
+        "translate": {
+          "x": -240,
+          "y": -280
+        },
+        "scale": 0.8
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_ESP32S3_Dev/CYC-8048.eez-project]:/userPages/12[flow-state]": {
+      "selection": {},
+      "transform": {
+        "translate": {
+          "x": -240,
+          "y": -400
+        },
+        "scale": 0.8
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_113/CYC-8048.eez-project]:/userPages/0[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -222,
+          "y": -323
+        },
+        "scale": 0.8
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_113/CYC-8048.eez-project]:/userPages/10[flow-state]": {
+      "selection": {
+        "0": {
+          "22": {
             "$selected": true
           }
         }
@@ -1789,8 +1885,8 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "MAIN",
-  "lvglState": "CHECKED",
+  "lvglPart": "ITEMS",
+  "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "IMAGE",

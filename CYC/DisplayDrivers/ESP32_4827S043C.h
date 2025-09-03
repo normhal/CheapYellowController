@@ -8,6 +8,7 @@
 #define TFT_BACKLIGHT 250
 #define MIN_BL 242
 #define FUNCCOL 100
+#define ACC_PER_PAGE 10
 
 #define GFX_BL 2 // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 
@@ -34,9 +35,11 @@ Arduino_ESP32RGBPanel *rgbpanel = new Arduino_ESP32RGBPanel(
     0 /* vsync_polarity */, 3 /* vsync_front_porch */, 1 /* vsync_pulse_width */, 12 /* vsync_back_porch */,
     1 /* pclk_active_neg */, 9000000 /* prefer_speed */);
 
-Arduino_RGB_Display *gfx = new Arduino_RGB_Display(SCREEN_HEIGHT, SCREEN_WIDTH, rgbpanel, ROTATION , AUTO_FLUSH);
-
+Arduino_RGB_Display *g = new Arduino_RGB_Display(SCREEN_HEIGHT, SCREEN_WIDTH, rgbpanel, ROTATION , AUTO_FLUSH);
+Arduino_GFX *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, g);
 Arduino_DataBus *bus = create_default_Arduino_DataBus();
+
+#define CANVAS
 
 /*******************************************************************************
  * Rotary Encoder Specifics

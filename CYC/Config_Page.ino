@@ -19,75 +19,100 @@
 void action_config_button(lv_event_t * e)
 {
   void *user_data = lv_event_get_user_data(e);
+//  lv_event_code_t code = lv_event_get_code(e);
+//  if(lv_obj_get_state(objects.btn_roster) == LV_STATE_CHECKED)
+//  {
   int pressedButton = *((int*)(&user_data));
+//  Serial.printf("Pressed Button: %d\n", pressedButton);
   switch(pressedButton)
   {
-    case (25):        //Get Local Lists
-    {
-      lv_label_set_text(objects.lbl_list_status, "Local Acc and Roster Requested");
-      Serial.println("Local ACC and Roster Requested");
-      setupLocalRoster();
-      setupLocalAcc();
-      lv_label_set_text(objects.lbl_list_status, "Local Acc and Roster Loaded");
-      break;
-    }
-    case (26):        //Default Roster Button - Load EX-Rail Roster
-    {
-      lv_label_set_text(objects.lbl_list_status, "DCC-EX Roster Requested");
-      lv_label_set_text(objects.lbl_btn_roster, "DCC-EX");
-      Serial.println("Setting to DCC-EX Boot up Roster");
-      def_roster = true;
+    case (22):        //Rotary Encoder UNChecked
+      re_enabled = false;
       eeProm.begin("configs", false);
-//      setupDCCEXRoster();
-      eeProm.putBool("roster", def_roster);
-      Serial.printf("Startup Roster set to: %d\n", def_roster);
+      eeProm.putBool("rEncoder", re_enabled);
       eeProm.end();
-      lv_label_set_text(objects.lbl_list_status, "DCC-EX Roster Scheduled");
       break;
-    }
-    case (27):        //Default Roster Button - Load Local Roster
+    case (23):        //Rotary Encoder Checked
+      re_enabled = true;
+      eeProm.begin("configs", false);
+      eeProm.putBool("rEncoder", re_enabled);
+      eeProm.end();
+      break;
+    case (24):        //Startup with Local Roster
     {
-      lv_label_set_text(objects.lbl_list_status, "Local Roster Requested");
       lv_label_set_text(objects.lbl_btn_roster, "Local");
-      Serial.println("Setting to Local Roster at Boot up");
       def_roster = false;
       eeProm.begin("configs", false);
-//      setupLocalRoster();
       eeProm.putBool("roster", def_roster);
-      Serial.printf("Start Roster set to: %d\n", def_roster);
       eeProm.end();
-      lv_label_set_text(objects.lbl_list_status, "Local Roster Scheduled");
+//      populateLocoArray("/locos.txt");
+      lv_label_set_text(objects.lbl_list_status, "Start with Local Roster");
+      Serial.printf("Roster set to: %d\n", def_roster);
+      reboot_req = true;
       break;
     }
-    case (28):       //Ex_Rail Acc 
+    case (25):        //Startup with DCC-EX Roster
     {
-      lv_label_set_text(objects.lbl_list_status, "DCC-EX Acc List Requested");
-      lv_label_set_text(objects.lbl_btn_acc, "DCC-EX");
-      def_acc = true;
+      lv_label_set_text(objects.lbl_btn_roster, "DCC-EX");
+      def_roster = true;
       eeProm.begin("configs", false);
-//      setupEXAcc();
-      eeProm.putBool("accList", def_acc);
-      Serial.printf("Start Acc List set to: %d\n", def_acc);
+      eeProm.putBool("roster", def_roster);
       eeProm.end();
-      lv_label_set_text(objects.lbl_list_status, "DCC-EX Acc List Scheduled");
+//      populateLocoArray("/exlocos.txt");
+      lv_label_set_text(objects.lbl_list_status, "Start with DCC-EX Roster");
+      Serial.printf("Roster set to: %d\n", def_roster);
+      reboot_req = true;
       break;
     }
-    case (29):       //Local Acc
+    case (26):        //Startup with Local Accessories
     {
-      lv_label_set_text(objects.lbl_list_status, "Local Acc List Requested");
       lv_label_set_text(objects.lbl_btn_acc, "Local");
       def_acc = false;
       eeProm.begin("configs", false);
-//      setupLocalAcc();
       eeProm.putBool("accList", def_acc);
-      Serial.printf("Start Acc List set to: %d\n", def_acc);
       eeProm.end();
-      lv_label_set_text(objects.lbl_list_status, "Local Acc List Scheduled");
+//      populateAccArray("/accessories.txt");
+      lv_label_set_text(objects.lbl_list_status, "Start with Local Accessories");
+      Serial.printf("Acc set to: %d\n", def_acc);
+      reboot_req = true;
+      break;
+    }
+    case (27):        //Startup with DCC-EX Accessories
+    {
+      lv_label_set_text(objects.lbl_btn_acc, "DCC-EX");
+      def_acc = true;
+      eeProm.begin("configs", false);
+      eeProm.putBool("accList", def_acc);
+      eeProm.end();
+//      populateAccArray("/locos.txt");
+      lv_label_set_text(objects.lbl_list_status, "Start with DCC-EX Accessories");
+      Serial.printf("Acc set to: %d\n", def_acc);
+      reboot_req = true;
+      break;
+    }
+    case (28):        
+    {
+      Serial.println("Now Populating Local Lists");
+      lv_label_set_text(objects.lbl_list_status, "Loading Local Roster");
+      delay(500);
+      setupLocalRoster();
+      delay(500);
+      lv_label_set_text(objects.lbl_list_status, "Roster Loaded, now Loading Accessories");
+      delay(500);
+      setupLocalAcc();
+      delay(500);
+      lv_label_set_text(objects.lbl_list_status, "Local Roster and Accessories Loaded");
+      lv_obj_clear_state(objects.btn_load_local, LV_STATE_CHECKED);
+      break;
+    }
+    case (29):        //Acc in use UN-Checked
+    {
       break;
     }
     case (30):       //WiFi
     {
-      enum ScreensEnum callingPage = SCREEN_ID_CONFIG;
+      reboot_req = false;
+      if(wifi_enabled == true) lv_obj_add_state(objects.btn_wifi_enable, LV_STATE_CHECKED);
       loadScreen(SCREEN_ID_WI_FI);
       break;
     }
@@ -114,10 +139,12 @@ void action_config_button(lv_event_t * e)
     }
     case (32):       //Done
     {
+      if(reboot_req == true) ESP.restart();
       loadScreen(SCREEN_ID_MAIN);
       break;
     }
     default:
       break;
   }
+//  }
 }

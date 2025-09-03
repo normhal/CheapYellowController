@@ -25,9 +25,9 @@ void populateThrottle()                   //Build the Loco DropDown List
 //  Serial.printf("Locos to Add: %d\n", Locomotives.size());
   for(int i = 0; i < NUM_LOCO_SLOTS; i++)
   {
-    if(i < Locomotives.size())
+    if(i < NUM_LOCOS)
     {
-//    Serial.printf("LocoID being loaded: %d\n", selectedIDs[activeThrottle][i]);
+//      Serial.printf("LocoID being loaded into DropDown List: %d\n", selectedIDs[activeThrottle][i]);
       if(selectedIDs[activeThrottle][i] != 255)                           //ignore unused Loco IDs
       {
 //      Serial.printf("Adding LocoID: %d\n", selectedIDs[activeThrottle][i]);
@@ -38,9 +38,9 @@ void populateThrottle()                   //Build the Loco DropDown List
         lv_dropdown_add_option(objects.dd_locos,"",i); //Blank out unused Loco IDs in the list
       }
     }
-    populateLocoDetails();                  //Fill the page with Active Loco's details
   }
   lv_dropdown_set_selected(objects.dd_locos, activeSlot[activeThrottle]); //Set the previously active Loco as selected
+  populateLocoDetails();                  //Fill the page with Active Loco's details
 }
 
 void clearGuest()
@@ -50,19 +50,14 @@ void clearGuest()
 
 void populateLocoDetails()                //Fill the page with Active Loco's details
 {
-  Serial.println("Populating Loco Details");
-//  if(activeLocoID != 255)
-//  {
-//    Serial.printf("activeLocoID: %d\n", activeLocoID);
+//    Serial.printf("Loading details for LocoID: %d\n", activeLocoID);
     lv_slider_set_value(objects.slider, Locomotives[activeLocoID].LocoSpeed, LV_ANIM_OFF);
     char speedString[10] = "";
     itoa(Locomotives[activeLocoID].LocoSpeed, speedString, 10);
     lv_label_set_text(objects.lbl_slider,speedString);                    //Update the speed label to the previously set speed value
     lv_label_set_text(objects.lbl_address, Locomotives[activeLocoID].LocoAddress.c_str());    //Update the address label to the previously set address
 
-    #if defined ROTARY_ENCODER    
-      ss.setEncoderPosition(Locomotives[activeLocoID].LocoSpeed);
-    #endif
+    if(re_enabled == true) ss.setEncoderPosition(Locomotives[activeLocoID].LocoSpeed);
 
     //Setup the Direction
     if(Locomotives[activeLocoID].LocoDir == 1)
@@ -70,26 +65,25 @@ void populateLocoDetails()                //Fill the page with Active Loco's det
     }else lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);
 
     lv_obj_set_style_pad_column(objects.functions_mtx, funcCol, LV_PART_MAIN | LV_STATE_DEFAULT); //   lv_obj_set_style_pad_column(objects.functions_mtx, 40, LV_STYLE_MAIN);
+    lv_btnmatrix_set_btn_ctrl_all(objects.functions_mtx, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
 
-    //Clear the mtxSlots
-    for(uint8_t mtxSlot = 0; mtxSlot < NUM_FUNC_SLOTS; mtxSlot++)
-    {
-      lv_btnmatrix_set_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
-//      lv_btnmatrix_set_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_DISABLED);
-    }
     uint8_t funcSlot = 255;
-    for(int funcNum = 0; funcNum < NUM_FUNC_SLOTS; funcNum++)           //process ALL (28)possible functions
+    for(int funcNum = 0; funcNum < NUM_FUNCS; funcNum++)      //This goes through up to 28 functions
     {
-      funcSlot = Locomotives[activeLocoID].FuncSlot[funcNum];            //Retrieve the 28 Function's designated Slot (0 - 9)
-//      Serial.printf("funcNum: %d funcSlot: %d\n", funcNum, funcSlot);
-//      uint8_t funcSlot = funcNum;            //Retrieve the 28 Function's designated Slot (0 - 9)
+      funcSlot = Locomotives[activeLocoID].FuncSlot[funcNum];            //Retrieve the specific Function's designated Slot (0 - 9)
+//     Serial.printf("LocoID: %d gets Function: %d for Slot %d\n", activeLocoID, funcNum, funcSlot);
       if(funcSlot >= 0 && funcSlot < NUM_FUNC_SLOTS)
       {
         if(funcSlot != 255)
         {
           uint8_t mtxSlot = slotXlate[funcSlot];                      //Convert the functions slot to the Matrix slot
-          btnMap_functions[map_xlate[funcSlot]] = Locomotives[activeLocoID].FuncName[funcNum].c_str();
-          lv_btnmatrix_clear_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
+//          Serial.printf("Processed LocoID: %d gets Function: %d for Slot %d translated to: %d\n", activeLocoID, funcNum, funcSlot, mtxSlot);
+          if(Locomotives[activeLocoID].FuncName[funcNum] != NULL) 
+          {
+            btnMap_functions[map_xlate[funcSlot]] = Locomotives[activeLocoID].FuncName[funcNum].c_str();
+//            Serial.printf("Button map %d loaded with %s\n", map_xlate[funcSlot] ,Locomotives[activeLocoID].FuncName[funcNum]);
+            lv_btnmatrix_clear_btn_ctrl(objects.functions_mtx, mtxSlot, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
+          }
           slot2Func[funcSlot] = funcNum;                              //record which slot contains which function
           if(Locomotives[activeLocoID].FuncState[funcNum] == 1)
           { 
@@ -104,17 +98,18 @@ void populateLocoDetails()                //Fill the page with Active Loco's det
     lv_btnmatrix_set_map(objects.functions_mtx, btnMap_functions);      //Display the Updated Map
 //  }
 }
-
-static void buildFunctionsPage(uint8_t locoID)
+static void buildFunctionsPage()
 {
+  lv_btnmatrix_set_btn_ctrl_all(objects.ex_functions_mtx, LV_BTNMATRIX_CTRL_DISABLED);
+//  lv_btnmatrix_clear_btn_ctrl_all(objects.ex_functions_mtx, LV_BTNMATRIX_CTRL_CHECKED);
   for(uint8_t i = 0; i < NUM_FUNCS; i++)
   {
-    uint16_t fSlot = Locomotives[locoID].FuncSlot[i];
-    lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, i, LV_BTNMATRIX_CTRL_CHECKED);
+    uint16_t fSlot = Locomotives[activeLocoID].FuncSlot[i];
+    lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, i, LV_BTNMATRIX_CTRL_CHECKED);          //Make sure button is UNCHECKED first
     if(fSlot != 255)
     {
       lv_btnmatrix_clear_btn_ctrl(objects.ex_functions_mtx, i, LV_BTNMATRIX_CTRL_DISABLED);
-      if(Locomotives[locoID].FuncState[i] == 1) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, i, LV_BTNMATRIX_CTRL_CHECKED);
+      if(Locomotives[activeLocoID].FuncState[i] == 1) lv_btnmatrix_set_btn_ctrl(objects.ex_functions_mtx, i, LV_BTNMATRIX_CTRL_CHECKED);
     }
   }
 }
@@ -148,20 +143,25 @@ static void functions_cb(lv_event_t * e)
     {
       if(code == LV_EVENT_PRESSED)
       {
-//        Serial.printf("Function Pressed: %d\n", Locomotives[activeLocoID].FuncOption[fslot]);
-        if(Locomotives[activeLocoID].FuncState[funcNum] == 1) Locomotives[activeLocoID].FuncState[funcNum] = 0;
-        else Locomotives[activeLocoID].FuncState[funcNum] = 1;
+//        Serial.printf("Function Pressed: %d\n", Locomotives[activeLocoID].FuncOption[funcNum]);
+//        if(!(lv_btnmatrix_has_btn_ctrl(obj, mapSlot, LV_BTNMATRIX_CTRL_CHECKED)))
+//        {
+          if(Locomotives[activeLocoID].FuncState[funcNum] == 1) Locomotives[activeLocoID].FuncState[funcNum] = 0;
+          else Locomotives[activeLocoID].FuncState[funcNum] = 1;
         //Send the DCCEX Command...
-        String functionCMD = ("<F " + String(Locomotives[activeLocoID].LocoAddress) + " " + String(funcNum) + " " + String(Locomotives[activeLocoID].FuncState[funcNum]) + ">");
-        Serial.println(functionCMD);
+          String functionCMD = ("<F " + String(Locomotives[activeLocoID].LocoAddress) + " " + String(funcNum) + " " + String(Locomotives[activeLocoID].FuncState[funcNum]) + ">");
+          Serial.println(functionCMD);
 //        client.print(functionCMD);
-        if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+          if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+//        }
       }
-      if(code == LV_EVENT_RELEASED)
+      if(Locomotives[activeLocoID].FuncOption[funcNum] == 1)
       {
-//        Serial.printf("Function %d in Slot: %d has Option state: %d\n", funcNum, fSlot, Locomotives[activeLocoID].FuncOption[funcNum]);
-        if(Locomotives[activeLocoID].FuncOption[funcNum] == 1)
+        if(code == LV_EVENT_RELEASED)
         {
+//          Serial.printf("LocoID %d Function %d in Slot: %d has Option state: %d\n", activeLocoID, funcNum, fSlot, Locomotives[activeLocoID].FuncOption[funcNum]);
+//        if(Locomotives[activeLocoID].FuncOption[funcNum] == 1)
+//        {
           lv_btnmatrix_clear_btn_ctrl(obj, mapSlot, LV_BTNMATRIX_CTRL_CHECKED);
           Locomotives[activeLocoID].FuncState[funcNum] = 0;
           //Send the DCCEX Command...
@@ -195,9 +195,10 @@ void setSpeed(uint16_t locoAddr, uint16_t newSpeed, uint8_t newDir)
   lv_label_set_text(objects.lbl_slider,speedString);
   String speedCMD = ("<t " + String(locoAddr) + " "
          + speedString + " " + String(newDir) + ">");
-#if defined ROTARY_ENCODER    
+if(re_enabled == true)
+{    
   ss.setEncoderPosition(newSpeed);
-#endif
+}
   Serial.println(speedCMD);
   if(!client.print(speedCMD)) Serial.println("Transmit Failed");
 }
@@ -270,7 +271,7 @@ void action_throttle_button(lv_event_t * e)
     {
       if(rosterMode != GUEST_ACTIVE)
       {
-        buildFunctionsPage(activeLocoID);
+        buildFunctionsPage();
         loadScreen(SCREEN_ID_FUNCTIONS);
       }
       break;
@@ -286,6 +287,8 @@ void action_throttle_button(lv_event_t * e)
       loadScreen(SCREEN_ID_ROSTER);
       break;
     case 32:    //Acc
+      Serial.println("Calling Draw Acc Page");
+      accDrawPage();                      //Draw from the last Acc Start ID
       callingPage = SCREEN_ID_THROTTLE;
       loadScreen(SCREEN_ID_ACCESSORIES);
       break;
@@ -325,19 +328,14 @@ void setLocoRev()
   }
 }
 
-void action_functions_button(lv_event_t * e)
+void action_functions_button(lv_event_t * e)        //Navigation Buttons on Functions Page
 {
   void *user_data = lv_event_get_user_data(e);
   int pressedButton = *((int*)(&user_data));
   switch(pressedButton)
   {
     case 30:    //Cancel Button
-      lv_obj_clear_state(objects.btn_fedit, LV_STATE_CHECKED);
-      populateLocoDetails();
-      loadScreen(SCREEN_ID_THROTTLE);
-      break;
     case 31:    //Description Button
-      break;
     case 32:    //Done Button
       lv_obj_clear_state(objects.btn_fedit, LV_STATE_CHECKED);
       populateLocoDetails();
@@ -355,7 +353,7 @@ static void ex_functions_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target(e);
     uint32_t fNum = lv_btnmatrix_get_selected_btn(obj); 
-    if(fNum == 65535) return;
+//    if(fNum == 65535) return;
     if(lv_obj_get_state(objects.btn_fedit) != LV_STATE_CHECKED)               //CHECKED = Edit Mode
     {
       if(lv_btnmatrix_has_btn_ctrl(obj, fNum, LV_BTNMATRIX_CTRL_DISABLED)) return;
@@ -386,21 +384,25 @@ static void ex_functions_cb(lv_event_t * e)
       }
     }else     //Now in Edit Mode
     {
-      char str[2];
-      if(lv_btnmatrix_has_btn_ctrl(obj, fNum, LV_BTNMATRIX_CTRL_DISABLED))
+      if(code == LV_EVENT_RELEASED) 
       {
+        char str[4];
         lv_textarea_set_text(objects.ta_fnum, itoa(fNum, str, 10));
+        if(lv_btnmatrix_has_btn_ctrl(obj, fNum, LV_BTNMATRIX_CTRL_DISABLED) == true)
+        {
+          lv_textarea_set_text(objects.ta_fname, "");
+        }
+        else
+        { 
+          lv_textarea_set_text(objects.ta_fname, Locomotives[activeLocoID].FuncName[fNum].c_str());
+        }
+        lv_textarea_set_text(objects.ta_name, Locomotives[activeLocoID].LocoName.c_str());
+        lv_textarea_set_text(objects.ta_address, Locomotives[activeLocoID].LocoAddress.c_str());
+        editingID = activeLocoID;
+        setupFuncEditSlots();
+        callingPage = SCREEN_ID_FUNCTIONS;
+        loadScreen(SCREEN_ID_EDIT_LOCO);
       }
-      else
-      { 
-        lv_textarea_set_text(objects.ta_fname, "");
-        lv_textarea_set_text(objects.ta_fnum, "");
-      }
-      lv_textarea_set_text(objects.ta_name, Locomotives[activeLocoID].LocoName.c_str());
-      lv_textarea_set_text(objects.ta_address, Locomotives[activeLocoID].LocoAddress.c_str());
-      setupFuncEditSlots(activeLocoID);
-      callingPage = SCREEN_ID_FUNCTIONS;
-      loadScreen(SCREEN_ID_EDIT_LOCO);
     }
   }
 }

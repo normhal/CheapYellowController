@@ -27,23 +27,14 @@
  *
  *****************************************************************************************************************************
  *
- * This version is for a NON-DCCEX Protocol Throttle based on a selection of Cheap Yellow Display (CYD)
- * Variants. Supported models are:
+ * This version is for a NON-DCCEXProtocol Throttle based on a selection of Cheap Yellow Display (CYD)
+ * Variants. Supported ESP32 models are:
+ *  2.8in Capacitive Touch 240x320 resolution   - Sunton ESP32-2432S028C - The original CYD:-)
  *  2.8in Resistive Touch 240x320 resolution   :- Sunton ESP32-2432S028R - The original CYD:-)
- *  2.8in Resistive Touch 240x320 resolution   :- LilyGo ESP32 T-HMI
- *  3.2in Resistive Touch 240x320 resolution   :- Sunton ESP32-2432S032R - Not tested
- *  3.2in Capacitive Touch 240x320 resolution  :- Sunton ESP32-2432S032C - Not tested
- *  3.5in Resistive Touch 320x480 resolution   :- Sunton ESP32-3248S035R
+ *  3.2in Capacitive Touch 240x320 resolution  :- Sunton ESP32-2432S032C
+ *  3.2in Resistive Touch 240x320 resolution   :- Sunton ESP32-2432S032R
  *  3.5in Capacitive Touch 320x480 resolution  :- Sunton ESP32-3248S035C
- *  3.5in Capacitive Touch 320x480 resolution  :- Guition JC3248W535C - in development
- *  4.0in Capacitive Touch 480x480 resolution  :- Guition JC4848W040C - in development
- *  4.3in Resistive Touch 272x480 resolution   :- Sunton ESP32-2748S043R
- *  4.3in Capacitive Touch 272x480 resolution  :- Sunton ESP32-2748S043C
- *  4.3in Capacitive Touch 272x480 resolution  :- Guition JC2748W435C - in development
- *  4.3in Capacitive Touch 480x800 resolution  :- Sunton ESP32-8048S043C
- *  5.0in Capacitive Touch 480x800 resolution  :- Sunton ESP32-8048S050C
- *  5.0in Capacitive Touch 480x800 resolution  :- Guition JC8048W550C
- *  7.0in model is likely to function, but is not actively supported
+ *  3.5in Resistive Touch 320x480 resolution   :- Sunton ESP32-3248S035R
  *
  * Variant in use must be enabled by uncommenting its definition below beforeand then "Building" the correct resolution
  * EEZ Studio project. The "Build" will place the necessary source and header files in the folder of this Arduino sketch.
@@ -72,16 +63,29 @@
  14 July - Version 1.0.6 Started
         - WiFi Connection fixed - known quirk
         - "Preferences" library added
+
+EEZ Studio Notes:
+ Version 1.3.1
+ - "WiFi Enable" Button changed to "Checked 10, Unchecked 9"
+ - Config Page added "Rotary Encoder Enable" - "Checked 23, Unchecked 22"
+
+Sketch Notes:
+ Version 1.3.1
+ - Suffix to Version indicates "Arrays" or "Vectors"
+ - Included WiFi Enabled state to EEPROM
+ - Included Rotary Enable Option in Config - saved to EEPROM
 *******************************************************************************************************************************/
 // Note: "t..." - not ready, "tick" = tested on physical device, "tock" = Batch file created and tested
 
-//#define ESP2432S028C           //Sunton ESP32-2432S028C Untested      ESP32     ticked 21 July
-//#define ESP2432S028R           //Sunton ESP32-2432S028R Classic CYD   ESP32     ticked 21 July
-//#define ESP2432THMIR           //LilyGo T-HMI                         ESP32-S3  ticked 21 July - No RE support yet
-//#define ESP2432S032C           //Sunton ESP32-2432S032C  Untested     ESP32
+//#define ESP2432S028C           //Sunton ESP32-2432S028C   Not Tested  ESP32     ticked 21 July
+//#define ESP2432S028R           //Sunton ESP32-2432S028R               ESP32     Good - 14 August
+//#define JC2432W328C             //Guition CYD                                   Good - 14 August
+//#define ESP2432S032C           //Sunton ESP32-2432S032C               ESP32     Good - 14 August
 //#define ESP2432S032R           //Sunton ESP32-2432S032R               ESP32     ticked 21 July
 //#define ESP3248S035C           //Sunton ESP32-3248S035C               ESP32     ticked 21 July
 //#define ESP3248S035R           //Sunton ESP32-3248S035R               ESP32     ticked 21 July  
+
+//#define ESP2432THMIR           //LilyGo T-HMI                         ESP32-S3  ticked 21 July - No RE support yet
 //#define ESP3248W535C           //Guition JC3248W535C                  ESP32-S3  ticked 16 June
 //#define ESP4827S043C           //Sunton ESP32-4827S043C               ESP32-S3  ticked 21 July
 //#define ESP4827S043R           //Sunton ESP32-4827S043R               ESP32-S3  ticked 21 July
@@ -89,21 +93,17 @@
 //#define ESP32DIS06043H         // Elcrow ESP32-DIS06043H              ESP32-S3  t...   by RKS
 //#define ESP32DIS08070H         // Elcrow ESP32-DIS08070H              ESP32-S3  t...   by RKS
 
-//#define ESP4827W543C           //Guition JC4827W543C                  ESP32-S3  ticked 21 July
+#define ESP4827W543C           //Guition JC4827W543C                  ESP32-S3  ticked 21 July
 //#define ESP4827W543R           //Guition JC4827W543R                  ESP32-S3  ticked 21 July
 //#define ESP4848S040C           //Guition JC4848W440C - in development
-#define ESP8048S043C           //Sunton ESP32-8048S043C               ESP32-S3  ticked 21 July
+//#define ESP8048S043C           //Sunton ESP32-8048S043C               ESP32-S3  ticked 21 July
 //#define ESP8048S050C           //Sunton ESP32-8048S050C               ESP32-S3  ticked 21 July
 //#define ESP8048W550C           //Guition JC8048W550C                  ESP32-S3  ticked 21 July
 //#define ESP8048S070C           //Sunton ESP32-8048S050C               ESP32-S3  ticked 21 July
 
-//*****************************************************************************************************************************
-// Rotary Encoder Compile Inclusion
-//*****************************************************************************************************************************
+const char* build = "1.3.1V";
 
-const char* build = "1.1.8";
-
-#define ROTARY_ENCODER                //Un-Comment to include Rotary Encoder Support
+#define USE_VECTORS
 
 //*****************************************************************************************************************************
 // Don't modify anything below the above two sections
@@ -112,8 +112,12 @@ const char* build = "1.1.8";
 #include "CYC.h"
 #include "credentials.h"
 
-vector<HCAcc> Turnouts;
-vector<HCLoco> Locomotives;
+#if defined USE_VECTORS
+  vector<accessory> Turnouts;
+  vector<locomotive> Locomotives;
+  #define NUM_ACCS Turnouts.size()
+  #define NUM_LOCOS Locomotives.size()
+#endif
 
 uint32_t bufSize;
 
@@ -125,51 +129,57 @@ File file;
 WiFiClient client;
 DCCEXProtocol dccexProtocol;
 
-// Delegate class
 class MyDelegate : public DCCEXProtocolDelegate 
 {
 public:
-  void receivedServerVersion(int major, int minor, int patch) override {
+  void receivedServerVersion(int major, int minor, int patch) override 
+  {
+/*
     Serial.print("\n\nReceived version: ");
     Serial.print(major);
     Serial.print(".");
     Serial.print(minor);
     Serial.print(".");
     Serial.println(patch);
+*/
   }
 
   void receivedTrackPower(TrackPower state) override 
   {
-    Serial.printf("Received Track Power: %d\n", state);    //Nothing done with this yet:-()
+//    Serial.printf_P(PSTR ("Received Track Power: %d\n"), state);    //Nothing done with this yet:-()
   }
 
   void receivedRosterList() override 
   {
-    Serial.println("Receiving DCC-EX Locos");
-    saveDCCExLocos(LittleFS, "/exlocos.new", "ID,Name,Address\n");
-    Serial.println("DCC-EX Roster Received");
+//    Serial.printf_P(PSTR ("Receiving DCC-EX Locos\n"));
+    receiveDCCEXLocos(LittleFS, "/exlocos");     //, "ID,Name,Address\n");
+//    Serial.println("DCC-EX Roster Received");
   }
 
   void receivedTurnoutList() override 
   {
-    Serial.println("Receiving DCC-EX Turnouts");
-    saveDCCExAcc(LittleFS, "/exacc.new", "ID,Name,Address,Image,Type\n");
+//    Serial.printf_P(PSTR ("Receiving DCC-EX Turnouts\n"));
+    receiveDCCEXAccs(LittleFS, "/exacc");
+//    Serial.println("DCC-EX Turnouts Received");
   }
 
-  void receivedRouteList() override {
-    Serial.print("\n\nReceived Routes List");
+  void receivedRouteList() override 
+  {
+//    Serial.printf_P(PSTR ("\n\nReceived Routes List\n"));
 //    printRoutes();
-    Serial.println("\n\n");
+//    Serial.println("\n\n");
   }
 
-  void receivedTurntableList() override {
-    Serial.print("\n\nReceived Turntables list");
+  void receivedTurntableList() override 
+  {
+//    Serial.print("\n\nReceived Turntables list");
 //    printTurntables();
-    Serial.println("\n\n");
+//    Serial.println("\n\n");
   }
 };
 
 MyDelegate myDelegate;
+
 /*
  ********************************************************************************************************
  * Call-Back routine for Textarea fields
@@ -222,10 +232,10 @@ void setBacklight(uint8_t brightness)
 {
   ledcSetup(0, 5000, 8);                          //If using ESP Boards 2.0.x LEDChannel, frequency, resolution
   ledcAttachPin(GFX_BL, 0);                       //If using ESP Boards 2.0.x Pin, LEDChannel
-  ledcWrite(0, lcdBL);                       //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
+  ledcWrite(0, lcdBL);                            //If using ESP Boards 2.0.x LEDChannel, Brightness* 0-255
 
-  //ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
-  //ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
+//  ledcAttachChannel(GFX_BL, 5000, 8, 0);          //If using ESP Boards 3.x Pin, Frequency, Resolution, Channel
+//  ledcWrite(GFX_BL, brightness);                  //If using ESP Boards 3.x Pin, Brightness
 }
 /*
  ********************************************************************************************************
@@ -244,31 +254,31 @@ void setup()
     digitalWrite(10 /* PWD */, HIGH);
   #endif
 
-#if  defined ROTARY_ENCODER
-  initRE();                         //Initialize Rotary Encoder if Enabled in Display Driver
-#endif
+  if(re_enabled == true) initRE();                         //Initialize Rotary Encoder if Enabled in Display Driver
 
-  #ifdef DIRECT_MODE
-    bufSize = SCREEN_WIDTH * SCREEN_HEIGHT;
-  #else
-    bufSize = SCREEN_WIDTH * 40;
-  #endif
+  //
+  //*****************************************************************************************************
+  // Read LittleFS data files and populate working arrays
+  //*****************************************************************************************************
+  //
+  LittleFS.begin();
 
-  #ifdef ESP32
-    #if defined(DIRECT_MODE) && (defined(CANVAS) || defined(RGB_PANEL) || defined(DSI_PANEL))
-      disp_draw_buf = (lv_color_t *)gfx->getFramebuffer();
-    #else  // !(defined(DIRECT_MODE) && (defined(CANVAS) || defined(RGB_PANEL) || defined(DSI_PANEL)))
-    disp_draw_buf = (lv_color_t *)heap_caps_malloc(bufSize * 2, MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
-    if (!disp_draw_buf)
+  // Set ALL Pre-Selected Loco IDs to unused (255)
+  for(int i = 0; i < THROTTLE_COUNT; i++)
+  {
+    for(int j = 0; j < NUM_LOCO_SLOTS; j++)
     {
-      // remove MALLOC_CAP_INTERNAL flag try again
-      disp_draw_buf = (lv_color_t *)heap_caps_malloc(bufSize * 2, MALLOC_CAP_8BIT);
+      selectedIDs[i][j] = 255;
     }
-    #endif // !(defined(DIRECT_MODE) && (defined(CANVAS) || defined(RGB_PANEL) || defined(DSI_PANEL)))
-  #else // !ESP32
-    Serial.println("LVGL disp_draw_buf heap_caps_malloc failed! malloc again...");
-    disp_draw_buf = (lv_color_t *)malloc(bufSize * 2);
-  #endif // !ESP32
+  }
+
+  populateSelected("/throttleids.txt");
+  populateCredentials("/credentials.txt");
+
+  ssid = netwks[0].ssid;
+  password = netwks[0].password;
+  ipAddress = netwks[0].ipAddress;
+  nwPort = netwks[0].nwPort;
 
   if (!gfx->begin())
   {
@@ -278,7 +288,38 @@ void setup()
 
   initTouch();
 
+  initAccMap();
+  
   lv_init();
+
+  #ifdef DIRECT_MODE
+    bufSize = SCREEN_WIDTH * SCREEN_HEIGHT;
+  #else
+    bufSize = SCREEN_WIDTH * 40;
+  #endif
+
+/*
+******************************************************************************************************************
+* Set TFT Backlight Brightness - can be changed in the Relevant Display Driver
+******************************************************************************************************************
+*/
+  #ifdef ESP32
+    #if defined(DIRECT_MODE) && (defined(CANVAS) || defined(RGB_PANEL) || defined(DSI_PANEL))
+      Serial.println("Using Frame Buffer");
+      disp_draw_buf = (lv_color_t *)gfx->getFramebuffer();
+    #else  // !(defined(DIRECT_MODE) && (defined(CANVAS) || defined(RGB_PANEL) || defined(DSI_PANEL)))
+      Serial.println("NOT Using Frame Buffer");
+      disp_draw_buf = (lv_color_t *)heap_caps_malloc(bufSize * 2, MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+      if (!disp_draw_buf)
+      {
+      // remove MALLOC_CAP_INTERNAL flag try again
+       disp_draw_buf = (lv_color_t *)heap_caps_malloc(bufSize * 2, MALLOC_CAP_8BIT);
+      }
+    #endif // !(defined(DIRECT_MODE) && (defined(CANVAS) || defined(RGB_PANEL) || defined(DSI_PANEL)))
+  #else // !ESP32
+    Serial.println("LVGL disp_draw_buf heap_caps_malloc failed! malloc again...");
+    disp_draw_buf = (lv_color_t *)malloc(bufSize * 2);
+  #endif // !ESP32
 
   if (!disp_draw_buf)
   {
@@ -294,9 +335,9 @@ void setup()
     disp_drv.ver_res = SCREEN_HEIGHT;   //screenHeight;
     disp_drv.flush_cb = my_disp_flush;
     disp_drv.draw_buf = &draw_buf;
-    #ifdef DIRECT_MODE
-      disp_drv.direct_mode = true;
-    #endif
+  #ifdef DIRECT_MODE
+    disp_drv.direct_mode = true;
+  #endif
     lv_disp_drv_register(&disp_drv);
 
     //Initialize the input device driver 
@@ -305,6 +346,8 @@ void setup()
     indev_drv.type = LV_INDEV_TYPE_POINTER;
     indev_drv.read_cb = my_touchpad_read;
     lv_indev_drv_register( &indev_drv );
+
+//    gfx->flush();
 
     // Init EEZ-Studio UI
     ui_init();
@@ -380,43 +423,25 @@ void setup()
     activeIndex = 0;              //Initialize the Index to the first in the SSID list
     CallingPage = 0;
 
-    // Set ALL Pre-Selected Loco IDs to unused (255)
-    for(int i = 0; i < THROTTLE_COUNT; i++)
-    {
-      for(int j = 0; j < NUM_LOCO_SLOTS; j++)
-      {
-        selectedIDs[i][j] = 255;
-      }
-    }
-    //
-    //*****************************************************************************************************
-    // Read all LittleFS data files and populate working arrays
-    //*****************************************************************************************************
-    //
-    LittleFS.begin();
-
-    Serial.println("Now loading Selected Loco IDs");
-    populateSelected("/throttleids.txt");
-
-    Serial.println("Now loading List of Credentials");
-    populateCredentials("/credentials.txt");
-
-//    Serial.println("Now loading List of Accessories");
-//    populateAccArray("/accessories.txt");
-
-/*
-******************************************************************************************************************
-* Set TFT Backlight Brightness - can be changed in the Relevant Display Driver
-******************************************************************************************************************
-*/
-    setBacklight(TFT_BACKLIGHT);
   }
 /*
 ******************************************************************************************************************
 * Setup Rotary Encoder
 ******************************************************************************************************************
 */
-#if defined ROTARY_ENCODER
+/*
+  eeProm.begin("configs", true);
+  eeProm.getUInt("lcdBL",lcdBL);
+  eeProm.getBool("roster", def_roster);
+  eeProm.getBool("accList", def_acc); 
+  eeProm.getBool("rEncoder", re_enabled); 
+  eeProm.getBool("wiFiState", wifi_enabled); 
+  eeProm.end();
+*/
+  Serial.printf("WiFi State from EEPROM: %d\n", wifi_enabled);
+
+if(re_enabled == true)
+{
   Serial.println("Looking for seesaw!");
 
   if (! ss.begin(SEESAW_ADDR)) Serial.println("Couldn't find seesaw on default address");
@@ -440,24 +465,11 @@ void setup()
     ss.enableEncoderInterrupt();
   }
   re_timer = millis();
-#endif
+}
 
-  ssid = netwks[0].ssid;
-  password = netwks[0].password;
-  ipAddress = netwks[0].ipAddress;
-  nwPort = netwks[0].nwPort;
-  
-  connectWiFi();
+  if(wifi_enabled == true) connectWiFi();
 
-//  dccexProtocol.setLogStream(&Serial);
-  dccexProtocol.setDelegate(&myDelegate);
-  dccexProtocol.connect(&client);
-  Serial.println("DCC-EX connected");
-//  dccexProtocol.requestServerVersion();
-  dccexProtocol.powerOn();
-
-  eeProm.begin("configs", true);
-  if(eeProm.getBool("roster", def_roster) == true) 
+  if(def_roster == true) 
   {
     setupDCCEXRoster();
     lv_label_set_text(objects.lbl_btn_roster, "DCC-EX");
@@ -467,17 +479,19 @@ void setup()
     setupLocalRoster();
     lv_label_set_text(objects.lbl_btn_roster, "Local");
   }
-  if(eeProm.getBool("accList", def_acc) == true) 
+
+  if(def_acc == true) 
   {
-    setupEXAcc();
+  //  Serial.println("Acc set to DCC-EX");
+    setupDCCEXAcc();
     lv_label_set_text(objects.lbl_btn_acc, "DCC-EX");
   }
   else 
   {
+  //  Serial.println("Acc set to Local");
     setupLocalAcc();
     lv_label_set_text(objects.lbl_btn_acc, "Local");
   }
-  eeProm.end();
 
   rosterMode = GUEST_INACTIVE;
   lv_table_set_col_width(objects.tbl_roster, 0, NAME_COL0_WIDTH);
@@ -485,7 +499,8 @@ void setup()
 
   Serial.println("Setup Done!");
   lv_label_set_text(objects.lbl_sketch_build, build);
-//  lv_label_set_text(objects.lbl_eez_build, eezBuild);
+
+  setBacklight(lcdBL);
 }
 /*
  ********************************************************************************************************
@@ -496,17 +511,14 @@ void loop()
 {
   lv_timer_handler();
 
-//  ui_t...();
-
-//  gfx->flush();
+//#if defined CANVAS
+  gfx->flush();
+//#endif
 
   dccexProtocol.check();
 
-//  dccexProtocol.getLists(true,false,false,false);
-
-//  receiveCMD();
-
-#if defined ROTARY_ENCODER
+  if(re_enabled == true)
+  {
   if(encoder_present)                       //Sample Rotary Encoder if it's been found:-)
   {
     if(!ss.digitalRead(SS_SWITCH))          //First check if the Direction Button has been pressed
@@ -557,5 +569,5 @@ void loop()
       re_timer = millis();
     }
   }
-#endif
+}
 }

@@ -16,18 +16,31 @@
  *
  *****************************************************************************************************************************
 */
-
+void initAccMap()
+{
+  uint8_t mapNum;
+  for(mapNum = 0; mapNum < (ACC_PER_PAGE * 2); mapNum++)
+  {
+    btnMap_acc_state[mapNum] = " ";
+    btnMap_acc_name[mapNum] = " ";
+    mapNum++;
+    btnMap_acc_state[mapNum] = "\n";
+    btnMap_acc_name[mapNum] = "\n";
+  }
+  btnMap_acc_state[mapNum-1] = NULL;
+  btnMap_acc_name[mapNum-1] = NULL;
+}
 /*
  ********************************************************************************************************
  * Retrieve and Load the List of Accessories from DCC-EX
  ********************************************************************************************************
 */
-void setupEXAcc()
+void setupDCCEXAcc()
 {
   lv_obj_add_state(objects.btn_acc, LV_STATE_CHECKED);                 //Slot 0 is used
   lv_label_set_text(objects.lbl_btn_acc, "DCC-EX");
-  Serial.println("Now populating Turnouts...");
-//  populateAccArray("/exacc.txt");
+  Serial.println("Now populating DCC-EX Turnouts...");
+////  populateAccArray("/exacc.txt");
   dccexProtocol.getLists(false, true, false,false);
 }
 /*
@@ -39,7 +52,7 @@ void setupLocalAcc()
 {
   lv_obj_clear_state(objects.btn_acc, LV_STATE_CHECKED);                 //Slot 0 is used
   lv_label_set_text(objects.lbl_btn_acc, "Local");
-  Serial.println("Now populating Turnouts...");
+  Serial.println("Now populating Local Turnouts...");
   populateAccArray("/accessories.txt");
 }
 /*
@@ -57,7 +70,6 @@ static void acc_cb(lv_event_t * e)
     uint16_t accID = atoi(lv_btnmatrix_get_btn_text(objects.acc_state_mtx, id));       //The Turnout Actual ID (accID) is stored in the Turnout State "Button" 
     if(lv_obj_get_state(objects.acc_edit_button) != LV_STATE_CHECKED)     
     { 
-//      Serial.printf("ID: %d and AccID Detected: %d\n", id, accID);
       if(lv_btnmatrix_has_btn_ctrl(obj, id, LV_BTNMATRIX_CTRL_CHECKED))  
       {
         lv_btnmatrix_clear_btn_ctrl(objects.acc_state_mtx, id, LV_BTNMATRIX_CTRL_CHECKED);
@@ -68,10 +80,8 @@ static void acc_cb(lv_event_t * e)
         lv_btnmatrix_set_btn_ctrl(objects.acc_state_mtx, id, LV_BTNMATRIX_CTRL_CHECKED);
         Turnouts[accID].AccState = 1;
       }
-//    Serial.printf("Accessory Button Identified %d\n", id);
       String accCMD = ("<a " + String(Turnouts[accID].AccAddress) + " " + String(Turnouts[accID].AccState) + "> ");
       Serial.print(accCMD);
-//    Serial.println(Turnouts[id].AccName);
       if(!client.print(accCMD)) Serial.println("Transmit Failed");
     }else                                                             //EDIT is Button CHECKED
     {
@@ -89,15 +99,12 @@ static void acc_cb(lv_event_t * e)
  * Populate a Page of up to 12 Accessories
  ********************************************************************************************************
 */
-#define ACC_PER_PAGE 10
-
 void accDrawPage()                                                        //Page starts from a Specific ID (Multiples of ACC_PER_PAGE)
 { 
   uint8_t slotNum = 0; 
   for(uint16_t accID = accStartID; accID < (accStartID + ACC_PER_PAGE); accID++)
   {
-    if(accID < Turnouts.size())
-//    if(Turnouts[accID].AccAddress != 0)
+    if((accID < NUM_ACCS) && (Turnouts[accID].AccName != ""))
     {
       lv_btnmatrix_clear_btn_ctrl(objects.acc_name_mtx, slotNum, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
       lv_btnmatrix_clear_btn_ctrl(objects.acc_state_mtx, slotNum, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
@@ -112,9 +119,7 @@ void accDrawPage()                                                        //Page
         lv_btnmatrix_clear_btn_ctrl(objects.acc_name_mtx, slotNum, LV_BTNMATRIX_CTRL_CHECKED);
       }
       btnMap_acc_name[acc_map_xlate[slotNum]] = Turnouts[accID].AccName.c_str();
-//      Serial.printf("xlated Slot: %d = %d\n", slotNum, acc_map_xlate[slotNum]);
       btnMap_acc_state[acc_map_xlate[slotNum]] = Turnouts[accID].AccRow.c_str();
-//      Serial.printf("Working on AccID: %d Slot: %d and Name: %s\n", accID, slotNum, Turnouts[accID].AccName);
     }else
     {
       lv_btnmatrix_set_btn_ctrl(objects.acc_name_mtx, slotNum, LV_BTNMATRIX_CTRL_HIDDEN | LV_BTNMATRIX_CTRL_DISABLED);
@@ -124,12 +129,11 @@ void accDrawPage()                                                        //Page
     }
     slotNum++;
   }
-  lv_btnmatrix_set_map(objects.acc_state_mtx, btnMap_acc_state);      //Display the Updated Map
-  lv_btnmatrix_set_map(objects.acc_name_mtx, btnMap_acc_name);      //Display the Updated Map
+  lv_btnmatrix_set_map(objects.acc_state_mtx, btnMap_acc_state);      //Display the Updated Maps
+  lv_btnmatrix_set_map(objects.acc_name_mtx, btnMap_acc_name);        
   if(accStartID == 0) lv_obj_add_state(objects.btn_page_up, LV_STATE_DISABLED);
-  if(accStartID > Turnouts.size() - ACC_PER_PAGE) lv_obj_add_state(objects.btn_page_down, LV_STATE_DISABLED);
+  if(accStartID > NUM_ACCS - ACC_PER_PAGE) lv_obj_add_state(objects.btn_page_down, LV_STATE_DISABLED);
 }
-
 /* 
  ********************************************************************************************************
  * General Page Button Handling
@@ -153,12 +157,12 @@ void action_accessories_button(lv_event_t * e)
       break;
     case 29:       //Page Down
       accStartID = accStartID + ACC_PER_PAGE;
-      if(accStartID == Turnouts.size() - ACC_PER_PAGE) lv_obj_add_state(objects.btn_page_down, LV_STATE_DISABLED);
-      if(accStartID > Turnouts.size()) 
+      if(accStartID == NUM_ACCS - ACC_PER_PAGE) lv_obj_add_state(objects.btn_page_down, LV_STATE_DISABLED);
+      if(accStartID > NUM_ACCS) 
       {
-        accStartID = Turnouts.size() - ACC_PER_PAGE;
+        accStartID = NUM_ACCS - ACC_PER_PAGE;
       }
-      if(accStartID == Turnouts.size() - ACC_PER_PAGE) lv_obj_add_state(objects.btn_page_down, LV_STATE_DISABLED);
+      if(accStartID == NUM_ACCS - ACC_PER_PAGE) lv_obj_add_state(objects.btn_page_down, LV_STATE_DISABLED);
       lv_obj_clear_state(objects.btn_page_up, LV_STATE_DISABLED);
       accDrawPage();
       break;
@@ -176,4 +180,29 @@ void action_accessories_button(lv_event_t * e)
     default:
       break;
   }
+}
+//
+//****************************************************************************************************************
+// Receive DCC-EX Turnouts/Accessories And populate Local Array
+//****************************************************************************************************************
+//
+void receiveDCCEXAccs(fs::FS &fs, const char * path)      //, const char * message)
+{
+  //First reset Array to "Empty"
+  for(int row = 0; row < NUM_ACCS; row++) Turnouts[row].AccName = "";
+
+  uint16_t row = 0;
+  for (Turnout *turnout = dccexProtocol.turnouts->getFirst(); turnout; turnout = turnout->getNext()) 
+  {
+    #if defined USE_VECTORS
+      Turnouts.push_back(accessory());
+    #endif
+    Turnouts[row].AccRow = String(row);
+    Turnouts[row].AccName = turnout->getName();
+    Turnouts[row].AccAddress = turnout->getId();
+    Turnouts[row].AccImage = 0;
+    Turnouts[row].AccType = 0;
+    row++;
+  }
+  Serial.printf("%d DCC-EX Turnouts Populated!\n", row);
 }

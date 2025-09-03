@@ -30,7 +30,7 @@ static void tbl_roster_cb(lv_event_t * e)
     lv_textarea_set_text(objects.ta_address, Locomotives[editingID].LocoAddress.c_str());
 
     //Now set the functions
-    setupFuncEditSlots(editingID);
+    setupFuncEditSlots();
     rosterMode = NORMAL_MODE;
     callingPage = SCREEN_ID_ROSTER;
     lv_obj_clear_state(objects.btn_edit_loco, LV_STATE_CHECKED);
@@ -83,16 +83,16 @@ void setupLocalRoster()
 {
   lv_obj_clear_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
   lv_label_set_text(objects.lbl_btn_roster, "Local");
-  Serial.println("Now populating Locos...");
+  Serial.println("Now populating Local Locos...");
   populateLocoArray("/locos.txt");
 
   // Set all function numbers to 255
-  for(int i = 0; i < Locomotives.size(); i++)
+  for(int i = 0; i < NUM_LOCOS; i++)
   {
     for(int j = 0; j < NUM_FUNCS; j++) Locomotives[i].FuncSlot[j] = 255;
   }
   
-  Serial.println("Now populating Functions");
+  Serial.println("Now populating Local Functions");
   populateLocoFunctions("/functions.txt");
 
   Serial.println("Now Populating the Roster...");
@@ -101,7 +101,7 @@ void setupLocalRoster()
     lv_table_set_cell_value(objects.tbl_roster, i, 0, Locomotives[i].LocoName.c_str());
     lv_table_set_cell_value(objects.tbl_roster, i, 1, Locomotives[i].LocoAddress.c_str());
   }
-  Serial.println("Local Roster Populated");
+  Serial.println("Roster Populated with Local details");
 }
 /*
  **********************************************************************************************************
@@ -110,25 +110,66 @@ void setupLocalRoster()
 */
 void setupDCCEXRoster()
 {
-  Serial.printf("Records to Clear: %d\n", Locomotives.size());
-  for(int i = 0; i < Locomotives.size(); i++)
+  //Serial.printf_P(PSTR ("Records to Clear: %d\n"), NUM_LOCOS);
+  Serial.println("Requesting DCC-EX Roster...");
+  for(int i = 0; i < NUM_LOCOS; i++)
   {
     lv_obj_add_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
-//    lv_table_set_cell_value(objects.tbl_roster, i, 0, "");
-//    lv_table_set_cell_value(objects.tbl_roster, i, 1, "");
     Locomotives[i].LocoName = "";
     Locomotives[i].LocoAddress = "";
-    //Now clear the Functions
+    //And clear the Functions
     for(uint8_t f = 0; f < NUM_FUNC_SLOTS; f++) 
     {
       Locomotives[i].FuncName[f] = " ";
       Locomotives[i].FuncSlot[f] = 255;
-      Serial.printf("LocoID: %d FuncSlot: %d\n", i, f);
+//      Serial.printf_P(PSTR ("LocoID: %d FuncSlot: %d\n"), i, f);
     }
   }
-  Serial.println("DCC-EX Roster Requested - Boot");
-//  Serial.println("<J R>");
-//  if(!client.print("<J R>")) Serial.println("Transmit Failed");
-
+//  receivePending = true;
   dccexProtocol.getLists(true, false, false, false);
+}
+
+//
+//****************************************************************************************************************
+// Receive DCC-EX Locos
+//****************************************************************************************************************
+//
+void receiveDCCEXLocos(fs::FS &fs, const char * path)
+{
+  Serial.println("Receiving DCC-EX Roster");
+  lv_label_set_text(objects.lbl_list_status, "Receiving DCC-EX Roster...");
+  uint16_t lId = 0;
+  for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
+  {
+    #if defined USE_VECTORS
+      Locomotives.push_back(locomotive());
+    #endif
+    
+    Locomotives[lId].LocoName = loco->getName();
+    Locomotives[lId].LocoAddress = loco->getAddress();
+//    Serial.printf("Loco ID: %d Name: %s and Address: %s\n", lId, Locomotives[lId].LocoName, Locomotives[lId].LocoAddress);
+    uint8_t slotNum = 0;
+    for(uint8_t funcNum = 0; funcNum < NUM_FUNCS; funcNum++)
+    {
+      Locomotives[lId].FuncSlot[funcNum] = 255;
+      if(loco->getFunctionName(funcNum) != NULL)
+      {
+        Locomotives[lId].FuncName[funcNum] = loco->getFunctionName(funcNum);
+//      if()  Serial.println(Locomotives[lId].FuncName[funcNum]);
+        Locomotives[lId].FuncSlot[funcNum] = slotNum;
+        if(loco->isFunctionMomentary(funcNum)) Locomotives[lId].FuncOption[funcNum] = 1;
+        else Locomotives[lId].FuncOption[funcNum] = 0;
+//        Locomotives[lId].FuncOption[funcNum] = loco->isFunctionMomentary(funcNum);
+        if(slotNum < NUM_FUNC_SLOTS) slotNum++;
+        else slotNum = 255;
+      }
+    }
+//      Locomotives[lId].FuncOption[funcNum] = loco>isFunctionMomentary(funcNum);   //wrong
+//    Serial.println("Adding Loco to the Roster...");
+    lv_table_set_cell_value(objects.tbl_roster, lId, 0, Locomotives[lId].LocoName.c_str());
+    lv_table_set_cell_value(objects.tbl_roster, lId, 1, Locomotives[lId].LocoAddress.c_str());
+    lId++;
+  }  
+//  receivePending = false;
+  Serial.println("DCC-EX Roster Received and Populated");
 }

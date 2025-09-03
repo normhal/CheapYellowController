@@ -7,6 +7,11 @@
 extern "C" {
 #endif
 
+// Style: Turnout
+lv_style_t *get_style_turnout_MAIN_DEFAULT();
+void add_style_turnout(lv_obj_t *obj);
+void remove_style_turnout(lv_obj_t *obj);
+
 
 
 #ifdef __cplusplus

@@ -23,7 +23,7 @@ void action_general_button(lv_event_t * e)
   switch(pressedButton)
   {
     case 1: 
-      for(int i = 0; i < Locomotives.size(); i++) 
+      for(int i = 0; i < NUM_LOCOS; i++) 
       {
         if(Locomotives[i].LocoSpeed != 0)
         {
@@ -39,13 +39,22 @@ void action_general_button(lv_event_t * e)
       lv_obj_clear_state(objects.slider, LV_STATE_DISABLED);
       break;
     case 3: 
-      lv_label_set_text(objects.lbl_power, "Power On");
-      if(!client.print("<0>")) lv_img_set_src(objects.img_wifi, &img_x);
+      Serial.println("Power Off Pressed");
+      if(lv_obj_get_state(objects.btn_power) == LV_STATE_CHECKED)
+      {
+        lv_label_set_text(objects.lbl_power, "Power On");
+        if(!client.print("<0>")) lv_img_set_src(objects.img_wifi, &img_x);
+        else lv_img_set_src(objects.img_wifi, &img_6);
+      }
       break;
     case 4:
       Serial.println("Power On Pressed");
-      lv_label_set_text(objects.lbl_power, "Power Off");
-      if(!client.print("<1 JOIN>")) lv_img_set_src(objects.img_wifi, &img_x);
+      if(lv_obj_get_state(objects.btn_power) != LV_STATE_CHECKED)
+      {
+        lv_label_set_text(objects.lbl_power, "Power Off");
+        if(!client.print("<1>")) lv_img_set_src(objects.img_wifi, &img_x);
+        else lv_img_set_src(objects.img_wifi, &img_6);
+      }
       break;
     case 5:
       Serial.println("DCC++EX Pressed");

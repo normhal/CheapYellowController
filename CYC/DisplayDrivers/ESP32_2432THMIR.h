@@ -7,6 +7,7 @@
 #define TFT_BACKLIGHT 200
 #define MIN_BL 10
 #define FUNCCOL 80
+#define ACC_PER_PAGE 6
 
 #define GFX_BL 38
 
@@ -15,8 +16,8 @@
 
 #define ROTATION 0
 
-#define NAME_COL0_WIDTH 180
-#define NAME_COL1_WIDTH 45
+#define NAME_COL0_WIDTH 175
+#define NAME_COL1_WIDTH 50
 
 /*******************************************************************************
  * Display Driver for GFX Library for Arduino by "moononournation"
