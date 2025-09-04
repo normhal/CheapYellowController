@@ -46,8 +46,8 @@ Arduino_DataBus *bus = create_default_Arduino_DataBus();
  * Encoder shares I2C bus with Touch on 19 and 20
  ******************************************************************************/
  
- #define I2C_SDA 17
- #define I2C_SCL 18
+ #define I2C_SDA 19
+ #define I2C_SCL 20
 
  #define SS_SWITCH        24
  #define SEESAW_ADDR    0x36

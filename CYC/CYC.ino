@@ -93,12 +93,12 @@ Sketch Notes:
 //#define ESP32DIS06043H         // Elcrow ESP32-DIS06043H              ESP32-S3  t...   by RKS
 //#define ESP32DIS08070H         // Elcrow ESP32-DIS08070H              ESP32-S3  t...   by RKS
 
-#define ESP4827W543C           //Guition JC4827W543C                  ESP32-S3  ticked 21 July
+//#define ESP4827W543C           //Guition JC4827W543C                  ESP32-S3  ticked 21 July
 //#define ESP4827W543R           //Guition JC4827W543R                  ESP32-S3  ticked 21 July
 //#define ESP4848S040C           //Guition JC4848W440C - in development
 //#define ESP8048S043C           //Sunton ESP32-8048S043C               ESP32-S3  ticked 21 July
 //#define ESP8048S050C           //Sunton ESP32-8048S050C               ESP32-S3  ticked 21 July
-//#define ESP8048W550C           //Guition JC8048W550C                  ESP32-S3  ticked 21 July
+#define ESP8048W550C           //Guition JC8048W550C                  ESP32-S3  ticked 21 July
 //#define ESP8048S070C           //Sunton ESP32-8048S050C               ESP32-S3  ticked 21 July
 
 const char* build = "1.3.1V";
