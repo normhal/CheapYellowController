@@ -501,6 +501,7 @@ if(re_enabled == true)
   lv_label_set_text(objects.lbl_sketch_build, build);
 
   setBacklight(lcdBL);
+//  gfx->flush();
 }
 /*
  ********************************************************************************************************
@@ -512,7 +513,7 @@ void loop()
   lv_timer_handler();
 
 //#if defined CANVAS
-  gfx->flush();
+//  gfx->flush();
 //#endif
 
   dccexProtocol.check();

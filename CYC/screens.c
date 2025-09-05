@@ -4155,6 +4155,7 @@ void create_screen_wi_fi() {
             lv_obj_set_size(obj, 120, 60);
             lv_obj_add_event_cb(obj, event_handler_unchecked_cb_wi_fi_btn_wifi_enable, LV_EVENT_VALUE_CHANGED, (void *)9);
             lv_obj_add_event_cb(obj, event_handler_checked_cb_wi_fi_btn_wifi_enable, LV_EVENT_VALUE_CHANGED, (void *)10);
+            lv_obj_add_flag(obj, LV_OBJ_FLAG_CHECKABLE);
             lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICK_FOCUSABLE|LV_OBJ_FLAG_GESTURE_BUBBLE|LV_OBJ_FLAG_PRESS_LOCK|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_CHAIN_VER|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_MOMENTUM|LV_OBJ_FLAG_SNAPPABLE);
             lv_obj_set_style_bg_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_grad_dir(obj, LV_GRAD_DIR_VER, LV_PART_MAIN | LV_STATE_DEFAULT);

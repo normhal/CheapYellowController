@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-8048.eez-project]:/userPages/12",
+    "selectedUserPageObject": "[CYC-8048.eez-project]:/userPages/8",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -197,16 +197,15 @@
                 {
                   "type": "tab",
                   "id": "#33c474c9-5833-45cf-aaed-1a59d9ed146e",
-                  "name": "Info",
+                  "name": "WiFi",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-8048.eez-project]:/userPages/12",
+                    "objectPath": "[CYC-8048.eez-project]:/userPages/8",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ],
-              "active": true
+              ]
             },
             {
               "type": "row",
@@ -226,7 +225,8 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
@@ -1429,10 +1429,9 @@
       "selection": {
         "0": {
           "3": {},
-          "6": {
-            "$selected": true
-          },
-          "7": {
+          "6": {},
+          "7": {},
+          "10": {
             "$selected": true
           }
         }
@@ -1885,8 +1884,8 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "ITEMS",
-  "lvglState": "DEFAULT",
+  "lvglPart": "MAIN",
+  "lvglState": "CHECKED",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "IMAGE",
