@@ -30,8 +30,9 @@ void action_wifi_button(lv_event_t * e)
       break;
     case 7:     //Connect
     {
-      client.stop();
       lv_label_set_text(objects.lbl_wifi_status, "Connecting to WiFi...");
+      client.stop();
+//      lv_label_set_text(objects.lbl_wifi_status, "Connecting to WiFi...");
       ssid = lv_textarea_get_text(objects.ta_ssid);
       password = lv_textarea_get_text(objects.ta_password);
       ipAddress = lv_textarea_get_text(objects.ta_ip_address);
@@ -60,6 +61,7 @@ void action_wifi_button(lv_event_t * e)
     }
     case 9:     //Enable Button UnChecked
       Serial.println("WiFi Disabled");
+      lv_label_set_text(objects.lbl_wifi_status, "WiFi Disabled");
       wifi_enabled = 0;
       eeProm.begin("configs", false);
       eeProm.putBool("wiFiState", wifi_enabled);
@@ -67,6 +69,7 @@ void action_wifi_button(lv_event_t * e)
       break;
     case 10:     //Enable Button Checked
     {
+      lv_label_set_text(objects.lbl_wifi_status, "WiFi Enabled");
       Serial.println("WiFi Enabled");
       wifi_enabled = 1;
       eeProm.begin("configs", false);
@@ -154,14 +157,14 @@ static void ssid_selected(lv_event_t * e)
 void connectWiFi()
 {
   Serial.printf_P(PSTR ("Connecting to WiFi with %s %s %s %d\n"), ssid, password, ipAddress, nwPort);
-
   WiFi.begin(ssid, password);
   int timeOut = timeout;
 //  int timeOut = 3;
   while (WiFi.status() != WL_CONNECTED)
   {
+//    WiFi.begin(ssid, password);
     Serial.print(".");
-    delay(1000);
+    delay(200);
     timeOut = timeOut -1;
     if(timeOut <0)
     {
