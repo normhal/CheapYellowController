@@ -2,10 +2,10 @@
 
 #define DEFAULT_ROSTER 0      //0 = Local, 1 = EX_Rail
 #define DEFAULT_ACC 0
-#define TIMEOUT 10
+#define TIMEOUT 20
 #define REACCEL 20
 #define THRESHOLD 20
-#define ROTARY_ENCODER 1
+#define ROTARY_ENCODER 0
 #define DEFAULT_WIFI 0
 #define MAX_LOCOS 100
 #define MAX_ACCS 200

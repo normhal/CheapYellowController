@@ -922,9 +922,9 @@
             {
               "objID": "4f10813b-d351-4884-8693-54cbd2dbc1db",
               "type": "LVGLLabelWidget",
-              "left": 41,
+              "left": 4,
               "top": 74,
-              "width": 229,
+              "width": 306,
               "height": 24,
               "customInputs": [],
               "customOutputs": [],
@@ -937,6 +937,7 @@
               "locked": false,
               "timeline": [],
               "eventHandlers": [],
+              "identifier": "lbl_menu_message",
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
@@ -10529,9 +10530,9 @@
             {
               "objID": "3ebd50bd-76b7-4449-f6cc-ad6c964e23f4",
               "type": "LVGLButtonWidget",
-              "left": 280,
+              "left": 260,
               "top": 236,
-              "width": 26,
+              "width": 50,
               "height": 26,
               "customInputs": [],
               "customOutputs": [],
@@ -10594,19 +10595,16 @@
                       "text_font": "MONTSERRAT_20"
                     },
                     "CHECKED": {
-                      "bg_color": "#000000",
-                      "bg_opa": 255,
-                      "bg_grad_dir": "VER",
-                      "bg_grad_color": "#ffffff",
+                      "bg_color": "#ffff00",
+                      "bg_grad_dir": "NONE",
                       "shadow_width": 0,
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0
                     },
                     "PRESSED": {
-                      "bg_color": "#ffffff",
-                      "bg_grad_dir": "VER",
-                      "bg_grad_color": "#000000"
+                      "bg_color": "#ffff00",
+                      "bg_grad_dir": "NONE"
                     }
                   }
                 }
@@ -10617,7 +10615,7 @@
             {
               "objID": "44398a3b-0b8a-41de-f91f-95569ca98de2",
               "type": "LVGLLabelWidget",
-              "left": 80,
+              "left": 65,
               "top": 9,
               "width": 37,
               "height": 16,
@@ -10716,9 +10714,9 @@
             {
               "objID": "24e95c57-a777-4d55-a2e9-3f02f67a75fe",
               "type": "LVGLButtonWidget",
-              "left": 280,
+              "left": 260,
               "top": 266,
-              "width": 26,
+              "width": 50,
               "height": 26,
               "customInputs": [],
               "customOutputs": [],
@@ -10781,19 +10779,16 @@
                       "text_font": "MONTSERRAT_20"
                     },
                     "CHECKED": {
-                      "bg_color": "#000000",
-                      "bg_opa": 255,
-                      "bg_grad_dir": "VER",
-                      "bg_grad_color": "#ffffff",
+                      "bg_color": "#ffff00",
+                      "bg_grad_dir": "NONE",
                       "shadow_width": 0,
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0
                     },
                     "PRESSED": {
-                      "bg_color": "#ffffff",
-                      "bg_grad_dir": "VER",
-                      "bg_grad_color": "#000000"
+                      "bg_color": "#ffff00",
+                      "bg_grad_dir": "NONE"
                     }
                   }
                 }
@@ -10804,7 +10799,7 @@
             {
               "objID": "fc83a493-d8a7-40de-9294-bf5a688ae049",
               "type": "LVGLLabelWidget",
-              "left": 80,
+              "left": 65,
               "top": 39,
               "width": 37,
               "height": 16,
@@ -10904,9 +10899,9 @@
             {
               "objID": "895b9f61-adc3-48d6-98de-107349852026",
               "type": "LVGLButtonWidget",
-              "left": 280,
+              "left": 260,
               "top": 296,
-              "width": 26,
+              "width": 50,
               "height": 26,
               "customInputs": [],
               "customOutputs": [],
@@ -10962,19 +10957,16 @@
                       "text_font": "MONTSERRAT_20"
                     },
                     "CHECKED": {
-                      "bg_color": "#000000",
-                      "bg_opa": 255,
+                      "bg_color": "#ffff00",
                       "bg_grad_dir": "VER",
-                      "bg_grad_color": "#ffffff",
                       "shadow_width": 0,
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
                       "shadow_spread": 0
                     },
                     "PRESSED": {
-                      "bg_color": "#ffffff",
-                      "bg_grad_dir": "VER",
-                      "bg_grad_color": "#000000"
+                      "bg_color": "#ffff00",
+                      "bg_grad_dir": "NONE"
                     }
                   }
                 }
@@ -11085,9 +11077,9 @@
             {
               "objID": "6808c341-bfdd-4c5f-c7cc-8bb41b5cbefc",
               "type": "LVGLButtonWidget",
-              "left": 280,
+              "left": 260,
               "top": 327,
-              "width": 26,
+              "width": 50,
               "height": 26,
               "customInputs": [],
               "customOutputs": [],
@@ -11151,8 +11143,6 @@
                     },
                     "CHECKED": {
                       "bg_color": "#ffff00",
-                      "bg_opa": 255,
-                      "bg_grad_color": "#ffffff",
                       "bg_grad_dir": "NONE",
                       "shadow_ofs_x": 0,
                       "shadow_ofs_y": 0,
@@ -11160,9 +11150,8 @@
                       "shadow_width": 0
                     },
                     "PRESSED": {
-                      "bg_color": "#ffffff",
-                      "bg_grad_dir": "VER",
-                      "bg_grad_color": "#000000"
+                      "bg_color": "#ffff00",
+                      "bg_grad_dir": "NONE"
                     }
                   }
                 }
@@ -14158,6 +14147,15 @@
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
                       "text_color": "#000000"
+                    },
+                    "CHECKED": {
+                      "bg_color": "#ffff00",
+                      "bg_grad_dir": "NONE",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_ofs_x": 0,
+                      "shadow_spread": 0,
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -16139,7 +16137,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "Tools Used and References\nEEZ Studio Version 0.23.2\n(https://www.envox.eu)\n\nArduino IDEs and Libraries\nESP32 Boards Version 2.0.17\nlvgl Version 8.4\n\nWhilst everything here is \"Open Source\", please respect the originality of everyones work.\n\n(c) Norm Halland (normhal)\nnormhal@gmail.com\nhttps://github.com/normhal/CheapYellowController\n\nAugust 2025",
+              "text": "Tools Used and References\nEEZ Studio Version 0.24.0\n(https://www.envox.eu)\n\nArduino IDEs and Libraries\nESP32 Boards Version 2.0.17\nlvgl Version 8.4\n\nWhilst everything here is \"Open Source\", please respect the originality of everyone's work.\n\n(c) Norm Halland (normhal)\nnormhal@gmail.com\nhttps://github.com/normhal/CheapYellowController\n\nSeptember 2025",
               "textType": "literal",
               "longMode": "WRAP",
               "recolor": false
@@ -16198,7 +16196,7 @@
               "type": "LVGLLabelWidget",
               "left": 194,
               "top": 454,
-              "width": 30,
+              "width": 0,
               "height": 16,
               "customInputs": [],
               "customOutputs": [],
@@ -16231,7 +16229,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "x.x.x",
+              "text": "",
               "textType": "literal",
               "longMode": "WRAP",
               "recolor": false
@@ -16290,7 +16288,7 @@
               "type": "LVGLLabelWidget",
               "left": 194,
               "top": 434,
-              "width": 33,
+              "width": 27,
               "height": 16,
               "customInputs": [],
               "customOutputs": [],
@@ -16323,7 +16321,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "0.0.0",
+              "text": "1.3.2",
               "textType": "literal",
               "longMode": "WRAP",
               "recolor": false
@@ -16759,7 +16757,7 @@
                   "recolor": false
                 }
               ],
-              "widgetFlags": "SCROLL_ON_FOCUS|SCROLL_WITH_ARROW",
+              "widgetFlags": "SCROLL_ON_FOCUS|SCROLL_WITH_ARROW|CHECKABLE",
               "hiddenFlagType": "literal",
               "clickableFlag": true,
               "clickableFlagType": "literal",
@@ -16790,6 +16788,11 @@
                       "bg_grad_dir": "VER",
                       "bg_grad_color": "#fff200",
                       "text_color": "#000000"
+                    },
+                    "CHECKED": {
+                      "bg_color": "#ffff00",
+                      "bg_grad_dir": "NONE",
+                      "text_color": "#000000"
                     }
                   }
                 }
@@ -16812,7 +16815,22 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [],
+              "eventHandlers": [
+                {
+                  "objID": "f896b074-7b83-43c9-f6f3-e4296a42f7d2",
+                  "eventName": "UNCHECKED",
+                  "handlerType": "action",
+                  "action": "turnoutButton",
+                  "userData": 0
+                },
+                {
+                  "objID": "33a77580-037d-47a3-994b-00b46e47e3f6",
+                  "eventName": "CHECKED",
+                  "handlerType": "action",
+                  "action": "turnoutButton",
+                  "userData": 1
+                }
+              ],
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
@@ -16823,7 +16841,7 @@
                   "type": "LVGLLabelWidget",
                   "left": 0,
                   "top": 0,
-                  "width": 9,
+                  "width": 8,
                   "height": 16,
                   "customInputs": [],
                   "customOutputs": [],
@@ -16863,7 +16881,7 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": "0",
+                  "text": "2",
                   "textType": "literal",
                   "longMode": "WRAP",
                   "recolor": false
@@ -16887,17 +16905,11 @@
                     "DEFAULT": {
                       "bg_color": "#c89600",
                       "shadow_color": "#c89600",
-                      "shadow_opa": 255,
-                      "text_color": "#000000",
-                      "bg_img_src": "40x40_LH_Closed_180"
-                    },
-                    "PRESSED": {
-                      "bg_color": "#c89600"
+                      "bg_img_src": "40x40_LH_Closed_180",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0
                     },
                     "CHECKED": {
-                      "bg_color": "#c89600",
-                      "shadow_color": "#c89600",
-                      "text_color": "#000000",
                       "bg_img_src": "40x40_LH_Thrown_180"
                     }
                   }
@@ -16922,7 +16934,22 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [],
+              "eventHandlers": [
+                {
+                  "objID": "2896d365-1c36-4cda-ddda-aa2044d7778d",
+                  "eventName": "UNCHECKED",
+                  "handlerType": "action",
+                  "action": "turnoutButton",
+                  "userData": 0
+                },
+                {
+                  "objID": "87f2a8bf-890f-40c6-b10f-9d324aa1b88c",
+                  "eventName": "CHECKED",
+                  "handlerType": "action",
+                  "action": "turnoutButton",
+                  "userData": 1
+                }
+              ],
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
@@ -16933,7 +16960,7 @@
                   "type": "LVGLLabelWidget",
                   "left": 0,
                   "top": 0,
-                  "width": 9,
+                  "width": 5,
                   "height": 16,
                   "customInputs": [],
                   "customOutputs": [],
@@ -16973,7 +17000,7 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": "0",
+                  "text": "1",
                   "textType": "literal",
                   "longMode": "WRAP",
                   "recolor": false
@@ -16999,7 +17026,9 @@
                       "shadow_color": "#c89600",
                       "shadow_opa": 255,
                       "text_color": "#000000",
-                      "bg_img_src": "40x40_RH_Closed_180"
+                      "bg_img_src": "40x40_RH_Closed_180",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0
                     },
                     "PRESSED": {
                       "bg_color": "#c89600"
@@ -17032,7 +17061,22 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [],
+              "eventHandlers": [
+                {
+                  "objID": "8c470cc0-0693-4983-87a8-390f0f7a7988",
+                  "eventName": "UNCHECKED",
+                  "handlerType": "action",
+                  "action": "turnoutButton",
+                  "userData": 0
+                },
+                {
+                  "objID": "aa285c1e-3dea-4433-942e-6a6479aec0ed",
+                  "eventName": "CHECKED",
+                  "handlerType": "action",
+                  "action": "turnoutButton",
+                  "userData": 1
+                }
+              ],
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
@@ -17043,7 +17087,7 @@
                   "type": "LVGLLabelWidget",
                   "left": 0,
                   "top": 0,
-                  "width": 9,
+                  "width": 8,
                   "height": 16,
                   "customInputs": [],
                   "customOutputs": [],
@@ -17083,7 +17127,7 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": "0",
+                  "text": "3",
                   "textType": "literal",
                   "longMode": "WRAP",
                   "recolor": false
@@ -17109,7 +17153,9 @@
                       "shadow_color": "#c89600",
                       "shadow_opa": 255,
                       "text_color": "#000000",
-                      "bg_img_src": "80x80_KatoX_Closed_0"
+                      "bg_img_src": "80x80_KatoX_Closed_0",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0
                     },
                     "PRESSED": {
                       "bg_color": "#c89600"
@@ -17142,7 +17188,22 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [],
+              "eventHandlers": [
+                {
+                  "objID": "5b79194f-20b1-4f8a-f2d0-b1ed12b38fd8",
+                  "eventName": "UNCHECKED",
+                  "handlerType": "action",
+                  "action": "turnoutButton",
+                  "userData": 0
+                },
+                {
+                  "objID": "ce89d6ad-dc25-449d-8edb-8a688694fc13",
+                  "eventName": "CHECKED",
+                  "handlerType": "action",
+                  "action": "turnoutButton",
+                  "userData": 1
+                }
+              ],
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
@@ -17171,6 +17232,7 @@
                   "heightUnit": "content",
                   "children": [],
                   "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlag": true,
                   "hiddenFlagType": "literal",
                   "clickableFlagType": "literal",
                   "flagScrollbarMode": "",
@@ -17185,7 +17247,11 @@
                     "definition": {
                       "MAIN": {
                         "DEFAULT": {
-                          "align": "CENTER"
+                          "align": "CENTER",
+                          "bg_color": "#c89600"
+                        },
+                        "PRESSED": {
+                          "bg_color": "#c89600"
                         }
                       }
                     }
@@ -17215,19 +17281,22 @@
                   "MAIN": {
                     "DEFAULT": {
                       "bg_color": "#c89600",
-                      "shadow_color": "#c89600",
-                      "shadow_opa": 255,
-                      "text_color": "#000000",
-                      "bg_img_src": "80x80_KatoX_Closed_0"
-                    },
-                    "PRESSED": {
-                      "bg_color": "#c89600"
+                      "bg_img_src": "80x80_KatoX_Closed_0",
+                      "shadow_width": 0,
+                      "shadow_ofs_y": 0,
+                      "shadow_color": "#c89600"
                     },
                     "CHECKED": {
                       "bg_color": "#c89600",
                       "shadow_color": "#c89600",
                       "text_color": "#000000",
-                      "bg_img_src": "80x80_KatoX_Thrown_0"
+                      "bg_img_src": "80x80_KatoX_Thrown_0",
+                      "img_recolor": "#c89600"
+                    },
+                    "PRESSED": {
+                      "bg_img_recolor": "#c89600",
+                      "shadow_opa": 0,
+                      "img_recolor": "#c89600"
                     }
                   }
                 }
@@ -19799,6 +19868,12 @@
               "MAIN": {
                 "DEFAULT": {
                   "bg_color": "#c89600"
+                },
+                "PRESSED": {
+                  "bg_opa": 0,
+                  "bg_color": "#c89600",
+                  "border_color": "#c89600",
+                  "border_opa": 0
                 }
               }
             }

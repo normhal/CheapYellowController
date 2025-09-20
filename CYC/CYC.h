@@ -143,7 +143,7 @@ uint8_t threshold = 15;
 bool def_roster = false;       //false = local, true = DCC-EX
 bool def_acc = false;        //false = local, true = DCC-EX
 bool reboot_req = false;
-bool re_enabled = true;
+bool re_enabled = false;
 bool wifi_enabled = false;
 
 uint8_t trackSel = 99; 
@@ -187,7 +187,7 @@ struct NwCred
 
 //typedef struct NwCred nwk;
 
-#define NUM_NWKS 10
+#define NUM_NWKS 5
 
 NwCred netwks[NUM_NWKS];
 
@@ -233,11 +233,11 @@ Network_Status_t networkStatus = NO_NETWORK;
 const char NUM_FUNCS = 28;
 
 #ifndef USE_VECTORS
-  #define NUM_LOCOS 50
-  #define NUM_ACCS 100
+  #define NUM_LOCOS 100
+  #define NUM_ACCS 200
 #endif
 
-#define NUM_ROUTES 48
+#define NUM_ROUTES 24
 /*
  ****************************************************************************************************************
  * Structures
@@ -299,10 +299,8 @@ struct accessory
  * Global Variables
  ****************************************************************************************************************
 */
-const uint16_t map_xlate[] = {0, 3, 6, 9, 12, 1, 4, 7, 10, 13};
-const uint16_t slotXlate[] = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
-const uint16_t abs_xlate[] = {0, 5, 1, 6, 2, 7, 3, 8, 4, 9};
-const uint16_t acc_map_xlate[] = {0,2,4,6,8,10,12,14,16,18};
+const uint8_t map_xlate[] = {0, 3, 6, 9, 12, 1, 4, 7, 10, 13};
+const uint8_t slotXlate[] = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
 
 const char * btnMap_functions[] = {
                           " ", " ", "\n",
@@ -311,18 +309,6 @@ const char * btnMap_functions[] = {
                           " ", " ", "\n",
                           " ", " ", NULL
                           };
-
-/*
-const char * btnMap_acc_state[] = {
-                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", "\n",
-                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", NULL
-                                  };
-
-const char * btnMap_acc_name[] =  {
-                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", "\n",
-                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", NULL
-                                  };
-*/
 
 const char * btnMap_acc_state[ACC_PER_PAGE * 2];    //= {
 //                                    " ", "\n"," ", "\n"," ", "\n"," ", "\n"," ", "\n", " ", NULL
@@ -357,9 +343,6 @@ uint8_t selectedIDs[THROTTLE_COUNT][NUM_LOCO_SLOTS];
 #define GUEST_ACTIVE 3
 #define GUEST_INACTIVE 4
 
-//String savedActiveAddress;
-//uint16_t savedActiveSpeed;
-//uint8_t savedActiveDir;
 uint16_t guestSpeed = 0;
 uint8_t guestDir = 1;          // Default Guest Direction
 

@@ -337,7 +337,7 @@ void action_edit_loco_button(lv_event_t * e)
       Locomotives[activeLocoID].LocoAddress = lv_textarea_get_text(objects.ta_address);   //Checked - EEZ
       lv_table_set_cell_value(objects.tbl_roster, activeLocoID, 0, Locomotives[activeLocoID].LocoName.c_str());
       lv_table_set_cell_value(objects.tbl_roster, activeLocoID, 1, Locomotives[activeLocoID].LocoAddress.c_str());
-      locosDirty = 1;
+//      locosDirty = 1;
       if(callingPage == SCREEN_ID_THROTTLE) populateThrottle();
       else buildFunctionsPage();
       loadScreen(callingPage);

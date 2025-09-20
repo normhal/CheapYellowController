@@ -26,7 +26,7 @@ void populateAccArray(const char *path)
   File file = LittleFS.open(path, "r");
   if(!file)
   {
-      Serial.println("Failed to open file for reading");
+//      Serial.println("Failed to open file for reading");
       return;
   }
 //  Serial.println("Calling Acc Parser");
@@ -62,7 +62,7 @@ void populateAccArray(const char *path)
     Turnouts[row].AccState = 0;
   }
   file.close();
-  Serial.printf("Acc Rows Read: %d\n", accCount);
+//  Serial.printf("Acc Rows Read: %d\n", accCount);
 }
 
 //****************************************************************************************************************
@@ -74,7 +74,7 @@ void populateLocoArray(const char *path)
   File file = LittleFS.open(path, "r");
   if(!file)
   {
-      Serial.println("Failed to open file for reading");
+//      Serial.println("Failed to open file for reading");
       return;
   }
 //  Serial.println("Calling Locos Parser");
@@ -104,7 +104,7 @@ void populateLocoArray(const char *path)
     Locomotives[row].LocoSpeed = 0;
     Locomotives[row].LocoDir = 1;       //Default to Forward
   }
-  Serial.printf_P(PSTR ("Records Loaded: %d\n"), locoCount);
+//  Serial.printf_P(PSTR ("Records Loaded: %d\n"), locoCount);
 
   file.close();
 }
@@ -118,21 +118,21 @@ void populateLocoFunctions(const char *path)
   File file = LittleFS.open(path, "r");
   if(!file)
   {
-      Serial.println("Failed to open file for reading");
+//      Serial.println("Failed to open file for reading");
       return;
   }
 
-  Serial.println("Calling Functions Parser");
+// Serial.println("Calling Functions Parser");
   CSV_Parser cp("ududsudud", true, ',');       //locoID, function, Name, slot, option
 
-  Serial.print("Reading from file: ");
-  Serial.println(path);
+//  Serial.print("Reading from file: ");
+//  Serial.println(path);
 
   while (file.available()) 
   {
     cp << (char)file.read();
   }
-  Serial.println("Functions.txt Read...");
+//  Serial.println("Functions.txt Read...");
   cp.parseLeftover();
 
   uint16_t *locoid = (uint16_t*)cp["LocoID"];         //Loco ID
@@ -141,8 +141,8 @@ void populateLocoFunctions(const char *path)
   uint16_t *slot = (uint16_t*)cp["Slot"];             //Function Slot
   uint16_t *option = (uint16_t*)cp["Momentary"];      //Function Option
 
-  Serial.print("Functions read from LittleFS: ");
-  Serial.println(cp.getRowsCount());
+//  Serial.print("Functions read from LittleFS: ");
+//  Serial.println(cp.getRowsCount());
 
   for(int row = 0; row < cp.getRowsCount(); row++)      
   {
@@ -229,10 +229,10 @@ void populateCredentials(const char *path)
   File file = LittleFS.open(path, "r");
   if(!file)
   {
-      Serial.println("Failed to open file for reading");
+//      Serial.println("Failed to open file for reading");
       return;
   }
-  Serial.println("Calling Credentials Parser");
+//  Serial.println("Calling Credentials Parser");
   CSV_Parser cp("udsssud", true, ',');
 
   while (file.available()) 
@@ -247,8 +247,8 @@ void populateCredentials(const char *path)
   char **lfipAddress = (char **)cp["IPAddress"];
   uint16_t *lfport = (uint16_t *)cp["Port"];
 
-  Serial.print("Credentials read from LittleFS: ");
-  Serial.println(cp.getRowsCount());
+//  Serial.print("Credentials read from LittleFS: ");
+//  Serial.println(cp.getRowsCount());
 
   for(int row = 0; row < cp.getRowsCount(); row++)      
   {
@@ -273,11 +273,11 @@ void populateSelected(const char *path)
   File file = LittleFS.open(path, "r");
   if(!file)
   {
-      Serial.println("Failed to open file for reading");
+//      Serial.println("Failed to open file for reading");
       return;
   }
   //Initialize all SelectedIDs to 
-  Serial.println("Calling Selected IDs Parser");
+//  Serial.println("Calling Selected IDs Parser");
   CSV_Parser cp("ucucuc");   //, true, ',');   //Throttle,LocoID,Slot
 
   while (file.available()) 
@@ -302,8 +302,8 @@ void populateSelected(const char *path)
     selectedIDs[throttleID[row]][slot[row]] = locoID[row];
 //    Serial.printf("Selected Throttle: %d Slot: %d has Loco ID: %d\n", throttleID[row], slot[row], locoID[row]);
   }
-  Serial.print("Selected ID Rows Read: ");
-  Serial.println(cp.getRowsCount());
+//  Serial.print("Selected ID Rows Read: ");
+//  Serial.println(cp.getRowsCount());
   file.close();
 }
 
@@ -325,16 +325,13 @@ void populateSelected(const char *path)
 //
 void saveLittleFS()
 {
-//  if(locosDirty == 1) saveLocos(LittleFS, "/locos.new", "ID,LongName, Address\n");
-//  if(functionsDirty == 1) saveFunctions(LittleFS, "/functions.new", "LocoID,Function,Name,Slot,Momentary\n");
-  if(locosDirty == 1) saveLocos(LittleFS, "/locos");      //, "ID,LongName, Address\n");
-  if(functionsDirty == 1) saveFunctions(LittleFS, "/functions", "LocoID,Function,Name,Slot,Momentary\n");
+  if(locosDirty == 1) saveLocos(LittleFS, "/locos.new", "ID,LongName, Address\n");
+  if(functionsDirty == 1) saveFunctions(LittleFS, "/functions.new", "LocoID,Function,Name,Slot,Momentary\n");
   if(throttlesDirty == 1) saveThrottles(LittleFS, "/throttleids.new", "Throttle,Slot,LocoID\n");
-//  if(accessoriesDirty == 1) saveAccessories(LittleFS, "/accessories.new", "ID,Name,Address,Image,Type\n");
-  if(accessoriesDirty == 1) saveAccs(LittleFS, "/accessories");    //, "ID,Name,Address,Image,Type\n");
+  if(accessoriesDirty == 1) saveAccs(LittleFS, "/accessories.new", "ID,Name,Address,Image,Type\n");
 //  if(routesDirty == 1) saveRoutes(LittleFS, "/routes.new", "ID,Acc1,State1,Acc2,State2,Acc3,State3,Acc4,State4,Acc5,State5,Acc6,State6\n");
   if(credentialsDirty == 1) saveCredentials(LittleFS, "/credentials.new", "ID,SSID,Password,IPAddress,Port\n");
-  Serial.println("All Updated Files Saved");
+//  Serial.println("All Updated Files Saved");
 }
 //
 //*********************************************************************************************
@@ -342,32 +339,20 @@ void saveLittleFS()
 // backup copies by cycling through three levels 
 //*********************************************************************************************
 //
-void saveLocos(fs::FS &fs, const char * path)
+void saveLocos(fs::FS &fs, const char * path, const char * message)
 {
-  std::string s1 = path;
-  std::string x1 = ".new";
-  std::string x2 = ".bak";
-  std::string x3 = ".old";
-  std::string x4 = ".txt";
-  std::string s2 = s1 + x1;
-  std::string s3 = s1 + x2;
-  std::string s4 = s1 + x3;
-  std::string s5 = s1 + x4;
-
-  Serial.printf_P(PSTR ("Writing file: %s\r\n"), s2.c_str());
-
-  File file = fs.open(s2.c_str(), "w");
+  File file = fs.open(path, "w");
   if(!file)
   {
-    Serial.println("- failed to open file for writing");
+//    Serial.println("- failed to open file for writing");
     return;
   }
-  if(file.print(s2.c_str()))
+  if(file.print(message))
   {
-    Serial.println("Writing File");
+//    Serial.println("Writing File");
   } else 
   {
-    Serial.println("- write failed");
+//    Serial.println("- write failed");
     file.close();
     return;
   }
@@ -376,21 +361,19 @@ void saveLocos(fs::FS &fs, const char * path)
   for(row = 0; row < NUM_LOCOS; row++)      //ALWAYS write the full number of locos to preserve LocoID link to functions and selectedIDs
   {
     String record = String(row) + "," +  Locomotives[row].LocoName + "," + Locomotives[row].LocoAddress + "\n";
-    Serial.println(record);
+//    Serial.println(record);
     file.print(record);
-//    Serial.print(".");
   }
-  Serial.printf_P(PSTR ("%d Loco records written\n"), row);
   file.close();
 
   locosDirty = 0;
 
-  deleteFile(LittleFS, s3.c_str());
-  renameFile(LittleFS, s4.c_str(), s3.c_str());
-  renameFile(LittleFS, s5.c_str(), s4.c_str());
-  renameFile(LittleFS, s2.c_str(), s5.c_str());
+  deleteFile(LittleFS, "/locos.bak");
+  renameFile(LittleFS, "/locos.old", "/locos.bak");
+  renameFile(LittleFS, "/locos.txt", "/locos.old");
+  renameFile(LittleFS, "/locos.new", "/locos.txt");
 
-  Serial.println("File Saved and Backup Created");
+//  Serial.printf_P(PSTR ("File Saved and Backup Created"));
 }
 
 //
@@ -399,32 +382,22 @@ void saveLocos(fs::FS &fs, const char * path)
 // backup copies by cycling through three levels 
 //*********************************************************************************************
 //
-void saveAccs(fs::FS &fs, const char * path)
+void saveAccs(fs::FS &fs, const char * path, const char * message)
 {
-  std::string s1 = path;
-  std::string x1 = ".new";
-  std::string x2 = ".bak";
-  std::string x3 = ".old";
-  std::string x4 = ".txt";
-  std::string s2 = s1 + x1;
-  std::string s3 = s1 + x2;
-  std::string s4 = s1 + x3;
-  std::string s5 = s1 + x4;
+//  Serial.printf_P(PSTR ("Writing file: %s\r\n"), path);
 
-  Serial.printf_P(PSTR ("Writing file: %s\r\n"), s2.c_str());
-
-  File file = fs.open(s2.c_str(), "w");
+  File file = fs.open(path, "w");
   if(!file)
   {
-    Serial.println("- failed to open file for writing");
+//    Serial.println("- failed to open file for writing");
     return;
   }
-  if(file.print(s2.c_str()))
+  if(file.print(message))
   {
-    Serial.println("Writing File");
+//    Serial.println("Writing File");
   } else 
   {
-    Serial.println("- write failed");
+//    Serial.println("- write failed");
     file.close();
     return;
   }
@@ -437,17 +410,17 @@ void saveAccs(fs::FS &fs, const char * path)
     row++;
   }
 
-  Serial.printf_P(PSTR ("%d Accessory records written\n"), row);
+//  Serial.printf_P(PSTR ("%d Accessory records written\n"), row);
   file.close();
 
   accessoriesDirty = 0;
 
-  deleteFile(LittleFS, s3.c_str());
-  renameFile(LittleFS, s4.c_str(), s3.c_str());
-  renameFile(LittleFS, s5.c_str(), s4.c_str());
-  renameFile(LittleFS, s2.c_str(), s5.c_str());
+  deleteFile(LittleFS, "/accessories.bak");
+  renameFile(LittleFS, "/accessories.old", "/accessories.bak");
+  renameFile(LittleFS, "/accessories.txt", "/accessories.old");
+  renameFile(LittleFS, "/accessories.new", "/accessories.txt");
 
-  Serial.printf_P(PSTR ("File Saved and Backup Created"));
+//  Serial.printf_P(PSTR ("File Saved and Backup Created"));
 }
 
 //
@@ -455,12 +428,13 @@ void saveAccs(fs::FS &fs, const char * path)
 //
 //*********************************************************************************************
 //
-void renameFile(fs::FS &fs, const char * path1, const char * path2){
-    Serial.printf_P(PSTR ("Renaming file %s to %s\r\n"), path1, path2);
+void renameFile(fs::FS &fs, const char * path1, const char * path2)
+{
+//    Serial.printf_P(PSTR ("Renaming file %s to %s\r\n"), path1, path2);
     if (fs.rename(path1, path2)) {
-        Serial.println("- file renamed");
+//        Serial.println("- file renamed");
     } else {
-        Serial.println("- rename failed");
+//        Serial.println("- rename failed");
     }
 }
 
@@ -469,12 +443,13 @@ void renameFile(fs::FS &fs, const char * path1, const char * path2){
 //
 //*********************************************************************************************
 //
-void deleteFile(fs::FS &fs, const char * path){
-    Serial.printf_P(PSTR ("Deleting file: %s\r\n"), path);
+void deleteFile(fs::FS &fs, const char * path)
+{
+//    Serial.printf_P(PSTR ("Deleting file: %s\r\n"), path);
     if(fs.remove(path)){
-        Serial.println("- file deleted");
+//        Serial.println("- file deleted");
     } else {
-        Serial.println("- delete failed");
+//        Serial.println("- delete failed");
     }
 }
 
@@ -483,22 +458,27 @@ void deleteFile(fs::FS &fs, const char * path){
 // Save Loco Functions
 //****************************************************************************************************************
 //
-void saveFunctions(fs::FS &fs, const char * path, const char * message)
+void saveFunctions(fs::FS &fs, const char * path, const char * message)   //, const char * message)
 {
-  Serial.printf_P(PSTR ("Writing file: %s\r\n"), path);
+//  Serial.printf_P(PSTR ("Writing file: %s\r\n"), path);
 
   File file = fs.open(path, "w");
   if(!file)
   {
-    Serial.println("- failed to open file for writing");
+//    Serial.println("Failed to open file for writing");
     return;
+  }else 
+  {
+//    Serial.println("File Opened");
   }
+
+//  Serial.println(message);
   if(file.print(message))
   {
-    Serial.println("Writing File");
+//    Serial.println("Writing File");
   } else 
   {
-    Serial.println("- write failed");
+//    Serial.println("- write failed");
     file.close();
     return;
   }
@@ -520,7 +500,7 @@ void saveFunctions(fs::FS &fs, const char * path, const char * message)
       }
     }
   }
-  Serial.printf_P(PSTR ("%d Function Records written\n"), counter);
+//  Serial.printf_P(PSTR ("%d Function Records written\n"), counter);
   file.close();
 
   functionsDirty = 0;
@@ -539,22 +519,22 @@ void saveFunctions(fs::FS &fs, const char * path, const char * message)
 // An unoccupied element contains "255" - ie a LocoID of 0 is invalid
 //****************************************************************************************************************
 //
-void saveThrottles(fs::FS &fs, const char * path, const char * message)
+void saveThrottles(fs::FS &fs, const char * path, const char * message)      //, const char * message)
 {
-  Serial.printf_P(PSTR ("Writing file: %s\r\n"), path);
+//  Serial.printf_P(PSTR ("Writing file: %s\r\n"), path);
 
   File file = fs.open(path, "w");
   if(!file)
   {
-    Serial.println("- failed to open file for writing");
+//    Serial.println("- failed to open file for writing");
     return;
   }
   if(file.print(message))
   {
-    Serial.println("Writing File");
+//    Serial.println("Writing File");
   } else 
   {
-    Serial.println("- write failed");
+//    Serial.println("- write failed");
     file.close();
     return;
   }
@@ -569,7 +549,7 @@ void saveThrottles(fs::FS &fs, const char * path, const char * message)
       }
     }
   }
-  Serial.println("Throttles file written");
+//  Serial.println("Throttles file written");
   file.close();
 
   throttlesDirty = 0;
@@ -578,53 +558,10 @@ void saveThrottles(fs::FS &fs, const char * path, const char * message)
   renameFile(LittleFS, "/throttleids.old", "/throttleids.bak");
   renameFile(LittleFS, "/throttleids.txt", "/throttleids.old");
   renameFile(LittleFS, "/throttleids.new", "/throttleids.txt");
+
+//  Serial.printf_P(PSTR ("File Saved and Backup Created"));
 }
 
-//
-//****************************************************************************************************************
-// Save all Accessories
-//****************************************************************************************************************
-//
-/*
-void saveAccessories(fs::FS &fs, const char * path)     //, const char * message)
-{
-  Serial.printf_P(PSTR ("Writing file: %s\r\n"), path);
-
-  File file = fs.open(path, "w");
-  if(!file)
-  {
-    Serial.println("- failed to open file for writing");
-    return;
-  }
-  if(file.print(message))
-  {
-    Serial.println("Writing File");
-  } else 
-  {
-    Serial.println("- write failed");
-    file.close();
-    return;
-  }
-  int row = 0;
-
-  while(Turnouts[row].AccAddress != 0)
-  {
-    String record = Turnouts[row].AccRow + "," + Turnouts[row].AccName + "," + Turnouts[row].AccAddress + "," + Turnouts[row].AccImage + "," + Turnouts[row].AccType + "\n" ;
-    file.print(record);
-    row++;
-  }
-
-  Serial.println("Accessories file written");
-  file.close();
-
-  accessoriesDirty = 0;
-
-  deleteFile(LittleFS, "/accessories.bak");
-  renameFile(LittleFS, "/accessories.old", "/accessories.bak");
-  renameFile(LittleFS, "/accessories.txt", "/accessories.old");
-  renameFile(LittleFS, "/accessories.new", "/accessories.txt");
-}
-*/
 //  Serial.println("Now Saving DCC-EX Turnouts");
 //  saveLocos(LittleFS, path, "ID,LongName, Address\n");
 
@@ -731,20 +668,20 @@ void saveRoutes(fs::FS &fs, const char * path, const char * message)
 //
 void saveCredentials(fs::FS &fs, const char * path, const char * message)
 {
-  Serial.printf_P(PSTR ("Writing file: %s\r\n"), path);
+//  Serial.printf_P(PSTR ("Writing file: %s\r\n"), path);
 
   File file = fs.open(path, "w");
   if(!file)
   {
-    Serial.println("- failed to open file for writing");
+//    Serial.println("- failed to open file for writing");
     return;
   }
   if(file.print(message))
   {
-    Serial.println("Writing File");
+//    Serial.println("Writing File");
   } else 
   {
-    Serial.println("- write failed");
+//    Serial.println("- write failed");
     file.close();
     return;
   }
@@ -753,7 +690,7 @@ void saveCredentials(fs::FS &fs, const char * path, const char * message)
     String message = String(row) + "," + netwks[row].ssid + "," + netwks[row].password + "," + netwks[row].ipAddress + "," + netwks[row].nwPort + "\n";
     file.print(message);
   }
-  Serial.println("Credentials file written");
+//  Serial.println("Credentials file written");
   file.close();
 
   credentialsDirty = 0;

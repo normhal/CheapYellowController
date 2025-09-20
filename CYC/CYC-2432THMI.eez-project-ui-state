@@ -1,5 +1,6 @@
 {
   "navigation": {
+    "selectedUserPageObject": "[CYC-2432THMI.eez-project]:/userPages/1",
     "subnavigationSelectedItems": {}
   },
   "layoutModel": {
@@ -188,10 +189,21 @@
               "type": "tabset",
               "id": "EDITORS",
               "weight": 59.90819209039548,
-              "selected": -1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
-              "children": [],
+              "children": [
+                {
+                  "type": "tab",
+                  "id": "#02cbe40f-1dc5-401a-a36f-f4d2952029ab",
+                  "name": "Main",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[CYC-2432THMI.eez-project]:/userPages/1",
+                    "permanent": false
+                  },
+                  "icon": "svg:page"
+                }
+              ],
               "active": true
             },
             {
@@ -1343,10 +1355,13 @@
           "0": {},
           "1": {},
           "2": {},
+          "4": {},
           "5": {
             "$selected": true
           },
-          "6": {},
+          "6": {
+            "0": {}
+          },
           "7": {},
           "8": {}
         }
@@ -1369,11 +1384,10 @@
       "selection": {
         "0": {
           "2": {},
-          "6": {},
-          "7": {
+          "6": {
             "$selected": true
           },
-          "11": {}
+          "7": {}
         }
       },
       "transform": {
@@ -1482,8 +1496,7 @@
         "0": {
           "0": {},
           "2": {},
-          "5": {},
-          "6": {}
+          "7": {}
         }
       },
       "transform": {
@@ -1503,15 +1516,17 @@
     "[CYC-2432THMI.eez-project]:/userPages/2[flow-state]": {
       "selection": {
         "0": {
-          "3": {
+          "3": {},
+          "14": {
             "$selected": true
-          }
+          },
+          "16": {}
         }
       },
       "transform": {
         "translate": {
           "x": -120,
-          "y": -400
+          "y": -280
         },
         "scale": 2
       },
@@ -1572,7 +1587,7 @@
       "transform": {
         "translate": {
           "x": -120,
-          "y": -40
+          "y": -520
         },
         "scale": 2
       },
@@ -1631,6 +1646,248 @@
         "secondToPx": 200,
         "scrollLeft": 0
       }
+    },
+    "[CYC-2432.eez-project]:/userPages/13[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -160
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/1[flow-state]": {
+      "selection": {
+        "0": {
+          "9": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/10[flow-state]": {
+      "selection": {
+        "0": {
+          "16": {
+            "$selected": true
+          },
+          "17": {
+            "$selected": true
+          },
+          "18": {
+            "$selected": true
+          },
+          "24": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -280
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/8[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[CYC-2432.eez-project]:/userPages/12[flow-state]": {
+      "selection": {
+        "0": {
+          "3": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_ESP32S3_Dev/CYC-2432.eez-project]:/userPages/10[flow-state]": {
+      "selection": {
+        "0": {
+          "16": {
+            "$selected": true
+          },
+          "17": {
+            "$selected": true
+          },
+          "18": {
+            "$selected": true
+          },
+          "24": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -280
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_ESP32S3_Dev/CYC-2432.eez-project]:/userPages/1[flow-state]": {
+      "selection": {
+        "0": {
+          "9": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -280
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_ESP32S3_Dev/CYC-2432.eez-project]:/userPages/8[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -280
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_ESP32S3_Dev/CYC-2432.eez-project]:/userPages/0[flow-state]": {
+      "selection": {
+        "0": {
+          "5": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../CYC_ESP32S3_Dev/CYC-2432.eez-project]:/userPages/13[flow-state]": {
+      "selection": {
+        "0": {
+          "1": {
+            "$selected": true
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -40,
+          "y": -301
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[../../CheapYellowController-Dev/CYC_ESP32S3_Dev/CYC-2432.eez-project]:/userPages/13[flow-state]": {
+      "selection": {},
+      "transform": {
+        "translate": {
+          "x": -120,
+          "y": -400
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
     }
   },
   "activeOutputSection": 0,
@@ -1646,7 +1903,7 @@
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
   "lvglPart": "MAIN",
-  "lvglState": "DEFAULT",
+  "lvglState": "CHECKED",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "PADDING",

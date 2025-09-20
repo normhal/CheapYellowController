@@ -55,12 +55,17 @@ void action_config_button(lv_event_t * e)
     {
       lv_label_set_text(objects.lbl_btn_roster, "DCC-EX");
       def_roster = true;
+      wifi_enabled = true;
       eeProm.begin("configs", false);
       eeProm.putBool("roster", def_roster);
+      eeProm.putBool("wiFiState", wifi_enabled);
       eeProm.end();
 //      populateLocoArray("/exlocos.txt");
       lv_label_set_text(objects.lbl_list_status, "Start with DCC-EX Roster");
       Serial.printf("Roster set to: %d\n", def_roster);
+      WiFi.disconnect();
+      lv_img_set_src(objects.img_wifi, &img_x);
+//      if(WiFi.status() != WL_CONNECTED) connectWiFi();
       reboot_req = true;
       break;
     }
@@ -81,12 +86,16 @@ void action_config_button(lv_event_t * e)
     {
       lv_label_set_text(objects.lbl_btn_acc, "DCC-EX");
       def_acc = true;
+      wifi_enabled = true;
       eeProm.begin("configs", false);
       eeProm.putBool("accList", def_acc);
+      eeProm.putBool("wiFiState", wifi_enabled);
       eeProm.end();
 //      populateAccArray("/locos.txt");
       lv_label_set_text(objects.lbl_list_status, "Start with DCC-EX Accessories");
       Serial.printf("Acc set to: %d\n", def_acc);
+      WiFi.disconnect();
+      lv_img_set_src(objects.img_wifi, &img_x);
       reboot_req = true;
       break;
     }
@@ -131,15 +140,15 @@ void action_config_button(lv_event_t * e)
       eeProm.putUInt("funcCol", funcCol);
       threshold = atoi(lv_textarea_get_text(objects.ta_threshold));
       eeProm.putUInt("threshold", threshold);
-//      if(lv_obj_get_state(objects.btn_roster) == LV_STATE_CHECKED) def_roster = true;
-//      else def_roster = false;
-//      eeProm.putBool("roster", def_roster);
       eeProm.end();
       break;
     }
     case (32):       //Done
     {
-      if(reboot_req == true) ESP.restart();
+      if(reboot_req == true) 
+      {
+        ESP.restart();
+      }
       loadScreen(SCREEN_ID_MAIN);
       break;
     }

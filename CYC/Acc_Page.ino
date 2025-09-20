@@ -42,6 +42,7 @@ void setupDCCEXAcc()
   Serial.println("Now populating DCC-EX Turnouts...");
 ////  populateAccArray("/exacc.txt");
   dccexProtocol.getLists(false, true, false,false);
+  lv_label_set_text(objects.lbl_menu_message, "Waiting for DCC-EX Turmouts");
 }
 /*
  ********************************************************************************************************
@@ -101,6 +102,7 @@ static void acc_cb(lv_event_t * e)
 */
 void accDrawPage()                                                        //Page starts from a Specific ID (Multiples of ACC_PER_PAGE)
 { 
+  const uint8_t acc_map_xlate[] = {0,2,4,6,8,10,12,14,16,18};
   uint8_t slotNum = 0; 
   for(uint16_t accID = accStartID; accID < (accStartID + ACC_PER_PAGE); accID++)
   {
