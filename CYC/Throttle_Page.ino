@@ -18,7 +18,7 @@
 */
 void populateThrottle()                   //Build the Loco DropDown List
 {
-  Serial.println("Populating Throttle");
+//  printf("Populating Throttle\n");
   lv_dropdown_clear_options(objects.dd_locos);                          //Clear the previous list
   lv_label_set_text(objects.lbl_throttle_page, throttleName[activeThrottle]);        //Update the page heading
   activeLocoID = selectedIDs[activeThrottle][activeSlot[activeThrottle]];
@@ -129,6 +129,7 @@ static void throttle_selection_handler_cb(lv_event_t * e)
 
 static void functions_cb(lv_event_t * e)
 {
+  const uint8_t abs_xlate[] = {0, 5, 1, 6, 2, 7, 3, 8, 4, 9};
   if(rosterMode != GUEST_ACTIVE)
   {
     lv_event_code_t code = lv_event_get_code(e);
@@ -150,9 +151,8 @@ static void functions_cb(lv_event_t * e)
           else Locomotives[activeLocoID].FuncState[funcNum] = 1;
         //Send the DCCEX Command...
           String functionCMD = ("<F " + String(Locomotives[activeLocoID].LocoAddress) + " " + String(funcNum) + " " + String(Locomotives[activeLocoID].FuncState[funcNum]) + ">");
-          Serial.println(functionCMD);
-//        client.print(functionCMD);
-          if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+          printf(functionCMD.c_str());
+          if(!client.print(functionCMD)) printf("Transmit Failed\n");
 //        }
       }
       if(Locomotives[activeLocoID].FuncOption[funcNum] == 1)
@@ -166,8 +166,8 @@ static void functions_cb(lv_event_t * e)
           Locomotives[activeLocoID].FuncState[funcNum] = 0;
           //Send the DCCEX Command...
           String functionCMD = ("<F " + String(Locomotives[activeLocoID].LocoAddress) + " " + String(funcNum) + " " + String(Locomotives[activeLocoID].FuncState[funcNum]) + ">");
-          Serial.println(functionCMD);
-          if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+          printf(functionCMD.c_str());
+          if(!client.print(functionCMD)) printf("Transmit Failed\n");
 //          client.print(functionCMD);
         }
       }
@@ -195,11 +195,11 @@ void setSpeed(uint16_t locoAddr, uint16_t newSpeed, uint8_t newDir)
   lv_label_set_text(objects.lbl_slider,speedString);
   String speedCMD = ("<t " + String(locoAddr) + " "
          + speedString + " " + String(newDir) + ">");
-if(re_enabled == true)
-{    
-  ss.setEncoderPosition(newSpeed);
+  if(re_enabled == true)
+  {    
+    ss.setEncoderPosition(newSpeed);
 }
-  Serial.println(speedCMD);
+  printf(speedCMD.c_str());
   if(!client.print(speedCMD)) Serial.println("Transmit Failed");
 }
 
@@ -287,7 +287,7 @@ void action_throttle_button(lv_event_t * e)
       loadScreen(SCREEN_ID_ROSTER);
       break;
     case 32:    //Acc
-      Serial.println("Calling Draw Acc Page");
+      printf("Calling Draw Acc Page\n");
       accDrawPage();                      //Draw from the last Acc Start ID
       callingPage = SCREEN_ID_THROTTLE;
       loadScreen(SCREEN_ID_ACCESSORIES);
@@ -366,7 +366,7 @@ static void ex_functions_cb(lv_event_t * e)
 
       //Send the DCCEX Command...
         String functionCMD = ("<F " + String(Locomotives[activeLocoID].LocoAddress) + " " + String(fNum) + " " + String(Locomotives[activeLocoID].FuncState[fNum]) + ">");
-        Serial.println(functionCMD);
+        printf(functionCMD.c_str());
         if(!client.print(functionCMD)) Serial.println("Transmit Failed");
       }else if(code == LV_EVENT_RELEASED)
       {
@@ -378,8 +378,8 @@ static void ex_functions_cb(lv_event_t * e)
           Locomotives[activeLocoID].FuncState[fNum] = 0;
           //Send the DCCEX Command...
           String functionCMD = ("<F " + String(Locomotives[activeLocoID].LocoAddress) + " " + String(fNum) + " " + String(Locomotives[activeLocoID].FuncState[fNum]) + ">");
-          Serial.println(functionCMD);
-          if(!client.print(functionCMD)) Serial.println("Transmit Failed");
+          printf(functionCMD.c_str());
+          if(!client.print(functionCMD)) printf("Transmit Failed\n");
         }
       }
     }else     //Now in Edit Mode

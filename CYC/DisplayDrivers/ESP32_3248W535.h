@@ -16,6 +16,7 @@
 #define SCREEN_HEIGHT 480
 
 #define ROTATION 0
+#define IPS false
 
 #define NAME_COL0_WIDTH 240
 #define NAME_COL1_WIDTH 60
@@ -36,12 +37,10 @@
 #define DIRECT_MODE // Uncomment to enable full frame buffer
 
 Arduino_DataBus *bus = new Arduino_ESP32QSPI(TFT_CS, TFT_SCK, TFT_SDA0, TFT_SDA1, TFT_SDA2, TFT_SDA3);
-
-Arduino_GFX *g = new Arduino_AXS15231B(bus, GFX_NOT_DEFINED, 0, false, SCREEN_WIDTH, SCREEN_HEIGHT);
-
+Arduino_GFX *g = new Arduino_AXS15231B(bus, GFX_NOT_DEFINED, ROTATION, IPS, SCREEN_WIDTH, SCREEN_HEIGHT);
+#define CANVAS
 Arduino_Canvas *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, g, 0, 0, ROTATION);
 
-#define CANVAS
 
 /*******************************************************************************
  * Rotary Encoder Specifics

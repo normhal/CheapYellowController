@@ -60,17 +60,19 @@ void action_wifi_button(lv_event_t * e)
       break;
     }
     case 9:     //Enable Button UnChecked
-      Serial.println("WiFi Disabled");
+//      Serial.println("WiFi Disabled");
       lv_label_set_text(objects.lbl_wifi_status, "WiFi Disabled");
+      lv_label_set_text(objects.lbl_wifi_status2, "");
       wifi_enabled = 0;
       eeProm.begin("configs", false);
       eeProm.putBool("wiFiState", wifi_enabled);
       eeProm.end();
+      lv_img_set_src(objects.img_wifi, &img_x);
       break;
     case 10:     //Enable Button Checked
     {
       lv_label_set_text(objects.lbl_wifi_status, "WiFi Enabled");
-      Serial.println("WiFi Enabled");
+//      Serial.println("WiFi Enabled");
       wifi_enabled = 1;
       eeProm.begin("configs", false);
       eeProm.putBool("wiFiState", wifi_enabled);
@@ -154,10 +156,11 @@ static void ssid_selected(lv_event_t * e)
   }
 }
 
+
 void connectWiFi()
 {
-  Serial.printf_P(PSTR ("Connecting to WiFi with %s %s %s %d\n"), ssid, password, ipAddress, nwPort);
-  WiFi.begin(ssid, password);
+//  Serial.printf_P(PSTR ("Connecting to WiFi with %s %s %s %d\n"), ssid, password, ipAddress, nwPort);
+  WiFi.begin(ssid.c_str(), password.c_str());
   int timeOut = timeout;
 //  int timeOut = 3;
   while (WiFi.status() != WL_CONNECTED)
@@ -166,12 +169,12 @@ void connectWiFi()
     Serial.print(".");
     delay(200);
     timeOut = timeOut -1;
-    if(timeOut <0)
+    if(timeOut < 0)
     {
       lv_label_set_text(objects.lbl_wifi_status, "Timeout trying to Connect...");
       lv_img_set_src(objects.img_wifi, &img_x);
       lv_label_set_text(objects.lbl_ps2,"");
-      Serial.println("Timeout trying to Connect...");
+//      Serial.println("Timeout trying to Connect...");
       break;
     }
   }
@@ -179,7 +182,7 @@ void connectWiFi()
   {
     lv_label_set_text(objects.lbl_wifi_status, "Connected to WiFi!");
     lv_label_set_text(objects.lbl_wifi_status2, "Now connecting to DCCEX");
-    Serial.printf_P(PSTR ("Now Connecting to DCC-EX with: %s and: %d\n"), ipAddress, nwPort);
+//    Serial.printf_P(PSTR ("Now Connecting to DCC-EX with: %s and: %d\n"), ipAddress, nwPort);
     client.connect(ipAddress.c_str(), nwPort);
 
     dccexProtocol.setDelegate(&myDelegate);
@@ -197,3 +200,42 @@ void connectWiFi()
     Serial.println("Done");
   }
 }
+
+/*
+void connectWiFi()
+{
+  if(WiFi.status() != WL_CONNECTED) WiFi.begin(ssid.c_str(), password.c_str());
+  printf("Connecting to WiFi with %s %s %s %d\n", ssid, password, ipAddress, nwPort);
+  int timeOut = 0;
+  while (WiFi.status() != WL_CONNECTED) 
+  {
+    delay(200);
+    printf("%d ", timeOut);
+    timeOut++;
+    if(timeOut == timeout) break;
+  }
+  printf("\n");
+
+  if(WiFi.status() == WL_CONNECTED)
+  {
+    lv_label_set_text(objects.lbl_wifi_status, "Connected to WiFi!");
+    lv_label_set_text(objects.lbl_wifi_status2, "Now connecting to DCCEX");
+//    Serial.printf_P(PSTR ("Now Connecting to DCC-EX with: %s and: %d\n"), ipAddress, nwPort);
+    client.connect(ipAddress.c_str(), nwPort);
+
+    dccexProtocol.setDelegate(&myDelegate);
+    dccexProtocol.connect(&client);
+
+    if(!client.connected())
+    {
+      lv_label_set_text(objects.lbl_wifi_status2, "Unable to Connect to DCCEX");
+      lv_img_set_src(objects.img_wifi, &img_x);
+    }else 
+    {
+      lv_label_set_text(objects.lbl_wifi_status2, "Connected to DCCEX!");
+      lv_img_set_src(objects.img_wifi, &img_6);
+    }
+    printf("Done\n");
+  }else Serial.println("WiFi NOT Connected");
+}
+*/

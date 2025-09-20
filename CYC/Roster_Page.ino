@@ -83,7 +83,7 @@ void setupLocalRoster()
 {
   lv_obj_clear_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
   lv_label_set_text(objects.lbl_btn_roster, "Local");
-  Serial.println("Now populating Local Locos...");
+//  Serial.println("Now populating Local Locos...");
   populateLocoArray("/locos.txt");
 
   // Set all function numbers to 255
@@ -92,16 +92,16 @@ void setupLocalRoster()
     for(int j = 0; j < NUM_FUNCS; j++) Locomotives[i].FuncSlot[j] = 255;
   }
   
-  Serial.println("Now populating Local Functions");
+//  Serial.println("Now populating Local Functions");
   populateLocoFunctions("/functions.txt");
 
-  Serial.println("Now Populating the Roster...");
+//  Serial.println("Now Populating the Roster...");
   for(int i = 0; i < locoCount; i++)                    //Using the count from LittleFS
   {
     lv_table_set_cell_value(objects.tbl_roster, i, 0, Locomotives[i].LocoName.c_str());
     lv_table_set_cell_value(objects.tbl_roster, i, 1, Locomotives[i].LocoAddress.c_str());
   }
-  Serial.println("Roster Populated with Local details");
+//  Serial.println("Roster Populated with Local details");
 }
 /*
  **********************************************************************************************************
@@ -111,7 +111,7 @@ void setupLocalRoster()
 void setupDCCEXRoster()
 {
   //Serial.printf_P(PSTR ("Records to Clear: %d\n"), NUM_LOCOS);
-  Serial.println("Requesting DCC-EX Roster...");
+//  Serial.println("Requesting DCC-EX Roster...");
   for(int i = 0; i < NUM_LOCOS; i++)
   {
     lv_obj_add_state(objects.btn_roster, LV_STATE_CHECKED);                 //Slot 0 is used
@@ -127,6 +127,7 @@ void setupDCCEXRoster()
   }
 //  receivePending = true;
   dccexProtocol.getLists(true, false, false, false);
+  lv_label_set_text(objects.lbl_menu_message, "Waiting for DCC-EX Roster");
 }
 
 //
@@ -136,7 +137,7 @@ void setupDCCEXRoster()
 //
 void receiveDCCEXLocos(fs::FS &fs, const char * path)
 {
-  Serial.println("Receiving DCC-EX Roster");
+//  Serial.println("Receiving DCC-EX Roster");
   lv_label_set_text(objects.lbl_list_status, "Receiving DCC-EX Roster...");
   uint16_t lId = 0;
   for (Loco *loco = dccexProtocol.roster->getFirst(); loco; loco = loco->getNext()) 
@@ -171,5 +172,5 @@ void receiveDCCEXLocos(fs::FS &fs, const char * path)
     lId++;
   }  
 //  receivePending = false;
-  Serial.println("DCC-EX Roster Received and Populated");
+//  Serial.println("DCC-EX Roster Received and Populated");
 }

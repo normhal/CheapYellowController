@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[CYC-4827.eez-project]:/userPages/13",
     "selectedBitmapObject": "[CYC-4827.eez-project]:/bitmaps/18",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -198,10 +198,10 @@
                 {
                   "type": "tab",
                   "id": "#ce0125d1-51ab-4b83-ab21-31be114932f7",
-                  "name": "Throttle",
+                  "name": "Layout",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-4827.eez-project]:/userPages/1",
+                    "objectPath": "[CYC-4827.eez-project]:/userPages/13",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1635,11 +1635,11 @@
           "20": {},
           "44": {},
           "45": {
-            "0": {}
+            "0": {},
+            "$selected": true
           },
           "50": {},
           "51": {},
-          "52": {},
           "57": {}
         }
       },

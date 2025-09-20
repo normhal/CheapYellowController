@@ -77,16 +77,8 @@ Sketch Notes:
 *******************************************************************************************************************************/
 // Note: "t..." - not ready, "tick" = tested on physical device, "tock" = Batch file created and tested
 
-//#define ESP2432S028C           //Sunton ESP32-2432S028C   Not Tested  ESP32     ticked 21 July
-//#define ESP2432S028R           //Sunton ESP32-2432S028R               ESP32     Good - 14 August
-//#define JC2432W328C             //Guition CYD                                   Good - 14 August
-//#define ESP2432S032C           //Sunton ESP32-2432S032C               ESP32     Good - 14 August
-//#define ESP2432S032R           //Sunton ESP32-2432S032R               ESP32     ticked 21 July
-//#define ESP3248S035C           //Sunton ESP32-3248S035C               ESP32     ticked 21 July
-//#define ESP3248S035R           //Sunton ESP32-3248S035R               ESP32     ticked 21 July  
-
 //#define ESP2432THMIR           //LilyGo T-HMI                         ESP32-S3  ticked 21 July - No RE support yet
-//#define ESP3248W535C           //Guition JC3248W535C                  ESP32-S3  ticked 16 June
+#define ESP3248W535C           //Guition JC3248W535C                  ESP32-S3  ticked 16 June
 //#define ESP4827S043C           //Sunton ESP32-4827S043C               ESP32-S3  ticked 21 July
 //#define ESP4827S043R           //Sunton ESP32-4827S043R               ESP32-S3  ticked 21 July
 
@@ -98,10 +90,10 @@ Sketch Notes:
 //#define ESP4848S040C           //Guition JC4848W440C - in development
 //#define ESP8048S043C           //Sunton ESP32-8048S043C               ESP32-S3  ticked 21 July
 //#define ESP8048S050C           //Sunton ESP32-8048S050C               ESP32-S3  ticked 21 July
-#define ESP8048W550C           //Guition JC8048W550C                  ESP32-S3  ticked 21 July
+//#define ESP8048W550C           //Guition JC8048W550C                  ESP32-S3  ticked 21 July
 //#define ESP8048S070C           //Sunton ESP32-8048S050C               ESP32-S3  ticked 21 July
 
-const char* build = "1.3.1V";
+const char* build = "1.3.2";
 
 #define USE_VECTORS
 
@@ -147,12 +139,22 @@ public:
   void receivedTrackPower(TrackPower state) override 
   {
 //    Serial.printf_P(PSTR ("Received Track Power: %d\n"), state);    //Nothing done with this yet:-()
+    if(state == 1)
+    {
+      lv_label_set_text(objects.lbl_power, "Power Off");
+      lv_obj_clear_state(objects.btn_power, LV_STATE_CHECKED);
+    }else
+    {
+      lv_label_set_text(objects.lbl_power, "Power On");
+      lv_obj_add_state(objects.btn_power, LV_STATE_CHECKED);
+    }
   }
 
   void receivedRosterList() override 
   {
 //    Serial.printf_P(PSTR ("Receiving DCC-EX Locos\n"));
     receiveDCCEXLocos(LittleFS, "/exlocos");     //, "ID,Name,Address\n");
+    lv_label_set_text(objects.lbl_menu_message, "Throttle");
 //    Serial.println("DCC-EX Roster Received");
   }
 
@@ -160,6 +162,7 @@ public:
   {
 //    Serial.printf_P(PSTR ("Receiving DCC-EX Turnouts\n"));
     receiveDCCEXAccs(LittleFS, "/exacc");
+    lv_label_set_text(objects.lbl_menu_message, "Throttle");
 //    Serial.println("DCC-EX Turnouts Received");
   }
 
@@ -253,9 +256,19 @@ void setup()
     pinMode(10 /* PWD */, OUTPUT);
     digitalWrite(10 /* PWD */, HIGH);
   #endif
+  
+//  delay(2000);
+
+//  Serial.println("Check1");
+
+//  if(re_enabled == true) Serial.println("RE Enabled is True");
+//  if(re_enabled == false) Serial.println("RE Enabled is False");
 
   if(re_enabled == true) initRE();                         //Initialize Rotary Encoder if Enabled in Display Driver
 
+//  if(re_enabled == true) Serial.println("RE Enabled is True");
+//  if(re_enabled == false) Serial.println("RE Enabled is False");
+ 
   //
   //*****************************************************************************************************
   // Read LittleFS data files and populate working arrays
@@ -271,26 +284,36 @@ void setup()
       selectedIDs[i][j] = 255;
     }
   }
+//  Serial.println("Check2");
 
   populateSelected("/throttleids.txt");
   populateCredentials("/credentials.txt");
+
+//  Serial.println("Check3");
 
   ssid = netwks[0].ssid;
   password = netwks[0].password;
   ipAddress = netwks[0].ipAddress;
   nwPort = netwks[0].nwPort;
 
+  if(wifi_enabled == true) WiFi.begin(ssid.c_str(), password.c_str());
+  
   if (!gfx->begin())
   {
     Serial.println("gfx->begin() failed!");
   }
+
   gfx->fillScreen(RGB565_BLACK);
 
   initTouch();
 
+//  Serial.println("Check4");
+
   initAccMap();
   
   lv_init();
+
+//  Serial.println("Check5");
 
   #ifdef DIRECT_MODE
     bufSize = SCREEN_WIDTH * SCREEN_HEIGHT;
@@ -347,7 +370,7 @@ void setup()
     indev_drv.read_cb = my_touchpad_read;
     lv_indev_drv_register( &indev_drv );
 
-//    gfx->flush();
+//    Serial.println("Check6");
 
     // Init EEZ-Studio UI
     ui_init();
@@ -429,43 +452,33 @@ void setup()
 * Setup Rotary Encoder
 ******************************************************************************************************************
 */
-/*
-  eeProm.begin("configs", true);
-  eeProm.getUInt("lcdBL",lcdBL);
-  eeProm.getBool("roster", def_roster);
-  eeProm.getBool("accList", def_acc); 
-  eeProm.getBool("rEncoder", re_enabled); 
-  eeProm.getBool("wiFiState", wifi_enabled); 
-  eeProm.end();
-*/
-  Serial.printf("WiFi State from EEPROM: %d\n", wifi_enabled);
-
-if(re_enabled == true)
-{
-  Serial.println("Looking for seesaw!");
-
-  if (! ss.begin(SEESAW_ADDR)) Serial.println("Couldn't find seesaw on default address");
-  else Serial.println("seesaw started");
-
-  uint32_t version = ((ss.getVersion() >> 16) & 0xFFFF);
-  if (version  != 4991)
+//  Serial.println("Check7");
+  
+  if(re_enabled == true)
   {
-    Serial.print("Wrong firmware loaded? ");
-    Serial.println(version);
+    Serial.println("Looking for seesaw!");
+
+    if (! ss.begin(SEESAW_ADDR)) Serial.println("Couldn't find seesaw on default address");
+    else Serial.println("seesaw started");
+
+    uint32_t version = ((ss.getVersion() >> 16) & 0xFFFF);
+    if (version  != 4991)
+    {
+      Serial.print("Wrong firmware loaded? ");
+      Serial.println(version);
+    }else 
+    {
+      Serial.println("Found Product 4991");
+      encoder_present = 1;
+      ss.pinMode(SS_SWITCH, INPUT_PULLUP);
+      encoder_position = 0;
+      Serial.println("Turning on interrupts");
+      delay(10);
+      ss.setGPIOInterrupts((uint32_t)1 << SS_SWITCH, 1);
+      ss.enableEncoderInterrupt();
+    }
+    re_timer = millis();
   }
-  else 
-  {
-    Serial.println("Found Product 4991");
-    encoder_present = 1;
-    ss.pinMode(SS_SWITCH, INPUT_PULLUP);
-    encoder_position = 0;
-    Serial.println("Turning on interrupts");
-    delay(10);
-    ss.setGPIOInterrupts((uint32_t)1 << SS_SWITCH, 1);
-    ss.enableEncoderInterrupt();
-  }
-  re_timer = millis();
-}
 
   if(wifi_enabled == true) connectWiFi();
 
@@ -512,63 +525,61 @@ void loop()
 {
   lv_timer_handler();
 
-//#if defined CANVAS
-//  gfx->flush();
+//#ifndef AUTO_FLUSH
+  gfx->flush();
 //#endif
 
   dccexProtocol.check();
 
   if(re_enabled == true)
   {
-  if(encoder_present)                       //Sample Rotary Encoder if it's been found:-)
-  {
-    if(!ss.digitalRead(SS_SWITCH))          //First check if the Direction Button has been pressed
+    if(encoder_present)                       //Sample Rotary Encoder if it's been found:-)
     {
-      if(RE_button_active != 1)             //Check if it's already been processed
+      if(!ss.digitalRead(SS_SWITCH))          //First check if the Direction Button has been pressed
       {
-        RE_button_active = 1;
-        if(Locomotives[activeLocoID].LocoDir == 1)      //Currently Forward?
+        if(RE_button_active != 1)             //Check if it's already been processed
         {
-          lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);     // Do this because the TFT wasn't the source
-          setLocoRev();                     //Change to Reverse
+          RE_button_active = 1;
+          if(Locomotives[activeLocoID].LocoDir == 1)      //Currently Forward?
+          {
+            lv_obj_clear_state(objects.sw_dir, LV_STATE_CHECKED);     // Do this because the TFT wasn't the source
+            setLocoRev();                     //Change to Reverse
+          }else
+          { 
+            lv_obj_add_state(objects.sw_dir, LV_STATE_CHECKED);
+            setLocoFwd();
+          }
         }
-        else
-        { 
-          lv_obj_add_state(objects.sw_dir, LV_STATE_CHECKED);
-          setLocoFwd();
-        }
-      }
-    }
-    else RE_button_active = 0;              //Now clear the processed flag
+      }else RE_button_active = 0;              //Now clear the processed flag
 
-    int32_t new_position = ss.getEncoderPosition();   //Now read the Encoder Position
-    if (encoder_position != new_position)             //and see if it changed
-    {
-      if(new_position > 127)                          //make sure it's not greater than 127
+      int32_t new_position = ss.getEncoderPosition();   //Now read the Encoder Position
+      if (encoder_position != new_position)             //and see if it changed
       {
-        ss.setEncoderPosition(127);                   //force the encoder to the max value
-        new_position = 127;                           //and record the value
+        if(new_position > 127)                          //make sure it's not greater than 127
+        {
+          ss.setEncoderPosition(127);                   //force the encoder to the max value
+          new_position = 127;                           //and record the value
+        }
+        if(new_position < 0)                            //and make sure it hasn't gone beyond 0
+        {
+          ss.setEncoderPosition(0);
+          new_position  = 0;
+        }
+        int32_t re_change = new_position - encoder_position;    //-ve = decrease
+        unsigned long elapsed_time = millis() - re_timer;
+        if(elapsed_time <= 200)
+        {
+          int32_t rate = (200-elapsed_time)/reAccel;
+          new_position = new_position + (re_change * rate);
+          if(new_position > 127) new_position = 127;
+          if(new_position < 0) new_position = 0;
+          ss.setEncoderPosition(new_position);
+        } 
+        Locomotives[activeLocoID].LocoSpeed = new_position; //update the Active loco
+        setSpeed(atoi(Locomotives[activeLocoID].LocoAddress.c_str()), Locomotives[activeLocoID].LocoSpeed, Locomotives[activeLocoID].LocoDir); //and tell DCC-EX
+        encoder_position = new_position;      // and save for next round
+        re_timer = millis();
       }
-      if(new_position < 0)                            //and make sure it hasn't gone beyond 0
-      {
-        ss.setEncoderPosition(0);
-        new_position  = 0;
-      }
-      int32_t re_change = new_position - encoder_position;    //-ve = decrease
-      unsigned long elapsed_time = millis() - re_timer;
-      if(elapsed_time <= 200)
-      {
-        int32_t rate = (200-elapsed_time)/reAccel;
-        new_position = new_position + (re_change * rate);
-        if(new_position > 127) new_position = 127;
-        if(new_position < 0) new_position = 0;
-        ss.setEncoderPosition(new_position);
-      } 
-      Locomotives[activeLocoID].LocoSpeed = new_position; //update the Active loco
-      setSpeed(atoi(Locomotives[activeLocoID].LocoAddress.c_str()), Locomotives[activeLocoID].LocoSpeed, Locomotives[activeLocoID].LocoDir); //and tell DCC-EX
-      encoder_position = new_position;      // and save for next round
-      re_timer = millis();
     }
   }
-}
 }

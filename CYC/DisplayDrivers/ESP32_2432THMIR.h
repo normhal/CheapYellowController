@@ -10,6 +10,8 @@
 #define ACC_PER_PAGE 6
 
 #define GFX_BL 38
+#define TFT_RST 7
+#define IPS false
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
@@ -28,8 +30,24 @@
 Arduino_DataBus *bus = new Arduino_ESP32PAR8(
     7 /* DC */, 6 /* CS */, 8 /* WR */, -1 /* RD */,
     48 /* D0 */, 47 /* D1 */, 39 /* D2 */, 40/* D3 */, 41 /* D4 */, 42 /* D5 */, 45 /* D6 */, 46 /* D7 */);
-Arduino_GFX *gfx = new Arduino_ST7789(bus, 7 /* RST */, ROTATION, false /* IPS */, SCREEN_WIDTH, SCREEN_HEIGHT, 0 /* col offset 1 */, 0 /* row offset 1 */, 0 /* col offset 2 */, 0 /* row offset 2 */);
+Arduino_GFX *gfx = new Arduino_ST7789(bus, TFT_RST, ROTATION, IPS, SCREEN_WIDTH, SCREEN_HEIGHT, 0 /* col offset 1 */, 0 /* row offset 1 */, 0 /* col offset 2 */, 0 /* row offset 2 */);
 
+/*******************************************************************************
+ * Rotary Encoder Specifics
+ ******************************************************************************/
+ 
+#define SS_SWITCH        24
+#define SEESAW_ADDR    0x36
+
+extern bool re_enabled;
+
+Adafruit_seesaw ss;
+ 
+void initRE()
+{
+ re_enabled = false;
+}
+ 
 /*******************************************************************************
  * Resistive Touch
  ******************************************************************************/

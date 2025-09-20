@@ -45,7 +45,7 @@ Arduino_RGB_Display *gfx = new Arduino_RGB_Display(SCREEN_HEIGHT, SCREEN_WIDTH, 
 //Arduino_GFX *gfx = new Arduino_Canvas(SCREEN_WIDTH, SCREEN_HEIGHT, g);
 //Arduino_DataBus *bus = create_default_Arduino_DataBus();
 
-#define CANVAS
+//#define CANVAS
 
 /*******************************************************************************
  * Rotary Encoder Specifics

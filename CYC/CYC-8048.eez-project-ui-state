@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[CYC-8048.eez-project]:/userPages/8",
+    "selectedUserPageObject": "[CYC-8048.eez-project]:/userPages/10",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -197,15 +197,16 @@
                 {
                   "type": "tab",
                   "id": "#33c474c9-5833-45cf-aaed-1a59d9ed146e",
-                  "name": "WiFi",
+                  "name": "Config",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[CYC-8048.eez-project]:/userPages/8",
+                    "objectPath": "[CYC-8048.eez-project]:/userPages/10",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
@@ -225,8 +226,7 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -1708,9 +1708,7 @@
           "15": {},
           "20": {},
           "21": {},
-          "22": {
-            "$selected": true
-          }
+          "22": {}
         }
       },
       "transform": {
